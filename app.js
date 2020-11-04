@@ -32,9 +32,6 @@ App({
 
     })
 
-    
-
-
     // 检查token是否存在
     checkToken().then(result => {
       //console.log(result)

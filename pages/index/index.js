@@ -51,6 +51,12 @@ Page({
       
     }
   },
+
+  onShow() {
+    this.setData({
+      location: app.globalData.location
+    })
+  },
   
   // 视野变更
   regionchange(e) {
