@@ -7,5 +7,6 @@
     "van-popup": "@vant/weapp/popup/index",
     "van-tree-select": "@vant/weapp/tree-select/index",
     "van-button": "@vant/weapp/button/index"
-  }
+  },
+  "navigationBarTitleText": "车型选择"
 }
