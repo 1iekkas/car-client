@@ -1,0 +1,57 @@
+/* userPackage/user/index.wxss */
+page {
+  background-color: #f7f7f7;
+}
+
+.content {
+  padding: 30rpx 0 100rpx 0;
+}
+
+.car-item {
+  width: 95vw;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 8rpx;
+  padding: 30rpx;
+}
+
+.car-item + .car-item {
+  margin-top: 30rpx;
+}
+
+.car-item-body {
+  display: flex;
+}
+
+.car-info {
+  padding-left: 10rpx;
+  padding-bottom: 30rpx;
+}
+
+.car-brand {
+  margin-bottom: 12rpx;
+}
+
+.car-params {
+  color: #bbb;
+  font-size: 24rpx;
+}
+
+.car-item-action {
+  padding-top: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.car-item-action van-button + van-button {
+  margin-left: 20rpx;
+}
+
+.add {
+  position: fixed;
+  bottom: 20rpx;
+  left: 10vw;
+  right: 10vw;
+  margin-top: 30rpx;
+}

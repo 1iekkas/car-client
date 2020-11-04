@@ -1,0 +1,59 @@
+/* userPackage/carList/index.wxss */
+
+.brand-icon{
+  margin-right: 26rpx;
+}
+
+.popup-body {
+  width: 75vw;
+}
+
+.popup-title {
+  display: flex;
+  align-items: center;
+  color: #232323;
+  height: 78rpx;
+  line-height: 75rpx;
+  padding-left: 30rpx;
+}
+
+.popup-title image {
+  margin-right: 10rpx;
+}
+
+.group-name {
+  padding: 20rpx 30rpx;
+  background-color: #f0f0f0;
+}
+
+.group-item {
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  padding: 24rpx 30rpx;
+}
+
+.group-item image {
+  width: 50rpx !important;
+  height: 50rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.popup-action {
+  height: 100rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.popup-action van-button {
+  width: 30vw;
+  
+}
+
+.popup-action van-button button {
+  height: 74rpx;
+  line-height: 74rpx;
+}
+

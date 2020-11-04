@@ -1,0 +1,95 @@
+{
+  "description": "项目配置文件",
+  "packOptions": {
+    "ignore": [
+     {
+      "type": "folder",
+      "value": "node_modules"
+     }
+    ]
+  },
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": false,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": false,
+    "coverView": true,
+    "nodeModules": true,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": true,
+    "useCompilerModule": false,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.14.0",
+  "appid": "wxb7724228c1b48daf",
+  "projectname": "car-client",
+  "debugOptions": {
+    "hidedInDevtools": []
+  },
+  "scripts": {},
+  "isGameTourist": false,
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {
+    "search": {
+      "list": []
+    },
+    "conversation": {
+      "list": []
+    },
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": -1,
+          "name": "用户中心",
+          "pathName": "pages/user/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "用户车辆列表",
+          "pathName": "userPackage/userCar/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "车辆品牌",
+          "pathName": "userPackage/carList/index",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

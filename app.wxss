@@ -1,0 +1,38 @@
+/**app.wxss**/
+@import 'miniprogram_npm/@vant/weapp/common/index.wxss';
+page {
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+      Segoe UI, Arial, Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei',
+      sans-serif;
+}
+
+.container {
+  height: 100%;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0; */
+  box-sizing: border-box;
+} 
+
+.nav-bar--fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 1;
+}
+
+view {
+  box-sizing: border-box;
+}
+
+image {
+  display: block;
+}
+
+.box-shadow {
+  box-shadow: -6rpx 6rpx 10rpx 2rpx #68686899;/*for Android*/
+  -webkit-box-shadow:-3px 3px 5px 1px #68686899;/*for IOS*/
+}

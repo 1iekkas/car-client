@@ -1,0 +1,48 @@
+<!--index.wxml-->
+<view class="container">
+  <navigation catchtouchmove="{{false}}">
+    <view class="nav-content">
+      <van-icon custom-class="icon" name="manager" />
+      <view class="location">
+        {{location.city}}
+        <van-icon class="icon-down" name="arrow-down" />
+      </view>
+    </view>
+  </navigation>
+  <!-- <scroll-view scroll-y="true" style="height: calc(100vh - 108rpx);" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll"
+    scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+    <view class="content" style="min-height: calc(100vh - 100rpx);">
+      
+    </view>
+  </scroll-view> -->
+  <view class="tabs-section tabs-section--black" style="margin-top: {{navBarHeight}}px;" catchtouchmove="{{false}}">
+    <scroll-view scroll-x="true" style="" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll"
+      scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+      <view class="content" style="">
+        <view class="tabs-item type-item {{ index == 0 ? 'active' : '' }}" wx:for="{{10}}">
+          <image src="../../static/img/tool.png" mode="widthFix" style="width: 30rpx;display: block;"></image>
+          选项
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="tabs-section box-shadow" catchtouchmove="{{false}}">
+    <scroll-view scroll-x="true" style="" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll"
+      scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+      <view class="content" style="">
+        <view class="tabs-item {{ index == 0 ? 'active' : '' }}" wx:for="{{10}}">
+          选项
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <block wx:if="{{location}}">
+    <map id="map" longitude="{{location.location.lng}}" control="{{false}}" markers="{{markers}}" latitude="{{location.location.lat}}" scale="16"
+      style="width: 100vw;height: calc(100vh - 120rpx - 98rpx - {{navBarHeight}}px);" bindregionchange="regionchange">
+        <cover-image class="location-marker" src="../../static/img/marker.png"></cover-image>
+      </map>
+  </block>
+  <van-button class="fixed-btn" round type="primary" block>发布需求</van-button>
+</view>
