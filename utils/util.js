@@ -14,6 +14,18 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const EARTH_RADIUS = 6378.137
+const range = 500
+
+const rad = d => {
+  return d * Math.PI / 180.0;
+}
+
+const getDistance = (lng1, lat1, lng2, lat2) => {
+
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  getDistance: getDistance
 }

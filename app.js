@@ -25,9 +25,10 @@ App({
 
     // 获取定位
     getLocation().then(res => {
-      this.globalData.location = res.result.ad_info
+      this.globalData.location = res.result
+      // console.log(res.result.ad_info)
       if (this.locationReadyCallback) {
-        this.locationReadyCallback(res.result.ad_info)
+        this.locationReadyCallback(res.result)
       }
 
     })

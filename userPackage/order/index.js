@@ -1,11 +1,47 @@
-// userPackage/user/index.js
+// userPackage/order/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    tabs: [{
+      id: '0',
+      name: '全部',
+      list: [],
+      page: 1,
+      max: 3
+    },{
+      id: '1',
+      name: '已发布',
+      list: [],
+      page: 1,
+      max: 3
+    },{
+      id: '2',
+      name: '待付款',
+      list: [],
+      page: 1,
+      max: 3
+    },{
+      id: '3',
+      name: '待维修',
+      list: [],
+      page: 1,
+      max: 3
+    },{
+      id: '4',
+      name: '待评价',
+      list: [],
+      page: 1,
+      max: 3
+    },{
+      id: '5',
+      name: '已完成',
+      list: [],
+      page: 1,
+      max: 3
+    },]
   },
 
   /**
