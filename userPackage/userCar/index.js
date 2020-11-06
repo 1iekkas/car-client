@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLogin: false,
     list: []
   },
 
@@ -12,7 +13,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      isLogin: app.globalData.isLogin
+    })
   },
 
   /**
@@ -26,7 +29,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**
@@ -58,14 +61,22 @@ Page({
   },
 
   /**
-   * 用户点击右上角分享
+   * 用户点击右上角分享, 不开启
    */
-  onShareAppMessage: function () {
+  /* onShareAppMessage: function () {
 
-  },
+  }, */
   
   //
   addCar() {
+    if(!this.data.isLogin) {
+      wx.navigateTo({
+        url: '/userPackage/login/index'
+      })
+      
+      return false
+    }
+    
     wx.navigateTo({
       url: '/userPackage/carList/index'
     })

@@ -2,7 +2,7 @@
 <view class="container">
   <navigation catchtouchmove="{{false}}">
     <view class="nav-content">
-      <van-icon custom-class="icon" name="manager" />
+      <van-icon bindtap="back" custom-class="icon" name="arrow-left" />
       <view class="location">
         {{location.address_component.city}}
         <van-icon class="icon-down" name="arrow-down" />
@@ -48,5 +48,12 @@
       <cover-image class="location-marker" src="../../static/img/marker.png"></cover-image>
     </map>
   </block>
-  <van-button class="fixed-btn" round type="primary" block>发布需求</van-button>
+  <block wx:if="{{isLogin}}">
+    <van-button class="fixed-btn" round type="primary" block>发布需求</van-button>
+  </block>
+  <block wx:else>
+    <van-button block class="fixed-btn" round type="primary" bind:click="toLogin">
+      发布需求
+    </van-button>
+  </block>
 </view>

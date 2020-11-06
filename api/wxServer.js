@@ -1,4 +1,5 @@
 /**小程序内置api封装 */
+const app = getApp()
 const QQMapWX = require('../utils/qqmap-wx-jssdk.js');
 const map = new QQMapWX({
   key: 'YRCBZ-LO2KJ-PMHFW-FHFGT-SPEPZ-POBWB'
@@ -33,14 +34,19 @@ module.exports = {
       let res = await new Promise((resolve, reject) => {
         wx.login({
           success: res => {
-            resolve(res.code)
+            resolve({
+              code: 200,
+              value: res.code
+            })
           }
         })
       })
 
       // do something  
-      wx.setStorageSync('token', 'token')
+      //wx.setStorageSync('token', 'token')
+     
       return res
+      
     } catch (err) {
       wx.showModal({
         content: '登陆失败，请重新登录'
@@ -83,6 +89,6 @@ module.exports = {
         }
       })
     })
-    
+
   },
 }

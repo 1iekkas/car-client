@@ -11,7 +11,7 @@ import {
 Page({
   data: {
     hasUserInfo: null,
-    canIUse: true,
+    isLogin: false,
     location: null,
     navBarHeight: app.globalData.navBarHeight, //导航栏高度
     storeList: ['同时呼叫', '洗美店', '维修店', '快修员', '维修厂'], // 商家类型
@@ -57,7 +57,8 @@ Page({
     // 用户token回调
     app.userTokenReadyCallback = res => {
       this.setData({
-        hasToken: res
+        hasToken: res,
+        isLogin: res
       })
     }
     // 用户信息回调
@@ -71,6 +72,7 @@ Page({
 
     // 定位回调
     app.locationReadyCallback = res => {
+      console.log(res)
       let markers = this.data.markers
       this.setData({
         location: res,
@@ -88,10 +90,11 @@ Page({
   },
 
   onShow() {
-    console.log(app.globalData.location)
+    //console.log(app.globalData.location)
+    
     this.setData({
       location: app.globalData.location,
-
+      isLogin: app.globalData.isLogin  
     })
   },
 
@@ -119,7 +122,14 @@ Page({
     this.setData({
       activeRange: index,
       ['mapSetting.scale']: data.rangeList[index].scale,
-      ['mapSetting.circles']: v,
+      ['mapSetting.circles']: [{
+        latitude: this.data.location.location.lat,
+        longitude: this.data.location.location.lng,
+        color: '#FF0000',
+        fillColor: '#7cb5ec',
+        radius: this.data.rangeList[index].value,
+        strokeWidth: 1
+      }],
     }, () => {
       console.log(circles)
     })
@@ -133,8 +143,8 @@ Page({
       return {
         latitude: this.data.location.location.lat,
         longitude: this.data.location.location.lng,
-        color: '#FF0000DD',
-        fillColor: '#7cb5ec88',
+        color: '#FF0000',
+        fillColor: '#7cb5ec',
         radius: this.data.rangeList[key].value,
         strokeWidth: 1
       }
@@ -142,4 +152,37 @@ Page({
       return []
     }
   },
+  
+  // 获取用户信息
+  getUserInfo: async function(e) {
+
+    // console.log(e)
+    /* if(e.detail.errMsg === 'getUserInfo:ok') {
+      app.globalData.userInfo = e.detail.userInfo
+      let res = await login()
+      // do something
+      wx.setStorageSync('token', 'token')
+    }else {
+      return false
+    } */
+    /* app.globalData.userInfo = e.detail.userInfo
+    wx.setStorageSync('token', 'data')
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true,
+      isLogin: true
+    }) */
+  },
+  
+  toLogin() {
+    wx.navigateTo({
+      url: '/userPackage/login/index'
+    })
+  },
+  
+  back() {
+    wx.navigateBack({
+      delta: 1
+    })
+  }
 })

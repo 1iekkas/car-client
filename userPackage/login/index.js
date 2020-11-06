@@ -1,5 +1,6 @@
-// pages/index/index.js
+// userPackage/login/index.js
 const app = getApp()
+import { login } from '../../api/wxServer.js'
 Page({
 
   /**
@@ -13,12 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    /* app.userTokenReadyCallback = res => {
-      this.setData({
-        hasToken: res,
-        isLogin: true
-      })
-    } */
+
   },
 
   /**
@@ -68,5 +64,33 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  
+  /**
+   * 获取用户电话
+   */
+  getphonenumber(e) {
+    console.log(e)
+  },
+  
+  /**
+   * 获取用户信息
+   */
+  async getUserInfo(e) {
+    if(e.detail.errMsg === 'getUserInfo:ok') {
+      let res = await login()
+      if(res.code && res.code == 200) {
+        wx.setStorageSync('token', 'token')
+        app.globalData.userInfo = e.detail.userInfo
+        app.globalData.isLogin = true
+        wx.navigateBack({
+          delta: 1
+        })
+      }
+      // do something
+      
+    }else {
+      return false
+    }
   }
 })

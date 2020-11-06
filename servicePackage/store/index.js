@@ -1,4 +1,4 @@
-// pages/index/index.js
+// servicePackage/store/index.js
 const app = getApp()
 Page({
 
@@ -6,19 +6,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    navBarHeight: app.globalData.navBarHeight, //导航栏高度
+    menuHeight: app.globalData.menuHeight
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    /* app.userTokenReadyCallback = res => {
-      this.setData({
-        hasToken: res,
-        isLogin: true
-      })
-    } */
+
   },
 
   /**
