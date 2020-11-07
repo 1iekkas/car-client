@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/map/index",
     "pages/logs/logs",
     "pages/user/index"
   ],
@@ -9,7 +10,9 @@
       "root": "userPackage",
       "pages": [
         "userCar/index",
-        "carList/index"
+        "carList/index",
+        "carInfoList/index",
+        "order/index"
       ]
     }
   ],

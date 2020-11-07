@@ -1,7 +1,7 @@
 /**小程序内置api封装 */
 const QQMapWX = require('../utils/qqmap-wx-jssdk.js');
 const map = new QQMapWX({
-  key: 'B6JBZ-T7N3D-XRL4T-P2T7P-FZIR2-XXBFE'
+  key: 'YRCBZ-LO2KJ-PMHFW-FHFGT-SPEPZ-POBWB'
 });
 module.exports = {
   /**

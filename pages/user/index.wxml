@@ -27,7 +27,7 @@
             <text>{{item}}</text>
           </view>
         </view>
-        <view class="tabs-all van-hairline--left">
+        <view class="tabs-all van-hairline--left" bindtap="orderLink" data-id="0">
           <image src="../../static/img/order.png" mode="widthFix" style="width: 46rpx;"></image>
           <text>全部</text>
         </view>
