@@ -1,0 +1,61 @@
+/* userPackage/order/index.wxss */
+page {
+  background-color: #f7f7f7;
+}
+
+.content {
+  padding-bottom: 40rpx;
+}
+
+.order-item {
+  font-size: 24rpx;
+  background-color: white;
+  padding: 30rpx;
+  margin-top: 20rpx;
+}
+
+.order-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.order-title .no {
+  color: #232323;
+  font-size: 32rpx;
+}
+
+.order-title .status {
+  color: var(--fontColor);
+}
+
+.order-body {
+  color: #959595;
+  font-size: 28rpx;
+  padding: 30rpx 0;
+}
+
+.order-body .cell {
+  display: flex;
+  align-items: center;
+}
+
+.order-body .cell + .cell {
+  padding-top: 16rpx;
+}
+
+.order-body .cell van-icon {
+  margin-right: 10rpx;
+}
+
+.order-body .cell .color {
+  color: var(--fontColor);
+}
+
+.order-action {
+  padding-top: 30rpx;
+  color: #959595;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

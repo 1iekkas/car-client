@@ -1,0 +1,23 @@
+/* userPackage/carInfoList/index.wxss */
+page {
+  background-color: #f7f7f7;
+}
+
+.custom-cell-value, .custom-cell-value van-image {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.custom-cell-value van-image {
+  margin-right: 10rpx;
+}
+
+.container .van-cell {
+  padding: 24rpx 30rpx;
+}
+
+.btn-section {
+  width: 80vw;
+  margin: 80rpx auto 0 auto;
+}

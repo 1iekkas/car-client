@@ -82,7 +82,7 @@ Page({
 
   },
   
-  
+  // 获取用户信息
   getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -90,5 +90,13 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  }
+  },
+  
+  // 跳转订单
+  orderLink(e) {
+    const id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url:`/userPackage/order/index?id=${id}`
+    })
+  },
 })

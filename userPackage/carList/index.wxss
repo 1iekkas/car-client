@@ -1,4 +1,8 @@
 /* userPackage/carList/index.wxss */
+@import "index.skeleton.wxss";
+.hidden {
+  display: none;
+}
 
 .brand-icon{
   margin-right: 26rpx;
@@ -31,6 +35,7 @@
   display: flex;
   align-items: center;
   padding: 24rpx 30rpx;
+  position: relative;
 }
 
 .group-item image {
@@ -38,6 +43,15 @@
   height: 50rpx;
   border-radius: 50%;
   margin-right: 20rpx;
+}
+
+.group-item .active-icon {
+  color: #fe9d00;
+  font-size: 32rpx;
+  position: absolute;
+  right: 30rpx;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .popup-action {
@@ -56,4 +70,5 @@
   height: 74rpx;
   line-height: 74rpx;
 }
+
 
