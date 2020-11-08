@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <navigation catchtouchmove="{{false}}">
+  <navigation catchtouchmove="{{true}}">
     <view class="nav-content">
       <van-icon custom-class="icon" name="manager" />
       <view class="location">

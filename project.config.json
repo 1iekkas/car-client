@@ -42,12 +42,6 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
-      "list": []
-    },
     "plugin": {
       "list": []
     },
@@ -99,6 +93,11 @@
           "name": "地图",
           "pathName": "pages/map/index",
           "query": "",
+          "scene": null
+        },
+        {
+          "name": "地点搜索",
+          "pathName": "userPackage/mapSearch/index",
           "scene": null
         }
       ]
