@@ -13,20 +13,30 @@
     "es6": true,
     "enhance": false,
     "postcss": true,
+    "preloadBackgroundData": false,
     "minified": true,
     "newFeature": false,
     "coverView": true,
     "nodeModules": true,
     "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
     "uglifyFileName": false,
     "checkInvalidKey": true,
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
     "useMultiFrameRuntime": false,
     "useApiHook": true
   },
@@ -42,12 +52,6 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
-      "list": []
-    },
     "plugin": {
       "list": []
     },
@@ -99,6 +103,23 @@
           "name": "地图",
           "pathName": "pages/map/index",
           "query": "",
+          "scene": null
+        },
+        {
+          "name": "登录",
+          "pathName": "userPackage/login/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "商铺",
+          "pathName": "servicePackage/store/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "地点搜索",
+          "pathName": "userPackage/mapSearch/index",
           "scene": null
         }
       ]

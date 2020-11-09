@@ -2,7 +2,6 @@
   "pages": [
     "pages/index/index",
     "pages/map/index",
-    "pages/logs/logs",
     "pages/user/index"
   ],
   "subPackages": [
@@ -12,7 +11,15 @@
         "userCar/index",
         "carList/index",
         "carInfoList/index",
-        "order/index"
+        "order/index",
+        "login/index",
+        "mapSearch/index"
+      ]
+    },
+    {
+      "root": "servicePackage",
+      "pages": [
+        "store/index"
       ]
     }
   ],

@@ -4,7 +4,9 @@ page {
   font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
       Segoe UI, Arial, Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei',
       sans-serif;
-  --fontColor: #ec8c05    
+  --bgWhite: white;    
+  --fontColor: #ec8c05;
+  --buttonBgColor: #ec8c05;   
 }
 
 .container {
