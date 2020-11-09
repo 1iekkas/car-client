@@ -91,4 +91,51 @@ module.exports = {
     })
 
   },
+
+  /**
+   * 
+   * @param Object {
+   *  keyword: 关键词,
+   *  region: 城市名， 例:佛山市,
+   *  region_fix: 是否自动扩大范围到全国 0=是 1=否,
+   * }  
+   */
+  async getSuggestion(params={}) {
+    console.log(123)
+    let object = {
+      ...params,
+      region_fix: 1,
+      page_size: 20,
+      page_index: 1
+    }
+    console.log(object)
+    try {
+      let res = await new Promise((resolve, reject) => {
+        map.getSuggestion({
+          ...object,
+          complete: result => {
+            resolve(result)
+          }
+        })
+      })
+
+      return res
+    }catch(error){
+      wx.showModal({
+        content: error
+      })
+    }
+  },
+
+  /**
+   * @function 用户搜索地点
+   * @params Object { 
+   *  keyword: 关键词,
+   *  location: 坐标点: '39.980014,116.313972' 
+   * } 
+   * create by liekkas 2020-11-07
+   */
+  searchLocation(params={}) {
+    map.search()
+  }
 }

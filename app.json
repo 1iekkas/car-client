@@ -12,7 +12,8 @@
         "carList/index",
         "carInfoList/index",
         "order/index",
-        "login/index"
+        "login/index",
+        "mapSearch/index"
       ]
     },
     {

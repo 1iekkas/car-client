@@ -26,8 +26,6 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
-    "useMultiFrameRuntime": false,
-    "useApiHook": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -38,7 +36,9 @@
     "userConfirmedUseCompilerModuleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true
+    "minifyWXSS": true,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.14.0",
@@ -114,6 +114,12 @@
         {
           "name": "商铺",
           "pathName": "servicePackage/store/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "地点搜索",
+          "pathName": "userPackage/mapSearch/index",
           "scene": null
         }
       ]

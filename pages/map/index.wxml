@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <navigation catchtouchmove="{{false}}">
+  <navigation catchtouchmove="{{true}}">
     <view class="nav-content">
       <van-icon bindtap="back" custom-class="icon" name="arrow-left" />
       <view class="location">
