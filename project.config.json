@@ -2,10 +2,10 @@
   "description": "项目配置文件",
   "packOptions": {
     "ignore": [
-     {
-      "type": "folder",
-      "value": "node_modules"
-     }
+      {
+        "type": "folder",
+        "value": "node_modules"
+      }
     ]
   },
   "setting": {
@@ -32,17 +32,17 @@
       "outputPath": ""
     },
     "useIsolateContext": true,
-    "useCompilerModule": false,
+    "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
-    "useMultiFrameRuntime": false,
-    "useApiHook": true,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true
+    "minifyWXSS": true,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.14.0",
-  "appid": "wxb7724228c1b48daf",
+  "appid": "wxaf48115651aaee69",
   "projectname": "car-client",
   "debugOptions": {
     "hidedInDevtools": []
@@ -52,12 +52,6 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
-      "list": []
-    },
     "plugin": {
       "list": []
     },
@@ -87,6 +81,45 @@
           "id": -1,
           "name": "车辆品牌",
           "pathName": "userPackage/carList/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 3,
+          "name": "填写车辆信息",
+          "pathName": "userPackage/carInfoList/index",
+          "query": "series={\"id\":\"509\",\"group_id\":\"9\",\"brand_id\":\"33\",\"full_name\":\"奥迪A6\",\"name\":\"奥迪A6\",\"firstletter\":\"A\",\"seriesstate\":\"40\",\"seriesorder\":\"89\",\"img\":\"https://car1.autoimg.cn/upload/spec/642/642676701043.jpg\",\"logo\":\"https://car2.autoimg.cn/cardfs/series/g24/M05/24/A3/autohomecar__wKgHH1qnPiGAbzOrAAchGgS3JvY808.png\",\"minprice\":\"308000\",\"maxprice\":\"541700\",\"seriesplace\":\"合资\",\"has_info\":\"1\",\"brand_logo\":\"//car2.autoimg.cn/cardfs/series/g26/M0B/AE/B3/autohomecar__wKgHEVs9u5WAV441AAAKdxZGE4U148.png\"}",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "订单",
+          "pathName": "userPackage/order/index",
+          "query": "series={\"id\":\"509\",\"group_id\":\"9\",\"brand_id\":\"33\",\"full_name\":\"奥迪A6\",\"name\":\"奥迪A6\",\"firstletter\":\"A\",\"seriesstate\":\"40\",\"seriesorder\":\"89\",\"img\":\"https://car1.autoimg.cn/upload/spec/642/642676701043.jpg\",\"logo\":\"https://car2.autoimg.cn/cardfs/series/g24/M05/24/A3/autohomecar__wKgHH1qnPiGAbzOrAAchGgS3JvY808.png\",\"minprice\":\"308000\",\"maxprice\":\"541700\",\"seriesplace\":\"合资\",\"has_info\":\"1\",\"brand_logo\":\"//car2.autoimg.cn/cardfs/series/g26/M0B/AE/B3/autohomecar__wKgHEVs9u5WAV441AAAKdxZGE4U148.png\"}",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "地图",
+          "pathName": "pages/map/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "登录",
+          "pathName": "userPackage/login/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "商铺",
+          "pathName": "servicePackage/store/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "地点搜索",
+          "pathName": "userPackage/mapSearch/index",
           "scene": null
         }
       ]

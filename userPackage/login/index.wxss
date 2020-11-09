@@ -1,0 +1,72 @@
+/* userPackage/login/index.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.logo {
+  text-align: center;
+  padding: 60rpx 0 20rpx 0;
+}
+
+.login-form {
+  width: 98vw;
+  margin: 0 auto;
+}
+
+.prefix {
+  padding-right: 18rpx;
+}
+
+.container .van-cell {
+  padding: 24rpx 30rpx;
+}
+
+.custom-btn button {
+  border: 0 !important;
+  color: var(--fontColor) !important;
+}
+
+.form-btn {
+  width: 90vw;
+  margin: 60rpx auto 0 auto;
+}
+
+.action-section {
+  width: 95vw;
+  margin: 0 auto;
+  padding-bottom: 60rpx;
+}
+
+.action-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-group .action-item {
+  color: #ababab;
+  font-size: 24rpx;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 50rpx;
+}
+
+.action-group .action-item van-button button {
+  border: 0;
+  margin-bottom: 10rpx;
+}
+
+.action-group .action-item van-image {
+  
+}
+
+.tips {
+  color: #ababab;
+  font-size: 24rpx;
+  text-align: center;
+  padding: 40rpx 0 0 0;
+}

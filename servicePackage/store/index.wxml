@@ -1,0 +1,77 @@
+<!--servicePackage/store/index.wxml-->
+<view class="container">
+  <navigation catchtouchmove="{{false}}">
+    <view class="nav-content" style="height: {{menuHeight}}px">
+      <van-icon name="arrow-left" size="40rpx" />
+    </view>
+  </navigation>
+  <view class="store-body">
+    <view class="store-swiper">
+      <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{5000}}" duration="{{800}}">
+        <block wx:for="{{1}}" wx:key="*this">
+          <swiper-item>
+            <image src="https://dummyimage.com/750x561" mode="widthFix" style="width: 100vw"></image>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <!---->
+    <view class="store-info">
+      <view class="info">
+        <view class="name van-hairline--right"> 在app.json或index.json中引入组件，详细介绍见快速上手</view>
+        <!-- <view class="range">
+          800m
+        </view> -->
+
+      </view>
+      <view class="service">
+        <van-tag color="#ec8c05" plain>美容店</van-tag>
+        <view class="block">
+          总订单 <text>396</text>
+        </view>
+        <view class="block">
+          评分 <text>4.3</text>
+        </view>
+      </view>
+
+      <view class="time">
+        营业时间: 09:00 ~ 21:00
+      </view>
+
+
+    </view>
+
+    <view class="store-address">
+      <view class="address-title">
+        <text>门店地址</text>
+        <van-icon name="arrow" size="26rpx" color="#999" />
+      </view>
+      <view class="address-info">
+        <text>广东省佛山市禅城区祖庙街道祖庙路NOVE岭南站首层103号</text>
+        <text>0.8km</text>
+      </view>
+    </view>
+
+    <!---->
+    <view class="store-comment">
+      <view class="comment-title">
+        <view>
+          <text>评价</text>
+          <text class="comment-count">43条</text>
+        </view>
+        <van-icon name="arrow" size="26rpx" color="#999" />
+      </view>
+      <!---->
+      <view class="comment-group">
+        <view class="comment-item van-hairline--bottom" wx:for="{{6}}" wx:key="index">
+          <view class="comment-item__title">
+            <van-image src="https://img.yzcdn.cn/vant/cat.jpeg" round width="50rpx" height="50rpx"></van-image>
+            <text class="user-name">18********01</text>
+            <text class="time">2020-10-31</text>
+          </view>
+          <view class="comment-item__body"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

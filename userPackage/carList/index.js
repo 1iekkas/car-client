@@ -7,11 +7,13 @@ Page({
    * 页面的初始数据
    */
   data: {
+    loading: true,
     keys: [],
     brand: [],
     show: false,
     activeBrand: null,
-    seriesList: []
+    seriesList: [], // 车系列表
+    activeSeries: null, // 选中的车系
   },
 
   /**
@@ -66,9 +68,9 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  /* onShareAppMessage: function() {
 
-  },
+  }, */
 
   // 获取品牌列表
   async getCarBrand() {
@@ -100,7 +102,8 @@ Page({
 
       this.setData({
         brand: brand,
-        keys: [...new Set(keys)]
+        keys: [...new Set(keys)],
+        loading: false
       })
 
     }
@@ -119,9 +122,12 @@ Page({
     const item = e.currentTarget.dataset.item;
     
     let factory = await this.getFactory(item.id) //厂家
-    let series = await this.getCarSeries(item.id)
+    let series = await this.getCarSeries(item.id) // 车系
     
-    //
+    // 如果没有数据 终止逻辑
+    if(!factory) return false
+    
+    // 处理数据
     factory.map((el, index) => {
       factory[index].list = []
       series.filter(e => {
@@ -131,16 +137,16 @@ Page({
       })
     })
     
-    console.log(factory)
+    //console.log(factory)
     this.setData({
       activeBrand: item,
       show: true,
+      activeSeries: 0,
       seriesList: factory
     })
   },
   
   // 获取厂家
-  // https://tool.bitefu.net/car/?type=series_group&from=0&brand_id=33&pagesize=50
   async getFactory(id) {
     let res = await api.get('https://tool.bitefu.net/car/', {
       type: 'series_group',
@@ -148,8 +154,14 @@ Page({
       brand_id: id,
       pagesize: 50
     })
-    if(res.statusCode == 200) {
+    if(res.statusCode == 200 && res.data.status == 1) {
       return res.data.info
+    }else {
+      wx.showModal({
+        content: res.data.info
+      })
+      
+      return false
     }
   },
   
@@ -165,5 +177,22 @@ Page({
       return res.data.info 
     }
   },
+  
+  // 选择车系
+  onSelectSeries(e) {
+    let series = e.currentTarget.dataset.series;
+    series.brand_logo = this.data.activeBrand.img
+    
+    this.setData({
+      activeSeries: series
+    })
+  },
+  
+  // 确认选择
+  onConfirmSelect() {
+    wx.navigateTo({
+      url: `/userPackage/carInfoList/index?series=${JSON.stringify(this.data.activeSeries)}`
+    })
+  }
   
 })

@@ -1,7 +1,8 @@
 /**小程序内置api封装 */
+const app = getApp()
 const QQMapWX = require('../utils/qqmap-wx-jssdk.js');
 const map = new QQMapWX({
-  key: 'B6JBZ-T7N3D-XRL4T-P2T7P-FZIR2-XXBFE'
+  key: 'YRCBZ-LO2KJ-PMHFW-FHFGT-SPEPZ-POBWB'
 });
 module.exports = {
   /**
@@ -33,14 +34,19 @@ module.exports = {
       let res = await new Promise((resolve, reject) => {
         wx.login({
           success: res => {
-            resolve(res.code)
+            resolve({
+              code: 200,
+              value: res.code
+            })
           }
         })
       })
 
       // do something  
-      wx.setStorageSync('token', 'token')
+      //wx.setStorageSync('token', 'token')
+     
       return res
+      
     } catch (err) {
       wx.showModal({
         content: '登陆失败，请重新登录'
@@ -83,6 +89,53 @@ module.exports = {
         }
       })
     })
-    
+
   },
+
+  /**
+   * 
+   * @param Object {
+   *  keyword: 关键词,
+   *  region: 城市名， 例:佛山市,
+   *  region_fix: 是否自动扩大范围到全国 0=是 1=否,
+   * }  
+   */
+  async getSuggestion(params={}) {
+    console.log(123)
+    let object = {
+      ...params,
+      region_fix: 1,
+      page_size: 20,
+      page_index: 1
+    }
+    console.log(object)
+    try {
+      let res = await new Promise((resolve, reject) => {
+        map.getSuggestion({
+          ...object,
+          complete: result => {
+            resolve(result)
+          }
+        })
+      })
+
+      return res
+    }catch(error){
+      wx.showModal({
+        content: error
+      })
+    }
+  },
+
+  /**
+   * @function 用户搜索地点
+   * @params Object { 
+   *  keyword: 关键词,
+   *  location: 坐标点: '39.980014,116.313972' 
+   * } 
+   * create by liekkas 2020-11-07
+   */
+  searchLocation(params={}) {
+    map.search()
+  }
 }
