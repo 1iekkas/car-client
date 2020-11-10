@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-import {  getDistance } from '../../utils/util.js'
+import { getDistance } from '../../utils/util.js'
 import {
   checkToken,
   login,
@@ -41,7 +41,9 @@ Page({
       value: 10000,
       scale: 11
     }],
+    tips: 1,
     activeRange: 0,
+    contentHeight: 0,
     // map配置
     mapSetting: {
       subkey: "YRCBZ-LO2KJ-PMHFW-FHFGT-SPEPZ-POBWB",
@@ -53,7 +55,7 @@ Page({
     circles: []
   },
 
-  onLoad: async function() {
+  onLoad: async function () {
     // 用户token回调
     app.userTokenReadyCallback = res => {
       this.setData({
@@ -63,7 +65,7 @@ Page({
     }
     // 用户信息回调
     app.userInfoReadyCallback = res => {
-      //console.log(res)
+      console.log(res)
       this.setData({
         userInfo: res.userInfo,
         hasUserInfo: true
@@ -90,12 +92,27 @@ Page({
   },
 
   onShow() {
-    //console.log(app.globalData.location)
-    
+
+
     this.setData({
       location: app.globalData.location,
-      isLogin: app.globalData.isLogin  
+      isLogin: app.globalData.isLogin,
+      userInfo: app.globalData.userInfo
     })
+    console.log(app.globalData.userInfo)
+  },
+
+  onReady() {
+    setTimeout(() => {
+      let query = wx.createSelectorQuery();
+      query.select('.content').boundingClientRect(rect => {
+        let height = rect.height;
+        //console.log(height);
+        this.setData({
+          contentHeight: height - 30
+        })
+      }).exec();
+    }, 0)
   },
 
   // 视野变更
@@ -104,7 +121,7 @@ Page({
   },
 
   // 获取用户信息 
-  getUserInfo: function(e) {
+  getUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
@@ -152,9 +169,9 @@ Page({
       return []
     }
   },
-  
+
   // 获取用户信息
-  getUserInfo: async function(e) {
+  getUserInfo: async function (e) {
 
     // console.log(e)
     /* if(e.detail.errMsg === 'getUserInfo:ok') {
@@ -173,16 +190,22 @@ Page({
       isLogin: true
     }) */
   },
-  
+
   toLogin() {
     wx.navigateTo({
       url: '/userPackage/login/index'
     })
   },
-  
+
   back() {
     wx.navigateBack({
       delta: 1
+    })
+  },
+
+  mapSearch() {
+    wx.navigateTo({
+      url: '/userPackage/mapSearch/index'
     })
   }
 })

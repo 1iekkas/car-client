@@ -118,8 +118,11 @@ Page({
       lng: address.location.lng,
       lat: address.location.lat
     }
-    wx.navigateTo({
+    /* wx.navigateTo({
       url: '/pages/map/index',
+    }) */
+    wx.navigateBack({
+      delta: 1
     })
   },
 })

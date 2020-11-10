@@ -3,5 +3,6 @@
     "van-sticky": "@vant/weapp/sticky/index",
     "van-search": "@vant/weapp/search/index",
     "van-icon": "@vant/weapp/icon/index"
-  }
+  },
+  "navigationBarTitleText": "地点搜索"
 }
