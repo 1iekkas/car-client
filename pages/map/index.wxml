@@ -52,14 +52,6 @@
     </view>
   </view> -->
 
-  <van-search
-    class="fixed-search"
-    value="{{ value }}"
-    shape="round"
-    background="transparent"
-    placeholder="请输入搜索关键词"
-  />
-
   <block wx:if="{{location}}">
     <map id="map" longitude="{{location.location.lng}}" setting="{{mapSetting}}" control="{{false}}" markers="{{markers}}"
       latitude="{{location.location.lat}}" style="width: 100vw;height: calc(100vh - {{navBarHeight}}px);margin-top: {{navBarHeight}}px;"
