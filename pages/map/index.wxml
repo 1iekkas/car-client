@@ -1,14 +1,25 @@
-<!--index.wxml-->
+<!-- index.wxml -->
 <view class="container">
   <navigation catchtouchmove="{{true}}">
     <view class="nav-content">
-      <van-icon bindtap="back" custom-class="icon" name="arrow-left" />
-      <view class="location">
+      <!-- <van-icon bindtap="back" custom-class="icon" name="arrow-left" /> -->
+      <block wx:if="{{userInfo}}">
+        <image class="avatar" mode="widthFix" src="{{userInfo.avatarUrl}}" />
+      </block>
+      <block wx:else>
+        <image class="avatar" mode="widthFix" src="../../static/img/avatar.png" />
+      </block>
+      <view class="location" bindtap="mapSearch">
         {{location.address_component.city}}
         <van-icon class="icon-down" name="arrow-down" />
       </view>
     </view>
   </navigation>
+
+  <view class="search-section" style="top: calc({{navBarHeight}}px + 30rpx)">
+    <van-search shape="round" disabled placeholder="搜索附近商家"></van-search>
+  </view>
+
   <!-- <scroll-view scroll-y="true" style="height: calc(100vh - 108rpx);" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll"
     scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
     <view class="content" style="min-height: calc(100vh - 100rpx);">
@@ -56,12 +67,44 @@
       <cover-image class="location-marker" src="../../static/img/marker.png"></cover-image>
     </map>
   </block>
-  <block wx:if="{{isLogin}}">
-    <van-button class="fixed-btn" round type="primary" block>发布需求</van-button>
-  </block>
-  <block wx:else>
-    <van-button block class="fixed-btn" round type="primary" bind:click="toLogin">
-      发布需求
-    </van-button>
-  </block>
+  <view class="content" catchtouchmove="{{true}}">
+    <view class="order-tips">
+      <block wx:if="{{tips}}">
+        <van-cell is-link>
+          <view slot="title" class="">
+            您有
+            <text class="number">1</text>
+            笔订单进行中
+          </view>
+        </van-cell>
+      </block>
+      <block wx:else>
+        <van-cell title="暂无订单进行中" is-link></van-cell>
+      </block>
+    </view>
+    <block wx:if="{{isLogin}}">
+      <van-button custom-class="link-button" round type="primary" block>发布需求</van-button>
+    </block>
+    <block wx:else>
+      <van-button block custom-class="link-button" round type="primary" bind:click="toLogin">
+        发布需求
+      </van-button>
+    </block>
+    <view class="order-swipe">
+      <swiper indicator-dots="{{indicatorDots}}"
+        vertical="{{true}}"
+        autoplay="{{false}}" circular="{{true}}" interval="{{5000}}" duration="{{800}}">
+        <block wx:for="{{5}}" wx:key="*this">
+          <swiper-item>
+            <view class="swiper-item {{item}}">
+              <view class="item" wx:for="{{3}}" wx:key="index">
+                <image class="item-avatar" mode="widthFix" src="../../static/img/avatar.png" />
+                <view class="text">刚刚在xxx成功预约一笔订单</view>
+              </view>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  </view>
 </view>

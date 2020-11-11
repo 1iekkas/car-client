@@ -6,7 +6,7 @@
 }
 
 van-icon.slot {
-  margin: 4rpx 10rpx 0 10rpx;
+  margin: 4rpx 16rpx 0 10rpx;
 }
 
 /** */
