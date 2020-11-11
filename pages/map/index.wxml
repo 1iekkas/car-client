@@ -51,8 +51,11 @@
       <van-icon name="search" size="40rpx" />
     </view>
   </view> -->
+
   <block wx:if="{{location}}">
-    <map id="map" longitude="{{location.location.lng}}" setting="{{mapSetting}}" control="{{false}}" markers="{{markers}}" latitude="{{location.location.lat}}" style="width: 100vw;height: calc(100vh - {{navBarHeight}}px - {{contentHeight}}px);margin-top: {{navBarHeight}}px" bindregionchange="regionchange">
+    <map id="map" longitude="{{location.location.lng}}" setting="{{mapSetting}}" control="{{false}}" markers="{{markers}}"
+      latitude="{{location.location.lat}}" style="width: 100vw;height: calc(100vh - {{navBarHeight}}px);margin-top: {{navBarHeight}}px;"
+      bindregionchange="regionchange">
       <cover-image class="location-marker" src="../../static/img/marker.png"></cover-image>
     </map>
   </block>

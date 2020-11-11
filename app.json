@@ -13,7 +13,8 @@
         "carInfoList/index",
         "order/index",
         "login/index",
-        "mapSearch/index"
+        "mapSearch/index",
+        "citySearch/index"
       ]
     },
     {

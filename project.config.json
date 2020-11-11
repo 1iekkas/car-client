@@ -120,6 +120,12 @@
         {
           "name": "地点搜索",
           "pathName": "userPackage/mapSearch/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "选择城市",
+          "pathName": "userPackage/citySearch/index",
           "scene": null
         }
       ]
