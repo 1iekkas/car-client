@@ -127,3 +127,11 @@
   right: 8vw;
   z-index: 100;
 }
+
+.fixed-search {
+  position: fixed;
+  top: 130rpx;
+  left: 5vw;
+  right: 5vw;
+  z-index: 2;
+}

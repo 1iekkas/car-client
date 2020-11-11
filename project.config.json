@@ -26,6 +26,8 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -36,9 +38,7 @@
     "userConfirmedUseCompilerModuleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true,
-    "useMultiFrameRuntime": false,
-    "useApiHook": true
+    "minifyWXSS": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.14.0",
@@ -120,6 +120,12 @@
         {
           "name": "地点搜索",
           "pathName": "userPackage/mapSearch/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "选择城市",
+          "pathName": "userPackage/citySearch/index",
           "scene": null
         }
       ]
