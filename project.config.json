@@ -126,6 +126,12 @@
         {
           "name": "选择城市",
           "pathName": "userPackage/citySearch/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "订单创建",
+          "pathName": "servicePackage/create/index",
           "scene": null
         }
       ]

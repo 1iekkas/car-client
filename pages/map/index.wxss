@@ -134,14 +134,25 @@
   padding: 12rpx 18rpx;
 }
 
-.content {
+.movable-area {
   width: 100vw;
-  height: auto;
-  font-size: 28rpx;
   position: fixed;
   left: 0;
   bottom: 0;
   z-index: 2;
+  height: 400rpx;
+  background-color: transparent;
+}
+
+.movable-view {
+  width: auto;
+  height: auto;
+}
+
+.content {
+  width: 100vw;
+  height: auto;
+  font-size: 28rpx;
   border-radius: 36rpx 36rpx 0 0;
   background-color: white;
   padding: 40rpx 30rpx 30rpx 30rpx;

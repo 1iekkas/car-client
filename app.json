@@ -20,7 +20,8 @@
     {
       "root": "servicePackage",
       "pages": [
-        "store/index"
+        "store/index",
+        "create/index"
       ]
     }
   ],

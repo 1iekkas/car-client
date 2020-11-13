@@ -1,0 +1,37 @@
+<!--servicePackage/create/index.wxml-->
+<view class="container">
+  <!--汽车列表-->
+  <view class="car-section">
+    <view class="car-item">
+      <view class="car-item-body">
+        <image src="../../static/img/car-icon.jpg" mode="widthFix" style="width: 100rpx;"></image>
+        <view class="car-info">
+          <view class="car-brand">Ferrari 法拉利</view>
+          <view class="car-params">2017款 基本型812 Superfast 前置后驱7挡双离合</view>
+        </view>
+      </view>
+      <view class="car-item-action">
+        切换
+        <van-icon name="replay" size="28rpx" />
+      </view>
+    </view>
+  </view>
+  <!--表单内容-->
+  <view class="form">
+    <view class="form-title">请输入你的需求</view>
+    <van-cell-group>
+      <van-field value="{{ message }}" type="textarea" placeholder="..." autosize="{{ autosize }}" border="{{ false }}" />
+    </van-cell-group>
+    <!--上传组件-->
+    <view class="form-title">上传图片</view>
+    <view class="upload">
+      <van-uploader file-list="{{ fileList }}" max-count="6" bind:after-read="afterRead" />
+    </view>
+    <!---->
+    <van-cell-group>
+      <van-field require label="预计费用" value="{{ message }}" input-align="right" placeholder="" />
+      <van-field require label="预约到店时间" value="{{ message }}" input-align="right" placeholder="" border="{{ false }}" />
+    </van-cell-group>
+  </view>
+  <!---->
+</view>
