@@ -42,7 +42,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.14.0",
-  "appid": "wxb7724228c1b48daf",
+  "appid": "wxa487cd75e5f05745",
   "projectname": "car-client",
   "debugOptions": {
     "hidedInDevtools": []
@@ -126,6 +126,24 @@
         {
           "name": "选择城市",
           "pathName": "userPackage/citySearch/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "订单创建",
+          "pathName": "servicePackage/create/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "订单信息",
+          "pathName": "servicePackage/orderInfo/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "车型订单搜索",
+          "pathName": "servicePackage/searchOrder/index",
           "scene": null
         }
       ]

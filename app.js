@@ -7,8 +7,6 @@ import {
   $api
 } from 'utils/http.js'
 
-console.log($api)
-
 App({
   onLaunch: function() {
     this.setNavBarInfo()
@@ -20,6 +18,7 @@ App({
         this.locationReadyCallback(res.result)
       }
     })
+
 
     // 检查token是否存在
     checkToken().then(result => {

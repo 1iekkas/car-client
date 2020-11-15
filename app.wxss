@@ -6,7 +6,8 @@ page {
       sans-serif;
   --bgWhite: white;    
   --fontColor: #ec8c05;
-  --buttonBgColor: #ec8c05;   
+  --buttonBgColor: #ec8c05;
+  --priceColor: #f40   
 }
 
 .container {
@@ -43,3 +44,9 @@ image {
 .line {
   height: 30rpx;
 }
+
+.price {
+  color: var(--priceColor);
+}
+
+

@@ -2,7 +2,7 @@
 const app = getApp()
 const QQMapWX = require('../utils/qqmap-wx-jssdk.js');
 const map = new QQMapWX({
-  key: 'YRCBZ-LO2KJ-PMHFW-FHFGT-SPEPZ-POBWB'
+  key: '553BZ-MI4CW-LMXR5-OXN7Z-OMBVK-RPFMX'
 });
 module.exports = {
   /**

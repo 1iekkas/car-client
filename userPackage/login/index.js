@@ -1,6 +1,8 @@
 // userPackage/login/index.js
 const app = getApp()
-import { login } from '../../api/wxServer.js'
+import {
+  login
+} from '../../api/wxServer.js'
 Page({
 
   /**
@@ -65,32 +67,43 @@ Page({
   onShareAppMessage: function () {
 
   },
-  
+
   /**
    * 获取用户电话
    */
   getphonenumber(e) {
     console.log(e)
   },
-  
+
   /**
    * 获取用户信息
    */
   async getUserInfo(e) {
-    if(e.detail.errMsg === 'getUserInfo:ok') {
+    console.log(e)
+    if (e.detail.errMsg == 'getUserInfo:ok') {
       let res = await login()
-      if(res.code && res.code == 200) {
-        wx.setStorageSync('token', 'token')
-        app.globalData.userInfo = e.detail.userInfo
-        app.globalData.isLogin = true
-        wx.navigateBack({
-          delta: 1
-        })
-      }
+      if (res.code && res.code == 200) {
+        this.getUserToken(res.value)
+      } /*  */
       // do something
-      
-    }else {
-      return false
     }
+  },
+
+  async getUserToken(code) {
+    let res = await app.$api.post(`/u/login/user/${code}`)
+    wx.setStorageSync('token', 'token')
+      app.globalData.userInfo = e.detail.userInfo
+      app.globalData.isLogin = true
+      wx.navigateBack({
+        delta: 1
+      })
+    /* if (res.code == 200) {
+      wx.setStorageSync('token', 'token')
+      app.globalData.userInfo = e.detail.userInfo
+      app.globalData.isLogin = true
+      wx.navigateBack({
+        delta: 1
+      })
+    } */
   }
 })

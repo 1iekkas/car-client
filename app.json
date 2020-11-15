@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/map/index",
+    "pages/index/index",
     "pages/user/index"
   ],
   "subPackages": [
@@ -20,7 +20,10 @@
     {
       "root": "servicePackage",
       "pages": [
-        "store/index"
+        "store/index",
+        "create/index",
+        "orderInfo/index",
+        "searchOrder/index"
       ]
     }
   ],

@@ -1,0 +1,21 @@
+<!--servicePackage/searchOrder/index.wxml-->
+<view class="container">
+  <van-sticky offset-top="0" catchtouchmove="{{true}}">
+    <van-search value="{{ value }}" placeholder="请输入相关车型" />
+  </van-sticky>
+  <scroll-view scroll-y="true" style="height: calc(100vh - 108rpx)" bindscrolltoupper="upper" bindscrolltolower="lower"
+    bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+    <view class="content" style="min-height: calc(100vh - 100rpx)">
+      <!--空数据-->
+      <block></block>
+      <!---->
+      <block>
+        <view class="item" wx:for="{{10}}" wx:key="index">
+          
+        </view>
+      </block>
+      <!---->
+      <block></block>
+    </view>
+  </scroll-view>
+</view>

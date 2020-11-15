@@ -1,5 +1,6 @@
 // pages/user/index.js
 const app = getApp()
+import { login } from '../../api/wxServer'
 Page({
 
   /**
@@ -91,6 +92,7 @@ Page({
   
   // 获取用户信息
   getUserInfo: async function(e) {
+    
     if(e.detail.errMsg === 'getUserInfo:ok') {
       app.globalData.userInfo = e.detail.userInfo
       let res = await login()

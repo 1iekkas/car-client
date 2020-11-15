@@ -1,0 +1,89 @@
+/* servicePackage/create/index.wxss */
+page {
+  background-color: #f7f7f7;
+}
+
+.container {
+  padding: 30rpx 0;
+}
+
+.car-item {
+  width: 95vw;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 8rpx;
+  padding: 30rpx;
+}
+
+.car-item-body {
+  display: flex;
+}
+
+.car-info {
+  padding-left: 10rpx;
+  padding-bottom: 30rpx;
+}
+
+.car-brand {
+  margin-bottom: 12rpx;
+}
+
+.car-params {
+  color: #bbb;
+  font-size: 24rpx;
+}
+
+.car-item-action {
+  color: #777;
+  font-size: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.car-item-action van-icon {
+  padding-left: 12rpx;
+}
+
+/**form */
+.form {
+  margin: 30rpx 0;
+  background-color: white;
+}
+
+.form-title {
+  color: #646566;
+  font-size: 28rpx;
+  padding: 20rpx 30rpx;
+}
+
+.upload {
+  padding: 15rpx 22rpx 20rpx 22rpx;
+}
+
+/** */
+.slot-title {
+  color: #646566;
+  display: flex;
+  align-items: center;
+}
+
+.slot-title van-checkbox {
+  margin-right: 8rpx;
+}
+
+.submit-button {
+  margin: 60rpx auto 0 auto;
+  width: 90vw;
+}
+
+.servies {
+  color: #646566;
+  font-size: 24rpx;
+  width: 90vw;
+  margin: 60rpx auto;
+}
+
+.van-cell.padding {
+  padding: 26rpx 16rpx 26rpx 26rpx;
+}

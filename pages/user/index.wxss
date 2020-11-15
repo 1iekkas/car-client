@@ -99,6 +99,3 @@ page {
   margin: 0 auto;
 }
 
-.van-cell.padding {
-  padding: 26rpx 16rpx 26rpx 26rpx;
-}

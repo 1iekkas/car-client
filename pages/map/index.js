@@ -46,7 +46,7 @@ Page({
     contentHeight: 0,
     // map配置
     mapSetting: {
-      subkey: "YRCBZ-LO2KJ-PMHFW-FHFGT-SPEPZ-POBWB",
+      subkey: "553BZ-MI4CW-LMXR5-OXN7Z-OMBVK-RPFMX",
       layerStyle: 1,
       scale: 16,
       circles: []
@@ -206,6 +206,26 @@ Page({
   mapSearch() {
     wx.navigateTo({
       url: '/userPackage/mapSearch/index'
+    })
+  },
+
+  // 个人中心
+  linkUserInfo() {
+    wx.navigateTo({
+      url: '/pages/user/index',
+    })
+  },
+
+  // 创建订单
+  toCreate() {
+    wx.navigateTo({
+      url: '/servicePackage/create/index',
+    })
+  },
+
+  toSearchOrder() {
+    wx.navigateTo({
+      url: '/servicePackage/searchOrder/index',
     })
   }
 })
