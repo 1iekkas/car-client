@@ -1,0 +1,76 @@
+<!--servicePackage/orderDetails/index.wxml-->
+<view class="container">
+  <view class="info van-hairline--bottom">
+    <view class="info-tips">
+      <view class="icon">
+        <van-icon name="passed" color="#07c160" size="52rpx" />待支付
+      </view>
+      <!-- <view class="text">请耐心等待商家报价</view>
+      <view class="time">剩余时间
+        <van-count-down class="count-down" time="{{ time }}" />
+      </view> -->
+    </view>
+  </view>
+  <view class="line"></view>
+  <!---->
+  <view class="form">
+    <van-cell-group border="{{false}}">
+      <van-cell title-width="150rpx" title="需求描述"
+        value="vant Weapp 是移動耑 Vue 組件庫 Vant 的小程序版本,兩者基於相同的眡覺槼範,提供一致的 API 接口,助力開發者快速搭建小程序應用。 預覽 掃描下方小程序二維碼" />
+      <van-cell>
+        <view class="img-list">
+          <van-image wx:for="{{5}}" wx:key="index" width="200rpx" height="200rpx" src="https://dummyimage.com/120x120">
+          </van-image>
+        </view>
+      </van-cell>
+      <van-cell title="预算费用">
+        <view class="price">
+          ￥950.00
+        </view>
+      </van-cell>
+      <van-cell title="预计到店时间" value="2020-12-31 10:00:00"></van-cell>
+      <van-cell title="是否需要上门服务" value="否"></van-cell>
+    </van-cell-group>
+  </view>
+  <!---->
+  <view class="line"></view>
+  <view class="store-section">
+    <view class="title van-hairline--bottom">服务门店</view>
+    <view class="store-group">
+      <view class="store-item">
+        <van-image width="200rpx" height="200rpx" src="https://dummyimage.com/120x120"></van-image>
+        <view class="store-content">
+          <view class="name">汽修店1000</view>
+          <block wx:if="{{ index % 2}}">
+            <view class="price">价格:￥1024.00</view>
+          </block>
+          <block wx:else>
+            <view class="tips price">
+              您描述的需求不清晰，本店无法提供报价，可致电或到店咨询
+            </view>
+          </block>
+          <view class="address">
+            <view class="location">佛山市禅城区汾江路世博广场首层102铺</view>
+            <view class="range">1.8km</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <van-cell-group border="{{false}}">
+    <van-cell title-width="150rpx" title="商家报价">
+      <view class="price">￥950.00</view>
+    </van-cell>
+    <van-cell title-width="150rpx" title="优惠">
+      <view class="price">-￥50.00</view>
+    </van-cell>
+    <van-cell title-width="150rpx" title="积分">
+      <view class="price">95</view>
+    </van-cell>
+  </van-cell-group>
+
+  <van-submit-bar class="van-hairline--top" price="{{ 3050 }}" button-text="支付" bind:submit="onSubmit">
+    <!-- <view>实付：3000</view> -->
+  </van-submit-bar>
+</view>

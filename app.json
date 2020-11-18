@@ -23,7 +23,8 @@
         "store/index",
         "create/index",
         "orderInfo/index",
-        "searchOrder/index"
+        "searchOrder/index",
+        "orderDetails/index"
       ]
     }
   ],
