@@ -1,5 +1,7 @@
 // userPackage/user/index.js
+import { getCarList } from '../../api/user'
 const app = getApp()
+let data 
 Page({
 
   /**
@@ -14,6 +16,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    data = this.data
     this.setData({
       isLogin: app.globalData.isLogin
     })
@@ -30,6 +33,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.getCarList()
     this.setData({
       isLogin: app.globalData.isLogin
     })
@@ -70,6 +74,17 @@ Page({
 
   }, */
   
+  // 获取列表
+  async getCarList() {
+    let res = await getCarList()
+    console.log(res.data)
+    this.setData({
+      list: res.data
+    },() => {
+      console.log(data.list)
+    })
+  },
+
   //
   addCar() {
     if(!this.data.isLogin) {

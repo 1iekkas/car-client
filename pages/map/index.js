@@ -47,7 +47,7 @@ Page({
     // map配置
     mapSetting: {
       subkey: "553BZ-MI4CW-LMXR5-OXN7Z-OMBVK-RPFMX",
-      layerStyle: 1,
+      layerStyle: '1',
       scale: 16,
       circles: []
     },
@@ -99,7 +99,7 @@ Page({
       isLogin: app.globalData.isLogin,
       userInfo: app.globalData.userInfo
     })
-    console.log(app.globalData.userInfo)
+    console.log(app.globalData.isLogin)
   },
 
   onReady() {

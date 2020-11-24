@@ -49,4 +49,8 @@ image {
   color: var(--priceColor);
 }
 
+.van-goods-action {
+  z-index: 100 !important;
+}
+
 

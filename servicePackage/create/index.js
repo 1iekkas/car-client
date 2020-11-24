@@ -1,55 +1,35 @@
 // servicePackage/create/index.js
+const md5 = require('../../utils/md5.js')
+import { getCarList } from '../../api/user'
+import { validatePhone } from '../../utils/validator'
+import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
+let data
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    car: null,
     autosize: {
       minHeight: 150
     },
+    content:'',
+    phone: '',
+    evaluate_fee: '',
+    evaluate_time: '',
     isLocation: false,
-    fileList: [{
-        url: 'https://img.yzcdn.cn/vant/leaf.jpg',
-        name: '图片1',
-        isImage: true,
-        deletable: true,
-      },
-      // Uploader 根据文件后缀来判断是否为图片文件
-      // 如果图片 URL 中不包含类型信息，可以添加 isImage 标记来声明
-      {
-        url: 'http://iph.href.lu?text=default',
-        url: 'http://iph.href.lu/60x60?text=default',
-        name: '图片2',
-        isImage: true,
-        deletable: true,
-      },
-      {
-        url: 'https://img.yzcdn.cn/vant/leaf.jpg',
-        name: '图片1',
-        isImage: true,
-        deletable: true,
-      },
-      {
-        url: 'https://img.yzcdn.cn/vant/leaf.jpg',
-        name: '图片1',
-        isImage: true,
-        deletable: true,
-      },
-      {
-        url: 'https://img.yzcdn.cn/vant/leaf.jpg',
-        name: '图片1',
-        isImage: true,
-        deletable: true,
-      },
-    ]
+    fileList: [],
+    doorType: '1'
+    
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    data = this.data
   },
 
   /**
@@ -62,8 +42,19 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: async function() {
+    // 
+    console.log(app.globalData.location)
 
+    let res = await getCarList()
+    this.setData({
+      car: res.data[0],
+      location: data.location ? data.location : {
+        address: app.globalData.location.address,
+        location: app.globalData.location.location
+      }  //app.globalData.location
+    })
+    console.log(data.location)
   },
 
   /**
@@ -101,41 +92,168 @@ Page({
 
   },
 
+  //
+  getStr() {
+    /** */
+    let signature = '';
+    const timestamp = (parseInt(new Date().getTime() / 1000))
+    const rand1 = (parseInt(Math.random(1, 1) * 1000)).toString()
+    const rand2 = (parseInt(Math.random(1, 2) * 10000)).toString()
+    const nonce = timestamp + rand1 + rand2
+    signature = md5.md5(timestamp + nonce + 'Zgc3a7jNqANK2nbVBluSgxKKaXZs0A')
+    //console.log(signature)
+    return {
+      timestamp: timestamp,
+      rand1: rand1,
+      rand2: rand2,
+      nonce: timestamp + rand1 + rand2,
+      signature: signature.toLocaleLowerCase(),
+    }
+  
+  },
+  
+
   /**
    * 上传图片
    */
   afterRead(event) {
+    
     const {
       file
     } = event.detail;
+    
+    file.map(e => {
+      this.upload(e)
+    })
+    
+  },
+
+  upload(file) {
+    const signature = this.getStr()
     // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
     wx.uploadFile({
-      url: 'https://example.weixin.qq.com/upload', // 仅为示例，非真实的接口地址
-      filePath: file.path,
+      url: `https://car.coasewash.com/u/upload?timestamp=${signature.timestamp}&nonce=${signature.nonce}&key=Zgc3a7jNqANK2nbVBluSgxKKaXZs0A&signature=${signature.signature}`, // 仅为示例，非真实的接口地址
+      filePath: file.url,
       name: 'file',
-      formData: {
-        user: 'test'
-      },
-      success(res) {
+      formData: signature,
+      success:res => {
+        res = JSON.parse(res.data)
+        // console.log(res)
         // 上传完成需要更新 fileList
         const {
           fileList = []
         } = this.data;
         fileList.push({ ...file,
-          url: res.data
+          url: 'https://car.coasewash.com/' + res[0],
+          isImage: true,
+          deletable: true
         });
+
+        console.log(fileList)
+
         this.setData({
           fileList
         });
       },
+      complete: c => {
+        console.log(c)
+      }
     });
   },
 
   /** */
-  onChange(event) {
+  onChange(e) {
+    const type = e.currentTarget.dataset.type,
+      value = e.detail
+
     this.setData({
-      isLocation: event.detail,
+      //isLocation: event.detail,
+      [`${type}`]: value
+    },() => {
+      // console.log(data)
     });
   },
+
+  // 提交
+  async onSubmit() {
+    validatePhone(data.phone)
+    //validateContent(data.content)
+    if(data.content == '') {
+      Toast.fail('请填写您的需求')
+      return false
+    }
+
+    if(!data.car) {
+      Toast.fail('请先添加车辆')
+      return false
+    }
+
+
+
+
+    // 参数body
+    let body = {
+      car_id: data.car.id || '',
+      content: data.content,
+      phone: data.phone,
+      evaluate_fee: data.evaluate_fee,
+      evaluate_time: data.evaluate_time,
+      on_door: data.isLocation ? data.doorType : 0, // 0 不上门 1 不取车 2 取车
+      lng: data.isLocation ? data.location.location.lng : '',
+      lat: data.isLocation ? data.location.location.lat : '',
+      images: data.fileList ? data.fileList.map(e => e.url).join('|') : [],
+    }
+
+    let res = await app.$api.post('/u/order/add', body)
+
+    if(!res.code) {
+      Toast({
+        type: 'success',
+        message: '提交成功',
+        onClose: () => {
+          wx.redirectTo({
+            url: '/userPackage/order/index',
+          })
+        },
+      })
+    } 
+    
+  },
+
+  // 删除图片
+  onDelImage(e) {
+    const index = e.detail.index
+    data.fileList.splice(index, 1)
+    this.setData({
+      fileList: data.fileList
+    })
+  },
+
+  //
+  set(e) {
+    //console.log('触发')
+    //console.log(value)
+    this.setData({
+      evaluate_time: e.detail.value
+    },() => {
+      console.log(data.evaluate_time)
+    })
+  },
+
+  addCar() {
+    wx.navigateTo({
+      url: '/userPackage/carList/index?from=create',
+    })
+  },
+
+  // 
+  onClick(e) {
+    console.log(e)
+    const { name } = e.currentTarget.dataset;
+
+    this.setData({
+      doorType: name
+    })
+  }
 
 })

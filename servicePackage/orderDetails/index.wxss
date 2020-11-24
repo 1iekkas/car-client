@@ -1,10 +1,7 @@
-/* servicePackage/orderInfo/index.wxss */
+/* servicePackage/orderDetails/index.wxss */
 page {
   background-color: #f7f7f7;
-}
-
-.container {
-  padding-bottom: 50px;
+  padding-bottom: 120rpx;
 }
 
 .info {
@@ -48,7 +45,10 @@ page {
 }
 
 /** */
-.store-section {}
+.store-section .title {
+  padding: 20rpx 30rpx;
+  background-color: white;
+}
 
 .store-filter {
   font-size: 28rpx;
@@ -58,13 +58,6 @@ page {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  position: relative;
-}
-
-.store-filter .refresh {
-  position: absolute;
-  right: 30rpx;
-  top: 24rpx;
 }
 
 .store-filter .filter-item+.filter-item {
@@ -111,13 +104,12 @@ van-goods-action-button button {
   width: 35vw !important;
 }
 
-.images-group {
+/** */
+.img-list {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
   flex-wrap: wrap;
 }
 
-.images-group van-image {
-  margin-right: 10px;
+.img-list van-image {
+  margin-right: 20rpx;
 }

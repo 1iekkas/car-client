@@ -19,6 +19,17 @@ page {
   display: flex;
 }
 
+.car-item-body.add {
+  padding: 20rpx 0;
+  align-items: center;
+  justify-content: center;
+  color: #646566;
+}
+
+.car-item-body.add van-icon {
+  margin-right: 10rpx;
+}
+
 .car-info {
   padding-left: 10rpx;
   padding-bottom: 30rpx;
@@ -31,6 +42,12 @@ page {
 .car-params {
   color: #bbb;
   font-size: 24rpx;
+}
+
+.car-params .car-number {
+  color: #232323;
+  font-size: 32rpx;
+  margin-bottom: 6rpx;
 }
 
 .car-item-action {
@@ -66,6 +83,7 @@ page {
   color: #646566;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .slot-title van-checkbox {
@@ -86,4 +104,8 @@ page {
 
 .van-cell.padding {
   padding: 26rpx 16rpx 26rpx 26rpx;
+}
+
+.location .van-cell__title {
+  color: #777 !important;
 }

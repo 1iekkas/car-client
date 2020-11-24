@@ -13,32 +13,22 @@
     "es6": true,
     "enhance": false,
     "postcss": true,
-    "preloadBackgroundData": false,
     "minified": true,
     "newFeature": false,
     "coverView": true,
     "nodeModules": true,
     "autoAudits": false,
-    "showShadowRootInWxmlPanel": true,
-    "scopeDataCheck": false,
     "uglifyFileName": false,
     "checkInvalidKey": true,
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
-    "compileHotReLoad": false,
-    "useMultiFrameRuntime": false,
-    "useApiHook": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
-    "useIsolateContext": true,
-    "useCompilerModule": true,
-    "userConfirmedUseCompilerModuleSwitch": false,
-    "packNpmManually": false,
-    "packNpmRelationList": [],
-    "minifyWXSS": true
+    "useMultiFrameRuntime": false,
+    "useApiHook": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.14.0",
@@ -138,12 +128,19 @@
         {
           "name": "订单信息",
           "pathName": "servicePackage/orderInfo/index",
-          "query": "",
+          "query": "id=6",
           "scene": null
         },
         {
           "name": "车型订单搜索",
           "pathName": "servicePackage/searchOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "servicePackage/orderDetails/index",
+          "pathName": "servicePackage/orderDetails/index",
+          "query": "id=1",
           "scene": null
         }
       ]
