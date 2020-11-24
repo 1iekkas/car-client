@@ -6,8 +6,8 @@ page {
       sans-serif;
   --bgWhite: white;    
   --fontColor: #ec8c05;
-  --buttonBgColor: #ec8c05;
-  --priceColor: #f40   
+  --buttonBgColor: #ec8c05; /* #ec8c05; */
+  --priceColor: #ff6000; /* #f40 */   
 }
 
 .container {

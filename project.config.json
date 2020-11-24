@@ -138,9 +138,8 @@
           "scene": null
         },
         {
-          "name": "servicePackage/orderDetails/index",
+          "name": "订单详情",
           "pathName": "servicePackage/orderDetails/index",
-          "query": "id=1",
           "scene": null
         }
       ]
