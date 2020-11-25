@@ -83,16 +83,28 @@ Page({
     if (e.detail.errMsg == 'getUserInfo:ok') {
       let res = await login()
       if (res.code && res.code == 200) {
-        this.getUserToken(res.value)
-      } /*  */
+        this.getUserToken(res.value, e.detail)
+      } 
       // do something
     }
   },
 
-  async getUserToken(code) {
-    let res = await app.$api.post(`/u/login/user/${code}`)
-    wx.setStorageSync('token', 'token')
-      app.globalData.userInfo = e.detail.userInfo
+  async getUserToken(code, userInfo) {
+    const body = {
+      iv: userInfo.iv,
+      encryptedData: userInfo.encryptedData,
+      sex: userInfo.userInfo.gender,
+      nickname: userInfo.userInfo.nickName,
+      province: userInfo.userInfo.province,
+      city: userInfo.userInfo.city,
+      country: userInfo.userInfo.country,
+      head: userInfo.userInfo.avatarUrl
+    }
+
+    let res = await app.$api.post(`/u/login/${code}`, body)
+    // console.log(res)
+    wx.setStorageSync('token', res.data.token)
+      app.globalData.userInfo = userInfo.userInfo
       app.globalData.isLogin = true
       wx.navigateBack({
         delta: 1

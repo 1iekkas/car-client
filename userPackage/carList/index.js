@@ -79,7 +79,7 @@ Page({
       type: 'brand',
       from: 0,
       pagesize: 300
-    })
+    }, false)
     if (res.statusCode == 200) {
       // 处理数据
       let keys = res.data.info.map(e => e.firstletter)
@@ -153,7 +153,7 @@ Page({
       from: 0,
       brand_id: id,
       pagesize: 50
-    })
+    }, false)
     if(res.statusCode == 200 && res.data.status == 1) {
       return res.data.info
     }else {
@@ -172,7 +172,7 @@ Page({
       from: 0,
       brand_id: id,
       pagesize: 50
-    })
+    }, false)
     if(res.statusCode == 200) {
       return res.data.info 
     }

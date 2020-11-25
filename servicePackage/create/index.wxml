@@ -2,55 +2,86 @@
 <view class="container">
   <!--汽车列表-->
   <view class="car-section">
-    <view class="car-item">
-      <view class="car-item-body">
-        <image src="../../static/img/car-icon.jpg" mode="widthFix" style="width: 100rpx;"></image>
-        <view class="car-info">
-          <view class="car-brand">Ferrari 法拉利</view>
-          <view class="car-params">2017款 基本型812 Superfast 前置后驱7挡双离合</view>
+    <block wx:if="{{car}}">
+      <view class="car-item">
+        <view class="car-item-body">
+          <image src="{{'http:' + car.img}}" mode="widthFix" style="width: 100rpx;"></image>
+          <view class="car-info">
+            <view class="car-brand">{{car.brand}}</view>
+            <view class="car-params">
+              <view class="car-number">{{car.car_num}}</view>
+              <view>{{car.full_name}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="car-item-action">
+          切换
+          <van-icon name="replay" size="28rpx" />
         </view>
       </view>
-      <view class="car-item-action">
-        切换
-        <van-icon name="replay" size="28rpx" />
+    </block>
+    <block wx:else>
+      <view class="car-item" bindtap="addCar">
+        <view class="car-item-body add">
+          <van-icon name="add-o" /> 添加车辆
+        </view>
       </view>
-    </view>
+    </block>
   </view>
   <!--表单内容-->
   <view class="form">
     <view class="form-title">请输入你的需求</view>
     <van-cell-group>
-      <van-field value="{{ message }}" type="textarea" placeholder="..." autosize="{{ autosize }}" border="{{ false }}" />
+      <van-field value="{{ content }}" type="textarea" data-type="content" bind:change="onChange" placeholder="..."
+        autosize="{{ autosize }}" border="{{ false }}" />
     </van-cell-group>
     <!--上传组件-->
     <view class="form-title">上传图片</view>
     <view class="upload">
-      <van-uploader file-list="{{ fileList }}" max-count="6" bind:after-read="afterRead" />
+      <van-uploader bind:delete="onDelImage" file-list="{{ fileList }}" max-count="6" bind:after-read="afterRead"
+        multiple />
     </view>
     <!---->
     <van-cell-group>
-      <van-field custom-class="padding" required label="联系电话" value="{{ message }}" input-align="right" placeholder="" />
-      <van-field custom-class="padding" require label="预计费用" value="{{ message }}" input-align="right" placeholder="" />
-      <van-field custom-class="padding" require label="预约到店时间" value="{{ message }}" input-align="right" placeholder="" />
-      <van-cell custom-class="padding" class="loc-cell">
-        <view class="slot-title" slot="title">
-          <van-checkbox
-            class="checkboxes-{{ index }}"
-            name="{{ item }}"
-            value="{{ isLocation }}"
-            bind:change="onChange"
-          ></van-checkbox>
-          需上门服务
+      <van-field custom-class="padding" required label="联系电话" data-type="phone" value="{{ phone }}" input-align="right"
+        placeholder="" bind:change="onChange" />
+      <van-field custom-style="color: #000" custom-class="padding" require label="预计费用" data-type="evaluate_fee" bind:change="onChange"
+        value="{{ evaluate_fee }}" input-align="right" placeholder="" />
+      <van-cell custom-class="padding" require title="预约到店时间" input-align="right" placeholder="">
+        <picker-date bindset="set"></picker-date>
+      </van-cell>
+      <van-cell title="需上门服务" custom-class="padding" class="loc-cell">
+        <view class="slot-title" align="right">
+          <van-checkbox class="checkboxes-{{ index }}" data-type="isLocation" name="{{ item }}" value="{{ isLocation }}"
+            bind:change="onChange"></van-checkbox>
         </view>
       </van-cell>
-      <van-cell custom-class="padding" title="选择位置:" is-link></van-cell>
+      <block>
+
+      </block>
     </van-cell-group>
+    <block wx:if="{{ isLocation }}">
+      <van-cell class="location" url="/servicePackage/position/index" title-width="136rpx" custom-class="padding" value="{{location ? location.address : '未获取位置'}}" title="选择位置:" is-link></van-cell>
+      <van-radio-group class="location" border="{{ false }}" value="{{ doorType }}" bind:change="onChange">
+        <van-cell-group>
+          <van-cell title="上门服务" clickable data-name="1" bind:click="onClick">
+            <van-radio slot="right-icon" name="1" />
+          </van-cell>
+          <van-cell title="上门取车" clickable data-name="2" bind:click="onClick">
+            <van-radio slot="right-icon" name="2" />
+          </van-cell>
+        </van-cell-group>
+      </van-radio-group>
+    </block>
   </view>
   <!---->
   <view class="submit-button">
-    <van-button type="primary" block round>提 交</van-button>
+    <van-button type="primary" block round bind:click="onSubmit">提 交</van-button>
   </view>
   <view class="servies">
     在线客服
   </view>
 </view>
+
+<!---->
+<van-toast id="van-toast" />

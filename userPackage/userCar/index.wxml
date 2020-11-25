@@ -3,17 +3,17 @@
   <scroll-view scroll-y="true" style="height: 100vh" bindscrolltoupper="upper"
     bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
     <view class="content" style="min-height: 101vh">
-      <block wx:if="{{!list.length}}">
-        <view class="car-item" wx:for="{{3}}" wx:key="{{index}}">
+      <block wx:if="{{list.length}}">
+        <view class="car-item" wx:for="{{list}}" wx:key="index">
           <view class="car-item-body">
-            <image src="../../static/img/car-icon.jpg" mode="widthFix" style="width: 100rpx;"></image>
+            <image src="{{item.img}}" mode="widthFix" style="width: 100rpx;"></image>
             <view class="car-info">
-              <view class="car-brand">Ferrari 法拉利</view>
-              <view class="car-params">2017款 基本型812 Superfast 前置后驱7挡双离合</view>
+              <view class="car-brand">{{item.brand_name}}</view>
+              <view class="car-params">{{item.full_name}}</view>
             </view>
           </view>
           <view class="car-item-action van-hairline--top">
-            <van-button type="primary" block size="mini" wx:if="{{index !== 0}}">设为默认</van-button>
+            <van-button type="primary" block size="mini" wx:if="{{item.focus == 0}}">设为默认</van-button>
             <van-button type="danger" block size="mini" plain>删除</van-button>
           </view>
         </view>

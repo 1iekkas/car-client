@@ -2,7 +2,7 @@
 <view class="container">
   <view class="form-section">
     <view class="logo">
-      <van-image width="80" height="80" round lazy-load src="https://resource.jinduo.com/Image/returnMultimedia?path=/upload/adminback/image/20201104/eeee0e18e2856c02aedeab3b481d2afd.png" />
+      <van-image width="80" height="80" round lazy-load src="https://car.coasewash.com/static/images/logo.png" />
     </view>
     <view class="login-form">
       <van-cell-group border="{{ false }}">
@@ -29,7 +29,8 @@
     <view class="action-group">
       <view class="action-item">
        <!-- <van-button block open-type="getPhoneNumber" bindgetphonenumber="getphonenumber"><van-image width="80rpx" height="80rpx" round lazy-load src="../../../../static/img/wechat.png" /></van-button> -->
-        <van-button block open-type="getUserInfo" bindgetuserinfo="getUserInfo"><van-image width="80rpx" height="80rpx" round lazy-load src="../../../../static/img/wechat.png" /></van-button>
+        <van-button block open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+          <van-image width="74rpx" height="74rpx" round lazy-load src="../../../../static/img/wechat.png" /></van-button>
         <text>微信登录</text>
       </view>
       <!-- <view class="action-item">

@@ -50,8 +50,7 @@ image {
 }
 
 .van-goods-action {
-  z-index: 100;
+  z-index: 100 !important;
 }
- 
 
 

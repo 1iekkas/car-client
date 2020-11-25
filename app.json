@@ -24,7 +24,7 @@
         "create/index",
         "orderInfo/index",
         "searchOrder/index",
-        "orderDetails/index"
+        "position/index"
       ]
     }
   ],
@@ -38,6 +38,26 @@
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
+  },
+  "usingComponents": {
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+    "van-toast": "@vant/weapp/toast/index",
+    "picker-date": "components/date/index",
+    "van-search": "@vant/weapp/search/index",
+    "navigation": "/components/nav-bar/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-empty": "@vant/weapp/empty/index",
+    "van-sticky": "@vant/weapp/sticky/index"
   },
   "sitemapLocation": "sitemap.json"
 }

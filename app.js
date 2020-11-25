@@ -1,4 +1,5 @@
 //app.js
+// appId wxa487cd75e5f05745
 import {
   checkToken,
   getLocation

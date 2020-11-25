@@ -21,3 +21,7 @@ page {
   width: 80vw;
   margin: 80rpx auto 0 auto;
 }
+
+.van-checkbox {
+  justify-content: flex-end;
+}

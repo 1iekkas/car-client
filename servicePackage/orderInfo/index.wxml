@@ -15,15 +15,22 @@
   <!---->
   <view class="form">
     <van-cell-group>
-      <van-cell title-width="150rpx" title="需求描述"
-        value="vant Weapp 是移動耑 Vue 組件庫 Vant 的小程序版本,兩者基於相同的眡覺槼範,提供一致的 API 接口,助力開發者快速搭建小程序應用。 預覽 掃描下方小程序二維碼" />
+      <van-cell title-width="150rpx" title="需求描述" value="{{info.content}}" />
       <van-cell title="预算费用">
         <view class="price">
-          ￥950.00
+          ￥{{info.evaluate_fee}}
         </view>
       </van-cell>
-      <van-cell title="预计到店时间" value="2020-12-31 10:00:00"></van-cell>
-      <van-cell title="是否需要上门服务" value="否"></van-cell>
+      <van-cell title="预约电话" value="{{info.phone}}"></van-cell>
+      <van-cell title="预计到店时间" value="{{info.evaluate_time}}"></van-cell>
+      <van-cell title="是否需要上门服务" value="{{ info.on_door ? '是' : '否' }}"></van-cell>
+      <van-cell title="上门类型" value="{{ info.on_door == 2 ? '上门取车' : '上门服务' }}"></van-cell>
+      <van-cell title="上门位置" title-width="120rpx" value="{{ info.address }}"></van-cell>
+      <van-cell wx:if="{{info.images.length}}">
+        <view class="images-group">
+          <van-image width="22vw" height="22vw" wx:for="{{info.images}}" bindtap="onPreview" data-url="{{item}}" wx:key="index" src="{{item}}"></van-image>
+        </view>
+      </van-cell>
     </van-cell-group>
   </view>
   <!---->
@@ -34,27 +41,36 @@
         <view class="filter-item {{ active == index ? 'active' : '' }}" wx:for="{{filterList}}" wx:key="index">
           {{item.name}}
         </view>
+        <view class="filter-item refresh" bindtap="getOfferList">
+          <van-icon name="replay" size="32rpx" color="#646566" />
+        </view>
       </view>
     </van-sticky>
     <view class="store-group">
-      <view class="store-item" wx:for="{{10}}" wx:key="index">
-        <van-image width="100" height="100" src="https://dummyimage.com/120x120"></van-image>
-        <view class="store-content">
-          <view class="name">汽修店1000</view>
-          <block wx:if="{{ index % 2}}">
-            <view class="price">价格:￥1024.00</view>
-          </block>
-          <block wx:else>
-            <view class="tips price">
-              您描述的需求不清晰，本店无法提供报价，可致电或到店咨询
+      <block wx:if="{{offerList.length}}">
+        <view class="store-item" wx:for="{{offerList}}" wx:key="index">
+          <van-image width="100" height="100" src="{{item.facade_images[0]}}"></van-image>
+          <view class="store-content">
+            <view class="name">{{item.name}}</view>
+            <block wx:if="{{ !item.vague }}">
+              <view class="price">价格:￥{{item.fee}}</view>
+            </block>
+            <block wx:else>
+              <view class="tips price">
+                您描述的需求不清晰，本店无法提供报价，可致电或到店咨询
+              </view>
+            </block>
+            <view class="address">
+              <view class="location">{{item.detail}}</view>
+              <view class="range" wx:if="{{item.distance}}">{{item.distance}}km</view>
             </view>
-          </block>
-          <view class="address">
-            <view class="location">佛山市禅城区汾江路世博广场首层102铺</view>
-            <view class="range">1.8km</view>
           </view>
         </view>
-      </view>
+      </block>
+      <!--暂无报价-->
+      <block wx:else>
+        <van-empty image="search" description="暂无商家报价" />
+      </block>
     </view>
   </view>
 

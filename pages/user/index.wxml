@@ -44,7 +44,7 @@
       <view class="line"></view>
       <view class="cell-section">
         <van-cell-group border="{{ false }}">
-          <van-cell custom-class="padding" title="车辆管理" value="" is-link url="/userPackage/userCar/index" />
+          <van-cell custom-class="padding" title="车辆管理" value="" is-link url="/userPackage/userCar/index?from=user" />
           <van-cell custom-class="padding" title="钱包" value="" is-link />
           <van-cell custom-class="padding" title="优惠券" value="" is-link />
           <van-cell custom-class="padding" title="联系客服" value="" is-link />

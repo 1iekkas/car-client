@@ -3,6 +3,10 @@ page {
   background-color: #f7f7f7;
 }
 
+.container {
+  padding-bottom: 50px;
+}
+
 .info {
   color: #646566;
   font-size: 32rpx;
@@ -54,6 +58,13 @@ page {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  position: relative;
+}
+
+.store-filter .refresh {
+  position: absolute;
+  right: 30rpx;
+  top: 24rpx;
 }
 
 .store-filter .filter-item+.filter-item {
@@ -98,4 +109,15 @@ van-goods-action-button {
 
 van-goods-action-button button {
   width: 35vw !important;
+}
+
+.images-group {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.images-group van-image {
+  margin-right: 10px;
 }

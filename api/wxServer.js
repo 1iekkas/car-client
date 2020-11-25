@@ -101,17 +101,60 @@ module.exports = {
    * }  
    */
   async getSuggestion(params={}) {
-    console.log(123)
     let object = {
       ...params,
       region_fix: 1,
       page_size: 20,
       page_index: 1
     }
-    console.log(object)
     try {
       let res = await new Promise((resolve, reject) => {
         map.getSuggestion({
+          ...object,
+          complete: result => {
+            resolve(result)
+          }
+        })
+      })
+
+      return res
+    }catch(error){
+      wx.showModal({
+        content: error
+      })
+    }
+  },
+
+  //  
+  async reverseGeocoder(params={}) {
+    let object = {
+      ...params
+    }
+    try {
+      let res = await new Promise((resolve, reject) => {
+        map.reverseGeocoder({
+          ...object,
+          complete: result => {
+            resolve(result)
+          }
+        })
+      })
+
+      return res
+    }catch(error){
+      wx.showModal({
+        content: error
+      })
+    }
+  },
+
+  async setCalculateDistance(params) {
+    let object = {
+      ...params
+    }
+    try {
+      let res = await new Promise((resolve, reject) => {
+        map.calculateDistance({
           ...object,
           complete: result => {
             resolve(result)

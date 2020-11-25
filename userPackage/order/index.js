@@ -1,4 +1,7 @@
 // userPackage/order/index.js
+import { getOrderList } from '../../api/order'
+const app = getApp()
+let data 
 Page({
 
   /**
@@ -41,14 +44,17 @@ Page({
       list: [],
       page: 1,
       max: 3
-    },]
+    }],
+    list: [],
+    page: 1,
+    loading: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    data = this.data
   },
 
   /**
@@ -62,7 +68,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getList()
   },
 
   /**
@@ -99,4 +105,28 @@ Page({
   /* onShareAppMessage: function () {
 
   } */
+  
+  // 获取列表
+  async getList() {
+    let res = await getOrderList()
+    
+    if(!res.data.code) {
+      console.warn('success')
+      this.setData({
+        list: res.data.data
+      },() => {
+        console.log(data.list)
+      })
+    }else {
+
+    }
+  },
+
+  //
+  linkToInfo(e) {
+    const id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: `/servicePackage/orderInfo/index?id=${id}`,
+    })
+  }
 })
