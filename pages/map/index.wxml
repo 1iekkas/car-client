@@ -3,12 +3,14 @@
   <navigation catchtouchmove="{{true}}">
     <view class="nav-content">
       <!-- <van-icon bindtap="back" custom-class="icon" name="arrow-left" /> -->
-      <block wx:if="{{userInfo}}">
-        <image bindtap="linkUserInfo" class="avatar" mode="widthFix" src="{{userInfo.avatarUrl}}" />
-      </block>
-      <block wx:else>
-        <image bindtap="linkUserInfo" class="avatar" mode="widthFix" src="../../static/img/avatar.png" />
-      </block>
+      <view class="avatar">
+        <block wx:if="{{userInfo}}">
+          <image bindtap="linkUserInfo" mode="widthFix" src="{{userInfo.avatarUrl}}" />
+        </block>
+        <block wx:else>
+          <image bindtap="linkUserInfo" mode="widthFix" src="../../static/img/avatar.png" />
+        </block>
+      </view>
       <view class="location" bindtap="mapSearch">
         {{location.address_component.city}}
         <van-icon class="icon-down" name="arrow-down" />
@@ -22,18 +24,23 @@
   </view>
 
   <block wx:if="{{location}}">
-    <map id="map" longitude="{{location.location.lng}}" setting="{{mapSetting}}" control="{{false}}" markers="{{markers}}"
-      latitude="{{location.location.lat}}" style="width: 100vw;height: calc(100vh - {{navBarHeight}}px - 170rpx);margin-top: {{navBarHeight}}px;"
+    <map id="map" longitude="{{location.location.lng}}" setting="{{mapSetting}}" control="{{false}}"
+      markers="{{markers}}" latitude="{{location.location.lat}}"
+      
+      style="width: 100vw;height: calc(100vh - {{navBarHeight}}px - 170rpx);margin-top: {{navBarHeight}}px;"
       bindregionchange="regionchange">
       <image class="location-marker" src="../../static/img/marker.png"></image>
-      <view class="location-button">在这里发布</view>
+      <view class="location-button" catchtap="toCreate" data-type="custom">在这里发布</view>
     </map>
   </block>
-  
+
   <movable-area class="movable-area">
     <movable-view class="movable-view" out-of-bounds="{{false}}" direction="vertical">
+      <view class="focus-icon" catchtap="onFocus">
+        <image src="../../static/img/focus.png" mode="widthFix" style="width: 8vw"></image>
+      </view>
       <view class="content">
-        <view class="order-tips">
+        <view class="order-tips" bindtap="linkToOrder">
           <block wx:if="{{tips}}">
             <van-cell is-link>
               <view slot="title" class="">
@@ -56,9 +63,8 @@
           </van-button>
         </block>
         <view class="order-swipe">
-          <swiper indicator-dots="{{indicatorDots}}"
-            vertical="{{true}}"
-            autoplay="{{false}}" circular="{{true}}" interval="{{5000}}" duration="{{800}}">
+          <swiper indicator-dots="{{indicatorDots}}" vertical="{{true}}" autoplay="{{false}}" circular="{{true}}"
+            interval="{{5000}}" duration="{{800}}">
             <block wx:for="{{5}}" wx:key="*this">
               <swiper-item catchtouchmove="{{true}}">
                 <view class="swiper-item {{item}}">
@@ -73,13 +79,16 @@
         </view>
         <!---->
         <view class="banner">
-          <van-image width="calc((100vw - 60rpx))" height="calc((100vw - 60rpx) / 4)" src="https://dummyimage.com/240x60" />
+          <van-image fit="cover" width="calc((100vw - 60rpx))" height="calc((100vw - 60rpx) / 4)"
+            src="http://i1.fuimg.com/605992/5dbd9bbe8e675c91.png" />
         </view>
 
       </view>
     </movable-view>
   </movable-area>
-  
-  
-  
+
+
+
 </view>
+
+<campaign />

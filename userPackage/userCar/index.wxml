@@ -1,10 +1,10 @@
 <!--userPackage/user/index.wxml-->
-<view class="container">
+<view class="container" catchtouchmove="{{true}}">
   <scroll-view scroll-y="true" style="height: 100vh" bindscrolltoupper="upper"
     bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
     <view class="content" style="min-height: 101vh">
       <block wx:if="{{list.length}}">
-        <view class="car-item" wx:for="{{list}}" wx:key="index">
+        <view class="car-item" wx:for="{{list}}" wx:key="index" bindtap="linkEdit" data-id="{{item.id}}">
           <view class="car-item-body">
             <image src="{{item.img}}" mode="widthFix" style="width: 100rpx;"></image>
             <view class="car-info">

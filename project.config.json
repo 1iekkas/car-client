@@ -13,20 +13,27 @@
     "es6": true,
     "enhance": false,
     "postcss": true,
+    "preloadBackgroundData": false,
     "minified": true,
     "newFeature": false,
     "coverView": true,
     "nodeModules": true,
     "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
     "uglifyFileName": false,
     "checkInvalidKey": true,
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
     "useMultiFrameRuntime": false,
     "useApiHook": true
   },
@@ -77,15 +84,14 @@
         {
           "id": 3,
           "name": "填写车辆信息",
-          "pathName": "userPackage/carInfoList/index",
+          "pathName": "userPackage/carInfo/index",
           "query": "series={\"id\":\"509\",\"group_id\":\"9\",\"brand_id\":\"33\",\"full_name\":\"奥迪A6\",\"name\":\"奥迪A6\",\"firstletter\":\"A\",\"seriesstate\":\"40\",\"seriesorder\":\"89\",\"img\":\"https://car1.autoimg.cn/upload/spec/642/642676701043.jpg\",\"logo\":\"https://car2.autoimg.cn/cardfs/series/g24/M05/24/A3/autohomecar__wKgHH1qnPiGAbzOrAAchGgS3JvY808.png\",\"minprice\":\"308000\",\"maxprice\":\"541700\",\"seriesplace\":\"合资\",\"has_info\":\"1\",\"brand_logo\":\"//car2.autoimg.cn/cardfs/series/g26/M0B/AE/B3/autohomecar__wKgHEVs9u5WAV441AAAKdxZGE4U148.png\"}",
           "scene": null
         },
         {
-          "id": -1,
           "name": "订单",
           "pathName": "userPackage/order/index",
-          "query": "series={\"id\":\"509\",\"group_id\":\"9\",\"brand_id\":\"33\",\"full_name\":\"奥迪A6\",\"name\":\"奥迪A6\",\"firstletter\":\"A\",\"seriesstate\":\"40\",\"seriesorder\":\"89\",\"img\":\"https://car1.autoimg.cn/upload/spec/642/642676701043.jpg\",\"logo\":\"https://car2.autoimg.cn/cardfs/series/g24/M05/24/A3/autohomecar__wKgHH1qnPiGAbzOrAAchGgS3JvY808.png\",\"minprice\":\"308000\",\"maxprice\":\"541700\",\"seriesplace\":\"合资\",\"has_info\":\"1\",\"brand_logo\":\"//car2.autoimg.cn/cardfs/series/g26/M0B/AE/B3/autohomecar__wKgHEVs9u5WAV441AAAKdxZGE4U148.png\"}",
+          "query": "",
           "scene": null
         },
         {
@@ -128,7 +134,7 @@
         {
           "name": "订单信息",
           "pathName": "servicePackage/orderInfo/index",
-          "query": "id=6",
+          "query": "id=19",
           "scene": null
         },
         {
@@ -140,6 +146,7 @@
         {
           "name": "订单详情",
           "pathName": "servicePackage/orderDetails/index",
+          "query": "",
           "scene": null
         }
       ]

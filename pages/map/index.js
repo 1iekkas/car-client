@@ -1,13 +1,14 @@
 //index.js
 //获取应用实例
 const app = getApp()
-import { getDistance } from '../../utils/util.js'
+import { reverseGeocoder } from '../../api/wxServer'
 import {
   checkToken,
   login,
   getLocation
 } from "../../api/wxServer.js"
-
+import { getSwipeList } from '../../api/poster'
+let data 
 Page({
   data: {
     hasUserInfo: null,
@@ -47,15 +48,22 @@ Page({
     // map配置
     mapSetting: {
       subkey: "553BZ-MI4CW-LMXR5-OXN7Z-OMBVK-RPFMX",
+      minScale: 16,
+      maxScale: 16,	
       layerStyle: '1',
       scale: 16,
-      circles: []
+      circles: [],
+      showLocation: true
     },
     markers: [],
     circles: []
   },
 
   onLoad: async function () {
+    data = this.data
+    // 清除缓存位置信息
+    wx.setStorageSync('location', null)
+
     // 用户token回调
     app.userTokenReadyCallback = res => {
       this.setData({
@@ -74,7 +82,7 @@ Page({
 
     // 定位回调
     app.locationReadyCallback = res => {
-      console.log(res)
+      // console.log(res)
       let markers = this.data.markers
       this.setData({
         location: res,
@@ -87,19 +95,20 @@ Page({
           }
         })
       })
-
     }
+    //
+    this.getSwipeList()
   },
 
   onShow() {
-
-
+    let location = wx.getStorageSync('location') || null
     this.setData({
-      location: app.globalData.location,
+      location: location ? location : app.globalData.location,
       isLogin: app.globalData.isLogin,
       userInfo: app.globalData.userInfo
     })
-    console.log(app.globalData.isLogin)
+    // wx.setStorageSync('location', null)
+   
   },
 
   onReady() {
@@ -115,9 +124,24 @@ Page({
     }, 0)
   },
 
+  // 获取banner
+  async getSwipeList(e) {
+    let res = await getSwipeList() 
+  },
+
   // 视野变更
-  regionchange(e) {
-    // console.log(e)
+  async regionchange(e) {
+    if(e.type == "begin") return false
+
+    const location = e.detail.centerLocation
+    let res = await reverseGeocoder({
+      location: location
+    }) 
+
+    if (!res.status) {
+      this.location = res.result
+    }
+
   },
 
   // 获取用户信息 
@@ -129,7 +153,7 @@ Page({
     })
   },
 
-  // 筛选距离
+  // 筛选距离 已废弃
   filterRange(e) {
     const data = this.data,
       scale = data.mapSetting.scale,
@@ -148,12 +172,11 @@ Page({
         strokeWidth: 1
       }],
     }, () => {
-      console.log(circles)
     })
 
   },
 
-  // 设置半径
+  // 设置半径 已废弃
   setCircles(key) {
     if (key) {
       let radius = (this.data.rangeList[key].scale / 16) * this.data.rangeList[key].value
@@ -173,22 +196,6 @@ Page({
   // 获取用户信息
   getUserInfo: async function (e) {
 
-    // console.log(e)
-    /* if(e.detail.errMsg === 'getUserInfo:ok') {
-      app.globalData.userInfo = e.detail.userInfo
-      let res = await login()
-      // do something
-      wx.setStorageSync('token', 'token')
-    }else {
-      return false
-    } */
-    /* app.globalData.userInfo = e.detail.userInfo
-    wx.setStorageSync('token', 'data')
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true,
-      isLogin: true
-    }) */
   },
 
   toLogin() {
@@ -217,7 +224,14 @@ Page({
   },
 
   // 创建订单
-  toCreate() {
+  toCreate(e) {
+    console.log('create')
+    const type = e.currentTarget.dataset.type
+    // console.log(type)
+    if(type === 'custom') {
+      // console.log(this.location)
+      wx.setStorageSync('location', this.location)
+    }
     wx.navigateTo({
       url: '/servicePackage/create/index',
     })
@@ -227,5 +241,21 @@ Page({
     wx.navigateTo({
       url: '/servicePackage/searchOrder/index',
     })
+  },
+
+  // 
+  linkToOrder() {
+    wx.navigateTo({
+      url: `/userPackage/order/index`,
+    })
+  },
+
+  // 
+  onFocus() {
+    data.map.moveToLocation();
+    /* this.setData({
+      location: app.globalData.location
+    }) */
+    wx.setStorageSync('location', null)
   }
 })

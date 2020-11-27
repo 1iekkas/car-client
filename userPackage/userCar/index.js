@@ -98,5 +98,13 @@ Page({
     wx.navigateTo({
       url: '/userPackage/carList/index'
     })
+  },
+
+  // 
+  linkEdit(e) {
+    const id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: `/userPackage/carInfo/index?id=${id}`,
+    })
   }
 })

@@ -1,5 +1,6 @@
-// userPackage/carInfoList/index.js
+// userPackage/carInfo/index.js
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
+import { validateCarNumber } from '../../utils/validator'
 const app = getApp()
 const api = app.$api
 let data
@@ -49,7 +50,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log(Toast)
+    
   },
 
   /**
@@ -161,6 +162,8 @@ Page({
 
   // 提交添加
   async onSubmit() {
+  validateCarNumber(data.carNum)
+
     /**验证 */
     if(!data.activeCarItem) {
       Toast.fail('请选择车型')

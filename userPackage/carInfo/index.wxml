@@ -1,4 +1,4 @@
-<!--userPackage/carInfoList/index.wxml-->
+<!--userPackage/carInfo/index.wxml-->
 <view class="container">
   <view class="line"></view>
   <van-cell-group title="车型信息">

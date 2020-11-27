@@ -125,7 +125,7 @@ module.exports = {
     }
   },
 
-  //  
+  // 坐标地址解析 @params { lat, lng }
   async reverseGeocoder(params={}) {
     let object = {
       ...params
@@ -148,6 +148,7 @@ module.exports = {
     }
   },
 
+  // 计算距离
   async setCalculateDistance(params) {
     let object = {
       ...params
@@ -180,5 +181,26 @@ module.exports = {
    */
   searchLocation(params={}) {
     map.search()
+  },
+
+  /**
+   * 发起微信支付
+   */
+  requestPayment(data) {
+    return new Promise(resolve => {
+      wx.requestPayment({
+        ...data,
+        complete: res => {
+          if(res.errMsg == 'requestPayment:fail cancel') {
+            resolve({code: 1, message: 'requestPayment:fail cancel' })
+          }else {
+            resolve({code: 0, message: '支付成功'})
+          }
+            
+          
+        }
+      })
+    })
   }
+ 
 }

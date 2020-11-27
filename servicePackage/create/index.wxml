@@ -45,8 +45,8 @@
     <van-cell-group>
       <van-field custom-class="padding" required label="联系电话" data-type="phone" value="{{ phone }}" input-align="right"
         placeholder="" bind:change="onChange" />
-      <van-field custom-style="color: #000" custom-class="padding" require label="预计费用" data-type="evaluate_fee" bind:change="onChange"
-        value="{{ evaluate_fee }}" input-align="right" placeholder="" />
+      <van-field custom-style="color: #000" custom-class="padding" require label="预计费用" data-type="evaluate_fee"
+        bind:change="onChange" value="{{ evaluate_fee }}" input-align="right" placeholder="" />
       <van-cell custom-class="padding" require title="预约到店时间" input-align="right" placeholder="">
         <picker-date bindset="set"></picker-date>
       </van-cell>
@@ -61,7 +61,8 @@
       </block>
     </van-cell-group>
     <block wx:if="{{ isLocation }}">
-      <van-cell class="location" url="/servicePackage/position/index" title-width="136rpx" custom-class="padding" value="{{location ? location.address : '未获取位置'}}" title="选择位置:" is-link></van-cell>
+      <van-cell class="location" url="/servicePackage/position/index" title-width="136rpx" custom-class="padding"
+        value="{{location ? location.formatted_addresses.recommend : '未获取位置'}}" title="选择位置:" is-link></van-cell>
       <van-radio-group class="location" border="{{ false }}" value="{{ doorType }}" bind:change="onChange">
         <van-cell-group>
           <van-cell title="上门服务" clickable data-name="1" bind:click="onClick">

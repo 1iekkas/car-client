@@ -36,13 +36,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log(app.globalData.location)
+    // console.log(app.globalData.location)
+    let location = wx.getStorageSync('location') || null
+
     this.setData({
-      address: {
-        address: app.globalData.location.address,
-        location: app.globalData.location.location
-      }
+      location: location ? location : app.globalData.location
+    },() => {
+      console.log(this.data.location)
     })
+
+    
   },
 
   /**
@@ -103,23 +106,31 @@ Page({
   onClickAddress(e) {
     let address = e.currentTarget.dataset.item;
     
+     // 深复制
+     let result = JSON.parse(JSON.stringify(data.location))
+     result.formatted_addresses.recommend = address.title
+     result.id = address.id
+     Object.keys(address).map(e => {
+       result[e] = address[e]
+     })
+
     this.setData({
-      address: address
+      location: result
     })
   },
 
+  // 返回
   back() {
     let pages = getCurrentPages();
     let prevPage = pages[pages.length - 2];
-    console.log(prevPage)
+    // console.log(prevPage)
     prevPage.setData({
-      location: data.address,
+      location: data.location,
     }, () => {
-      console.log(prevPage.data)
+      // console.log(prevPage.data)
       wx.navigateBack({
         delta: 1,
       })
     })
-    
   }
 })

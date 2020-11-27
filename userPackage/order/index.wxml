@@ -1,30 +1,81 @@
 <!--userPackage/order/index.wxml-->
 <view class="container">
-  <van-tabs swipeable sticky offset-top="0">
-    <van-tab wx:for="{{tabs}}" wx:key="index" title="{{item.name}}">
-      <scroll-view scroll-y="true" style="height: calc(100vh - 88rpx)" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll"
-        scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+  <van-tabs swipeable sticky offset-top="0" bind:change="changeTabs">
+    <van-tab wx:for="{{tabs}}" wx:key="index" name="{{item.id}}" title="{{item.name}}">
+      <scroll-view scroll-y refresher-enabled refresher-triggered="{{triggered}}" bindrefresherpulling="onPulling"
+        bindrefresherrefresh="onRefresh" bindrefresherrestore="onRestore" bindrefresherabort="onAbort"
+        style="height: calc(100vh - 88rpx)" bindscrolltolower="lower">
         <view class="content" style="min-height: calc(100vh - 80rpx)">
-          <block wx:if="{{!list.length}}">
+          <block wx:if="{{!list.length && !loading && !triggered}}">
             <van-empty image="search" description="没有相关订单" />
           </block>
+
           <block wx:else>
             <view class="order-item" wx:for="{{list}}" wx:key="index" bindtap="linkToInfo" data-id="{{item.id}}">
               <view class="order-title">
                 <view class="no">No.{{item.order_no}}</view>
-                <view class="status">
-                  已发布
-                </view>
+                <!--状态-->
+                <block wx:if="{{item.status == 0}}">
+                  <view class="status origin">
+                    已发布
+                  </view>
+                </block>
+                <block wx:if="{{item.status == 1}}">
+                  <view class="status origin">
+                    待付款
+                  </view>
+                </block>
+                <block wx:if="{{item.status == 2}}">
+                  <view class="status origin">
+                    待维修
+                  </view>
+                </block>
+                <block wx:if="{{item.status == 3}}">
+                  <view class="status origin">
+                    待验收
+                  </view>
+                </block>
+
+                <block wx:if="{{item.status == 4}}">
+                  <view class="status green">
+                    已完成
+                  </view>
+                </block>
+
+                <block wx:if="{{item.status == 5}}">
+                  <view class="status green">
+                    已取消
+                  </view>
+                </block>
+
               </view>
               <view class="order-body">
-                <view class="cell"><van-icon name="clock" size="24rpx" /> 发布于{{item.create_time}}</view>
-                <view class="cell"><van-icon class="color" name="orders-o" /> {{item.content}}</view>
-                <view class="cell"><van-icon class="color" name="underway-o" />预约时间 {{item.evaluate_time}}</view>
+                <view class="cell">
+                  <van-icon name="clock" size="24rpx" /> 发布于{{item.create_time}}</view>
+                <view class="cell">
+                  <van-icon class="color" name="orders-o" />
+                  <view class="text van-ellipsis">{{item.content}}</view>
+                </view>
+                <view class="cell">
+                  <van-icon class="color" name="underway-o" />预约时间 {{item.evaluate_time}}</view>
               </view>
-              <view class="order-action van-hairline--top">
-                <view class="type">已有<text style="color: #ec8c05;">{{item.offer_count}}</text>位商户报价</view>
-                <van-icon name="arrow" />
-              </view>
+              <!--等待报价-->
+              <block wx:if="{{item.status == 0}}">
+                <view class="order-action van-hairline--top">
+                  <block wx:if="{{item.offer_count}}">
+                    <view class="type">已有<text style="color: #ec8c05;">{{item.offer_count}}</text>位商户报价</view>
+                  </block>
+                  <block wx:else>
+                    <view class="type">等待商家报价中</view>
+                  </block>
+                  <van-icon name="arrow" />
+                </view>
+              </block>
+            </view>
+          </block>
+          <block wx:if="{{loading}}">
+            <view class="list-loading">
+              <van-loading />
             </view>
           </block>
         </view>

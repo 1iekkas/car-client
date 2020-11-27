@@ -1,15 +1,20 @@
 // servicePackage/orderInfo/index.js
 import {
   getWaitOrderInfo,
-  getOffer
+  getOffer,
+  pickOffer,
+  getPayParams,
+  checkOrder
 } from '../../api/order'
 import {
   reverseGeocoder,
-  setCalculateDistance
+  setCalculateDistance,
+  requestPayment
 } from '../../api/wxServer'
 import {
   IMG_HOST
 } from '../../constances/server'
+import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 const app = getApp()
 let data
 Page({
@@ -28,7 +33,8 @@ Page({
     }],
     info: null,
     active: 0,
-    offerList: []
+    offerList: [],
+    loading: true
   },
 
   /**
@@ -92,8 +98,8 @@ Page({
     let res = await getWaitOrderInfo({
       id: id
     })
-    //console.log(res)
-    if (!res.code) {
+    console.log(res)
+    if (!res.status) {
       // 解析地址
       let address = await reverseGeocoder({
         location: {
@@ -105,13 +111,15 @@ Page({
       res.data.address = address.result ? address.result.address : '解析位置失败'
       // 保存
       this.setData({
-        info: res.data
+        info: res.data,
+        loading: false
       }, () => {
         this.getOfferList()
       })
     }
   },
 
+  // 获取报价列表
   async getOfferList() {
     let res = await getOffer({
       id: data.info.id
@@ -141,7 +149,7 @@ Page({
           return e
         })).then(result => {
 
-          
+
           // 处理图片前缀
           if (result.facade_images && result.facade_images.length) {
             result.facade_images.map(e => {
@@ -173,6 +181,34 @@ Page({
     })
   },
 
+  // 选择预约门店
+  onSelectShop(e) {
+    const id = e.currentTarget.dataset.id;
+    Dialog.confirm({
+        title: '确认预约',
+        message: '是否确认预约该门店',
+        cancelButtonText: '再想想'
+      })
+      .then(async () => {
+        // on confirm
+        let res = await pickOffer({
+          offer_id: id,
+          order_id: data.info.id
+        })
+
+        if (!res.code) {
+          /* wx.showToast({
+            title: 'title',
+          }) */
+          this.getData(data.info.id)
+        }
+
+      })
+      .catch(() => {
+        // on cancel
+      });
+  },
+
   // 重新发布
   onClickButton() {
     wx.showToast({
@@ -181,5 +217,51 @@ Page({
     })
   },
 
+  // 付款
+  async onSubmitPay() {
+    // 获取支付配置
+    let res = await getPayParams({
+      order_id: data.info.id,
+      offer_id: data.info.offer_id
+    })
+
+    if (!res.code) {
+      let result = await requestPayment(res.data)
+      if (!result.code) {
+        wx.showToast({
+          title: '支付成功',
+        })
+        this.getData(data.info.id)
+      }
+    }
+  },
+
+  // 取消订单
+  onCancelOrder() {
+    Dialog.confirm({
+      title: '取消订单',
+      message: '当前等待维修中,是否确认取消订单',
+      confirmButtonText: '确定取消',
+      cancelButtonText: '不，点错了'
+    })
+    .then(() => {
+      // on confirm
+      wx.navigateTo({
+        url: `/servicePackage/cancel/index`,
+      })
+    })
+  },
+
+  // 验收
+  async onConfirmCheck(e) {
+    let res = await checkOrder({id: data.info.id})
+    console.log(res)
+    if(!res.code) {
+      wx.showToast({
+        title: '已验收',
+      })
+      this.getData(data.info.id)
+    }
+  }
 
 })

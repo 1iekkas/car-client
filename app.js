@@ -23,8 +23,15 @@ App({
 
     // 检查token是否存在
     checkToken().then(result => {
-      //console.log(result)
+      console.log(`token检测：${result}`)
       if (result) {
+        // 刷新token
+        let refresh_token = wx.getStorageSync('refresh_token')
+        console.log(refresh_token)
+        $api.get(`/u/user/token/${refresh_token}`).then(res => {
+          wx.setStorageSync('token', res.data)
+        })
+
         this.globalData.isLogin = true
         // 获取用户信息
         wx.getSetting({

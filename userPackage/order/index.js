@@ -9,45 +9,54 @@ Page({
    */
   data: {
     tabs: [{
-      id: '0',
+      id: 'all',
       name: '全部',
       list: [],
       page: 1,
       max: 3
     },{
-      id: '1',
+      id: '0',
       name: '已发布',
       list: [],
       page: 1,
       max: 3
     },{
-      id: '2',
+      id: '1',
       name: '待付款',
       list: [],
       page: 1,
       max: 3
     },{
-      id: '3',
+      id: '2',
       name: '待维修',
       list: [],
       page: 1,
       max: 3
     },{
+      id: '3',
+      name: '待验收',
+      list: [],
+      page: 1,
+      max: 3
+    },{
       id: '4',
-      name: '待评价',
+      name: '已完成',
       list: [],
       page: 1,
       max: 3
     },{
       id: '5',
-      name: '已完成',
+      name: '已取消',
       list: [],
       page: 1,
       max: 3
     }],
+    active: 'all',
     list: [],
     page: 1,
-    loading: false
+    total: 1,
+    triggered: false,
+    loading: true,
   },
 
   /**
@@ -68,6 +77,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.setData({
+      list: [],
+      page: 1
+    })
     this.getList()
   },
 
@@ -99,34 +112,76 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  /* onShareAppMessage: function () {
+  async onRefresh() {
+    if (this._freshing || data.loading) return
+    this.setData({
+      page: 1,
+      triggered: true
+    })
+    this._freshing = true
+    await this.getList()
+    this._freshing = false
+  },
 
-  } */
+  onRestore(e) {
+    console.log('onRestore:', e)
+  },
+
+  onAbort(e) {
+    console.log('onAbort', e)
+  },
+
+  // 切换列表
+  changeTabs(e) {
+    this.setData({
+      active: e.detail.name,
+      list: [],
+      loading: true
+    },() => {
+      this.getList()
+    })
+  },
   
   // 获取列表
   async getList() {
-    let res = await getOrderList()
-    
+    let res = await getOrderList({
+      status: data.active === 'all' ? '' : data.active,
+    })
     if(!res.data.code) {
-      console.warn('success')
-      this.setData({
-        list: res.data.data
-      },() => {
-        console.log(data.list)
-      })
-    }else {
+      if(data.triggered) {
+        data.list = []
+      }
 
+      data.list = data.list.concat(res.data.data)
+      //console.log(data.list)
+      this.setData({
+        list: data.list,
+        triggered: false,
+        loading: false,
+        total: res.data.last_page
+      })
     }
   },
 
-  //
+  // 跳转详情
   linkToInfo(e) {
     const id = e.currentTarget.dataset.id;
     wx.navigateTo({
       url: `/servicePackage/orderInfo/index?id=${id}`,
     })
-  }
+  },
+
+
+
+  // 分页加载
+  lower() {
+    if(this.loading || data.page > data.total) return false
+    this.loading = true
+    this.setData({
+      loading: true
+    },() => {
+      this.getList()
+    })
+    
+  },
 })

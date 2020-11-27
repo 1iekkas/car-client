@@ -1,4 +1,4 @@
-/* userPackage/carInfoList/index.wxss */
+/* userPackage/carInfo/index.wxss */
 page {
   background-color: #f7f7f7;
 }
