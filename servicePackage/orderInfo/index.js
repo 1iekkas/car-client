@@ -114,6 +114,10 @@ Page({
     let res = await getWaitOrderInfo({
       id: id
     })
+<<<<<<< HEAD
+=======
+    console.log(res)
+>>>>>>> 1a6ce2175172fbd4a87a52866f98e6f149425296
     if (!res.status) {
       // 解析地址
       let address = await reverseGeocoder({
@@ -258,6 +262,7 @@ Page({
       cancelButtonText: '不，点错了'
     })
     .then(() => {
+<<<<<<< HEAD
       this.setData({
         showCancel: true
       })
@@ -291,13 +296,23 @@ Page({
   cancelPopup() {
     this.setData({
       showCancel: false
+=======
+      // on confirm
+      wx.navigateTo({
+        url: `/servicePackage/cancel/index`,
+      })
+>>>>>>> 1a6ce2175172fbd4a87a52866f98e6f149425296
     })
   },
 
   // 验收
   async onConfirmCheck(e) {
     let res = await checkOrder({id: data.info.id})
+<<<<<<< HEAD
     // console.log(res)
+=======
+    console.log(res)
+>>>>>>> 1a6ce2175172fbd4a87a52866f98e6f149425296
     if(!res.code) {
       wx.showToast({
         title: '已验收',
