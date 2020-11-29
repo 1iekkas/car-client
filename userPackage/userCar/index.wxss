@@ -37,6 +37,12 @@ page {
   font-size: 24rpx;
 }
 
+.car-params .car-number {
+  color: #232323;
+  font-size: 32rpx;
+  margin-bottom: 6rpx;
+}
+
 .car-item-action {
   padding-top: 30rpx;
   display: flex;

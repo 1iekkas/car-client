@@ -1,6 +1,7 @@
 // userPackage/carInfo/index.js
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 import { validateCarNumber } from '../../utils/validator'
+import { editCar } from '../../api/user'
 const app = getApp()
 const api = app.$api
 let data
@@ -17,7 +18,6 @@ Page({
     carList: [], // 车型列表
     activeCar: 0,
     activeCarItem: null,
-    checked: true,
     miles: '',
     date: '',
     carNum: '',
@@ -29,13 +29,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: async function (options) {
+    console.log(options.car)
     data = this.data
     const series = options.series ? JSON.parse(options.series) : null
+    const car = options.car ? JSON.parse(options.car) : null
+    
     this.setData({
       series: series,
-      from: options.from
+      from: options.from || '',
+      carId: car ? car.id : '',
+      activeYearItem: car ? car.year : '',
+      activeCarItem: car ?car.full_name : '',
+      carNum: car ? car.car_num : '',
+      focus: car && car.focus == 1 ? true : false,
+      miles: car ? car.miles : '',
+      date: car ? car.year_check : '',
+      logo: car ? car.img : '',
     }, () => {
-      this.getCarYear()
+      console.log(data)
+      if(!data.from) this.getCarYear()
     })
   },
 
@@ -176,7 +188,7 @@ Page({
 
     let res = await app.$api.post(`/u/car/add`, {
       car_info_id: data.activeCarItem.id,
-      miles: 100,
+      miles: data.miles,
       year_check: data.date,
       focus: data.checked ? 1 : 0,
       car_num: data.carNum,
@@ -219,5 +231,22 @@ Page({
     this.setData({
       carNum: e.detail
     })
+  },
+
+  // 编辑保存
+  async onSave() {
+    let res = editCar({
+      id: data.carId, 
+      miles: data.miles,
+      year_check: data.date,
+      focus: data.focus ? 1 : 0,
+      car_num: data.carNum})
+    
+      if(!res.code) {
+        Toast.success('保存成功')
+        wx.navigateBack({
+          delta: 1,
+        })
+      }
   }
 })

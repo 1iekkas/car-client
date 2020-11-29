@@ -17,22 +17,17 @@
                 <!--状态-->
                 <block wx:if="{{item.status == 0}}">
                   <view class="status origin">
-                    已发布
+                    报价中
                   </view>
                 </block>
                 <block wx:if="{{item.status == 1}}">
-                  <view class="status origin">
-                    待付款
-                  </view>
-                </block>
-                <block wx:if="{{item.status == 2}}">
                   <view class="status origin">
                     待维修
                   </view>
                 </block>
                 <block wx:if="{{item.status == 3}}">
                   <view class="status origin">
-                    待验收
+                    待交付
                   </view>
                 </block>
 
@@ -50,7 +45,19 @@
 
                 <block wx:if="{{item.status == 6}}">
                   <view class="status green">
+                    待商家确认取消
+                  </view>
+                </block>
+
+                <block wx:if="{{item.status == 7}}">
+                  <view class="status green">
                     退款中
+                  </view>
+                </block>
+
+                <block wx:if="{{item.status == 8}}">
+                  <view class="status green">
+                    已退款
                   </view>
                 </block>
 

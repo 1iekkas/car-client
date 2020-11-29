@@ -12,7 +12,7 @@ Page({
     userInfo: null,
     hasUserInfo: false,
     carCount: 0,
-    tabs: ['已发布', '待维修', '待验收', '已完成', '已取消']
+    tabs: ['报价中', '待维修', '待验收', '已完成', '已取消']
   },
 
   /**

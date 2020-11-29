@@ -7,7 +7,7 @@
     <block wx:if="{{info.status == 0}}">
       <view class="info-tips">
         <view class="icon">
-          <van-icon name="passed" color="#07c160" size="52rpx" />订单已发布
+          <van-icon name="passed" color="#07c160" size="52rpx" />订单报价中
         </view>
         <view class="text">请耐心等待商家报价</view>
         <view class="time">剩余时间
@@ -17,18 +17,6 @@
     </block>
     <!---->
     <block wx:if="{{info.status == 1}}">
-      <view class="info-tips">
-        <view class="icon">
-          <van-icon name="underway-o" color="#ec8c05" size="52rpx" /><text>待支付</text>
-        </view>
-        <view class="text">请在限定时间内完成支付</view>
-        <view class="time">剩余时间
-          <van-count-down class="count-down" time="{{ time }}" />
-        </view>
-      </view>
-    </block>
-    <!---->
-    <block wx:if="{{info.status == 2}}">
       <view class="info-tips">
         <view class="icon">
           <van-icon name="setting" color="#ec8c05" size="52rpx" />待维修
@@ -132,7 +120,7 @@
                 <view class="name">{{item.name}}</view>
                 <block wx:if="{{ !item.vague }}">
                   <view class="price">价格:￥{{item.fee}}</view>
-                  <view class="pay" bindtap="onSelectShop" data-id="{{item.id}}">
+                  <view class="pay" bindtap="onSelectShop" data-item="{{item}}">
                     <view>预约支付</view>
                     <van-icon name="arrow" size="26rpx" style="margin-top: 4rpx"></van-icon>
                   </view>
@@ -191,7 +179,7 @@
     </view>
   </block>
   <!--付款明细-->
-  <block wx:if="{{ info.status != 0 && info.status != 1 }}">
+  <block wx:if="{{ info.status != 0}}">
     <view class="line"></view>
     <view class="form">
       <view class="title van-hairline--bottom">费用明细</view>
@@ -218,17 +206,13 @@
   </block>
   <!--action 栏-->
   <!--等待报价 0-->
-  <block wx:if="{{info.status == 0}}">
+  <!-- <block wx:if="{{info.status == 0}}">
     <van-goods-action>
       <van-goods-action-button text="重新发布" type="warning" bind:click="onClickButton" />
     </van-goods-action>
-  </block>
-  <!--等待付款 1-->
+  </block> -->
+  <!--等待维修 1-->
   <block wx:if="{{info.status == 1}}">
-    <van-submit-bar price="{{ info.offer[0].fee * 100 }}" button-text="付款" bind:submit="onSubmitPay" />
-  </block>
-  <!--等待维修 2-->
-  <block wx:if="{{info.status == 2}}">
     <van-submit-bar button-type="default" button-text="取消订单" bind:submit="onCancelOrder" />
   </block>
   <!--等待维修 3-->

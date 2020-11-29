@@ -52,9 +52,13 @@ Page({
   onShow: async function() {
     // console.log(app.globalData.location)
     // let location = wx.getStorageSync('location') || null
-    let res = await getCarList()
+    let res = await getCarList(),
+      car = [];
+
+    if(!res.code) car = res.data.length ? res.data.filter(e => e.focus == 1)[0] : []
+    console.log(car)
     this.setData({
-      car: res.data[0],
+      car: car,
       location: data.location ? data.location : app.globalData.location  //app.globalData.location
     })
     // console.log(data.location)
@@ -166,7 +170,6 @@ Page({
       },
       complete: c => {
         Toast.clear()
-        console.log(c)
       }
     });
   },

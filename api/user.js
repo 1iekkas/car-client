@@ -13,6 +13,10 @@ module.exports = {
     return $api.put(`/u/car/${data.id}/focus`, data)
   },
 
+  editCar(data) {
+    return $api.put(`/u/car/${data.id}/edit`, data)
+  },
+
   getPhone(data) {
     return $api.put(`/u/user/phone`, data)
   }

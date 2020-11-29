@@ -25,7 +25,8 @@
         "orderInfo/index",
         "searchOrder/index",
         "position/index",
-        "cancel/index"
+        "cancel/index",
+        "pay/index"
       ]
     }
   ],

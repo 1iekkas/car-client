@@ -4,36 +4,51 @@
   <van-cell-group title="车型信息">
     <van-cell title="车系">
       <view class="custom-cell-value">
-        <van-image height="50rpx" width="50rpx" round use-loading-slot src="{{series.brand_logo}}">
+        <block wx:if="{{ from == 'edit'}}">
+          <van-image height="50rpx" width="50rpx" round use-loading-slot src="{{logo}}">
           <van-loading slot="loading" type="spinner" size="6" vertical />
         </van-image>
+        </block>
+        <block wx:else>
+          <van-image height="50rpx" width="50rpx" round use-loading-slot src="{{series.brand_logo}}">
+          <van-loading slot="loading" type="spinner" size="6" vertical />
+        </van-image>
+        </block>
         <text>{{series.full_name}}</text>
       </view>
     </van-cell>
     <!---->
-    <van-cell required title-width="100rpx" title="年份" is-link>
-      <picker bindchange="bindPickerYear" value="{{activeYear}}" range="{{carYearList}}">
-        <view class="picker">
-          <block wx:if="{{activeYearItem}}">
-            {{activeYearItem}}
-          </block>
-          <block wx:else>请选择车型年份</block>
-        </view>
-      </picker>
-    </van-cell>
+    <block wx:if="{{from == 'edit'}}">
+      <van-cell required title-width="100rpx" title="年份" value="{{activeYearItem}}" is-link></van-cell>
+      <van-cell required title-width="100rpx" title="车型" value="{{activeCarItem}}" is-link></van-cell>
+    </block>
+    <block wx:else>
+      <van-cell required title-width="100rpx" title="年份" is-link>
+        <picker bindchange="bindPickerYear" value="{{activeYear}}" range="{{carYearList}}">
+          <view class="picker">
+            <block wx:if="{{activeYearItem}}">
+              {{activeYearItem}}
+            </block>
+            <block wx:else>请选择车型年份</block>
+          </view>
+        </picker>
+      </van-cell>
+      <van-cell required title-width="100rpx" title="车型" is-link>
+        <picker bindchange="bindPickerCar" value="{{activeCar}}" range-key="name" range="{{carList}}">
+          <view class="picker">
+            <block wx:if="{{activeCarItem}}">
+              {{activeCarItem.name}}
+            </block>
+            <block wx:else>请选择车型</block>
+          </view>
+        </picker>
+      </van-cell>
+    </block>
     <!---->
-    <van-cell required title-width="100rpx" title="车型" is-link>
-      <picker bindchange="bindPickerCar" value="{{activeCar}}" range-key="name" range="{{carList}}">
-        <view class="picker">
-          <block wx:if="{{activeCarItem}}">
-            {{activeCarItem.name}}
-          </block>
-          <block wx:else>请选择车型</block>
-        </view>
-      </picker>
-    </van-cell>
 
-    <van-field label="车牌号" value="{{ carNum }}" input-align="right" placeholder="请输入车牌号码" bind:change="onChangeCarNum" />
+
+    <van-field label="车牌号" value="{{ carNum }}" input-align="right" placeholder="请输入车牌号码"
+      bind:change="onChangeCarNum" />
 
     <van-cell title="是否设为默认">
       <van-checkbox value="{{ focus }}" bind:change="onChangeDefault"></van-checkbox>
@@ -44,8 +59,9 @@
   <view class="line"></view>
   <!---->
   <van-cell-group title="车辆信息(选填)">
-    <van-field label="行驶公里数" value="{{ miles }}" input-align="right" placeholder="请输入行驶公里数" bind:change="onChangeMiles" />
-    <van-cell title="车险到期年份" input-align="right" placeholder="请输入车险到期年份"  is-link>
+    <van-field label="行驶公里数" value="{{ miles }}" input-align="right" placeholder="请输入行驶公里数"
+      bind:change="onChangeMiles" />
+    <van-cell title="车险到期年份" input-align="right" placeholder="请输入车险到期年份" is-link>
       <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
         <view class="picker">
           {{date ? date : '请选择'}}
@@ -55,7 +71,12 @@
   </van-cell-group>
 
   <view class="btn-section">
-    <van-button type="primary" loading="{{ isLoading }}" block bind:click="onSubmit">添加车辆</van-button>
+    <block wx:if="{{from == 'edit'}}">
+      <van-button type="primary" loading="{{ isLoading }}" block bind:click="onSave">保存</van-button>
+    </block>
+    <block wx:else>
+      <van-button type="primary" loading="{{ isLoading }}" block bind:click="onSubmit">添加车辆</van-button>
+    </block>
   </view>
 </view>
 

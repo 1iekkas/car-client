@@ -2,15 +2,12 @@
 import {
   getWaitOrderInfo,
   getOffer,
-  pickOffer,
-  getPayParams,
   checkOrder,
   cancelOrder
 } from '../../api/order'
 import {
   reverseGeocoder,
-  setCalculateDistance,
-  requestPayment
+  setCalculateDistance
 } from '../../api/wxServer'
 import {
   IMG_HOST
@@ -57,6 +54,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     data = this.data
     this.getData(options.id)
   },
@@ -72,7 +70,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    /* console.log(data)
+    if(data.info && data.info.id) this.onLoad() */
   },
 
   /**
@@ -114,10 +113,6 @@ Page({
     let res = await getWaitOrderInfo({
       id: id
     })
-<<<<<<< HEAD
-=======
-    console.log(res)
->>>>>>> 1a6ce2175172fbd4a87a52866f98e6f149425296
     if (!res.status) {
       // 解析地址
       let address = await reverseGeocoder({
@@ -200,7 +195,7 @@ Page({
 
   // 选择预约门店
   onSelectShop(e) {
-    const id = e.currentTarget.dataset.id;
+    const { item } = e.currentTarget.dataset;
     Dialog.confirm({
         title: '确认预约',
         message: '是否确认预约该门店',
@@ -208,17 +203,9 @@ Page({
       })
       .then(async () => {
         // on confirm
-        let res = await pickOffer({
-          offer_id: id,
-          order_id: data.info.id
+        wx.navigateTo({
+          url: `/servicePackage/pay/index?id=${data.info.id}&offer=${JSON.stringify(item)}`,
         })
-
-        if (!res.code) {
-          /* wx.showToast({
-            title: 'title',
-          }) */
-          this.getData(data.info.id)
-        }
 
       })
       .catch(() => {
@@ -234,25 +221,6 @@ Page({
     })
   },
 
-  // 付款
-  async onSubmitPay() {
-    // 获取支付配置
-    let res = await getPayParams({
-      order_id: data.info.id,
-      offer_id: data.info.offer_id
-    })
-
-    if (!res.code) {
-      let result = await requestPayment(res.data)
-      if (!result.code) {
-        wx.showToast({
-          title: '支付成功',
-        })
-        this.getData(data.info.id)
-      }
-    }
-  },
-
   // 取消订单
   onCancelOrder() {
     Dialog.confirm({
@@ -262,7 +230,6 @@ Page({
       cancelButtonText: '不，点错了'
     })
     .then(() => {
-<<<<<<< HEAD
       this.setData({
         showCancel: true
       })
@@ -296,23 +263,13 @@ Page({
   cancelPopup() {
     this.setData({
       showCancel: false
-=======
-      // on confirm
-      wx.navigateTo({
-        url: `/servicePackage/cancel/index`,
-      })
->>>>>>> 1a6ce2175172fbd4a87a52866f98e6f149425296
     })
   },
 
   // 验收
   async onConfirmCheck(e) {
     let res = await checkOrder({id: data.info.id})
-<<<<<<< HEAD
     // console.log(res)
-=======
-    console.log(res)
->>>>>>> 1a6ce2175172fbd4a87a52866f98e6f149425296
     if(!res.code) {
       wx.showToast({
         title: '已验收',

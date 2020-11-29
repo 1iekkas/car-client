@@ -16,25 +16,19 @@ Page({
       max: 3
     },{
       id: '0',
-      name: '已发布',
+      name: '报价中',
       list: [],
       page: 1,
       max: 3
     },{
       id: '1',
-      name: '待付款',
-      list: [],
-      page: 1,
-      max: 3
-    },{
-      id: '2',
       name: '待维修',
       list: [],
       page: 1,
       max: 3
     },{
-      id: '3',
-      name: '待验收',
+      id: '2',
+      name: '待交付',
       list: [],
       page: 1,
       max: 3
@@ -45,14 +39,8 @@ Page({
       page: 1,
       max: 3
     },{
-      id: '5',
+      id: '5,6,7,8',
       name: '已取消',
-      list: [],
-      page: 1,
-      max: 3
-    },{
-      id: '6,7',
-      name: '退款中',
       list: [],
       page: 1,
       max: 3

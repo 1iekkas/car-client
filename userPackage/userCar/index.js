@@ -80,7 +80,7 @@ Page({
   // 获取列表
   async getCarList() {
     let res = await getCarList()
-    console.log(res.data)
+    // console.log(res.data)
     this.setData({
       list: res.data
     },() => {
@@ -143,9 +143,9 @@ Page({
 
   // 
   linkEdit(e) {
-    const id = e.currentTarget.dataset.id;
+    const { car } = e.currentTarget.dataset;
     wx.navigateTo({
-      url: `/userPackage/carInfo/index?id=${id}`,
+      url: `/userPackage/carInfo/index?car=${JSON.stringify(car)}&from=edit`,
     })
   }
 })
