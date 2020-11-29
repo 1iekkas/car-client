@@ -1,4 +1,5 @@
 //app.js
+// appId wxa487cd75e5f05745
 import {
   checkToken,
   getLocation
@@ -7,22 +8,9 @@ import {
   $api
 } from 'utils/http.js'
 
-console.log($api)
-
 App({
   onLaunch: function() {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
     this.setNavBarInfo()
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
-
     // 获取定位
     getLocation().then(res => {
       this.globalData.location = res.result
@@ -30,17 +18,25 @@ App({
       if (this.locationReadyCallback) {
         this.locationReadyCallback(res.result)
       }
-
     })
+
 
     // 检查token是否存在
     checkToken().then(result => {
-      //console.log(result)
+      console.log(`token检测：${result}`)
       if (result) {
+        // 刷新token
+        let refresh_token = wx.getStorageSync('refresh_token')
+        // console.log(refresh_token)
+        $api.get(`/u/user/token/${refresh_token}`).then(res => {
+          wx.setStorageSync('token', res.data)
+        })
+
+        this.globalData.isLogin = true
         // 获取用户信息
         wx.getSetting({
           success: res => {
-            console.log(res)
+            // console.log(res)
             if (res.authSetting['scope.userInfo']) {
               // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
               wx.getUserInfo({
@@ -53,18 +49,16 @@ App({
                   if (this.userInfoReadyCallback) {
                     this.userInfoReadyCallback(res)
                   }
-
-                  if (this.userTokenReadyCallback) {
-                    this.userTokenReadyCallback(result)
-                  }
                 }
               })
             }
           }
         })
       }
+      if (this.userTokenReadyCallback) {
+        this.userTokenReadyCallback(result)
+      }
     })
-
   },
 
   /**
@@ -84,6 +78,7 @@ App({
   },
 
   globalData: {
+    isLogin: false,
     userInfo: null, //用户信息
     hasToken: false, // 是否存在token
     location: null, // 当前位置
@@ -92,7 +87,7 @@ App({
     menuRight: 0, // 胶囊距右方间距（方保持左、右间距一致）
     menuHeight: 0, // 胶囊高度（自定义内容可与胶囊高度保证一致）
   },
-  
+
   $api
-  
+
 })

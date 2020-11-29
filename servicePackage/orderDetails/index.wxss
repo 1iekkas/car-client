@@ -1,0 +1,115 @@
+/* servicePackage/orderDetails/index.wxss */
+page {
+  background-color: #f7f7f7;
+  padding-bottom: 120rpx;
+}
+
+.info {
+  color: #646566;
+  font-size: 32rpx;
+  padding: 50rpx 30rpx;
+  background-color: white;
+  text-align: center;
+}
+
+.info .icon {
+  color: #232323;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42rpx;
+}
+
+.info .icon van-icon {
+  margin-right: 12rpx;
+}
+
+.info .text {
+  margin: 30rpx 0
+}
+
+.info .time {
+  font-size: 30rpx;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info .count-down {
+  padding-left: 20rpx;
+}
+
+.info .count-down .van-count-down {
+  color: #f40;
+}
+
+/** */
+.store-section .title {
+  padding: 20rpx 30rpx;
+  background-color: white;
+}
+
+.store-filter {
+  font-size: 28rpx;
+  width: 100vw;
+  padding: 20rpx 30rpx;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.store-filter .filter-item+.filter-item {
+  color: #232323;
+  padding-left: 48rpx;
+}
+
+.store-filter .filter-item.active {
+  color: #ee0a24;
+}
+
+.store-item {
+  padding: 20rpx;
+  background-color: white;
+  margin-bottom: 20rpx;
+  display: flex;
+}
+
+.store-content {
+  font-size: 28rpx;
+  padding-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.store-content .address {
+  color: #bdbdbd;
+  font-size: 24rpx;
+  display: flex;
+  align-items: center;
+}
+
+.store-content .address .location {
+  flex: 1;
+  padding-right: 20rpx;
+}
+
+van-goods-action-button {
+  text-align: right;
+}
+
+van-goods-action-button button {
+  width: 35vw !important;
+}
+
+/** */
+.img-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.img-list van-image {
+  margin-right: 20rpx;
+}

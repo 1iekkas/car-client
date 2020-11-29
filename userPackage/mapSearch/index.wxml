@@ -1,0 +1,30 @@
+<!--userPackage/mapSearch/index.wxml-->
+<view class="container">
+  <van-sticky offset-top="0">
+    <van-search catchtouchmove="{{true}}" value="{{ value }}" placeholder="请输入地点" use-left-icon-slot use-action-slot bind:change="onChange"
+      bind:search="onSearch">
+      <view slot="label" class="slot">{{location.address_component.city}}</view>
+      <van-icon slot="left-icon" class="slot" name="arrow-down" />
+      <view slot="action" bind:tap="onClick">搜索</view>
+    </van-search>
+  </van-sticky>
+  <!---->
+  <block wx:if="addressList">
+    <scroll-view enhanced scroll-y="true" style="height: calc(100vh - 108rpx)" bindscrolltoupper="upper"
+      bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+      <view class="content" style="min-height: calc(100vh - 100rpx);">
+        <!--地点列表-->
+        <view class="address-group" wx:for="{{addressList}}" wx:key="index">
+          <view class="address-list van-hairline--bottom" bindtap="onClickAddress" data-item="{{item}}">
+            <van-icon name="location-o" size="26rpx" />
+            <view class="info">
+              <view class="title">{{ item.title }}</view>
+              <view class="address">{{ item.address }}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </block>
+
+</view>

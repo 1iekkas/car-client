@@ -1,0 +1,269 @@
+<!--servicePackage/orderInfo/index.wxml-->
+<import src="index.skeleton.wxml" />
+<template is="skeleton" wx-if="{{loading}}" />
+
+<view class="container {{!loading ? '': 'hidden'}}">
+  <view class="info van-hairline--bottom"  style="{{info.status == 6 ? 'padding-bottom: 60rpx': ''}}">
+    <block wx:if="{{info.status == 0}}">
+      <view class="info-tips">
+        <view class="icon">
+          <van-icon name="passed" color="#07c160" size="52rpx" />订单已发布
+        </view>
+        <view class="text">请耐心等待商家报价</view>
+        <view class="time">剩余时间
+          <van-count-down class="count-down" time="{{ time }}" />
+        </view>
+      </view>
+    </block>
+    <!---->
+    <block wx:if="{{info.status == 1}}">
+      <view class="info-tips">
+        <view class="icon">
+          <van-icon name="underway-o" color="#ec8c05" size="52rpx" /><text>待支付</text>
+        </view>
+        <view class="text">请在限定时间内完成支付</view>
+        <view class="time">剩余时间
+          <van-count-down class="count-down" time="{{ time }}" />
+        </view>
+      </view>
+    </block>
+    <!---->
+    <block wx:if="{{info.status == 2}}">
+      <view class="info-tips">
+        <view class="icon">
+          <van-icon name="setting" color="#ec8c05" size="52rpx" />待维修
+        </view>
+        <view class="text">等待门店维修中</view>
+        <!-- <view class="time">剩余时间
+          <van-count-down class="count-down" time="{{ time }}" />
+        </view> -->
+      </view>
+    </block>
+    <!---->
+    <block wx:if="{{info.status == 3}}">
+      <view class="info-tips">
+        <view class="icon">
+          <van-icon name="underway-o" color="#ec8c05" size="52rpx" /><text>待验收</text>
+        </view>
+        <view class="text">服务已完成，请检查验收</view>
+        <!-- <view class="time">剩余时间
+          <van-count-down class="count-down" time="{{ time }}" />
+        </view> -->
+      </view>
+    </block>
+    <!---->
+    <block wx:if="{{info.status == 4}}">
+      <view class="info-tips">
+        <view class="icon">
+          <van-icon name="success" color="#07c160" size="52rpx" /><text>已完成</text>
+        </view>
+        <view class="text">订单已完成</view>
+        <!-- <view class="time">剩余时间
+          <van-count-down class="count-down" time="{{ time }}" />
+        </view> -->
+      </view>
+    </block>
+    <!--6: 待商家确认取消-->
+    <block wx:if="{{info.status == 6}}">
+      <view class="info-tips">
+        <view class="icon">
+          <van-icon name="gold-coin-o" color="#ec8c05" size="52rpx" /><text>退款中</text>
+        </view>
+        <view class="text">等待商家确认退款</view>
+        <view class="step">
+          <view class="step-item">
+            <view class="phoneColor">
+              <view>联系商家</view>
+              <view class="phone"><van-icon name="phone-o" />18055881011</view>
+            </view>
+          </view>
+          <van-icon name="arrow" />
+          <view class="step-item">协商退款金额</view>
+          <van-icon name="arrow" />
+          <view class="step-item">完成退款</view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="line"></view>
+  <!---->
+  <view class="form">
+    <van-cell-group>
+      <van-cell title-width="150rpx" title="需求描述" value="{{info.content}}" />
+      <van-cell title="预算费用">
+        <view class="price">
+          ￥{{info.evaluate_fee}}
+        </view>
+      </van-cell>
+      <van-cell title="预约电话" value="{{info.phone}}"></van-cell>
+      <van-cell title="预计到店时间" value="{{info.evaluate_time}}"></van-cell>
+      <van-cell title="是否需要上门服务" value="{{ info.on_door ? '是' : '否' }}"></van-cell>
+      <van-cell title="上门类型" value="{{ info.on_door == 2 ? '上门取车' : '上门服务' }}"></van-cell>
+      <van-cell title="上门位置" title-width="120rpx" value="{{ info.address }}"></van-cell>
+      <van-cell wx:if="{{info.images.length}}">
+        <view class="images-group">
+          <van-image width="22vw" height="22vw" wx:for="{{info.images}}" bindtap="onPreview" data-url="{{item}}"
+            wx:key="index" src="{{item}}"></van-image>
+        </view>
+      </van-cell>
+    </van-cell-group>
+  </view>
+  <!---->
+  <view class="line"></view>
+  <!--商铺报价列表-->
+  <block wx:if="{{info.status == 0}}">
+    <view class="store-section">
+      <van-sticky offset-top="0">
+        <view class="store-filter van-hairline--bottom">
+          <view class="filter-item {{ active == index ? 'active' : '' }}" wx:for="{{filterList}}" wx:key="index">
+            {{item.name}}
+          </view>
+          <view class="filter-item refresh" bindtap="getOfferList">
+            <van-icon name="replay" size="32rpx" color="#646566" />
+          </view>
+        </view>
+      </van-sticky>
+      <view class="store-group">
+        <block wx:if="{{offerList.length}}">
+          <view class="store-item" wx:for="{{offerList}}" wx:key="index">
+            <view class="store-body">
+              <van-image width="100" height="100" src="{{item.facade_images[0]}}"></van-image>
+              <view class="store-content">
+                <view class="name">{{item.name}}</view>
+                <block wx:if="{{ !item.vague }}">
+                  <view class="price">价格:￥{{item.fee}}</view>
+                  <view class="pay" bindtap="onSelectShop" data-id="{{item.id}}">
+                    <view>预约支付</view>
+                    <van-icon name="arrow" size="26rpx" style="margin-top: 4rpx"></van-icon>
+                  </view>
+                </block>
+                <block wx:else>
+                  <view class="tips price">
+                    您描述的需求不清晰，本店无法提供报价，可致电或到店咨询
+                  </view>
+                </block>
+
+              </view>
+            </view>
+            <view class="store-address van-hairline--top">
+              <view class="location">{{item.detail}}</view>
+              <view class="range" wx:if="{{item.distance}}">{{item.distance}}km</view>
+            </view>
+          </view>
+        </block>
+        <!--暂无报价-->
+        <block wx:else>
+          <van-empty image="search" description="暂无商家报价" />
+        </block>
+      </view>
+    </view>
+  </block>
+  <!--服务店铺-->
+  <block wx:else>
+    <view class="store-section">
+      <view class="title van-hairline--bottom">服务门店</view>
+      <view class="store-group">
+        <block wx:if="{{info.offer.length}}">
+          <view class="store-item" wx:for="{{offerList}}" wx:key="index">
+            <view class="store-body">
+              <van-image width="100" height="100" src="{{item.facade_images[0]}}"></van-image>
+              <view class="store-content">
+                <view class="name">{{item.name}}</view>
+                <view class="price">价格:￥{{item.fee}}</view>
+              </view>
+            </view>
+            <view class="store-address van-hairline--top">
+              <view class="location">{{item.detail}}</view>
+              <view class="range" wx:if="{{item.distance}}">{{item.distance}}km</view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </block>
+
+  <block wx:if="{{info.status != 0}}">
+    <view class="contact van-hairline--top">
+      <view class="contact-item van-hairline--right">
+        <van-icon name="phone" /><text>联系商家</text></view>
+      <view class="contact-item">
+        <van-icon name="service" /><text>联系客服</text></view>
+    </view>
+  </block>
+  <!--付款明细-->
+  <block wx:if="{{ info.status != 0 && info.status != 1 }}">
+    <view class="line"></view>
+    <view class="form">
+      <view class="title van-hairline--bottom">费用明细</view>
+      <van-cell-group border="{{false}}">
+        <van-cell title="门店报价">
+          <view class="price">
+            ￥{{info.offer[0].fee}}
+          </view>
+        </van-cell>
+        <van-cell title="优惠券">
+          <view class="price">
+            -￥0.00
+          </view>
+        </van-cell>
+        <van-cell>
+          <view class="content">
+            <text>实付款</text>
+            <text>￥</text>
+            <text>{{info.offer[0].fee}}</text>
+          </view>
+        </van-cell>
+      </van-cell-group>
+    </view>
+  </block>
+  <!--action 栏-->
+  <!--等待报价 0-->
+  <block wx:if="{{info.status == 0}}">
+    <van-goods-action>
+      <van-goods-action-button text="重新发布" type="warning" bind:click="onClickButton" />
+    </van-goods-action>
+  </block>
+  <!--等待付款 1-->
+  <block wx:if="{{info.status == 1}}">
+    <van-submit-bar price="{{ info.offer[0].fee * 100 }}" button-text="付款" bind:submit="onSubmitPay" />
+  </block>
+  <!--等待维修 2-->
+  <block wx:if="{{info.status == 2}}">
+    <van-submit-bar button-type="default" button-text="取消订单" bind:submit="onCancelOrder" />
+  </block>
+  <!--等待维修 3-->
+  <block wx:if="{{info.status == 3}}">
+    <van-submit-bar button-text="确认验收" bind:submit="onConfirmCheck" />
+  </block>
+</view>
+
+<!---->
+<van-dialog id="van-dialog" />
+
+<van-popup show="{{ showCancel }}" round position="bottom" bind:close="onClose">
+  <view class="popup-body">
+    <view class="popup-head">
+      <view class="popup-text cancel" bindtap="cancelPopup">取消</view>
+      <view class="popup-title">请选择取消原因</view>
+      <view class="popup-text" bindtap="confirmPopup">确定</view>
+    </view>
+    <view class="popup-group">
+      <van-radio-group value="{{ cancelType }}">
+        <van-cell-group border="{{false}}">
+          <van-cell border="{{false}}" title="订单信息有误" clickable data-name="1" bind:click="onChangeCancel">
+            <van-radio slot="right-icon" name="1" />
+          </van-cell>
+          <van-cell border="{{false}}" title="门店距离太远" clickable data-name="2" bind:click="onChangeCancel">
+            <van-radio slot="right-icon" name="2" />
+          </van-cell>
+          <van-cell border="{{false}}" title="无法支付订单" clickable data-name="3" bind:click="onChangeCancel">
+            <van-radio slot="right-icon" name="3" />
+          </van-cell>
+          <van-cell border="{{false}}" title="不想发布了" clickable data-name="4" bind:click="onChangeCancel">
+            <van-radio slot="right-icon" name="4" />
+          </van-cell>
+        </van-cell-group>
+      </van-radio-group>
+    </view>
+  </view>
+</van-popup>

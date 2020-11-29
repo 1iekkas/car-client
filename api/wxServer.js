@@ -1,7 +1,8 @@
 /**小程序内置api封装 */
+const app = getApp()
 const QQMapWX = require('../utils/qqmap-wx-jssdk.js');
 const map = new QQMapWX({
-  key: 'YRCBZ-LO2KJ-PMHFW-FHFGT-SPEPZ-POBWB'
+  key: '553BZ-MI4CW-LMXR5-OXN7Z-OMBVK-RPFMX'
 });
 module.exports = {
   /**
@@ -33,14 +34,19 @@ module.exports = {
       let res = await new Promise((resolve, reject) => {
         wx.login({
           success: res => {
-            resolve(res.code)
+            resolve({
+              code: 200,
+              value: res.code
+            })
           }
         })
       })
 
       // do something  
-      wx.setStorageSync('token', 'token')
+      //wx.setStorageSync('token', 'token')
+     
       return res
+      
     } catch (err) {
       wx.showModal({
         content: '登陆失败，请重新登录'
@@ -58,7 +64,7 @@ module.exports = {
         type: 'gcj02',
         altitude: true,
         success: result => {
-          console.log(result)
+          console.log(`系统定位信息：${JSON.stringify(result)}`)
           // 地址逆解析
           map.reverseGeocoder({
             location: {
@@ -83,6 +89,132 @@ module.exports = {
         }
       })
     })
-    
+
   },
+
+  /**
+   * 
+   * @param Object {
+   *  keyword: 关键词,
+   *  region: 城市名， 例:佛山市,
+   *  region_fix: 是否自动扩大范围到全国 0=是 1=否,
+   * }  
+   */
+  async getSuggestion(params={}) {
+    let object = {
+      ...params,
+      region_fix: 1,
+      page_size: 20,
+      page_index: 1
+    }
+    try {
+      let res = await new Promise((resolve, reject) => {
+        map.getSuggestion({
+          ...object,
+          complete: result => {
+            resolve(result)
+          }
+        })
+      })
+
+      return res
+    }catch(error){
+      wx.showModal({
+        content: error
+      })
+    }
+  },
+
+  // 坐标地址解析 @params { lat, lng }
+  async reverseGeocoder(params={}) {
+    let object = {
+      ...params
+    }
+    try {
+      let res = await new Promise((resolve, reject) => {
+        map.reverseGeocoder({
+          ...object,
+          complete: result => {
+            resolve(result)
+          }
+        })
+      })
+
+      return res
+    }catch(error){
+      wx.showModal({
+        content: error
+      })
+    }
+  },
+
+  // 计算距离
+  async setCalculateDistance(params) {
+    let object = {
+      ...params
+    }
+    try {
+      let res = await new Promise((resolve, reject) => {
+        map.calculateDistance({
+          ...object,
+          complete: result => {
+            resolve(result)
+          }
+        })
+      })
+
+      return res
+    }catch(error){
+      wx.showModal({
+        content: error
+      })
+    }
+  },
+
+  /**
+   * @function 用户搜索地点
+   * @params Object { 
+   *  keyword: 关键词,
+   *  location: 坐标点: '39.980014,116.313972' 
+   * } 
+   * create by liekkas 2020-11-07
+   */
+  searchLocation(params={}) {
+    map.search()
+  },
+
+  /**
+   * 发起微信支付
+   */
+  requestPayment(data) {
+    return new Promise(resolve => {
+      wx.requestPayment({
+        ...data,
+        complete: res => {
+          if(res.errMsg == 'requestPayment:fail cancel') {
+            resolve({code: 1, message: 'requestPayment:fail cancel' })
+          }else {
+            resolve({code: 0, message: '支付成功'})
+          }
+        }
+      })
+    })
+  },
+
+  // 订阅消息
+  requestSubscribeMessage(tmplIds = []) {
+   return new Promise(resolve => {
+    wx.requestSubscribeMessage({
+      tmplIds: tmplIds,
+      complete: res => {
+        if(res.errMsg == "requestSubscribeMessage:ok") {
+          resolve({code: 0, message: '订阅成功' })
+        }else {
+          resolve({code: 1, message: '订阅失败'})
+        }
+      }
+    })
+   })
+  }
+ 
 }

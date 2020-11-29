@@ -1,17 +1,18 @@
 //index.js
 //获取应用实例
 const app = getApp()
-import {  getDistance } from '../../utils/util.js'
+import { reverseGeocoder } from '../../api/wxServer'
 import {
   checkToken,
   login,
   getLocation
 } from "../../api/wxServer.js"
-
+import { getSwipeList } from '../../api/poster'
+let data 
 Page({
   data: {
     hasUserInfo: null,
-    canIUse: true,
+    isLogin: false,
     location: null,
     navBarHeight: app.globalData.navBarHeight, //导航栏高度
     storeList: ['同时呼叫', '洗美店', '维修店', '快修员', '维修厂'], // 商家类型
@@ -41,28 +42,38 @@ Page({
       value: 10000,
       scale: 11
     }],
+    tips: 1,
     activeRange: 0,
+    contentHeight: 0,
     // map配置
     mapSetting: {
-      subkey: "YRCBZ-LO2KJ-PMHFW-FHFGT-SPEPZ-POBWB",
-      layerStyle: 1,
+      subkey: "553BZ-MI4CW-LMXR5-OXN7Z-OMBVK-RPFMX",
+      minScale: 16,
+      maxScale: 16,	
+      layerStyle: '1',
       scale: 16,
-      circles: []
+      circles: [],
+      showLocation: true
     },
     markers: [],
     circles: []
   },
 
-  onLoad: async function() {
+  onLoad: async function () {
+    data = this.data
+    // 清除缓存位置信息
+    wx.setStorageSync('location', null)
+
     // 用户token回调
     app.userTokenReadyCallback = res => {
       this.setData({
-        hasToken: res
+        hasToken: res,
+        isLogin: res
       })
     }
     // 用户信息回调
     app.userInfoReadyCallback = res => {
-      //console.log(res)
+      console.log(res)
       this.setData({
         userInfo: res.userInfo,
         hasUserInfo: true
@@ -71,6 +82,7 @@ Page({
 
     // 定位回调
     app.locationReadyCallback = res => {
+      // console.log(res)
       let markers = this.data.markers
       this.setData({
         location: res,
@@ -83,25 +95,61 @@ Page({
           }
         })
       })
-
     }
+    //
+    this.getSwipeList()
   },
 
   onShow() {
-    console.log(app.globalData.location)
+    let location = wx.getStorageSync('location') || null
     this.setData({
-      location: app.globalData.location,
-
+      location: location ? location : app.globalData.location,
+      isLogin: app.globalData.isLogin,
+      userInfo: app.globalData.userInfo,
+      map: this.data.map ? this.data.map : wx.createMapContext('map', this),
     })
+    // wx.setStorageSync('location', null)
+   
+  },
+
+  onReady() {
+    setTimeout(() => {
+      let query = wx.createSelectorQuery();
+      query.select('.content').boundingClientRect(rect => {
+        let height = rect.height;
+        //console.log(height);
+        this.setData({
+          contentHeight: height - 30
+        })
+      }).exec();
+    }, 0)
+  },
+
+  // 获取banner
+  async getSwipeList(e) {
+    let res = await getSwipeList() 
   },
 
   // 视野变更
-  regionchange(e) {
-    // console.log(e)
+  async regionchange(e) { 
+    if(e.type == "begin" || e.causedBy != 'drag') return false
+    this.update = true
+     const location = e.detail.centerLocation
+    let res = await reverseGeocoder({
+      location: location
+    }) 
+
+    if (!res.status) {
+      this.setData({
+        location: res.result
+      },() => {
+        this.update = false
+      })
+    }
   },
 
   // 获取用户信息 
-  getUserInfo: function(e) {
+  getUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
@@ -109,7 +157,7 @@ Page({
     })
   },
 
-  // 筛选距离
+  // 筛选距离 已废弃
   filterRange(e) {
     const data = this.data,
       scale = data.mapSetting.scale,
@@ -119,22 +167,28 @@ Page({
     this.setData({
       activeRange: index,
       ['mapSetting.scale']: data.rangeList[index].scale,
-      ['mapSetting.circles']: v,
+      ['mapSetting.circles']: [{
+        latitude: this.data.location.location.lat,
+        longitude: this.data.location.location.lng,
+        color: '#FF0000',
+        fillColor: '#7cb5ec',
+        radius: this.data.rangeList[index].value,
+        strokeWidth: 1
+      }],
     }, () => {
-      console.log(circles)
     })
 
   },
 
-  // 设置半径
+  // 设置半径 已废弃
   setCircles(key) {
     if (key) {
       let radius = (this.data.rangeList[key].scale / 16) * this.data.rangeList[key].value
       return {
         latitude: this.data.location.location.lat,
         longitude: this.data.location.location.lng,
-        color: '#FF0000DD',
-        fillColor: '#7cb5ec88',
+        color: '#FF0000',
+        fillColor: '#7cb5ec',
         radius: this.data.rangeList[key].value,
         strokeWidth: 1
       }
@@ -142,4 +196,71 @@ Page({
       return []
     }
   },
+
+  // 获取用户信息
+  getUserInfo: async function (e) {
+
+  },
+
+  toLogin() {
+    wx.navigateTo({
+      url: '/userPackage/login/index'
+    })
+  },
+
+  back() {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+
+  mapSearch() {
+    wx.navigateTo({
+      url: '/userPackage/mapSearch/index'
+    })
+  },
+
+  // 个人中心
+  linkUserInfo() {
+    wx.navigateTo({
+      url: '/pages/user/index',
+    })
+  },
+
+  // 创建订单
+  toCreate(e) {
+    console.log('create')
+    const type = e.currentTarget.dataset.type
+    // console.log(type)
+    if(type === 'custom') {
+      // console.log(this.location)
+      wx.setStorageSync('location', this.location)
+    }
+    wx.navigateTo({
+      url: '/servicePackage/create/index',
+    })
+  },
+
+  toSearchOrder() {
+    wx.navigateTo({
+      url: '/servicePackage/searchOrder/index',
+    })
+  },
+
+  // 
+  linkToOrder() {
+    wx.navigateTo({
+      url: `/userPackage/order/index`,
+    })
+  },
+
+  // 
+  onFocus() {
+    console.log(data.map)
+    data.map.moveToLocation();
+    this.setData({
+      location: app.globalData.location
+    })
+    wx.setStorageSync('location', null)
+  }
 })

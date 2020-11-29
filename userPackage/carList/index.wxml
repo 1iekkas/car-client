@@ -23,7 +23,7 @@
   custom-style="height: 100vh;"
   bind:close="onClosePopup"
   close-on-click-overlay	
-  catchtouchmove="{{false}}"
+  catchtouchmove="{{true}}"
 >
   <view class="popup-body van-hairline--top">
     <view class="popup-title van-hairline--bottom">

@@ -1,4 +1,4 @@
-/* userPackage/carInfoList/index.wxss */
+/* userPackage/carInfo/index.wxss */
 page {
   background-color: #f7f7f7;
 }
@@ -20,4 +20,8 @@ page {
 .btn-section {
   width: 80vw;
   margin: 80rpx auto 0 auto;
+}
+
+.van-checkbox {
+  justify-content: flex-end;
 }

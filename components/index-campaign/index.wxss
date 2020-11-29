@@ -1,0 +1,13 @@
+/* components/index-campaign/index.wxss */
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.close {
+  padding: 30rpx 0;
+  color: white;
+  text-align: center;
+}

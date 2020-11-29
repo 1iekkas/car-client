@@ -4,7 +4,18 @@ page {
   font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
       Segoe UI, Arial, Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei',
       sans-serif;
-  --fontColor: #ec8c05    
+  --bgWhite: white;    
+  --fontColor: #ec8c05;
+  --buttonBgColor: #ec8c05; /* #ec8c05; */
+  --priceColor: #ff6000; /* #f40 */ 
+  --origin:#ec8c05;
+  --red: #ff5455;
+  --green: #07c160;
+  --phoneColor: #3476ea;
+}
+
+image {
+  height: auto;
 }
 
 .container {
@@ -16,6 +27,10 @@ page {
   padding: 200rpx 0; */
   box-sizing: border-box;
 } 
+
+.hidden {
+  display: none;
+}
 
 .nav-bar--fixed {
   position: fixed;
@@ -41,3 +56,30 @@ image {
 .line {
   height: 30rpx;
 }
+
+.price {
+  color: var(--priceColor);
+}
+
+.van-goods-action {
+  z-index: 100 !important;
+}
+
+.origin {
+  color: var(--origin)
+}
+
+.green {
+  color: var(--green);
+}
+
+.red {
+  color: var(--red);
+}
+
+.list-loading {
+  padding: 20px 0;
+  text-align: center;
+}
+
+

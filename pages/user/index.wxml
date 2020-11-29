@@ -1,34 +1,42 @@
 <!--pages/user/index.wxml-->
-<scroll-view class="van-hairline--top" scroll-y="true" style="height: 100vh" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll"
-    scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+<scroll-view class="van-hairline--top" scroll-y="true" style="height: 100vh">
     <view class="content" style="min-height: calc(100vh + 4rpx);">
       <view class="user-info-section">
         <view class="avatar">
-          <block wx:if="{{!hasUserInfo}}">
-            <button class="auth-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+          <block wx:if="{{!isLogin}}">
+            <!-- <button class="auth-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
               <image src="../../static/img/avatar.png" mode="widthFix" style="width: 100%"></image>
-            </button>
+            </button> -->
+            <navigator class="auth-btn" hover-class="none" url="../../userPackage/login/index">
+              <image src="../../static/img/avatar.png" mode="widthFix" style="width: 100%"></image>
+            </navigator>
           </block>
           <block wx:else>
             <image src="{{userInfo.avatarUrl}}" mode="widthFix" style="width: 100%"></image>
           </block>
         </view>
         <view class="info">
-          <text class="name">{{userInfo.nickName}}</text>
-          <text>已绑定车辆：2</text>
+          <block wx:if="{{isLogin}}">
+            <text class="name">{{userInfo.nickName}}</text>
+            <text wx:if="{{carCount}}">已绑定车辆：{{ carCount }}</text>
+            <text wx:else>未绑定车辆</text>
+          </block>
+          <block wx:else>
+            <text>请点击头像登录</text>
+          </block>
         </view>
       </view>
       <!---->
       <view class="line"></view>
       <view class="tabs order-tabs">
         <view class="tabs-list">
-          <view class="tabs-item" wx:for="{{tabs}}" wx:key="{{index}}">
-            <image src="../../static/img/order.png" mode="widthFix" style="width: 46rpx;"></image>
+          <view class="tabs-item" wx:for="{{tabs}}" wx:key="index">
+            <view class="tabs-img"><image src="../../static/img/order.png" mode="widthFix" style="width: 46rpx;height: auto;"></image></view>
             <text>{{item}}</text>
           </view>
         </view>
         <view class="tabs-all van-hairline--left" bindtap="orderLink" data-id="0">
-          <image src="../../static/img/order.png" mode="widthFix" style="width: 46rpx;"></image>
+          <view class="tabs-img"><image src="../../static/img/order.png" mode="widthFix" style="width: 46rpx;height: auto;"></image></view>
           <text>全部</text>
         </view>
       </view>
@@ -36,7 +44,7 @@
       <view class="line"></view>
       <view class="cell-section">
         <van-cell-group border="{{ false }}">
-          <van-cell custom-class="padding" title="车辆管理" value="" is-link url="/userPackage/userCar/index" />
+          <van-cell custom-class="padding" title="车辆管理" value="" is-link url="/userPackage/userCar/index?from=user" />
           <van-cell custom-class="padding" title="钱包" value="" is-link />
           <van-cell custom-class="padding" title="优惠券" value="" is-link />
           <van-cell custom-class="padding" title="联系客服" value="" is-link />
