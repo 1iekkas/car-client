@@ -1,10 +1,11 @@
 /* servicePackage/orderInfo/index.wxss */
+@import "index.skeleton.wxss";
 page {
   background-color: #f7f7f7;
 }
 
 .container {
-  padding-bottom: 50px;
+  padding-bottom: 60px;
 }
 
 .info {
@@ -47,8 +48,40 @@ page {
   color: #f40;
 }
 
+.info .step {
+  display: flex;
+  font-size: 24rpx;
+  align-items: center;
+}
+
+.info .step-item {
+  flex: 1;
+}
+
+.phoneColor {
+  color: var(--phoneColor);
+  position: relative;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+
+.phoneColor .phone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 36rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
 /** */
-.store-section {}
+.store-section .title, .form .title {
+  padding: 20rpx 30rpx;
+  background-color: white;
+}
 
 .store-filter {
   font-size: 28rpx;
@@ -79,26 +112,49 @@ page {
 .store-item {
   padding: 20rpx;
   background-color: white;
+  
+}
+
+.store-body {
   margin-bottom: 20rpx;
   display: flex;
 }
 
 .store-content {
+  flex: 1;
   font-size: 28rpx;
   padding-left: 20rpx;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  position: relative;
 }
 
-.store-content .address {
+.store-content view + view {
+  padding-top: 20rpx;
+}
+
+.store-content .pay {
+  flex: 1;
+  color: #646566;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: var(--red);
+}
+
+.store-address {
+  padding-top: 20rpx;
   color: #bdbdbd;
   font-size: 24rpx;
   display: flex;
   align-items: center;
 }
 
-.store-content .address .location {
+.store-address .location {
   flex: 1;
   padding-right: 20rpx;
 }
@@ -121,3 +177,65 @@ van-goods-action-button button {
 .images-group van-image {
   margin-right: 10px;
 }
+
+.contact {
+  width: 95vw;
+  background-color: #fcfcfc;
+  margin: 0 auto;
+  padding: 20rpx 0;
+  display: flex;
+  border-radius: 0 0 12rpx 12rpx;
+}
+
+.contact .contact-item {
+  flex: 1;
+  color: #646566;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact .contact-item text {
+  padding-left: 8rpx;
+}
+
+.content {
+  color: #646566;
+}
+
+.content text:nth-child(2), .content text:nth-child(3) {
+  color: var(--priceColor);
+}
+
+.content text:nth-child(2) {
+  margin-left: 12rpx;
+}
+
+.content text:nth-child(3) {
+  font-size: 38rpx;
+}
+
+.popup-head {
+  display: flex;
+  align-items: center;
+  padding: 30rpx 20rpx 20rpx 20rpx;
+}
+
+.popup-head .popup-title {
+  flex: 1;
+  text-align: center;
+}
+
+.popup-head .popup-text {
+  color: var(--red);
+}
+
+.popup-head .popup-text.cancel {
+  color: #999;
+}
+
+.popup-group {
+  padding: 40rpx 0 20rpx 0;
+}
+

@@ -3,6 +3,7 @@ const md5 = require('../../utils/md5.js')
 import { getCarList } from '../../api/user'
 import { validatePhone } from '../../utils/validator'
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
+import { requestSubscribeMessage } from '../../api/wxServer';
 let data
 const app = getApp()
 Page({
@@ -13,7 +14,7 @@ Page({
   data: {
     car: null,
     autosize: {
-      minHeight: 150
+      minHeight: 100
     },
     content:'',
     phone: '',
@@ -21,8 +22,8 @@ Page({
     evaluate_time: '',
     isLocation: false,
     fileList: [],
-    doorType: '1'
-    
+    doorType: '1',
+    location: null
   },
 
   /**
@@ -30,6 +31,12 @@ Page({
    */
   onLoad: function(options) {
     data = this.data
+    let location = wx.getStorageSync('location') || null
+    if(location) {
+      this.setData({
+        location: location
+      })
+    }
   },
 
   /**
@@ -43,18 +50,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: async function() {
-    // 
-    console.log(app.globalData.location)
-
+    // console.log(app.globalData.location)
+    // let location = wx.getStorageSync('location') || null
     let res = await getCarList()
     this.setData({
       car: res.data[0],
-      location: data.location ? data.location : {
-        address: app.globalData.location.address,
-        location: app.globalData.location.location
-      }  //app.globalData.location
+      location: data.location ? data.location : app.globalData.location  //app.globalData.location
     })
-    console.log(data.location)
+    // console.log(data.location)
   },
 
   /**
@@ -130,6 +133,12 @@ Page({
 
   upload(file) {
     const signature = this.getStr()
+    Toast.loading({
+      duration: 0, // 持续展示 toast
+      forbidClick: true,
+      message: '上传中',
+    });
+    console.log('upload')
     // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
     wx.uploadFile({
       url: `https://car.coasewash.com/u/upload?timestamp=${signature.timestamp}&nonce=${signature.nonce}&key=Zgc3a7jNqANK2nbVBluSgxKKaXZs0A&signature=${signature.signature}`, // 仅为示例，非真实的接口地址
@@ -156,6 +165,7 @@ Page({
         });
       },
       complete: c => {
+        Toast.clear()
         console.log(c)
       }
     });
@@ -176,6 +186,9 @@ Page({
 
   // 提交
   async onSubmit() {
+    
+
+
     validatePhone(data.phone)
     //validateContent(data.content)
     if(data.content == '') {
@@ -188,9 +201,6 @@ Page({
       return false
     }
 
-
-
-
     // 参数body
     let body = {
       car_id: data.car.id || '',
@@ -201,6 +211,7 @@ Page({
       on_door: data.isLocation ? data.doorType : 0, // 0 不上门 1 不取车 2 取车
       lng: data.isLocation ? data.location.location.lng : '',
       lat: data.isLocation ? data.location.location.lat : '',
+      address: data.isLocation ? data.location.formatted_addresses.recommend: '',
       images: data.fileList ? data.fileList.map(e => e.url).join('|') : [],
     }
 
@@ -210,12 +221,26 @@ Page({
       Toast({
         type: 'success',
         message: '提交成功',
-        onClose: () => {
-          wx.redirectTo({
+        onClose: async () => {
+          
+          /* wx.redirectTo({
             url: '/userPackage/order/index',
-          })
+          }) */
         },
       })
+
+      let callback = await requestSubscribeMessage([
+        'huXLWTyuXvjNjvbJ8qktf00-DSH6TdAufUI1oYNK_ug',
+        'MfgN-57tlS4bcsivSK54n9B_u2cNiEGSOv1imoV5zGk',
+        'u9jgWWi__K3swfJ0y8AlOPlNaZV5JsTZ16kK13Y9z88'
+      ])
+
+      // if(!callback.code)
+      if(callback) {
+        wx.redirectTo({
+          url: '/userPackage/order/index',
+        }) 
+      }
     } 
     
   },
@@ -235,8 +260,6 @@ Page({
     //console.log(value)
     this.setData({
       evaluate_time: e.detail.value
-    },() => {
-      console.log(data.evaluate_time)
     })
   },
 

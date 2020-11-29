@@ -41,7 +41,7 @@
 
 .address-list .info {
   flex: 1;
-  padding-left: 30rpx;
+  padding:0 50rpx 0 30rpx;
   font-size: 28rpx;
 }
 

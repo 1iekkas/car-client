@@ -1,8 +1,5 @@
 /* userPackage/carList/index.wxss */
 @import "index.skeleton.wxss";
-.hidden {
-  display: none;
-}
 
 .brand-icon{
   margin-right: 26rpx;

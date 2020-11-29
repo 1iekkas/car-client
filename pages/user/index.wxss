@@ -80,6 +80,10 @@ page {
   justify-content: center;
 }
 
+.tabs-list .tabs-item {
+  width: 46rpx;
+}
+
 .tabs-list .tabs-item image, .tabs-all image {
   margin-bottom: 12rpx;
 }

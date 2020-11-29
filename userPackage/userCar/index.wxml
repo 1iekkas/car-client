@@ -1,10 +1,10 @@
 <!--userPackage/user/index.wxml-->
-<view class="container">
+<view class="container" catchtouchmove="{{true}}">
   <scroll-view scroll-y="true" style="height: 100vh" bindscrolltoupper="upper"
     bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
     <view class="content" style="min-height: 101vh">
       <block wx:if="{{list.length}}">
-        <view class="car-item" wx:for="{{list}}" wx:key="index">
+        <view class="car-item" wx:for="{{list}}" wx:key="index" bindtap="linkEdit" data-id="{{item.id}}">
           <view class="car-item-body">
             <image src="{{item.img}}" mode="widthFix" style="width: 100rpx;"></image>
             <view class="car-info">
@@ -13,8 +13,8 @@
             </view>
           </view>
           <view class="car-item-action van-hairline--top">
-            <van-button type="primary" block size="mini" wx:if="{{item.focus == 0}}">设为默认</van-button>
-            <van-button type="danger" block size="mini" plain>删除</van-button>
+            <van-button type="primary" block size="mini" wx:if="{{item.focus == 0}}" catchtap="setCar" data-id="{{item.id}}">设为默认</van-button>
+            <van-button type="danger" block size="mini" plain catchtap="delCar" data-id="{{item.id}}">删除</van-button>
           </view>
         </view>
       </block>
@@ -24,3 +24,5 @@
     </view>
   </scroll-view>
 </view>
+
+<van-dialog id="van-dialog" />

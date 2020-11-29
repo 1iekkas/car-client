@@ -43,11 +43,7 @@ const api = {
       url = `${baseUrl}${url}?timestamp=${signature.timestamp}&nonce=${signature.nonce}&signature=${signature.signature}`
     } else {
       url = `${url}`
-    
     } 
-
-
-
     //console.log(signature)
     let res = await new Promise((resolve, reject) => {
       wx.request({
@@ -99,8 +95,6 @@ const api = {
     } else {
       url = `${url}`
     }
-
-    console.log(url)
     // console.log(signature)
     let res = await new Promise((resolve, reject) => {
       const requestTask = wx.request({
@@ -136,7 +130,121 @@ const api = {
       })
     })
     return res
+  },
+
+  /**
+   * @put
+   * url: 请求地址, data: 请求参数, el: 当前页面对象, stop: 未定
+   * 2020-11-03 create by 1iekkas
+   */
+  async put(url, data, isSignature=true, el, stop = true) {
+    const token = wx.getStorageSync('token') || ''
+    if (isSignature) {
+      let str = ''
+      Object.keys(data).map(e => {
+        str += `${e}=${data[e]}&`
+      })
+      // key = value &
+      data.data = str.slice(0, -1)
+      const signature = getStr(data.data)
+      url = `${baseUrl}${url}?timestamp=${signature.timestamp}&nonce=${signature.nonce}&signature=${signature.signature}`
+    } else {
+      url = `${url}`
+    }
+    // console.log(signature)
+    let res = await new Promise((resolve, reject) => {
+      const requestTask = wx.request({
+        url: url,
+        method: 'put',
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Authorization": isSignature ? token : ''
+        },
+        data: data,
+        success(res) {
+          if (res.statusCode !== 200) {
+            wx.showModal({
+              title: '提示',
+              content: (`${res.data.error}`).toString(),
+            })
+          } else {
+            resolve(res)
+          }
+        },
+        fail(err) {
+          console.log(err)
+          if (err.errMsg == 'request:fail abort') {
+            return false
+          } else {
+            wx.showModal({
+              title: 'error',
+              content: err.errMsg,
+            })
+          }
+
+        }
+      })
+    })
+    return res
+  },
+
+  async delete(url, data, isSignature=true, el, stop = true) {
+    console.log(data)
+    const token = wx.getStorageSync('token') || ''
+    if (isSignature) {
+      let str = ''
+      Object.keys(data).map(e => {
+        str += `${e}=${data[e]}&`
+      })
+      // key = value &
+      data.data = str.slice(0, -1)
+      const signature = getStr(data.data)
+      url = `${baseUrl}${url}?timestamp=${signature.timestamp}&nonce=${signature.nonce}&signature=${signature.signature}`
+    } else {
+      url = `${url}`
+    }
+    console.log(url)
+    let res = await new Promise((resolve, reject) => {
+      const requestTask = wx.request({
+        url: url,
+        method: 'DELETE',
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Authorization": isSignature ? token : ''
+        },
+        data: data,
+        success(res) {
+          
+          if (res.statusCode !== 200) {
+            wx.showModal({
+              title: '提示',
+              content: (`${res.data.error}`).toString(),
+            })
+          } else {
+            resolve(res)
+          }
+        },
+        fail(err) {
+          console.log(err)
+          if (err.errMsg == 'request:fail abort') {
+            return false
+          } else {
+            wx.showModal({
+              title: 'error',
+              content: err.errMsg,
+            })
+          }
+
+        },
+
+        complete: c => {
+          console.log(c)
+        }
+      })
+    })
+    return res
   }
+
 }
 
 module.exports.$api = api

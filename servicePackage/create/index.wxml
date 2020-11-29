@@ -32,7 +32,7 @@
   <view class="form">
     <view class="form-title">请输入你的需求</view>
     <van-cell-group>
-      <van-field value="{{ content }}" type="textarea" data-type="content" bind:change="onChange" placeholder="..."
+      <van-field value="{{ content }}" type="textarea" data-type="content" bind:change="onChange" placeholder="详细的需求描述有助于报价"
         autosize="{{ autosize }}" border="{{ false }}" />
     </van-cell-group>
     <!--上传组件-->
@@ -43,11 +43,11 @@
     </view>
     <!---->
     <van-cell-group>
-      <van-field custom-class="padding" required label="联系电话" data-type="phone" value="{{ phone }}" input-align="right"
-        placeholder="" bind:change="onChange" />
-      <van-field custom-style="color: #000" custom-class="padding" require label="预计费用" data-type="evaluate_fee" bind:change="onChange"
-        value="{{ evaluate_fee }}" input-align="right" placeholder="" />
-      <van-cell custom-class="padding" require title="预约到店时间" input-align="right" placeholder="">
+      <van-field custom-class="padding" required label="联系电话" type="number" data-type="phone" value="{{ phone }}" input-align="right"
+        placeholder="请填写联系电话" bind:change="onChange" />
+      <van-field custom-style="color: #000" custom-class="padding" require label="预计费用" data-type="evaluate_fee"
+        bind:change="onChange" value="{{ evaluate_fee }}" input-align="right" placeholder="" />
+      <van-cell custom-class="padding" require title="预约时间" input-align="right" placeholder="">
         <picker-date bindset="set"></picker-date>
       </van-cell>
       <van-cell title="需上门服务" custom-class="padding" class="loc-cell">
@@ -61,13 +61,14 @@
       </block>
     </van-cell-group>
     <block wx:if="{{ isLocation }}">
-      <van-cell class="location" url="/servicePackage/position/index" title-width="136rpx" custom-class="padding" value="{{location ? location.address : '未获取位置'}}" title="选择位置:" is-link></van-cell>
+      <van-cell class="location" url="/servicePackage/position/index" title-width="136rpx" custom-class="padding"
+        value="{{location ? location.formatted_addresses.recommend : '未获取位置'}}" title="选择位置:" is-link></van-cell>
       <van-radio-group class="location" border="{{ false }}" value="{{ doorType }}" bind:change="onChange">
         <van-cell-group>
-          <van-cell title="上门服务" clickable data-name="1" bind:click="onClick">
+          <van-cell title="上门救援" clickable data-name="1" bind:click="onClick">
             <van-radio slot="right-icon" name="1" />
           </van-cell>
-          <van-cell title="上门取车" clickable data-name="2" bind:click="onClick">
+          <van-cell title="接车送车" clickable data-name="2" bind:click="onClick">
             <van-radio slot="right-icon" name="2" />
           </van-cell>
         </van-cell-group>
@@ -76,7 +77,7 @@
   </view>
   <!---->
   <view class="submit-button">
-    <van-button type="primary" block round bind:click="onSubmit">提 交</van-button>
+    <van-button type="primary" block round bindtap="onSubmit">提 交</van-button>
   </view>
   <view class="servies">
     在线客服

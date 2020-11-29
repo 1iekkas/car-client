@@ -64,7 +64,7 @@ module.exports = {
         type: 'gcj02',
         altitude: true,
         success: result => {
-          console.log(result)
+          console.log(`系统定位信息：${JSON.stringify(result)}`)
           // 地址逆解析
           map.reverseGeocoder({
             location: {
@@ -125,7 +125,7 @@ module.exports = {
     }
   },
 
-  //  
+  // 坐标地址解析 @params { lat, lng }
   async reverseGeocoder(params={}) {
     let object = {
       ...params
@@ -148,6 +148,7 @@ module.exports = {
     }
   },
 
+  // 计算距离
   async setCalculateDistance(params) {
     let object = {
       ...params
@@ -180,5 +181,40 @@ module.exports = {
    */
   searchLocation(params={}) {
     map.search()
+  },
+
+  /**
+   * 发起微信支付
+   */
+  requestPayment(data) {
+    return new Promise(resolve => {
+      wx.requestPayment({
+        ...data,
+        complete: res => {
+          if(res.errMsg == 'requestPayment:fail cancel') {
+            resolve({code: 1, message: 'requestPayment:fail cancel' })
+          }else {
+            resolve({code: 0, message: '支付成功'})
+          }
+        }
+      })
+    })
+  },
+
+  // 订阅消息
+  requestSubscribeMessage(tmplIds = []) {
+   return new Promise(resolve => {
+    wx.requestSubscribeMessage({
+      tmplIds: tmplIds,
+      complete: res => {
+        if(res.errMsg == "requestSubscribeMessage:ok") {
+          resolve({code: 0, message: '订阅成功' })
+        }else {
+          resolve({code: 1, message: '订阅失败'})
+        }
+      }
+    })
+   })
   }
+ 
 }

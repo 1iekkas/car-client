@@ -23,13 +23,20 @@ App({
 
     // 检查token是否存在
     checkToken().then(result => {
-      //console.log(result)
+      console.log(`token检测：${result}`)
       if (result) {
+        // 刷新token
+        let refresh_token = wx.getStorageSync('refresh_token')
+        // console.log(refresh_token)
+        $api.get(`/u/user/token/${refresh_token}`).then(res => {
+          wx.setStorageSync('token', res.data)
+        })
+
         this.globalData.isLogin = true
         // 获取用户信息
         wx.getSetting({
           success: res => {
-            console.log(res)
+            // console.log(res)
             if (res.authSetting['scope.userInfo']) {
               // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
               wx.getUserInfo({

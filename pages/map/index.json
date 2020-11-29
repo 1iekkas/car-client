@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    
+    "campaign": "../../components/index-campaign/index"
   },
   "navigationStyle": "custom"
 }

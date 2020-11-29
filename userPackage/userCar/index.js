@@ -1,5 +1,6 @@
 // userPackage/user/index.js
-import { getCarList } from '../../api/user'
+import { getCarList, deleteCar, setDefaultCar } from '../../api/user'
+import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 const app = getApp()
 let data 
 Page({
@@ -20,6 +21,8 @@ Page({
     this.setData({
       isLogin: app.globalData.isLogin
     })
+
+    console.log(app.$api)
   },
 
   /**
@@ -97,6 +100,52 @@ Page({
     
     wx.navigateTo({
       url: '/userPackage/carList/index'
+    })
+  },
+
+  delCar(e) {
+    const { id } = e.currentTarget.dataset;
+    Dialog.confirm({
+      title: '删除车辆',
+      message: '是否确认删除该车辆',
+      cancelButtonText: '取消'
+    })
+    .then(async () => {
+      // on confirm
+      let res = await deleteCar({id: id}) 
+
+      if (!res.code) {
+        wx.showToast({
+          title: '已删除车辆',
+        })
+        this.getCarList()
+      }
+
+    })
+    .catch(() => {
+      // on cancel
+    }); 
+  },
+
+  // 设为默认
+  async setCar(e) {
+    const { id } = e.currentTarget.dataset;
+    let res = await setDefaultCar({id: id})
+    
+    if(!res.code) {
+      wx.showToast({
+        title: '已设为默认',
+      })
+      this.getCarList()
+    }
+
+  }, 
+
+  // 
+  linkEdit(e) {
+    const id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: `/userPackage/carInfo/index?id=${id}`,
     })
   }
 })

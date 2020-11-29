@@ -10,7 +10,7 @@
       "pages": [
         "userCar/index",
         "carList/index",
-        "carInfoList/index",
+        "carInfo/index",
         "order/index",
         "login/index",
         "mapSearch/index",
@@ -24,7 +24,8 @@
         "create/index",
         "orderInfo/index",
         "searchOrder/index",
-        "position/index"
+        "position/index",
+        "cancel/index"
       ]
     }
   ],
@@ -57,7 +58,13 @@
     "van-tab": "@vant/weapp/tab/index",
     "van-tabs": "@vant/weapp/tabs/index",
     "van-empty": "@vant/weapp/empty/index",
-    "van-sticky": "@vant/weapp/sticky/index"
+    "van-sticky": "@vant/weapp/sticky/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-submit-bar": "@vant/weapp/submit-bar/index",
+    "van-loading": "@vant/weapp/loading/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-steps": "@vant/weapp/steps/index"
   },
   "sitemapLocation": "sitemap.json"
 }

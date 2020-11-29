@@ -1,9 +1,9 @@
 <!--servicePackage/position/index.wxml-->
 <view class="container">
   <van-sticky offset-top="0">
-    <block wx:if="{{address}}">
-      <map id="map" longitude="{{address.location.lng}}" setting="{{mapSetting}}" control="{{false}}"
-        markers="{{markers}}" latitude="{{address.location.lat}}" style="width: 100vw;height: 50vh;"
+    <block wx:if="{{location}}">
+      <map id="map" longitude="{{location.location.lng}}" setting="{{mapSetting}}" control="{{false}}"
+        markers="{{markers}}" latitude="{{location.location.lat}}" style="width: 100vw;height: 50vh;"
         bindregionchange="regionchange">
         <image class="location-marker" src="../../static/img/marker.png"></image>
       </map>
@@ -12,7 +12,7 @@
   </van-sticky>
   <!---->
   <view class="content">
-    <van-search catchtouchmove="{{true}}" value="{{ address.address }}" placeholder="请输入地点" use-left-icon-slot
+    <van-search catchtouchmove="{{true}}" value="{{ location.formatted_addresses.recommend }}" placeholder="请输入地点" use-left-icon-slot
       use-action-slot bind:change="onChange" bind:search="onSearch">
     </van-search>
     <block>
@@ -27,7 +27,7 @@
                 <view class="title">{{ item.title }}</view>
                 <view class="address">{{ item.address }}</view>
               </view>
-              <block wx:if="{{ address.id == item.id }}">
+              <block wx:if="{{ location.id == item.id }}">
                 <van-icon class="active-icon" name="success" />
               </block>
             </view>

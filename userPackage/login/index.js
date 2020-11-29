@@ -1,5 +1,7 @@
 // userPackage/login/index.js
+import { getPhone } from '../../api/user'
 const app = getApp()
+let data
 import {
   login
 } from '../../api/wxServer.js'
@@ -79,12 +81,13 @@ Page({
    * 获取用户信息
    */
   async getUserInfo(e) {
-    console.log(e)
+
     if (e.detail.errMsg == 'getUserInfo:ok') {
       let res = await login()
       if (res.code && res.code == 200) {
         this.getUserToken(res.value, e.detail)
-      } 
+        // app.globalData.userInfo =e.detail.userInfo
+      }
       // do something
     }
   },
@@ -104,18 +107,26 @@ Page({
     let res = await app.$api.post(`/u/login/${code}`, body)
     // console.log(res)
     wx.setStorageSync('token', res.data.token)
-      app.globalData.userInfo = userInfo.userInfo
-      app.globalData.isLogin = true
-      wx.navigateBack({
-        delta: 1
-      })
-    /* if (res.code == 200) {
-      wx.setStorageSync('token', 'token')
-      app.globalData.userInfo = e.detail.userInfo
-      app.globalData.isLogin = true
-      wx.navigateBack({
-        delta: 1
-      })
-    } */
+    wx.setStorageSync('refresh_token', res.data.refresh_token)
+    app.globalData.userInfo = userInfo.userInfo
+    app.globalData.isLogin = true
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+
+  // 获取手机号
+  async getphonenumber(e) {
+    console.log(e)
+    if(e.detail && e.detail.errMsg == "getPhoneNumber:ok") {
+      let data = e.detail
+      delete data.errMsg
+      let res = await getPhone(data)
+      console.log(res)
+    }
+  },
+
+  getSms() {
+    console.log(123)
   }
 })

@@ -1,6 +1,7 @@
 // pages/user/index.js
 const app = getApp()
 import { login } from '../../api/wxServer'
+import { getCarList } from '../../api/user'
 Page({
 
   /**
@@ -10,6 +11,7 @@ Page({
     isLogin: false,
     userInfo: null,
     hasUserInfo: false,
+    carCount: 0,
     tabs: ['已发布', '待维修', '待验收', '已完成', '已取消']
   },
 
@@ -52,7 +54,17 @@ Page({
         isLogin: true,
         userInfo: app.globalData.userInfo
       })
+
+      getCarList().then(res => {
+        this.setData({
+          carCount: res.data.length
+        })
+      })
+
     }
+
+    
+
   },
 
   /**

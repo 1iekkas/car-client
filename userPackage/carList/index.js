@@ -191,7 +191,7 @@ Page({
   // 确认选择
   onConfirmSelect() {
     wx.navigateTo({
-      url: `/userPackage/carInfoList/index?series=${JSON.stringify(this.data.activeSeries)}`
+      url: `/userPackage/carInfo/index?series=${JSON.stringify(this.data.activeSeries)}`
     })
   }
   

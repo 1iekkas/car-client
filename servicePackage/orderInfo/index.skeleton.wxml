@@ -1,0 +1,121 @@
+<!--
+此文件为开发者工具生成，生成时间: 2020/11/26 下午4:24:06 
+使用方法：
+在 D:\mini\car-client\servicePackage\orderInfo\index.wxml 引入模板
+
+```
+<import src="index.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{loading}}" />
+```
+
+在 D:\mini\car-client\servicePackage\orderInfo\index.wxss 中引入样式
+```
+@import "./index.skeleton.wxss";
+```
+
+更多详细信息可以参考文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html
+-->
+<template name="skeleton">
+  <view class="sk-container">
+    <view class="sk-container sk-transparent">
+      <view class="sk-container">
+        <view class="container">
+          <view class="info van-hairline--bottom sk-pseudo sk-pseudo-circle">
+            <view class="info-tips">
+              <view class="icon sk-transparent">
+                <view>
+                  <view class="van-icon weapp-icon-index--van-icon van-icon-passed weapp-icon-index--van-icon-passed sk-pseudo sk-pseudo-circle" style="color: #07c160;font-size: 26px;"></view>
+                </view>订单已发布
+              </view>
+              <view class="text sk-transparent sk-text-14-2857-718 sk-text sk-image sk-text-14-2857-762" style="background-position-x: 50%;">请耐心等待商家报价</view>
+              <view class="time sk-transparent">剩余时间
+                <view class="count-down">
+                  <view class="van-count-down down-index--van-count-down sk-transparent sk-text-15-0000-802 sk-text sk-image sk-text-15-0000-873" style="background-position-x: 50%;">29:58:21</view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="line"></view>
+          <view class="form">
+            <view>
+              <view class="van-cell-group cell-group-index--van-cell-group van-hairline--top-bottom cell-group-index--van-hairline--top-bottom">
+                <view>
+                  <view class="van-cell cell-index--van-cell sk-pseudo sk-pseudo-circle" hover-class="van-cell--hover hover-class" hover-stay-time="70" style="true">
+                    <view class="van-cell__title cell-index--van-cell__title sk-transparent sk-text-20-8333-754 sk-text sk-image sk-text-20-8333-761" style="max-width:75px;min-width:75px;">需求描述</view>
+                    <view class="van-cell__value cell-index--van-cell__value sk-transparent sk-text-20-8333-120 sk-text sk-image sk-text-20-8333-306">是否显示会话内消息卡片，设置此参数为 true，用户进入客服会话会在右下角显示"可能要发送的小程序"提示，用户点击后可以快速发送小程序消息，open-type="contact"时有效</view>
+                  </view>
+                </view>
+                <view>
+                  <view class="van-cell cell-index--van-cell sk-pseudo sk-pseudo-circle" hover-class="van-cell--hover hover-class" hover-stay-time="70" style="true">
+                    <view class="van-cell__title cell-index--van-cell__title sk-transparent sk-text-20-8333-417 sk-text sk-image sk-text-20-8333-789" style="true">预算费用</view>
+                    <view class="van-cell__value cell-index--van-cell__value">
+                      <view class="price sk-transparent sk-text-20-8333-405 sk-text sk-image sk-text-20-8333-66" style="background-position-x: 100%;">
+                        ￥500.00
+                      </view>
+                    </view>
+                  </view>
+                </view>
+                <view>
+                  <view class="van-cell cell-index--van-cell sk-pseudo sk-pseudo-circle" hover-class="van-cell--hover hover-class" hover-stay-time="70" style="true">
+                    <view class="van-cell__title cell-index--van-cell__title sk-transparent sk-text-20-8333-547 sk-text sk-image sk-text-20-8333-600" style="true">预约电话</view>
+                    <view class="van-cell__value cell-index--van-cell__value sk-transparent sk-text-20-8333-587 sk-text sk-image sk-text-20-8333-748" style="background-position-x: 100%;">15627795345</view>
+                  </view>
+                </view>
+                <view>
+                  <view class="van-cell cell-index--van-cell sk-pseudo sk-pseudo-circle" hover-class="van-cell--hover hover-class" hover-stay-time="70" style="true">
+                    <view class="van-cell__title cell-index--van-cell__title sk-transparent sk-text-20-8333-170 sk-text sk-image sk-text-20-8333-550" style="true">预计到店时间</view>
+                    <view class="van-cell__value cell-index--van-cell__value sk-transparent sk-text-20-8333-139 sk-text sk-image sk-text-20-8333-989" style="background-position-x: 100%;">2020-11-26</view>
+                  </view>
+                </view>
+                <view>
+                  <view class="van-cell cell-index--van-cell sk-pseudo sk-pseudo-circle" hover-class="van-cell--hover hover-class" hover-stay-time="70" style="true">
+                    <view class="van-cell__title cell-index--van-cell__title sk-transparent sk-text-20-8333-667 sk-text sk-image sk-text-20-8333-350" style="true">是否需要上门服务</view>
+                    <view class="van-cell__value cell-index--van-cell__value sk-transparent sk-text-20-8333-617 sk-text sk-image sk-text-20-8333-618" style="background-position-x: 100%;">是</view>
+                  </view>
+                </view>
+                <view>
+                  <view class="van-cell cell-index--van-cell sk-pseudo sk-pseudo-circle" hover-class="van-cell--hover hover-class" hover-stay-time="70" style="true">
+                    <view class="van-cell__title cell-index--van-cell__title sk-transparent sk-text-20-8333-754 sk-text sk-image sk-text-20-8333-833" style="true">上门类型</view>
+                    <view class="van-cell__value cell-index--van-cell__value sk-transparent sk-text-20-8333-653 sk-text sk-image sk-text-20-8333-986" style="background-position-x: 100%;">上门取车</view>
+                  </view>
+                </view>
+                <view>
+                  <view class="van-cell cell-index--van-cell sk-pseudo sk-pseudo-circle" hover-class="van-cell--hover hover-class" hover-stay-time="70" style="true">
+                    <view class="van-cell__title cell-index--van-cell__title sk-transparent sk-text-20-8333-620 sk-text sk-image sk-text-20-8333-10" style="max-width:60px;min-width:60px;">上门位置</view>
+                    <view class="van-cell__value cell-index--van-cell__value sk-transparent sk-text-20-8333-3 sk-text sk-image sk-text-20-8333-769" style="background-position-x: 100%;">广东省佛山市禅城区岭南大道北</view>
+                  </view>
+                </view>
+                <view>
+                  <view class="van-cell cell-index--van-cell sk-pseudo sk-pseudo-circle" hover-class="van-cell--hover hover-class" hover-stay-time="70" style="true">
+                    <view class="van-cell__value cell-index--van-cell__value">
+                      <view class="images-group">
+                        <view data-url="https://car.coasewash.com/topic/20201126/baab4f66bbca9d5018bdc863564a2ac4.png">
+                          <view class="van-image image-index--van-image" style="width: 22vw;height: 22vw;">
+                            <image class="van-image__img image-index--van-image__img sk-image" mode="scaleToFill"></image>
+                          </view>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view id="van-dialog">
+        <view>
+          <view>
+            <view></view>
+          </view>
+        </view>
+      </view>view.info-tips345 x 102</view>
+    <view is="miniprogram_npm/@vant/weapp/dialog/index" id="van-dialog">
+      <view is="miniprogram_npm/@vant/weapp/popup/index">
+        <view is="miniprogram_npm/@vant/weapp/overlay/index">
+          <view is="miniprogram_npm/@vant/weapp/transition/index"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

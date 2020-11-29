@@ -1,5 +1,6 @@
 // servicePackage/position/index.js
 import { getSuggestion } from '../../api/wxServer'
+import { reverseGeocoder } from '../../api/wxServer'
 const app = getApp()
 let data 
 Page({
@@ -16,6 +17,7 @@ Page({
       circles: [],
       address: null
     },
+    location: null
   },
 
   /**
@@ -37,12 +39,15 @@ Page({
    */
   onShow: function () {
     console.log(app.globalData.location)
+    let location = wx.getStorageSync('location') || null
+
     this.setData({
-      address: {
-        address: app.globalData.location.address,
-        location: app.globalData.location.location
-      }
+      location: location ? location : app.globalData.location
+    },() => {
+      console.log(this.data.location)
     })
+
+    
   },
 
   /**
@@ -80,19 +85,44 @@ Page({
 
   },
 
+  // 视野变更
+  async regionchange(e) { 
+    if(e.type == "begin" || e.causedBy != 'drag') return false
+    const location = e.detail.centerLocation
+    let res = await reverseGeocoder({
+      location: location
+    }) 
+
+    if (!res.status) {
+      this.setData({
+        location: res.result
+      }, async() => {
+        let result = await getSuggestion({
+          keyword: data.location.formatted_addresses.recommend,
+          region:'佛山' //data.location.address_component.city
+        })
+    
+        if(result.status == 0) {
+          this.setData({
+            addressList: result.data
+          })
+        }
+      })
+
+    }
+  },
+
   /**
    * 输入框键入
    */
   async onChange(e) {
     const keywords = e.detail,
       data = this.data;
-    console.log(e)
     let res = await getSuggestion({
       keyword: keywords,
       region:'佛山' //data.location.address_component.city
     })
 
-    console.log(res)
     if(res.status == 0) {
       this.setData({
         addressList: res.data
@@ -103,23 +133,31 @@ Page({
   onClickAddress(e) {
     let address = e.currentTarget.dataset.item;
     
+     // 深复制
+     let result = JSON.parse(JSON.stringify(data.location))
+     result.formatted_addresses.recommend = address.title
+     result.id = address.id
+     Object.keys(address).map(e => {
+       result[e] = address[e]
+     })
+
     this.setData({
-      address: address
+      location: result
     })
   },
 
+  // 返回
   back() {
     let pages = getCurrentPages();
     let prevPage = pages[pages.length - 2];
-    console.log(prevPage)
+    // console.log(prevPage)
     prevPage.setData({
-      location: data.address,
+      location: data.location,
     }, () => {
-      console.log(prevPage.data)
+      // console.log(prevPage.data)
       wx.navigateBack({
         delta: 1,
       })
     })
-    
   }
 })
