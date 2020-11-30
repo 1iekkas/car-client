@@ -1,5 +1,6 @@
 // userPackage/carList/index.js
 import { getCarBrand } from '../../api/car'
+import { IMG_HOST } from '../../constances/server'
 const app = getApp()
 const api = app.$api
 Page({
@@ -21,7 +22,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.setData({
+      IMG_HOST: IMG_HOST
+    })
   },
 
   /**

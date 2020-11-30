@@ -1,6 +1,7 @@
 // userPackage/user/index.js
 import { getCarList, deleteCar, setDefaultCar } from '../../api/user'
 import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
+import { IMG_HOST } from '../../constances/server'
 const app = getApp()
 let data 
 Page({
@@ -19,10 +20,11 @@ Page({
   onLoad: function (options) {
     data = this.data
     this.setData({
-      isLogin: app.globalData.isLogin
+      isLogin: app.globalData.isLogin,
+      IMG_HOST: IMG_HOST
     })
 
-    console.log(app.$api)
+    // console.log(app.$api)
   },
 
   /**

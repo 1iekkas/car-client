@@ -262,5 +262,11 @@ Page({
       location: app.globalData.location
     })
     wx.setStorageSync('location', null)
+  },
+
+  linkToStore() {
+    wx.navigateTo({
+      url: '/storePackage/storeList/index',
+    })
   }
 })

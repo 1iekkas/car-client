@@ -6,7 +6,7 @@
       <block wx:if="{{list.length}}">
         <view class="car-item" wx:for="{{list}}" wx:key="index" bindtap="linkEdit" data-car="{{item}}">
           <view class="car-item-body">
-            <image src="{{item.img}}" mode="widthFix" style="width: 100rpx;"></image>
+            <image src="{{IMG_HOST + item.img}}" mode="widthFix" style="width: 100rpx;"></image>
             <view class="car-info">
               <view class="car-params">
                 <view class="car-number">{{item.car_num}}</view>

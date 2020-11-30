@@ -20,7 +20,7 @@
 
   <view class="search-section" style="top: calc({{navBarHeight}}px + 30rpx)">
     <van-search bindtap="toSearchOrder" shape="round" disabled placeholder="搜索同类车型历史订单"></van-search>
-    <view class="store-title">店铺列表</view>
+    <view class="store-title" bindtap="linkToStore">店铺列表</view>
   </view>
 
   <block wx:if="{{location}}">

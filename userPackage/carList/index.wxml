@@ -9,8 +9,7 @@
       <van-index-anchor index="{{item.key}}"></van-index-anchor>
       <van-cell custom-class="brand-cell" wx:for="{{item.list}}" wx:for-item="brand" wx:key="index" title="{{brand.name}}" data-item="{{brand}}" bindtap="select">
         <!-- <image wx:if="{{brand.img}}" class="brand-icon" slot="icon" src="{{brand.img}}" mode="widthFix" style="width: 50rpx;"></image> -->
-        <van-image slot="icon" height="50rpx" width="50rpx" class="brand-icon" round use-loading-slot src="{{brand.img}}">
-          <van-loading slot="loading" type="spinner" size="6" vertical />
+        <van-image slot="icon" height="50rpx" width="50rpx" class="brand-icon" round use-loading-slot src="{{ IMG_HOST + brand.img}}">
         </van-image>
       </van-cell>
     </view>
