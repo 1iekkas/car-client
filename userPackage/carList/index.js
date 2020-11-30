@@ -1,5 +1,5 @@
 // userPackage/carList/index.js
-import { getCarBrand, getCarFactory, getCarSeries } from '../../api/car'
+import { getCarBrand } from '../../api/car'
 const app = getApp()
 const api = app.$api
 Page({
@@ -121,22 +121,22 @@ Page({
   // 选中项
   async select(e) {
     const item = e.currentTarget.dataset.item;
-    
+    console.log(item)
     let factory = await this.getFactory(item.id) //厂家
-    // let series = await this.getCarSeries(item.id) // 车系 废弃接口
+    let series = await this.getCarSeries(item.id) // 车系 废弃接口
     
     // 如果没有数据 终止逻辑
     if(!factory) return false
     
     // 处理数据 废弃
-    /* factory.map((el, index) => {
+    factory.map((el, index) => {
       factory[index].list = []
       series.filter(e => {
         if(el.id == e.group_id) {
           factory[index].list.push(e)
         }
       })
-    }) */
+    })
     
     // console.log(factory)
     this.setData({
@@ -164,17 +164,38 @@ Page({
     }
   },
   
-  // 获取车型
-  async getCarSeries(id) {
-    let res = await getCarSeries({
-     id: id
+  // 获取厂家
+  async getFactory(id) {
+    let res = await api.get('https://tool.bitefu.net/car/', {
+      type: 'series_group',
+      from: 0,
+      brand_id: id,
+      pagesize: 50
     }, false)
-    if(res.statusCode == 200) {
-      console.log(res.data)
-      return res.data
+    if(res.statusCode == 200 && res.data.status == 1) {
+      return res.data.info
+    }else {
+      wx.showModal({
+        content: res.data.info
+      })
+      
+      return false
     }
   },
   
+  // 获取车型
+  async getCarSeries(id) {
+    let res = await api.get('https://tool.bitefu.net/car/', {
+      type: 'series',
+      from: 0,
+      brand_id: id,
+      pagesize: 50
+    }, false)
+    if(res.statusCode == 200) {
+      return res.data.info 
+    }
+  },
+
   // 选择车系
   onSelectSeries(e) {
     let series = e.currentTarget.dataset.series;

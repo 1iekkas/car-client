@@ -30,12 +30,13 @@
       <image src="{{activeBrand.img}}" mode="widthFix" style="width: 50rpx;"></image>
       {{activeBrand.name}}
     </view>
-    <scroll-view scroll-y="true" style="height: calc(100vh - 78rpx - 100rpx)">
+    <scroll-view scroll-y="true" style="height: calc(100vh - 78rpx - 100rpx)" bindscrolltoupper="upper"
+      bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
       <view class="content" style="min-height: calc(100vh - 76rpx - 100rpx);">
         <!--车型模块-->
         <view class="car-group" wx:for="{{seriesList}}" wx:key="index">
           <view class="group-name">{{item.name}}</view>
-          <view class="group-item" wx:for="{{item.series}}" wx:for-item="series" wx:key="index" bindtap="onSelectSeries" data-series="{{series}}">
+          <view class="group-item" wx:for="{{item.list}}" wx:for-item="series" wx:key="index" bindtap="onSelectSeries" data-series="{{series}}">
             <image class="logo" src="{{series.img}}"></image>
             {{series.name}}
             <block wx:if="{{ activeSeries.id == series.id }}">
