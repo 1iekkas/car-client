@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/map/index",
-    "pages/index/index",
     "pages/user/index"
   ],
   "subPackages": [
@@ -20,13 +19,19 @@
     {
       "root": "servicePackage",
       "pages": [
-        "store/index",
         "create/index",
         "orderInfo/index",
         "searchOrder/index",
         "position/index",
         "cancel/index",
         "pay/index"
+      ]
+    },
+    {
+      "root": "storePackage",
+      "pages": [
+        "store/index",
+        "storeList/index"
       ]
     }
   ],
@@ -65,7 +70,11 @@
     "van-loading": "@vant/weapp/loading/index",
     "van-overlay": "@vant/weapp/overlay/index",
     "van-popup": "@vant/weapp/popup/index",
-    "van-steps": "@vant/weapp/steps/index"
+    "van-steps": "@vant/weapp/steps/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+    "van-tag": "@vant/weapp/tag/index"
+
   },
   "sitemapLocation": "sitemap.json"
 }

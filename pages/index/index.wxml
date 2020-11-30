@@ -1,8 +1,0 @@
-<!--pages/index/index.wxml-->
-<text>pages/index/index.wxml</text>
-
-<navigator url="../map/index">地图</navigator>
-
-<navigator url="../user/index">个人中心</navigator>
-
-

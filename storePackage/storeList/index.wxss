@@ -1,0 +1,90 @@
+/* servicePackage/storeList/index.wxss */
+page {
+  background-color: #f7f7f7;
+}
+
+.slot {
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+}
+
+van-icon.slot {
+  margin: 4rpx 16rpx 0 10rpx;
+}
+
+.store-filter {
+  font-size: 28rpx;
+  width: 100vw;
+  padding: 20rpx 30rpx;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.store-filter .refresh {
+  position: absolute;
+  right: 30rpx;
+  top: 24rpx;
+}
+
+.store-filter .filter-item+.filter-item {
+  color: #232323;
+  padding-left: 48rpx;
+}
+
+.store-filter .filter-item.active {
+  color: #ee0a24;
+}
+
+.store-item {
+  padding: 20rpx;
+  background-color: white;
+  margin-top: 30rpx;
+}
+
+.store-body {
+  margin-bottom: 20rpx;
+  display: flex;
+}
+
+.store-content {
+  flex: 1;
+  font-size: 28rpx;
+  padding-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.store-content view + view {
+  padding-top: 20rpx;
+}
+
+.store-content .pay {
+  flex: 1;
+  color: #646566;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: var(--red);
+}
+
+.store-address {
+  padding-top: 20rpx;
+  color: #bdbdbd;
+  font-size: 24rpx;
+  display: flex;
+  align-items: center;
+}
+
+.store-address .location {
+  flex: 1;
+  padding-right: 20rpx;
+}
