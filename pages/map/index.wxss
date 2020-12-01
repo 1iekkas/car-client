@@ -35,8 +35,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60rpx;
-  height: 60rpx;
+  width: 52rpx;
+  height: auto;
 }
 
 #map .location-button {

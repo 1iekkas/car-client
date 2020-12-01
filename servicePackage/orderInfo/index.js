@@ -7,7 +7,8 @@ import {
 } from '../../api/order'
 import {
   reverseGeocoder,
-  setCalculateDistance
+  setCalculateDistance,
+  openMap
 } from '../../api/wxServer'
 import {
   IMG_HOST
@@ -276,6 +277,13 @@ Page({
       })
       this.getData(data.info.id)
     }
+  },
+
+  async openMap(e) {
+    const { lat, lng } = e.currentTarget.dataset;
+    // console.log(lat, lng)
+    let res = await openMap({latitude: lat, longitude: lng})
+    console.log(res)
   }
 
 })

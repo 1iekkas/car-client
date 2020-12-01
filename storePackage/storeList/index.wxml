@@ -3,7 +3,7 @@
   <van-sticky offset-top="0" catchtouchmove="{{true}}">
     <van-search catchtouchmove="{{true}}" value="{{ value }}" placeholder="请输入店铺名称" use-left-icon-slot use-action-slot
       bind:change="onChange" bind:search="onSearch">
-      <view slot="label" class="slot">{{location.address_component.city}}</view>
+      <view slot="label" class="slot" bindtap="linkToCitySearch">{{location.address_component.city}}</view>
       <van-icon slot="left-icon" class="slot" name="arrow-down" />
     </van-search>
     <view class="store-filter van-hairline--bottom">
@@ -15,19 +15,24 @@
   <!--scroll-->
   <scroll-view scroll-y refresher-enabled refresher-triggered="{{triggered}}" bindrefresherpulling="onPulling"
     bindrefresherrefresh="onRefresh" bindrefresherrestore="onRestore" bindrefresherabort="onAbort"
-    style="height: calc(100vh - 54px - 39rpx)" bindscrolltolower="lower">
-    <view class="content" style="min-height: calc(100vh - 53px - 39rpx)">
+    style="height: calc(100vh - 54px - 78rpx)" bindscrolltolower="lower">
+    <view class="content" style="min-height: calc(100vh - 53px - 78rpx)">
       <!--无数据-->
-      <block></block>
+      <block wx:if="{{!list.length && !loading && !triggered}}">
+        <van-empty image="search" description="没有相关订单" />
+      </block>
       <!--存在数据-->
-      <block>
+      <block wx:else>
         <view class="group">
           <view class="store-item" wx:for="{{list}}" wx:key="index">
             <view class="store-body">
               <van-image width="100" height="100" src="{{item.facade_images[0]}}"></van-image>
               <view class="store-content">
                 <view class="name">{{item.name}}</view>
-                <view>
+                <view class="rate">
+                  评分: {{ index % 2 ? '4.5' : '暂无评分'}}
+                </view>
+                <view class="tags">
                   <van-tag type="danger" plain>{{item.type_text}}</van-tag>
                 </view>
               </view>

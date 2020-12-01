@@ -39,9 +39,16 @@ van-icon.slot {
   color: #ee0a24;
 }
 
+.group {
+  padding: 30rpx 0;
+}
+
 .store-item {
   padding: 20rpx;
   background-color: white;
+}
+
+.store-item + .store-item {
   margin-top: 30rpx;
 }
 
@@ -87,4 +94,13 @@ van-icon.slot {
 .store-address .location {
   flex: 1;
   padding-right: 20rpx;
+}
+
+.store-item .rate {
+  font-size: 24rpx;
+  color: var(--fontColor);
+}
+
+.store-item .tags {
+  font-size: 24rpx;
 }

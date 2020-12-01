@@ -93,7 +93,7 @@ module.exports = {
   },
 
   /**
-   * 
+   * 地址关键词输入提示
    * @param Object {
    *  keyword: 关键词,
    *  region: 城市名， 例:佛山市,
@@ -125,7 +125,7 @@ module.exports = {
     }
   },
 
-  // 坐标地址解析 @params { lat, lng }
+  // 坐标解析地址 @params { lat, lng }
   async reverseGeocoder(params={}) {
     let object = {
       ...params
@@ -134,6 +134,29 @@ module.exports = {
       let res = await new Promise((resolve, reject) => {
         map.reverseGeocoder({
           ...object,
+          complete: result => {
+            resolve(result)
+          }
+        })
+      })
+
+      return res
+    }catch(error){
+      wx.showModal({
+        content: error
+      })
+    }
+  },
+
+  /**
+   * 地址解析坐标
+   * @param {*} params 
+   */
+  async getGeocoder(params) {
+    try {
+      let res = await new Promise((resolve, reject) => {
+        map.geocoder({
+          ...params,
           complete: result => {
             resolve(result)
           }
@@ -201,7 +224,40 @@ module.exports = {
     })
   },
 
-  // 订阅消息
+  // 打开地图
+  openMap(location) {
+    return new Promise(resolve => {
+      wx.openLocation({
+        ...location,
+        scale: 16,
+        complete: res => {
+          resolve(res)
+        }
+      })
+    })
+  },
+
+  // 模拟获取周围店铺
+  async searchStore(params) {
+    try {
+      let res = await new Promise((resolve, reject) => {
+        map.search({
+          ...params,
+          complete: result => {
+            resolve(result)
+          }
+        })
+      })
+
+      return res
+    }catch(error){
+      wx.showModal({
+        content: error
+      })
+    }
+  },
+
+  // 订阅消息 废弃
   requestSubscribeMessage(tmplIds = []) {
    return new Promise(resolve => {
     wx.requestSubscribeMessage({

@@ -133,7 +133,7 @@
 
               </view>
             </view>
-            <view class="store-address van-hairline--top">
+            <view class="store-address van-hairline--top" catchtap="openMap" data-lat="{{item.lat}}" data-lng="{{item.lnt}}">
               <view class="location">{{item.detail}}</view>
               <view class="range" wx:if="{{item.distance}}">{{item.distance}}km</view>
             </view>
@@ -160,7 +160,7 @@
                 <view class="price">价格:￥{{item.fee}}</view>
               </view>
             </view>
-            <view class="store-address van-hairline--top">
+            <view class="store-address van-hairline--top" catchtap="openMap" data-lat="{{item.lat}}" data-lng="{{item.lnt}}">
               <view class="location">{{item.detail}}</view>
               <view class="range" wx:if="{{item.distance}}">{{item.distance}}km</view>
             </view>

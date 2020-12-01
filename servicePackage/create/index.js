@@ -3,6 +3,7 @@ const md5 = require('../../utils/md5.js')
 import { getCarList } from '../../api/user'
 import { validatePhone } from '../../utils/validator'
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
+import { IMG_HOST } from '../../constances/server'
 import { requestSubscribeMessage } from '../../api/wxServer';
 let data
 const app = getApp()
@@ -37,6 +38,10 @@ Page({
         location: location
       })
     }
+
+    this.setData({
+      IMG_HOST: IMG_HOST
+    })
   },
 
   /**
@@ -279,6 +284,12 @@ Page({
 
     this.setData({
       doorType: name
+    })
+  },
+
+  linkToCar() {
+    wx.navigateTo({
+      url: '/userPackage/userCar/index',
     })
   }
 

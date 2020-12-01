@@ -5,7 +5,7 @@
     <block wx:if="{{car}}">
       <view class="car-item">
         <view class="car-item-body">
-          <image src="{{'http:' + car.img}}" mode="widthFix" style="width: 100rpx;"></image>
+          <image src="{{IMG_HOST + car.img}}" mode="widthFix" style="width: 100rpx;"></image>
           <view class="car-info">
             <view class="car-params">
               <view class="car-number">{{car.car_num}}</view>
@@ -13,7 +13,7 @@
             </view>
           </view>
         </view>
-        <view class="car-item-action">
+        <view class="car-item-action" bindtap="linkToCar">
           切换
           <van-icon name="replay" size="28rpx" />
         </view>
@@ -31,7 +31,7 @@
   <view class="form">
     <view class="form-title">请输入你的需求</view>
     <van-cell-group>
-      <van-field value="{{ content }}" type="textarea" data-type="content" bind:change="onChange" placeholder="详细的需求描述有助于报价"
+      <van-field value="{{ content }}" type="textarea" data-type="content" bind:change="onChange" placeholder="详细的需求描述有助于获得更精准的报价"
         autosize="{{ autosize }}" border="{{ false }}" />
     </van-cell-group>
     <!--上传组件-->

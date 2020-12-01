@@ -29,7 +29,7 @@
       
       style="width: 100vw;height: calc(100vh - {{navBarHeight}}px - 170rpx);margin-top: {{navBarHeight}}px;"
       bindregionchange="regionchange">
-      <image class="location-marker" src="../../static/img/marker.png"></image>
+      <image class="location-marker" src="../../static/img/marker.png" mode="widthFix"></image>
       <view class="location-button" catchtap="toCreate" data-type="custom">{{location.formatted_addresses.recommend}}</view>
     </map>
   </block>
