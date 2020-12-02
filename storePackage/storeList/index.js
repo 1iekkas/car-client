@@ -155,7 +155,13 @@ Page({
   // 跳转切换城市
   linkToCitySearch() {
     wx.navigateTo({
-      url: '/userPackage/citySearch/index?from=map',
+      url: '/userPackage/citySearch/index',
+    })
+  },
+
+  linkToStore() {
+    wx.navigateTo({
+      url: '/storePackage/store/index',
     })
   }
 })

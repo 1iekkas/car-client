@@ -194,9 +194,6 @@ Page({
 
   // 提交
   async onSubmit() {
-    
-
-
     validatePhone(data.phone)
     //validateContent(data.content)
     if(data.content == '') {

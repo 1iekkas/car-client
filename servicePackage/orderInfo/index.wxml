@@ -194,6 +194,11 @@
             -￥0.00
           </view>
         </van-cell>
+        <van-cell title="支付方式">
+          <view class="price">
+            线下支付
+          </view>
+        </van-cell>
         <van-cell>
           <view class="content">
             <text>实付款</text>
@@ -201,6 +206,7 @@
             <text>{{info.offer[0].fee}}</text>
           </view>
         </van-cell>
+        
       </van-cell-group>
     </view>
   </block>

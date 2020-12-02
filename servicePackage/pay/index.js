@@ -38,7 +38,22 @@ Page({
         text: '退款成功',
       }
     ],
-    activeStep: 3
+    activeStep: 3,
+    showPayment: false,
+    payment: {
+      id: 2,
+      name: '微信支付'
+    },
+    paymentActions: [{
+      id: 1,
+      name: '线下支付'
+    },{
+      id: 2,
+      name: '微信支付'
+    }],
+    showCoupon: false,
+    couponList: [],
+    couponItem: ''
   },
 
   /**
@@ -120,7 +135,7 @@ Page({
         info: res.data,
         loading: false
       }, () => {
-        this.getOfferList()
+        //this.getOfferList()
       })
     }
   },
@@ -169,5 +184,41 @@ Page({
         })
       }
     }
+  },
+
+  showActions() {
+    this.setData({
+      showPayment: !data.showPayment
+    })
+  },
+
+  onSelectActions(e) {
+    const item = e.detail;
+    this.setData({
+      payment: item
+    })
+  },
+
+  // 优惠券
+  onSelectCoupon(e) {
+    const { name } = e.currentTarget.dataset;
+    this.setData({
+      couponItem: name,
+      showCoupon: false,
+      selectedCoupon: null
+    })
+  },
+
+  onShowCoupon() {
+    this.setData({
+      showCoupon: !data.showCoupon
+    })
+  },
+
+  onCancelCoupon() {
+    this.setData({
+      couponItem: '',
+      showCoupon: false
+    })
   }
 })

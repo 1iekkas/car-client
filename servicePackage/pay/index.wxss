@@ -219,23 +219,66 @@ van-goods-action-button button {
 .popup-head {
   display: flex;
   align-items: center;
-  padding: 30rpx 20rpx 20rpx 20rpx;
+  padding: 30rpx 20rpx 40rpx 20rpx;
+  justify-content: center;
+  box-shadow:0 -2rpx 10rpx 2rpx rgba(0, 0, 0, 0.2);
 }
 
-.popup-head .popup-title {
-  flex: 1;
-  text-align: center;
-}
-
-.popup-head .popup-text {
-  color: var(--red);
-}
-
-.popup-head .popup-text.cancel {
-  color: #999;
+.popup-body {
+  background-color: #f7f7f7;
+  padding: 30rpx 0;
+  height: calc(80vh - 53px - 74px);
+  overflow: scroll;
 }
 
 .popup-group {
-  padding: 40rpx 0 20rpx 0;
+  width: 92vw;
+  margin: 0 auto;
 }
+
+.coupon {
+  padding: 40rpx 30rpx 40rpx 0 !important;
+  border-radius: 12rpx;
+  margin-bottom: 30rpx;
+  box-shadow:0 0 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.coupon-head {
+  color: #ee0a24;
+  width: 192rpx;
+  text-align: center;
+}
+
+.coupon-amount {
+  font-size: 60rpx;
+  margin-bottom: 8rpx;
+}
+
+.coupon-amount text {
+  font-size: 28rpx;
+  margin-left: 6rpx;
+}
+
+.coupon-condition {
+  font-size: 24rpx;
+  line-height: 32rpx;
+  white-space: pre-wrap;
+}
+
+.coupon-info {
+  text-align: left;
+  padding: 0 30rpx
+}
+
+.coupon-name {
+  font-size: 30rpx;
+  color: #000;
+}
+
+.popup-action {
+  padding: 30rpx 0;
+  width: 90vw;
+  margin: 0 auto;
+}
+
 

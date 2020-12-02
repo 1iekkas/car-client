@@ -51,7 +51,9 @@
       </view>
     </view>
   </block>
-
+  <view class="line"></view>
+  <van-cell title="支付方式" title-style="font-size:32rpx" bind:click="showActions" value="{{payment.name}}" is-link>
+  </van-cell>
   <!--付款明细-->
   <view class="line"></view>
   <view class="form">
@@ -62,10 +64,15 @@
           ￥{{offer.fee}}
         </view>
       </van-cell>
-      <van-cell title="优惠券">
-        <view class="price">
-          -￥0.00
-        </view>
+      <van-cell title="优惠券" bindtap="onShowCoupon" is-link="{{couponItem !== '' ? false : true}}">
+        <block wx:if="{{couponItem !== ''}}">
+          <view class="price">
+            -￥0.00
+          </view>
+        </block>
+        <block wx:else>
+          2张可用
+        </block>
       </van-cell>
       <van-cell>
         <view class="content">
@@ -77,8 +84,42 @@
     </van-cell-group>
   </view>
   <!--action 栏-->
-  <van-submit-bar price="{{ offer.fee * 100 }}" button-text="付款" bind:submit="onSubmitPay" />
+  <van-submit-bar price="{{ offer.fee * 100 }}" button-text="{{ payment.id == 1 ? '提交' : '付款' }}"
+    bind:submit="onSubmitPay" />
 </view>
 
-<!---->
+<!--dialog-->
 <van-dialog id="van-dialog" />
+<!--支付方式-->
+<van-action-sheet show="{{ showPayment }}" actions="{{ paymentActions }}" bind:close="showActions"
+  bind:select="onSelectActions" cancel-text="取消" />
+<!--优惠券-->
+<van-popup show="{{ showCoupon }}" round custom-style="height: 80vh" position="bottom" bind:close="onClose">
+  <view class="popup-head">优惠券</view>
+  <view class="popup-body">
+    <view class="popup-group">
+      <van-radio-group value="{{ couponItem }}">
+        <van-cell-group border="{{false}}">
+          <van-cell title-width="192rpx" wx:for="{{6}}" wx:key="index" custom-class="coupon" border="{{false}}" clickable data-name="{{index}}"
+            bind:click="onSelectCoupon">
+            <view slot="title" class="coupon-head">
+              <view class="coupon-amount">
+                20<text>元</text>
+              </view>
+              <view class="coupon-condition">无使用门槛</view>
+            </view>
+            <view class="coupon-info">
+              <view class="coupon-name">优惠券名称</view>
+              <view class="coupon-desc">描述信息</view>
+            </view>
+            <van-radio slot="right-icon" name="{{index}}" />
+          </van-cell>
+
+        </van-cell-group>
+      </van-radio-group>
+    </view>
+  </view>
+  <view class="popup-action">
+    <van-button type="danger" block round bindtap="onCancelCoupon">不使用优惠券</van-button>
+  </view>
+</van-popup>

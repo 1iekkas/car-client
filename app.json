@@ -31,7 +31,8 @@
       "root": "storePackage",
       "pages": [
         "store/index",
-        "storeList/index"
+        "storeList/index",
+        "rate/index"
       ]
     }
   ],
@@ -76,7 +77,8 @@
     "van-tag": "@vant/weapp/tag/index",
     "van-index-bar": "@vant/weapp/index-bar/index",
     "van-index-anchor": "@vant/weapp/index-anchor/index",
-    "van-tree-select": "@vant/weapp/tree-select/index"
+    "van-tree-select": "@vant/weapp/tree-select/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index"
   },
   "sitemapLocation": "sitemap.json"
 }

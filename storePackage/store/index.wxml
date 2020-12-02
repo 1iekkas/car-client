@@ -1,8 +1,9 @@
 <!--servicePackage/store/index.wxml-->
 <view class="container">
-  <navigation catchtouchmove="{{false}}">
+  <navigation custom-class="{{showNav ? 'nav-bg' : ''}}" catchtouchmove="{{false}}">
     <view class="nav-content" style="height: {{menuHeight}}px">
-      <van-icon name="arrow-left" size="40rpx" />
+      <van-icon class="arrow" name="arrow-left" size="40rpx" bindtap="back" />
+      <view class="nav-title" wx:if="{{showNav}}">店铺详情</view>
     </view>
   </navigation>
   <view class="store-body">
@@ -22,10 +23,9 @@
         <!-- <view class="range">
           800m
         </view> -->
-
       </view>
       <view class="service">
-        <van-tag color="#ec8c05" plain>美容店</van-tag>
+        <van-tag color="#ec8c05" plain>企业</van-tag>
         <view class="block">
           总订单 <text>396</text>
         </view>
@@ -33,15 +33,12 @@
           评分 <text>4.3</text>
         </view>
       </view>
-
       <view class="time">
         营业时间: 09:00 ~ 21:00
       </view>
-
-
     </view>
 
-    <view class="store-address">
+    <view class="store-address" bindtap="openMap">
       <view class="address-title">
         <text>门店地址</text>
         <van-icon name="arrow" size="26rpx" color="#999" />
@@ -59,18 +56,30 @@
           <text>评价</text>
           <text class="comment-count">43条</text>
         </view>
-        <van-icon name="arrow" size="26rpx" color="#999" />
+        <!-- <van-icon name="arrow" size="26rpx" color="#999" /> -->
       </view>
       <!---->
       <view class="comment-group">
-        <view class="comment-item van-hairline--bottom" wx:for="{{6}}" wx:key="index">
+        <view class="comment-item van-hairline--bottom" wx:for="{{3}}" wx:key="index">
           <view class="comment-item__title">
-            <van-image src="https://img.yzcdn.cn/vant/cat.jpeg" round width="50rpx" height="50rpx"></van-image>
+            <van-image src="https://img.yzcdn.cn/vant/cat.jpeg" round width="56rpx" height="56rpx"></van-image>
             <text class="user-name">18********01</text>
             <text class="time">2020-10-31</text>
           </view>
-          <view class="comment-item__body"></view>
+          <view class="comment-item__body">
+            <view class="comment-value">
+              工具未校验合法域名、web-view（业务域名）、TLS 版本以及 HTTPS 证书
+            </view>
+            <block wx:if="{{index % 2}}">
+              <view class="comment-image">
+                <van-image src="https://img.yzcdn.cn/vant/cat.jpeg" width="20vw" height="20vw"></van-image>
+                <van-image src="https://img.yzcdn.cn/vant/cat.jpeg" width="20vw" height="20vw"></van-image>
+                <van-image src="https://img.yzcdn.cn/vant/cat.jpeg" width="20vw" height="20vw"></van-image>
+              </view>
+            </block>
+          </view>
         </view>
+        <view class="showMore">查看全部</view>
       </view>
     </view>
   </view>
