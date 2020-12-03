@@ -1,5 +1,6 @@
 // servicePackage/orderInfo/index.js
 import {
+  pickOffer,
   getWaitOrderInfo,
   getPayParams
 } from '../../api/order'
@@ -13,6 +14,7 @@ import {
 import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 const app = getApp()
 let data
+
 Page({
 
   /**
@@ -41,16 +43,16 @@ Page({
     activeStep: 3,
     showPayment: false,
     payment: {
-      id: 2,
+      id: 1,
       name: '微信支付'
     },
     paymentActions: [{
       id: 1,
-      name: '线下支付'
+      name: '微信支付'
     },{
       id: 2,
-      name: '微信支付'
-    }],
+      name: '线下支付'
+    },],
     showCoupon: false,
     couponList: [],
     couponItem: ''
@@ -149,7 +151,43 @@ Page({
     })
   },
 
-  // 付款
+  onPostForm() {
+    var pages = getCurrentPages();
+    var beforePage = pages[pages.length - 2];
+    console.log(beforePage)
+    if (data.payment.id == 1) {
+      this.appointment()
+    } else {
+      this.onSubmitPay()
+    }
+  },
+
+  // 线下交易
+  async appointment() {
+    let res = await pickOffer({
+      order_id: data.info.id,
+      offer_id: data.offer.id
+    })
+
+    if (!res.code) {
+      wx.showToast({
+        title: '预约成功',
+        duration: 1500,
+        complete: c => {
+
+
+          wx.navigateBack({
+            delta: 1
+          })
+        }
+      })
+    } else {
+
+    }
+  },
+
+
+  // 线上交易付款
   async onSubmitPay() {
     // 获取支付配置
     let res = await getPayParams({
@@ -173,11 +211,6 @@ Page({
             })
           }
         })
-        // this.getData(data.info.id)
-        /* wx.redirectTo({
-          url: `/servicePackage/orderInfo/index?id=${data.info.id}`
-        }) */
-
       } else {
         wx.navigateBack({
           delta: 1
@@ -201,7 +234,9 @@ Page({
 
   // 优惠券
   onSelectCoupon(e) {
-    const { name } = e.currentTarget.dataset;
+    const {
+      name
+    } = e.currentTarget.dataset;
     this.setData({
       couponItem: name,
       showCoupon: false,
@@ -210,6 +245,7 @@ Page({
   },
 
   onShowCoupon() {
+    if (data.payment.id == 1) return false
     this.setData({
       showCoupon: !data.showCoupon
     })

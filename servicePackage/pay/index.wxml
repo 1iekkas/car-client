@@ -65,13 +65,18 @@
         </view>
       </van-cell>
       <van-cell title="优惠券" bindtap="onShowCoupon" is-link="{{couponItem !== '' ? false : true}}">
-        <block wx:if="{{couponItem !== ''}}">
-          <view class="price">
-            -￥0.00
-          </view>
+        <block wx:if="{{payment.id == 2}}">
+          线下支付不可用
         </block>
         <block wx:else>
-          2张可用
+          <block wx:if="{{couponItem !== ''}}">
+            <view class="price">
+              -￥0.00
+            </view>
+          </block>
+          <block wx:else>
+            2张可用
+          </block>
         </block>
       </van-cell>
       <van-cell>
@@ -84,8 +89,8 @@
     </van-cell-group>
   </view>
   <!--action 栏-->
-  <van-submit-bar price="{{ offer.fee * 100 }}" button-text="{{ payment.id == 1 ? '提交' : '付款' }}"
-    bind:submit="onSubmitPay" />
+  <van-submit-bar price="{{ payment.id == 2 ? 0 : offer.fee * 100 }}" button-text="{{ payment.id == 2 ? '提交' : '付款' }}"
+    bind:submit="onPostForm" />
 </view>
 
 <!--dialog-->
@@ -100,8 +105,8 @@
     <view class="popup-group">
       <van-radio-group value="{{ couponItem }}">
         <van-cell-group border="{{false}}">
-          <van-cell title-width="192rpx" wx:for="{{6}}" wx:key="index" custom-class="coupon" border="{{false}}" clickable data-name="{{index}}"
-            bind:click="onSelectCoupon">
+          <van-cell title-width="192rpx" wx:for="{{6}}" wx:key="index" custom-class="coupon" border="{{false}}"
+            clickable data-name="{{index}}" bind:click="onSelectCoupon">
             <view slot="title" class="coupon-head">
               <view class="coupon-amount">
                 20<text>元</text>

@@ -11,7 +11,7 @@
       <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{5000}}" duration="{{800}}">
         <block wx:for="{{1}}" wx:key="*this">
           <swiper-item>
-            <image src="https://dummyimage.com/750x561" mode="widthFix" style="width: 100vw"></image>
+            <image src="../../static/img/store.jpg" mode="widthFix" style="width: 100vw;height: 100%"></image>
           </swiper-item>
         </block>
       </swiper>
@@ -19,7 +19,7 @@
     <!---->
     <view class="store-info">
       <view class="info">
-        <view class="name van-hairline--right"> 在app.json或index.json中引入组件，详细介绍见快速上手</view>
+        <view class="name">曼狄卡豪车升级改装中心（广州）</view>
         <!-- <view class="range">
           800m
         </view> -->
@@ -44,7 +44,7 @@
         <van-icon name="arrow" size="26rpx" color="#999" />
       </view>
       <view class="address-info">
-        <text>广东省佛山市禅城区祖庙街道祖庙路NOVE岭南站首层103号</text>
+        <text>广东省广州市番禺区东环街蔡二工业区二街1号</text>
         <text>0.8km</text>
       </view>
     </view>
@@ -62,7 +62,7 @@
       <view class="comment-group">
         <view class="comment-item van-hairline--bottom" wx:for="{{3}}" wx:key="index">
           <view class="comment-item__title">
-            <van-image src="https://img.yzcdn.cn/vant/cat.jpeg" round width="56rpx" height="56rpx"></van-image>
+            <van-image src="https://gss0.bdstatic.com/7051cy89Q1gCncy6lo7D0j9wexYrbOWh7c50/yt/bdsp/icon/anonymous.png" round width="56rpx" height="56rpx"></van-image>
             <text class="user-name">18********01</text>
             <text class="time">2020-10-31</text>
           </view>
@@ -72,14 +72,26 @@
             </view>
             <block wx:if="{{index % 2}}">
               <view class="comment-image">
-                <van-image src="https://img.yzcdn.cn/vant/cat.jpeg" width="20vw" height="20vw"></van-image>
-                <van-image src="https://img.yzcdn.cn/vant/cat.jpeg" width="20vw" height="20vw"></van-image>
-                <van-image src="https://img.yzcdn.cn/vant/cat.jpeg" width="20vw" height="20vw"></van-image>
+                <van-image src="https://img.wanchezhijia.com/A/2020/11/3/11/11/0fc9dd85-a4cf-486e-8f7e-ee70e49e272f.jpg" bindtap="onPreview" width="20vw" height="20vw"></van-image>
+                <van-image src="https://img.wanchezhijia.com/A/2020/11/3/11/11/0fc9dd85-a4cf-486e-8f7e-ee70e49e272f.jpg" width="20vw" height="20vw"></van-image>
+                <van-image src="https://img.wanchezhijia.com/A/2020/11/3/11/11/0fc9dd85-a4cf-486e-8f7e-ee70e49e272f.jpg" width="20vw" height="20vw"></van-image>
               </view>
             </block>
           </view>
         </view>
         <view class="showMore">查看全部</view>
+      </view>
+    </view>
+
+    <!---->
+    <view class="store-address" bindtap="openMap">
+      <view class="address-title">
+        <text>门店地址</text>
+        <van-icon name="arrow" size="26rpx" color="#999" />
+      </view>
+      <view class="address-info">
+        <text>广东省广州市番禺区东环街蔡二工业区二街1号</text>
+        <text>0.8km</text>
       </view>
     </view>
   </view>

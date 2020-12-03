@@ -57,7 +57,7 @@ Page({
   onLoad: function (options) {
     console.log(options)
     data = this.data
-    this.getData(options.id)
+    this.oid = options.id
   },
 
   /**
@@ -73,6 +73,7 @@ Page({
   onShow: function () {
     /* console.log(data)
     if(data.info && data.info.id) this.onLoad() */
+    this.getData(this.oid)
   },
 
   /**

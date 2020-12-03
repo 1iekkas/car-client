@@ -151,7 +151,7 @@
     <view class="store-section">
       <view class="title van-hairline--bottom">服务门店</view>
       <view class="store-group">
-        <block wx:if="{{info.offer.length}}">
+        <block wx:if="{{offerList.length}}">
           <view class="store-item" wx:for="{{offerList}}" wx:key="index">
             <view class="store-body">
               <van-image width="100" height="100" src="{{item.facade_images[0]}}"></van-image>
@@ -186,7 +186,7 @@
       <van-cell-group border="{{false}}">
         <van-cell title="门店报价">
           <view class="price">
-            ￥{{info.offer[0].fee}}
+            ￥{{offerList[0].fee}}
           </view>
         </van-cell>
         <van-cell title="优惠券">
@@ -196,17 +196,21 @@
         </van-cell>
         <van-cell title="支付方式">
           <view class="price">
-            线下支付
+            <block wx:if="{{info.pay_mode == 1}}">
+              微信支付
+            </block>
+            <block wx:else>
+              线下支付
+            </block>
           </view>
         </van-cell>
         <van-cell>
           <view class="content">
             <text>实付款</text>
             <text>￥</text>
-            <text>{{info.offer[0].fee}}</text>
+            <text>{{offerList[0].fee}}</text>
           </view>
         </van-cell>
-        
       </van-cell-group>
     </view>
   </block>
