@@ -1,1 +1,59 @@
 /* storePackage/rate/index.wxss */
+page {
+  background-color: #f7f7f7;
+}
+
+.container {
+  padding: 60rpx 30rpx 30rpx 30rpx;
+}
+
+.store {
+  display: flex;
+  align-items: center;
+}
+
+.store-name {
+  margin-left: 20rpx;
+}
+
+/** */
+.rate-section {
+  text-align: center;
+  padding: 30rpx;
+  background-color: white;
+  border-radius: 12rpx;
+  margin-top: 40rpx;
+  position: relative;
+}
+
+.rate-section::after {
+  content: '';
+  width: 0px;
+  height: 0px;
+  border-left: 20rpx solid transparent;
+  border-right: 20rpx solid transparent;
+  border-bottom: 20rpx solid white;
+  position: absolute;
+  top: -20rpx;
+  left: 20rpx;
+}
+
+.rate-section .rate-title,
+.rate-action {
+  margin-bottom: 30rpx;
+}
+
+.field-index--van-field {
+  padding: 0 !important;
+}
+
+.van-field__body--textarea {
+  background: #f7f7f7;
+  padding: 20rpx !important;
+}
+
+.upload {
+  margin-top: 30rpx;
+  padding-top: 30rpx;
+  text-align: left;
+}
