@@ -1,12 +1,11 @@
 //index.js
 //获取应用实例
 const app = getApp()
-import { reverseGeocoder } from '../../api/wxServer'
+import { reverseGeocoder, searchStore } from '../../api/wxServer'
 import {
-  checkToken,
-  login,
   getLocation
 } from "../../api/wxServer.js"
+import { getOrderList } from '../../api/order'
 import { getSwipeList } from '../../api/poster'
 let data 
 Page({
@@ -42,7 +41,7 @@ Page({
       value: 10000,
       scale: 11
     }],
-    tips: 1,
+    orderCount: 0,
     activeRange: 0,
     contentHeight: 0,
     // map配置
@@ -70,10 +69,18 @@ Page({
         hasToken: res,
         isLogin: res
       })
+
+      if(res) {
+        getOrderList({status: 0}).then(res => {
+          this.setData({
+            orderCount: res.data.data.length || 0
+          })
+        })
+      }
     }
     // 用户信息回调
     app.userInfoReadyCallback = res => {
-      console.log(res)
+      // console.log(res)
       this.setData({
         userInfo: res.userInfo,
         hasUserInfo: true
@@ -92,6 +99,7 @@ Page({
         this.data.map.getCenterLocation({
           success: res => {
             console.log(res)
+            this.searchStore(res)
           }
         })
       })
@@ -107,9 +115,23 @@ Page({
       isLogin: app.globalData.isLogin,
       userInfo: app.globalData.userInfo,
       map: this.data.map ? this.data.map : wx.createMapContext('map', this),
+    },() => {
+      //console.log(app.globalData.location)
+      if( !data.location) return false
+      this.searchStore({
+        latitude: data.location.location.lat,
+        longitude: data.location.location.lng
+      })
     })
     // wx.setStorageSync('location', null)
-   
+    if(data.isLogin) {
+      getOrderList({status: 0}).then(res => {
+        console.log(res.data)
+        this.setData({
+          orderCount: res.data.data.length || 0
+        })
+      })
+    }
   },
 
   onReady() {
@@ -134,16 +156,22 @@ Page({
   async regionchange(e) { 
     if(e.type == "begin" || e.causedBy != 'drag') return false
     this.update = true
-     const location = e.detail.centerLocation
+    const location = e.detail.centerLocation
     let res = await reverseGeocoder({
       location: location
     }) 
-
+    // console.log(location)
     if (!res.status) {
+      // 重置全局变量？
       this.setData({
         location: res.result
       },() => {
         this.update = false
+        
+        this.searchStore({
+          latitude: data.location.location.lat,
+          longitude: data.location.location.lng
+        })
       })
     }
   },
@@ -197,23 +225,26 @@ Page({
     }
   },
 
-  // 获取用户信息
+  // 获取用户信息 已废弃
   getUserInfo: async function (e) {
 
   },
 
+  // 跳转登录
   toLogin() {
     wx.navigateTo({
       url: '/userPackage/login/index'
     })
   },
 
+  // 废弃跳转
   back() {
     wx.navigateBack({
       delta: 1
     })
   },
 
+  // 切换地址
   mapSearch() {
     wx.navigateTo({
       url: '/userPackage/mapSearch/index'
@@ -229,11 +260,8 @@ Page({
 
   // 创建订单
   toCreate(e) {
-    console.log('create')
     const type = e.currentTarget.dataset.type
-    // console.log(type)
     if(type === 'custom') {
-      // console.log(this.location)
       wx.setStorageSync('location', this.location)
     }
     wx.navigateTo({
@@ -241,32 +269,101 @@ Page({
     })
   },
 
+  // 跳转车型订单搜索  
   toSearchOrder() {
     wx.navigateTo({
       url: '/servicePackage/searchOrder/index',
     })
   },
 
-  // 
+  // 跳转订单列表
   linkToOrder() {
-    wx.navigateTo({
-      url: `/userPackage/order/index`,
-    })
+    if(!data.isLogin) {
+      wx.navigateTo({
+        url: '/userPackage/login/index',
+      })
+    }else {
+      wx.navigateTo({
+        url: `/userPackage/order/index?status=0`,
+      })
+    }
+    
   },
 
-  // 
-  onFocus() {
-    console.log(data.map)
-    data.map.moveToLocation();
+  // 地图移到当前定位点
+  async onFocus() {
+    let obj = await getLocation()
+    let myLocation = obj.result
+    // 简略比较相等
+    // if(JSON.stringify(myLocation) === JSON.stringify(app.globalData.location)) return false
+    app.globalData.location = myLocation
     this.setData({
-      location: app.globalData.location
+      location: myLocation
+    },() => {
+      data.map.moveToLocation()
+      this.searchStore({
+        latitude: data.location.location.lat,
+        longitude: data.location.location.lng
+      })
     })
-    wx.setStorageSync('location', null)
   },
 
   linkToStore() {
     wx.navigateTo({
       url: '/storePackage/storeList/index',
     })
+  },
+
+  // 坐标转换详细地址
+  async refreshMap(location) {
+    console.log(location)
+    let res = await reverseGeocoder({
+      location: {
+        latitude: location.latitude,
+        longitude: location.longitude
+      }
+    })
+
+    if(!res.status) {
+      app.globalData.location = res.result
+      this.setData({
+        location: res.result
+      })
+      wx.setStorageSync('location', null)
+      /* wx.navigateBack({
+        delta: 1,
+      }) */
+    }else {
+      wx.showToast({
+        title: '很抱歉，位置未能成功切换',
+      })
+    }
+  },
+
+  // 搜索门店
+  async searchStore(location) {
+    let storeList = []
+    let res = await searchStore({
+      keyword: '酒店',
+      location: `${location.latitude},${location.longitude}`
+    })
+
+    if(!res.status) {
+      //storeList = res.data
+      storeList = res.data.map(e => ({
+        id: e.id,
+        title: e.title,
+        latitude: e.location.lat,
+        longitude: e.location.lng,
+        height: 30,
+        width: 22,
+        zIndex: 2,
+        iconPath: '../../static/img/store.png'
+      }))
+
+      this.setData({
+        markers: storeList
+      })
+    }
   }
 })

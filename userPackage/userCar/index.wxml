@@ -17,7 +17,8 @@
           <view class="car-item-action van-hairline--top">
             <van-button type="primary" block size="mini" wx:if="{{item.focus == 0}}" catchtap="setCar"
               data-id="{{item.id}}">设为默认</van-button>
-            <van-button type="danger" block size="mini" plain catchtap="delCar" data-id="{{item.id}}">删除</van-button>
+              <!-- <van-button type="primary" hairline block size="mini" plain catchtap="delCar" data-id="{{item.id}}">编辑</van-button>   -->
+            <van-button type="danger" hairline block size="mini" plain catchtap="delCar" data-id="{{item.id}}">删除</van-button>
           </view>
         </view>
       </block>

@@ -81,9 +81,9 @@
           "scene": null
         },
         {
-          "name": "订单",
-          "pathName": "userPackage/order/index",
-          "query": "",
+          "name": "支付",
+          "pathName": "servicePackage/pay/index",
+          "query": "id=21&offer={\"id\":30,\"user_id\":1,\"shop_id\":13,\"order_id\":21,\"fee\":0.01,\"vague\":0,\"content\":null,\"distance\":\"35\",\"create_time\":\"2020-11-28 11:29:44\",\"name\":\"1111\",\"detail\":\"广东省佛山市顺德区德民路6号政府大楼\",\"lnt\":113.293716,\"lat\":22.803751,\"contactor\":\"111\",\"phone\":\"111\",\"tel\":\"111\",\"facade_images\":[\"https://car.coasewash.com/topic/20201126/1183b5b43b45df4e4d7619299eb63ac1.jpg\"],\"on_work\":\"09:00\",\"off_work\":\"18:00\"}",
           "scene": null
         },
         {
@@ -100,8 +100,8 @@
           "scene": null
         },
         {
-          "name": "商铺",
-          "pathName": "servicePackage/store/index",
+          "name": "店铺详情",
+          "pathName": "storePackage/store/index",
           "query": "",
           "scene": null
         },
@@ -126,7 +126,7 @@
         {
           "name": "订单信息",
           "pathName": "servicePackage/orderInfo/index",
-          "query": "id=12",
+          "query": "id=101",
           "scene": null
         },
         {
@@ -138,7 +138,7 @@
         {
           "name": "订单详情",
           "pathName": "servicePackage/orderDetails/index",
-          "query": "",
+          "query": "id=101",
           "scene": null
         },
         {
@@ -151,6 +151,35 @@
           "name": "店铺列表",
           "pathName": "storePackage/storeList/index",
           "query": "",
+          "scene": null
+        },
+        {
+          "name": "支付",
+          "pathName": "servicePackage/pay/index",
+          "query": "id=30",
+          "scene": null
+        },
+        {
+          "name": "评分",
+          "pathName": "storePackage/rate/index",
+          "query": "id=21&offer={\"id\":30,\"user_id\":1,\"shop_id\":13,\"order_id\":21,\"fee\":0.01,\"vague\":0,\"content\":null,\"distance\":\"35\",\"create_time\":\"2020-11-28 11:29:44\",\"name\":\"1111\",\"detail\":\"广东省佛山市顺德区德民路6号政府大楼\",\"lnt\":113.293716,\"lat\":22.803751,\"contactor\":\"111\",\"phone\":\"111\",\"tel\":\"111\",\"facade_images\":[\"https://car.coasewash.com/topic/20201126/1183b5b43b45df4e4d7619299eb63ac1.jpg\"],\"on_work\":\"09:00\",\"off_work\":\"18:00\"}",
+          "scene": null
+        },
+        {
+          "name": "订单列表",
+          "pathName": "userPackage/order/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "联系客服",
+          "pathName": "servicePackage/service/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "钱包",
+          "pathName": "userPackage/wallet/index",
           "scene": null
         }
       ]

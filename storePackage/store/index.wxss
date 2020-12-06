@@ -11,6 +11,27 @@ navigation {
 .nav-content {
   display: flex;
   align-items: center;
+  position: relative;
+}
+
+.nav-title {
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 10px);
+  transform: translate(-50%, -50%);
+}
+
+.nav-bg {
+  background-color: white !important;
+}
+
+.none-boxShadow{
+  box-shadow: none !important;
+}
+
+.nav-content {
+  display: flex;
+  align-items: center;
 }
 
 swiper {
@@ -122,13 +143,17 @@ swiper {
   color: #444
 }
 
+.store-comment {
+  padding-bottom: 0;
+}
+
 /** */
 .comment-group {
-  padding: 30rpx 0;
+  padding: 30rpx 0 0;
 }
 
 .comment-item {
-  padding: 30rpx;
+  padding: 30rpx 0;
 }
 
 .comment-item__title {
@@ -147,4 +172,34 @@ swiper {
   color: #bbb;
   text-align: right;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.comment-item__body {
+
+}
+
+.comment-value {
+  margin-top: 20rpx;
+  color: #232323;
+  font-size: 28rpx;
+  line-height: 42rpx;
+}
+
+.comment-image {
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.comment-image van-image {
+  margin-right: 12rpx;
+}
+
+.showMore {
+  color: #646566;
+  font-size: 28rpx;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
 }

@@ -16,9 +16,11 @@ Page({
       name: '评分'
     }],
     active: 0,
-    value1: 0,
-    value2: 'a',
-    list: []
+    list: [],
+    page: 1,
+    total: 1,
+    triggered: false,
+    loading: true,
   },
 
   /**
@@ -57,7 +59,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    const location = app.globalData.location;
+    this.setData({
+      location: location
+    })
   },
 
   /**
@@ -95,6 +100,26 @@ Page({
 
   },
 
+  async onRefresh() {
+    console.log(123)
+    if (this._freshing || data.loading) return
+    this.setData({
+      page: 1,
+      triggered: true
+    })
+    this._freshing = true
+    await this.getStoreList()
+    this._freshing = false
+  },
+
+  onRestore(e) {
+    console.log('onRestore:', e)
+  },
+
+  onAbort(e) {
+    console.log('onAbort', e)
+  },
+
   /**
    * 
    */
@@ -108,8 +133,35 @@ Page({
       // console.log(res)
       list = list.concat(res.data.data)
       this.setData({
-        list: list
+        list: list,
+        triggered: false,
+        loading: false,
+        total: res.data.last_page
       })
     }
+  },
+
+  // 分页加载
+  lower() {
+    if(this.loading || data.page > data.total) return false
+    this.loading = true
+    this.setData({
+      loading: true
+    },() => {
+      this.getStoreList()
+    })
+  },
+
+  // 跳转切换城市
+  linkToCitySearch() {
+    wx.navigateTo({
+      url: '/userPackage/citySearch/index',
+    })
+  },
+
+  linkToStore() {
+    wx.navigateTo({
+      url: '/storePackage/store/index',
+    })
   }
 })

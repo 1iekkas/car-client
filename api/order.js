@@ -34,5 +34,10 @@ module.exports = {
   // 取消订单
   cancelOrder(data) {
     return $api.put(`/u/order/${data.id}/cancel`, data)
+  },
+
+  // 取消原因
+  cancelReason(data={}) {
+    return $api.get(`/u/order/reason`, data)
   }
 }

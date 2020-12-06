@@ -21,13 +21,13 @@ Page({
       page: 1,
       max: 3
     },{
-      id: '1',
+      id: '1,2',
       name: '待维修',
       list: [],
       page: 1,
       max: 3
     },{
-      id: '2',
+      id: '3',
       name: '待交付',
       list: [],
       page: 1,
@@ -58,6 +58,9 @@ Page({
    */
   onLoad: function (options) {
     data = this.data
+    this.setData({
+      active: options.status || 'all'
+    })
   },
 
   /**
@@ -127,6 +130,9 @@ Page({
 
   // 切换列表
   changeTabs(e) {
+    wx.pageScrollTo({
+      scrollTop: 0
+    })
     this.setData({
       active: e.detail.name,
       list: [],
@@ -169,13 +175,12 @@ Page({
 
   // 分页加载
   lower() {
-    if(this.loading || data.page > data.total) return false
+    if(this.loading || data.page >= data.total) return false
     this.loading = true
     this.setData({
       loading: true
     },() => {
       this.getList()
     })
-    
   },
 })

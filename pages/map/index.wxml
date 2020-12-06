@@ -29,7 +29,7 @@
       
       style="width: 100vw;height: calc(100vh - {{navBarHeight}}px - 170rpx);margin-top: {{navBarHeight}}px;"
       bindregionchange="regionchange">
-      <image class="location-marker" src="../../static/img/marker.png"></image>
+      <image class="location-marker" src="../../static/img/marker.png" mode="widthFix"></image>
       <view class="location-button" catchtap="toCreate" data-type="custom">{{location.formatted_addresses.recommend}}</view>
     </map>
   </block>
@@ -41,8 +41,8 @@
       </view>
       <view class="content">
         <view class="order-tips" bindtap="linkToOrder">
-          <block wx:if="{{tips}}">
-            <van-cell is-link>
+          <block wx:if="{{orderCount}}">
+            <van-cell is-link bindtap="linkToOrder">
               <view slot="title" class="">
                 您有
                 <text class="number">1</text>
@@ -62,7 +62,7 @@
             发布需求
           </van-button>
         </block>
-        <view class="order-swipe">
+        <!-- <view class="order-swipe">
           <swiper indicator-dots="{{indicatorDots}}" vertical="{{true}}" autoplay="{{false}}" circular="{{true}}"
             interval="{{5000}}" duration="{{800}}">
             <block wx:for="{{5}}" wx:key="*this">
@@ -76,7 +76,7 @@
               </swiper-item>
             </block>
           </swiper>
-        </view>
+        </view> -->
         <!---->
         <view class="banner">
           <van-image fit="cover" width="calc((100vw - 60rpx))" height="calc((100vw - 60rpx) / 4)"

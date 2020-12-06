@@ -13,7 +13,8 @@
         "order/index",
         "login/index",
         "mapSearch/index",
-        "citySearch/index"
+        "citySearch/index",
+        "wallet/index"
       ]
     },
     {
@@ -24,14 +25,16 @@
         "searchOrder/index",
         "position/index",
         "cancel/index",
-        "pay/index"
+        "pay/index",
+        "service/index"
       ]
     },
     {
       "root": "storePackage",
       "pages": [
         "store/index",
-        "storeList/index"
+        "storeList/index",
+        "rate/index"
       ]
     }
   ],
@@ -73,8 +76,13 @@
     "van-steps": "@vant/weapp/steps/index",
     "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
     "van-dropdown-item": "@vant/weapp/dropdown-item/index",
-    "van-tag": "@vant/weapp/tag/index"
-
+    "van-tag": "@vant/weapp/tag/index",
+    "van-index-bar": "@vant/weapp/index-bar/index",
+    "van-index-anchor": "@vant/weapp/index-anchor/index",
+    "van-tree-select": "@vant/weapp/tree-select/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-rate": "@vant/weapp/rate/index",
+    "van-uploader": "@vant/weapp/uploader/index"
   },
   "sitemapLocation": "sitemap.json"
 }

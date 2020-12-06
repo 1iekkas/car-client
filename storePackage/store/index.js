@@ -1,4 +1,7 @@
 // servicePackage/store/index.js
+import {
+  openMap
+} from '../../api/wxServer'
 const app = getApp()
 Page({
 
@@ -7,7 +10,8 @@ Page({
    */
   data: {
     navBarHeight: app.globalData.navBarHeight, //导航栏高度
-    menuHeight: app.globalData.menuHeight
+    menuHeight: app.globalData.menuHeight,
+    showNav: false
   },
 
   /**
@@ -64,5 +68,41 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  onPageScroll: function (e) {
+    const top = e.scrollTop;
+    if (top > 200) {
+      this.setData({
+        showNav: true
+      })
+    } else {
+      this.setData({
+        showNav: false
+      })
+    }
+    // Do something when page scroll
+  },
+
+  openMap() {
+    openMap({
+      latitude: 23.00944, // 纬度，范围为-90~90，负数表示南纬
+      longitude: 113.12249
+    })
+  },
+
+  // 图片预览
+  onPreview(e) {
+    const url = e.currentTarget.dataset.url;
+    wx.previewImage({
+      current: 'https://img.yzcdn.cn/vant/cat.jpeg',
+      urls: ['https://img.yzcdn.cn/vant/cat.jpeg'],
+    })
+  },
+
+  back() {
+    wx.navigateBack({
+      delta: 1
+    })
   }
 })

@@ -3,6 +3,7 @@ const md5 = require('../../utils/md5.js')
 import { getCarList } from '../../api/user'
 import { validatePhone } from '../../utils/validator'
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
+import { IMG_HOST } from '../../constances/server'
 import { requestSubscribeMessage } from '../../api/wxServer';
 let data
 const app = getApp()
@@ -14,7 +15,7 @@ Page({
   data: {
     car: null,
     autosize: {
-      minHeight: 100
+      minHeight: 60
     },
     content:'',
     phone: '',
@@ -23,7 +24,9 @@ Page({
     isLocation: false,
     fileList: [],
     doorType: '1',
-    location: null
+    location: null,
+    showCar: false,
+    catchMove: false
   },
 
   /**
@@ -37,6 +40,10 @@ Page({
         location: location
       })
     }
+
+    this.setData({
+      IMG_HOST: IMG_HOST
+    })
   },
 
   /**
@@ -54,14 +61,16 @@ Page({
     // let location = wx.getStorageSync('location') || null
     let res = await getCarList(),
       car = [];
+    //console.log(res)  
 
     if(!res.code) car = res.data.length ? res.data.filter(e => e.focus == 1)[0] : []
     console.log(car)
     this.setData({
       car: car,
+      carList: res.data.length ? res.data : [],
       location: data.location ? data.location : app.globalData.location  //app.globalData.location
     })
-    // console.log(data.location)
+    
   },
 
   /**
@@ -189,9 +198,6 @@ Page({
 
   // 提交
   async onSubmit() {
-    
-
-
     validatePhone(data.phone)
     //validateContent(data.content)
     if(data.content == '') {
@@ -212,9 +218,9 @@ Page({
       evaluate_fee: data.evaluate_fee,
       evaluate_time: data.evaluate_time,
       on_door: data.isLocation ? data.doorType : 0, // 0 不上门 1 不取车 2 取车
-      lng: data.isLocation ? data.location.location.lng : '',
-      lat: data.isLocation ? data.location.location.lat : '',
-      address: data.isLocation ? data.location.formatted_addresses.recommend: '',
+      lng: data.location.location.lng || '',
+      lat: data.location.location.lat || '',
+      address: data.location.formatted_addresses.recommend || '',
       images: data.fileList ? data.fileList.map(e => e.url).join('|') : [],
     }
 
@@ -232,18 +238,19 @@ Page({
         },
       })
 
-      let callback = await requestSubscribeMessage([
+      /* let callback = await requestSubscribeMessage([
         'huXLWTyuXvjNjvbJ8qktf00-DSH6TdAufUI1oYNK_ug',
         'MfgN-57tlS4bcsivSK54n9B_u2cNiEGSOv1imoV5zGk',
         'u9jgWWi__K3swfJ0y8AlOPlNaZV5JsTZ16kK13Y9z88'
-      ])
+      ]) */
 
       // if(!callback.code)
-      if(callback) {
-        wx.redirectTo({
-          url: '/userPackage/order/index',
-        }) 
-      }
+      /* if(callback) {
+        
+      } */
+      wx.redirectTo({
+        url: '/userPackage/order/index',
+      }) 
     } 
     
   },
@@ -259,8 +266,6 @@ Page({
 
   //
   set(e) {
-    //console.log('触发')
-    //console.log(value)
     this.setData({
       evaluate_time: e.detail.value
     })
@@ -280,6 +285,49 @@ Page({
     this.setData({
       doorType: name
     })
+  },
+
+  onShowCar() {
+    this.setData({
+      showCar: !data.showCar,
+    })
+  },
+
+  onPopupScroll(e) {
+    console.log(e)
+  },
+
+  upper() {
+    this.setData({
+      catchMove: true
+    })
+  },
+
+  lower() {
+    this.setData({
+      catchMove: true
+    })
+  },
+
+  onSelectCar(e) {
+    const { car } = e.currentTarget.dataset
+    this.setData({
+      car: car,
+      showCar: false
+    })
+  },
+
+  onEidtCar(e) {
+    const { car } = e.currentTarget.dataset
+    wx.navigateTo({
+      url: `/userPackage/carInfo/index?car=${JSON.stringify(car)}&from=createOrder`,
+    })
   }
+
+  /* linkToCar() {
+    wx.navigateTo({
+      url: '/userPackage/userCar/index',
+    })
+  } */
 
 })

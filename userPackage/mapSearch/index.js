@@ -27,7 +27,7 @@ Page({
         //console.log(this.data.markers)
         this.data.map.getCenterLocation({
           success: res => {
-            console.log(res)
+            // console.log(res)
           }
         })
       })
@@ -54,8 +54,6 @@ Page({
       location: location
     })
     //console.log(this.data.location)
-    
-    
   },
 
   /**
@@ -112,7 +110,6 @@ Page({
   },
 
   onClickAddress(e) {
-    
     let address = e.currentTarget.dataset.item;
     // 深复制
     let result = JSON.parse(JSON.stringify(data.location))
@@ -126,4 +123,11 @@ Page({
       delta: 1
     })
   },
+
+  // 跳转切换城市
+  linkToCitySearch() {
+    wx.navigateTo({
+      url: '/userPackage/citySearch/index?from=map',
+    })
+  }
 })

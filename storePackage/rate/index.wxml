@@ -1,0 +1,27 @@
+<!--storePackage/rate/index.wxml-->
+<view class="container">
+  <view class="store">
+    <van-image src="http://5b0988e595225.cdn.sohucs.com/images/20181011/a10cad3a601346ba90b1c393ab645e6d.jpeg"
+      width="12vw" height="12vw"></van-image>
+    <view class="store-name">{{store.name}}</view>
+  </view>
+  <view class="rate-section">
+    <view class="rate-title">您对这次服务满意吗？</view>
+    <view class="rate-action">
+      <van-rate value="{{ value }}" size="{{ 25 }}" color="#ee0a24" void-color="#eee" void-icon="star"
+      bind:change="onChange" />
+    </view>
+    <van-field value="{{ message }}" label="" type="textarea" placeholder="请输入您的评价" autosize="{{autosize}}" border="{{ false }}" />
+
+    <view class="upload van-hairline--top">
+      <van-uploader bind:delete="onDelImage" file-list="{{ fileList }}" max-count="6" bind:after-read="afterRead"
+        multiple />
+    </view>
+
+    
+
+  </view>
+  <view style="margin-top: 60rpx">
+    <van-button type="primary" block>评 价</van-button>
+  </view>
+</view>

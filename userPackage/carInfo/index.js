@@ -2,6 +2,7 @@
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 import { validateCarNumber } from '../../utils/validator'
 import { editCar } from '../../api/user'
+import { IMG_HOST } from '../../constances/server'
 const app = getApp()
 const api = app.$api
 let data
@@ -29,7 +30,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: async function (options) {
-    console.log(options.car)
+    // console.log(options.car)
     data = this.data
     const series = options.series ? JSON.parse(options.series) : null
     const car = options.car ? JSON.parse(options.car) : null
@@ -44,9 +45,10 @@ Page({
       focus: car && car.focus == 1 ? true : false,
       miles: car ? car.miles : '',
       date: car ? car.year_check : '',
-      logo: car ? car.img : '',
+      logo: car ? `${IMG_HOST}${car.img}` : '',
+      IMG_HOST: IMG_HOST
     }, () => {
-      console.log(data)
+      // console.log(data)
       if(!data.from) this.getCarYear()
     })
   },
@@ -190,7 +192,7 @@ Page({
       car_info_id: data.activeCarItem.id,
       miles: data.miles,
       year_check: data.date,
-      focus: data.checked ? 1 : 0,
+      focus: data.focus ? 1 : 0,
       car_num: data.carNum,
     })
 

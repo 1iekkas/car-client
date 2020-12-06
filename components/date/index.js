@@ -3,7 +3,9 @@ const dateTimePicker = require('../../utils/dateTimePicker.js'); // components/p
 Component({
   /** * 组件的属性列表 */
   properties: {},
-  /** * 组件的初始数据 */ data: {},
+  /** * 组件的初始数据 */ data: {
+    isDate: false
+  },
   lifetimes: {
     attached() {
       this.startTime()
@@ -25,6 +27,7 @@ Component({
     },
     changeDateTime(e) {
       this.setData({
+        isDate: true,
         dateTime: e.detail.value
       }, () => {
         const value = `${this.data.dateTimeArray[0][this.data.dateTime[0]]}-${this.data.dateTimeArray[1][this.data.dateTime[1]]}-${this.data.dateTimeArray[2][this.data.dateTime[2]]} ${this.data.dateTimeArray[3][this.data.dateTime[3]]}:${this.data.dateTimeArray[4][this.data.dateTime[4]]}`

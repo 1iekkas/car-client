@@ -35,8 +35,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60rpx;
-  height: 60rpx;
+  width: 52rpx;
+  height: auto;
 }
 
 #map .location-button {
@@ -143,7 +143,7 @@
 
 /** */
 swiper {
-  margin: 40rpx auto 40rpx auto;
+  margin: 40rpx auto 0 auto;
   height: 170rpx;
   width: 80vw;
 }
@@ -169,7 +169,7 @@ swiper {
 }
 
 .banner {
-  
+  margin-top: 40rpx;
 }
 
 .focus-icon {

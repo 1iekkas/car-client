@@ -239,3 +239,11 @@ van-goods-action-button button {
   padding: 40rpx 0 20rpx 0;
 }
 
+.empty-store {
+  font-size: 28rpx;
+  color: #646566;
+  padding: 40rpx 0;
+  background-color: white;
+  text-align: center;
+}
+

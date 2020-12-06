@@ -4,7 +4,7 @@
 
 <view class="container {{!loading ? '': 'hidden'}}">
   <van-search value="{{ value }}" disabled placeholder="请输入搜索关键词" />
-  <van-index-bar index-list="{{keys}}" sticky-offset-top="0">
+  <van-index-bar index-list="{{keys}}" sticky-offset-top="54">
     <view wx:for="{{brand}}" wx:key="index">
       <van-index-anchor index="{{item.key}}"></van-index-anchor>
       <van-cell custom-class="brand-cell" wx:for="{{item.list}}" wx:for-item="brand" wx:key="index" title="{{brand.name}}" data-item="{{brand}}" bindtap="select">
