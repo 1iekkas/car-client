@@ -5,6 +5,7 @@ import { reverseGeocoder, searchStore } from '../../api/wxServer'
 import {
   getLocation
 } from "../../api/wxServer.js"
+import { getOrderList } from '../../api/order'
 import { getSwipeList } from '../../api/poster'
 let data 
 Page({
@@ -40,7 +41,7 @@ Page({
       value: 10000,
       scale: 11
     }],
-    tips: 1,
+    orderCount: 0,
     activeRange: 0,
     contentHeight: 0,
     // map配置
@@ -68,6 +69,14 @@ Page({
         hasToken: res,
         isLogin: res
       })
+
+      if(res) {
+        getOrderList({status: 0}).then(res => {
+          this.setData({
+            orderCount: res.data.data.length || 0
+          })
+        })
+      }
     }
     // 用户信息回调
     app.userInfoReadyCallback = res => {
@@ -115,7 +124,14 @@ Page({
       })
     })
     // wx.setStorageSync('location', null)
-   
+    if(data.isLogin) {
+      getOrderList({status: 0}).then(res => {
+        console.log(res.data)
+        this.setData({
+          orderCount: res.data.data.length || 0
+        })
+      })
+    }
   },
 
   onReady() {
@@ -262,9 +278,16 @@ Page({
 
   // 跳转订单列表
   linkToOrder() {
-    wx.navigateTo({
-      url: `/userPackage/order/index`,
-    })
+    if(!data.isLogin) {
+      wx.navigateTo({
+        url: '/userPackage/login/index',
+      })
+    }else {
+      wx.navigateTo({
+        url: `/userPackage/order/index?status=0`,
+      })
+    }
+    
   },
 
   // 地图移到当前定位点

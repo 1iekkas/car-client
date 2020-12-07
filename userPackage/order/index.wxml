@@ -1,9 +1,7 @@
 <!--userPackage/order/index.wxml-->
 <view class="container">
-  <van-tabs swipeable sticky offset-top="0" bind:change="changeTabs">
-    <van-tab wx:for="{{tabs}}" wx:key="index" name="{{item.id}}" title="{{item.name}}">
-
-    </van-tab>
+  <van-tabs swipeable sticky active="{{active}}" offset-top="0" bind:click="changeTabs">
+    <van-tab wx:for="{{tabs}}" wx:key="index" name="{{item.id}}" title="{{item.name}}"></van-tab>
   </van-tabs>
 
   <scroll-view scroll-y refresher-enabled refresher-triggered="{{triggered}}" bindrefresherrefresh="onRefresh"
@@ -24,7 +22,7 @@
                 报价中
               </view>
             </block>
-            <block wx:if="{{item.status == 1}}">
+            <block wx:if="{{item.status == 1 || item.status == 2}}">
               <view class="status origin">
                 待维修
               </view>

@@ -13,7 +13,8 @@
         "order/index",
         "login/index",
         "mapSearch/index",
-        "citySearch/index"
+        "citySearch/index",
+        "wallet/index"
       ]
     },
     {
@@ -24,7 +25,8 @@
         "searchOrder/index",
         "position/index",
         "cancel/index",
-        "pay/index"
+        "pay/index",
+        "service/index"
       ]
     },
     {

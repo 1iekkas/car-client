@@ -155,7 +155,7 @@ Page({
     var pages = getCurrentPages();
     var beforePage = pages[pages.length - 2];
     console.log(beforePage)
-    if (data.payment.id == 1) {
+    if (data.payment.id == 2) {
       this.appointment()
     } else {
       this.onSubmitPay()

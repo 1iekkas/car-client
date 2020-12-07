@@ -3,7 +3,8 @@ import {
   getWaitOrderInfo,
   getOffer,
   checkOrder,
-  cancelOrder
+  cancelOrder,
+  cancelReason
 } from '../../api/order'
 import {
   reverseGeocoder,
@@ -35,6 +36,7 @@ Page({
     offerList: [],
     loading: true,
     showCancel: false, // 取消订单弹出
+    cancelList: [],
     cancelType: '1', // 取消类型
     steps: [
       {
@@ -48,7 +50,7 @@ Page({
         text: '退款成功',
       }
     ],
-    activeStep: 3
+    activeStep: 3,
   },
 
   /**
@@ -58,6 +60,7 @@ Page({
     console.log(options)
     data = this.data
     this.oid = options.id
+    this.getCancelReason()
   },
 
   /**
@@ -225,9 +228,21 @@ Page({
 
   // 取消订单
   onCancelOrder() {
+    let message = ''
+    const status = data.info.status
+
+    switch (status) {
+      case 0:
+        message = '当前等待报价中，是否确认取消订单?'
+        break;
+      default :
+        message = '当前等待维修中,是否确认取消订单?'
+        break;    
+    }
+
     Dialog.confirm({
       title: '取消订单',
-      message: '当前等待维修中,是否确认取消订单',
+      message: message,
       confirmButtonText: '确定取消',
       cancelButtonText: '不，点错了'
     })
@@ -236,30 +251,41 @@ Page({
         showCancel: true
       })
       // on confirm
-      /* wx.navigateTo({
-        url: `/servicePackage/cancel/index`,
-      }) */
-      
     }).catch(() => {
 
     }) 
   },
 
+  // 
+  async getCancelReason() {
+    let res = await cancelReason()
+    if(!res.code) {
+      this.setData({
+        cancelList: res.data,
+        cancelType: res.data[0].id
+      })
+    }
+  },
+
   onChangeCancel(e) {
     const { name } = e.currentTarget.dataset;
     this.setData({
-      cancelType:name
+      cancelType: name
     })
   },
 
   async confirmPopup() {
     let res = await cancelOrder({id: data.info.id, cancel_reason_id: data.cancelType})
     if(!res.code) {
+      wx.showToast({
+        title: '已提交取消申请',
+      })
       this.setData({
         showCancel: false
+      }, () => {
+        this.getData(data.info.id)
       })
     }
-    
   },
 
   cancelPopup() {
@@ -284,7 +310,19 @@ Page({
     const { lat, lng } = e.currentTarget.dataset;
     // console.log(lat, lng)
     let res = await openMap({latitude: lat, longitude: lng})
-    console.log(res)
-  }
+  },
+
+  // 跳转评价
+  onLinkRate() {
+    wx.navigateTo({
+      url: `/storePackage/rate/index`,
+    })
+  },
+
+  onPhone() {
+    wx.makePhoneCall({
+      phoneNumber: data.offerList[0].phone,
+    })
+  },
 
 })

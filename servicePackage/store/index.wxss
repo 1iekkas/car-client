@@ -1,0 +1,150 @@
+/* servicePackage/store/index.wxss */
+page {
+  background-color: #f7f7f7;
+}
+
+navigation {
+  position: relative;
+  z-index: 10;
+}
+
+.nav-content {
+  display: flex;
+  align-items: center;
+}
+
+swiper {
+  height: 75vw;
+}
+
+.store-info {
+  background-color: var(--bgWhite);
+  padding: 30rpx;
+  border-radius: 0 0 24rpx 24rpx;
+  margin-bottom: 24rpx;
+  line-height: 50rpx;
+}
+
+.store-info .info {
+  display: flex;
+  align-items: center;
+}
+
+.store-info .name {
+  font-size: 32rpx;
+  padding-right: 20rpx;
+}
+
+.store-info .range {
+  color: #444;
+  font-size: 24rpx;
+  flex: 0 0 15vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.store-info .service {
+  color: #666;
+  font-size: 26rpx;
+  margin-top: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.store-info .service .block {
+  margin-left: 20rpx;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.store-info .service .block text {
+  color: rgb(209, 1, 1);
+}
+
+.store-info .time {
+  font-size: 26rpx;
+  margin-top: 10rpx;
+  color: #666;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.store-address,
+.store-comment {
+  background-color: var(--bgWhite);
+  border-radius: 24rpx;
+  padding: 30rpx;
+  margin-bottom: 24rpx;
+}
+
+.store-address .address-title,
+.store-comment .comment-title {
+  color: #232323;
+  font-size: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 24rpx;
+  position: relative;
+}
+
+.store-address .address-title::before,
+.store-comment .comment-title::before {
+  content: '';
+  width: 8rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: -webkit-linear-gradient(top, #f89c1a, #f3c078);
+}
+
+.store-address .address-info {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 26rpx;
+  padding-top: 24rpx;
+  color: rgb(148, 148, 148);
+  display: flex;
+}
+
+.store-address .address-info text:first-child {
+  flex: 1;
+  padding-right: 24rpx;
+}
+
+.store-address .address-info text:last-child {
+  text-align: right;
+}
+
+.store-comment .comment-count {
+  margin-left: 16rpx;
+  font-size: 24rpx;
+  color: #444
+}
+
+/** */
+.comment-group {
+  padding: 30rpx 0;
+}
+
+.comment-item {
+  padding: 30rpx;
+}
+
+.comment-item__title {
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+}
+
+.comment-item__title .user-name {
+  color: #555;
+  flex: 1;
+  padding-left: 20rpx;
+}
+
+.comment-item__title .time {
+  color: #bbb;
+  text-align: right;
+  font-family: Arial, Helvetica, sans-serif;
+}

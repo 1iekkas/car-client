@@ -35,15 +35,15 @@ const getStr = (data = null) => {
  * 2020-11-03 create by 1iekkas
  */
 const api = {
-  
   async get(url, data, isSignature = true, el, stop = false) {
+    const cacheUrl = url
     const token = wx.getStorageSync('token') || ''
     if (isSignature) {
       const signature = getStr()
       url = `${baseUrl}${url}?timestamp=${signature.timestamp}&nonce=${signature.nonce}&signature=${signature.signature}`
     } else {
       url = `${url}`
-    } 
+    }
     //console.log(signature)
     let res = await new Promise((resolve, reject) => {
       wx.request({
@@ -55,7 +55,10 @@ const api = {
         },
         data: data,
         success(res) {
-          if (res.statusCode !== 200) {
+          if (res.statusCode == 401 || res.statusCode == 110) {
+            // 刷新token
+            refreshToken(cacheUrl, data, isSignature = true, resolve)
+          } else if (res.statusCode !== 200) {
             wx.showModal({
               title: '提示',
               content: (`${res.data.error}`).toString(),
@@ -81,7 +84,8 @@ const api = {
    * url: 请求地址, data: 请求参数, el: 当前页面对象, stop: 未定
    * 2020-11-03 create by 1iekkas
    */
-  async post(url, data, isSignature=true, el, stop = true) {
+  async post(url, data, isSignature = true, el, stop = true) {
+    const cacheUrl = url
     const token = wx.getStorageSync('token') || ''
     if (isSignature) {
       let str = ''
@@ -106,7 +110,10 @@ const api = {
         },
         data: data,
         success(res) {
-          if (res.statusCode !== 200) {
+          if (res.statusCode == 401 || res.statusCode == 110) {
+            // 刷新token
+            refreshToken(cacheUrl, data, isSignature = true, resolve)
+          } else if (res.statusCode !== 200) {
             wx.showModal({
               title: '提示',
               content: (`${res.data.error}`).toString(),
@@ -137,7 +144,8 @@ const api = {
    * url: 请求地址, data: 请求参数, el: 当前页面对象, stop: 未定
    * 2020-11-03 create by 1iekkas
    */
-  async put(url, data, isSignature=true, el, stop = true) {
+  async put(url, data, isSignature = true, el, stop = true) {
+    const cacheUrl = url
     const token = wx.getStorageSync('token') || ''
     if (isSignature) {
       let str = ''
@@ -162,7 +170,10 @@ const api = {
         },
         data: data,
         success(res) {
-          if (res.statusCode !== 200) {
+          if (res.statusCode == 401 || res.statusCode == 110) {
+            // 刷新token
+            refreshToken(cacheUrl, data, isSignature = true, resolve)
+          } else if (res.statusCode !== 200) {
             wx.showModal({
               title: '提示',
               content: (`${res.data.error}`).toString(),
@@ -188,8 +199,8 @@ const api = {
     return res
   },
 
-  async delete(url, data, isSignature=true, el, stop = true) {
-    console.log(data)
+  async delete(url, data, isSignature = true, el, stop = true) {
+    const cacheUrl = url
     const token = wx.getStorageSync('token') || ''
     if (isSignature) {
       let str = ''
@@ -203,7 +214,7 @@ const api = {
     } else {
       url = `${url}`
     }
-    console.log(url)
+
     let res = await new Promise((resolve, reject) => {
       const requestTask = wx.request({
         url: url,
@@ -214,8 +225,11 @@ const api = {
         },
         data: data,
         success(res) {
-          
-          if (res.statusCode !== 200) {
+
+          if (res.statusCode == 401 || res.statusCode == 110) {
+            // 刷新token
+            refreshToken(cacheUrl, data, isSignature = true, resolve)
+          } else if (res.statusCode !== 200) {
             wx.showModal({
               title: '提示',
               content: (`${res.data.error}`).toString(),
@@ -245,6 +259,18 @@ const api = {
     return res
   }
 
+}
+
+// 刷新token
+const refreshToken = (url, data, isSignature = true, callback) => {
+  let refresh_token = wx.getStorageSync('refresh_token')
+  // console.log(refresh_token)
+  api.get(`/u/user/token/${refresh_token}`).then(async res => {
+    wx.setStorageSync('token', res.data)
+    console.log(url)
+    let result = await api.get(url, data, isSignature = true)
+    callback(result)
+  })
 }
 
 module.exports.$api = api

@@ -4,6 +4,7 @@ page {
 }
 
 .container {
+  height: 100vh;
   padding: 30rpx 0;
 }
 
@@ -109,3 +110,58 @@ page {
 .location .van-cell__title {
   color: #777 !important;
 }
+
+/** */
+.popup-head {
+  display: flex;
+  align-items: center;
+  padding: 30rpx 20rpx 40rpx 20rpx;
+  justify-content: center;
+  box-shadow:0 -2rpx 10rpx 2rpx rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.popup-head .cancel {
+  color: #ff5455;
+  font-size: 28rpx;
+  position: absolute;
+  top: 34rpx;
+  left: 30rpx;
+}
+
+.popup-body {
+  background-color: #f7f7f7;
+  height: calc(80vh - 53px - 50px);
+}
+
+.popup-group {
+  width: 92vw;
+  margin: 0 auto;
+  padding: 30rpx 0;
+}
+
+.popup-body .car-item {
+  width: 100%;
+  position: relative;
+}
+
+.popup-body .car-item + .car-item {
+  margin-top: 30rpx;
+}
+
+.popup-action .add-car{
+  font-size: 28rpx;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checked-icon {
+  position: absolute;
+  top: 30rpx;
+  right: 30rpx;
+}
+

@@ -16,8 +16,13 @@
       <van-cell title="预约电话" value="{{info.phone}}"></van-cell>
       <van-cell title="预计到店时间" value="{{info.evaluate_time}}"></van-cell>
       <van-cell title="是否需要上门服务" value="{{ info.on_door ? '是' : '否' }}"></van-cell>
-      <van-cell title="上门类型" value="{{ info.on_door == 2 ? '上门取车' : '上门服务' }}"></van-cell>
-      <van-cell title="上门位置" title-width="120rpx" value="{{ info.address }}"></van-cell>
+      <block wx:if="{{info.on_door !== 0}}">
+        <van-cell title="上门类型" value="{{ info.on_door == 2 ? '上门取车' : '上门服务' }}"></van-cell>
+        <van-cell title="上门位置" title-width="120rpx" value="{{ info.address }}"></van-cell>
+      </block>
+      <block wx:else>
+        <van-cell title="发布位置" title-width="120rpx" value="{{ info.address }}"></van-cell>
+      </block>
       <van-cell wx:if="{{info.images.length}}">
         <view class="images-group">
           <van-image width="22vw" height="22vw" wx:for="{{info.images}}" bindtap="onPreview" data-url="{{item}}"

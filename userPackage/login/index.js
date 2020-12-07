@@ -122,11 +122,18 @@ Page({
       let data = e.detail
       delete data.errMsg
       let res = await getPhone(data)
-      console.log(res)
+      // console.log(res)
     }
   },
 
   getSms() {
     console.log(123)
+  },
+
+  onToast() {
+    wx.showToast({
+      icon: 'none',
+      title: '功能暂未开放，请使用微信登录'
+    })
   }
 })

@@ -12,7 +12,22 @@ Page({
     userInfo: null,
     hasUserInfo: false,
     carCount: 0,
-    tabs: ['报价中', '待维修', '待验收', '已完成', '已取消']
+    tabs: [{
+      id: '0',
+      name: '报价中'
+    }, {
+      id: '1,2',
+      name: '待维修'
+    }, {
+      id: '3',
+      name: '待交付'
+    }, {
+      id: '4',
+      name: '已完成'
+    }, {
+      id: '5,6,7,8',
+      name: '已取消'
+    }]
   },
 
   /**
@@ -119,7 +134,7 @@ Page({
   orderLink(e) {
     const id = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url:`/userPackage/order/index?id=${id}`
+      url:`/userPackage/order/index?status=${id}`
     })
   },
 })

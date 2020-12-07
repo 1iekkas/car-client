@@ -1,26 +1,24 @@
-// servicePackage/orderDetails/index.js
+// pages/index/index.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    time: 30 * 60 * 60 * 1000,
-    filterList: [{
-      name: '综合排序'
-    },{
-      name: '距离'
-    },{
-      name: '价格'
-    }],
-    active: 0
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    /* app.userTokenReadyCallback = res => {
+      this.setData({
+        hasToken: res,
+        isLogin: true
+      })
+    } */
   },
 
   /**

@@ -1,0 +1,9 @@
+<!--servicePackage/service/index.wxml-->
+<view class="container">
+  <van-cell-group>
+    <van-cell title="电话客服" icon="phone-o" bindtap="onPhone" value="0757-86251003" is-link />
+    <van-cell class="contact" title="在线客服" title-width="60px" icon="service-o" value="" border="{{ false }}" is-link>
+      <button class="message-button" block open-type="contact"></button>
+    </van-cell>
+  </van-cell-group>
+</view>
