@@ -25,7 +25,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**
@@ -67,7 +67,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '曼狄卡豪车升级改装中心（广州）',
+      path: '/storePackage/store/index',
+      imageUrl: '../../static/img/store.jpg'
+    }
   },
 
   onPageScroll: function (e) {
@@ -100,9 +104,27 @@ Page({
     })
   },
 
-  back() {
-    wx.navigateBack({
-      delta: 1
+  onClickIcon() {
+    wx.showToast({
+      icon: 'none',
+      mask: true,
+      title: '未开放'
     })
+  },
+
+  back() {
+    let pages = getCurrentPages();
+    let prevPage = pages[pages.length - 2];
+    console.log(pages)
+    if(prevPage) {
+      wx.navigateBack({
+        delta: 1
+      })
+    }else {
+      wx.redirectTo({
+        url: '/pages/map/index',
+      })
+    }
+    
   }
 })

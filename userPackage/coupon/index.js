@@ -1,6 +1,4 @@
-// userPackage/wallet/index.js
-const app = getApp()
-let data
+// userPackage/coupon/index.js
 Page({
 
   /**
@@ -14,19 +12,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.userInfoReadyCallback = res => {
-      // console.log(res)
-      this.setData({
-        userInfo: res.userInfo,
-        hasUserInfo: true
-      })
 
-      console.log(data.userInfo)
-    }
-    data = this.data
-    this.setData({
-      userInfo: app.globalData.userInfo || null
-    })
   },
 
   /**

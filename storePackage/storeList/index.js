@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    keywords: '',
     filterList: [{
       name: '综合排序'
     }, {
@@ -101,7 +102,6 @@ Page({
   },
 
   async onRefresh() {
-    console.log(123)
     if (this._freshing || data.loading) return
     this.setData({
       page: 1,
@@ -113,27 +113,47 @@ Page({
   },
 
   onRestore(e) {
-    console.log('onRestore:', e)
+    // console.log('onRestore:', e)
   },
 
   onAbort(e) {
-    console.log('onAbort', e)
+    // console.log('onAbort', e)
+  },
+
+  onPulling(e) {
+
+  },
+
+  onChange(e) {
+    const keywords = e.detail
+    this.setData({
+      keywords: keywords
+    })
+  },
+
+  async onSearch() {
+    this.isSearch = true
+    await this.getStoreList()
+    this.isSearch = false
   },
 
   /**
    * 
    */
   async getStoreList() {
-    let list = data.list
     let res = await getStoreList({
+      keywords: data.keywords,
       type: 2,
       page_size: 10
     })
     if(!res.code) {
+      if(data.triggered || this.isSearch) {
+        data.list = []
+      }
       // console.log(res)
-      list = list.concat(res.data.data)
+      data.list = data.list.concat(res.data.data)
       this.setData({
-        list: list,
+        list: data.list,
         triggered: false,
         loading: false,
         total: res.data.last_page
@@ -143,7 +163,7 @@ Page({
 
   // 分页加载
   lower() {
-    if(this.loading || data.page > data.total) return false
+    if(this.loading || data.page >= data.total) return false
     this.loading = true
     this.setData({
       loading: true

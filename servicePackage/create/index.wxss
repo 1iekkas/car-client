@@ -99,12 +99,17 @@ page {
 .servies {
   color: #646566;
   font-size: 24rpx;
-  width: 90vw;
-  margin: 60rpx auto;
+  width: 100vw;
+  padding: 60rpx 0;
+  text-align: center;
 }
 
 .van-cell.padding {
   padding: 26rpx 16rpx 26rpx 26rpx;
+}
+
+van-field .van-field__label {
+  color: #323233 !important;
 }
 
 .location .van-cell__title {
@@ -119,6 +124,7 @@ page {
   justify-content: center;
   box-shadow:0 -2rpx 10rpx 2rpx rgba(0, 0, 0, 0.2);
   position: relative;
+  z-index: 2;
 }
 
 .popup-head .cancel {

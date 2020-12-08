@@ -4,21 +4,22 @@
   <van-cell-group title="车型信息">
     <van-cell title="车系">
       <view class="custom-cell-value">
-        <block wx:if="{{ from == 'edit' || from == 'createOrder'}}">
+        <block wx:if="{{ from == 'edit' || from == 'createOrderManage'}}">
           <van-image height="50rpx" width="50rpx" round use-loading-slot src="{{logo}}">
-          <van-loading slot="loading" type="spinner" size="6" vertical />
-        </van-image>
+            <van-loading slot="loading" type="spinner" size="6" vertical />
+          </van-image>
+          <text>{{car.series_name}}</text>
         </block>
         <block wx:else>
-          <van-image height="50rpx" width="50rpx" round use-loading-slot src="{{series.brand_logo}}">
-          <van-loading slot="loading" type="spinner" size="6" vertical />
-        </van-image>
+          <van-image height="50rpx" width="50rpx" round use-loading-slot src="{{IMG_HOST}}{{series.brand_logo}}">
+            <van-loading slot="loading" type="spinner" size="6" vertical />
+          </van-image>
+          <text>{{series.full_name}}</text>
         </block>
-        <text>{{series.full_name}}</text>
       </view>
     </van-cell>
     <!---->
-    <block wx:if="{{from == 'edit' || from == 'createOrder'}}">
+    <block wx:if="{{from == 'edit' || from == 'createOrderManage'}}">
       <van-cell required title-width="100rpx" title="年份" value="{{activeYearItem}}" is-link></van-cell>
       <van-cell required title-width="100rpx" title="车型" value="{{activeCarItem}}" is-link></van-cell>
     </block>
@@ -62,7 +63,7 @@
     <van-field label="行驶公里数" value="{{ miles }}" input-align="right" placeholder="请输入行驶公里数"
       bind:change="onChangeMiles" />
     <van-cell title="车险到期年份" input-align="right" placeholder="请输入车险到期年份" is-link>
-      <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+      <picker mode="date" value="{{date}}" start="2015-09-01" end="" bindchange="bindDateChange">
         <view class="picker">
           {{date ? date : '请选择'}}
         </view>
@@ -71,7 +72,7 @@
   </van-cell-group>
 
   <view class="btn-section">
-    <block wx:if="{{from == 'edit' || from == 'createOrder'}}">
+    <block wx:if="{{from == 'edit' || from == 'createOrderManage'}}">
       <van-button type="primary" loading="{{ isLoading }}" block bind:click="onSave">保存</van-button>
     </block>
     <block wx:else>

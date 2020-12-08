@@ -75,11 +75,7 @@ Page({
           carCount: res.data.length
         })
       })
-
     }
-
-    
-
   },
 
   /**
@@ -118,8 +114,7 @@ Page({
   }, */
   
   // 获取用户信息
-  getUserInfo: async function(e) {
-    
+  getUserInfo: async function(e) {  
     if(e.detail.errMsg === 'getUserInfo:ok') {
       app.globalData.userInfo = e.detail.userInfo
       let res = await login()
@@ -137,4 +132,10 @@ Page({
       url:`/userPackage/order/index?status=${id}`
     })
   },
+
+  linkLogin() {
+    wx.navigateTo({
+      url: '/userPackage/login/index',
+    })
+  }
 })

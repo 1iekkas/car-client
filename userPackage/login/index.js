@@ -81,7 +81,11 @@ Page({
    * 获取用户信息
    */
   async getUserInfo(e) {
-
+    wx.showLoading({
+      duration: 0,
+      mask: true,
+      title: '登陆中...',
+    })
     if (e.detail.errMsg == 'getUserInfo:ok') {
       let res = await login()
       if (res.code && res.code == 200) {
@@ -104,12 +108,13 @@ Page({
       head: userInfo.userInfo.avatarUrl
     }
 
-    let res = await app.$api.post(`/u/login/${code}`, body)
+    let res = await app.$api.post(`/auth/wechat/mini/login/user/${code}`, body)
     // console.log(res)
-    wx.setStorageSync('token', res.data.token)
-    wx.setStorageSync('refresh_token', res.data.refresh_token)
+    wx.setStorageSync('token', res.data.data.token)
+    wx.setStorageSync('refresh_token', res.data.data.refresh_token)
     app.globalData.userInfo = userInfo.userInfo
     app.globalData.isLogin = true
+    wx.hideLoading()
     wx.navigateBack({
       delta: 1
     })

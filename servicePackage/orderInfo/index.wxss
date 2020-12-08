@@ -5,14 +5,20 @@ page {
 }
 
 .container {
+  width: 100vw;
+  overflow: hidden;
+  padding-top: 20rpx;
   padding-bottom: 60px;
 }
 
 .info {
+  width: 96vw;
+  min-height: 80px;
+  margin: 0 auto;
   color: #646566;
   font-size: 32rpx;
-  padding: 50rpx 30rpx;
-  background-color: white;
+  padding: 40rpx 30rpx;
+  background: white; /* linear-gradient( to bottom right,#FE6146 , #FF8773 90%); */
   text-align: center;
 }
 
@@ -21,7 +27,7 @@ page {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 42rpx;
+  font-size: 36rpx;
 }
 
 .info .icon van-icon {
@@ -29,11 +35,14 @@ page {
 }
 
 .info .text {
-  margin: 30rpx 0
+  color: #9e9e9e;
+  font-size: 28rpx;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 20rpx 0;
 }
 
 .info .time {
-  font-size: 30rpx;
+  font-size: 28rpx;
   width: 100%;
   display: flex;
   align-items: center;
@@ -48,14 +57,49 @@ page {
   color: #f40;
 }
 
-.info .step {
+.refund {
+  width: 96vw;
+  margin: 0 auto;
+  background-color: white;
+  padding: 30rpx 20rpx 66rpx 20rpx;
+
+}
+
+.refund .refund-title {
+  padding-bottom: 30rpx;
+  position: relative;
+}
+
+.refund .refund-title::after, .refund .refund-title::before {
+  content: '';
+  width: 34rpx;
+  height: 34rpx;
+  background-color: #f7f7f7;
+  border-radius: 50%;
+  position: absolute;
+  top: -47rpx;
+  z-index: 10;
+}
+
+.refund .refund-title::before {
+  left: -40rpx;
+}
+
+.refund .refund-title::after {
+  right: -40rpx;
+}
+
+.step {
+  width: 96vw;
+  margin: 0 auto;
   display: flex;
   font-size: 24rpx;
   align-items: center;
 }
 
-.info .step-item {
+.step-item {
   flex: 1;
+  text-align: center;
 }
 
 .phoneColor {
@@ -76,16 +120,37 @@ page {
   transform: translateX(-50%);
 }
 
+.form {
+  width: 96vw;
+  margin: 0 auto;
+}
 
 /** */
+.store-section {
+  width: 96vw;
+  margin: 0 auto;
+}
+
 .store-section .title, .form .title {
-  padding: 20rpx 30rpx;
+  position: relative;
+  padding: 20rpx 20rpx;
   background-color: white;
 }
 
+/* .store-section .title::before , .form .title::before {
+  content: '';
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+  background-color: #f7f7f7;
+  position: absolute;
+  top: ;
+} */
+
 .store-filter {
   font-size: 28rpx;
-  width: 100vw;
+  width: 96vw;
+  margin: 0 auto;
   padding: 20rpx 30rpx;
   background-color: white;
   display: flex;

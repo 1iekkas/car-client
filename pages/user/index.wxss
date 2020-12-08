@@ -63,7 +63,7 @@ page {
   display: flex;
   background-color: white;
   padding: 30rpx;
-  border-radius: 8rpx;
+  border-radius: 12rpx;
 }
 
 .tabs-list {
@@ -101,5 +101,7 @@ page {
 .cell-section {
   width: 95vw;
   margin: 0 auto;
+  border-radius: 12rpx;
+  overflow: hidden;
 }
 

@@ -34,13 +34,6 @@ Page({
    */
   onLoad: function(options) {
     data = this.data
-    let location = wx.getStorageSync('location') || null
-    if(location) {
-      this.setData({
-        location: location
-      })
-    }
-
     this.setData({
       IMG_HOST: IMG_HOST
     })
@@ -57,14 +50,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: async function() {
-    // console.log(app.globalData.location)
-    // let location = wx.getStorageSync('location') || null
+    let location = wx.getStorageSync('location') || null
+    if(location) {
+      this.setData({
+        location: location
+      })
+    }
+
+    console.log(location)
     let res = await getCarList(),
       car = [];
-    //console.log(res)  
-
     if(!res.code) car = res.data.length ? res.data.filter(e => e.focus == 1)[0] : []
-    console.log(car)
     this.setData({
       car: car,
       carList: res.data.length ? res.data : [],
@@ -320,7 +316,7 @@ Page({
   onEidtCar(e) {
     const { car } = e.currentTarget.dataset
     wx.navigateTo({
-      url: `/userPackage/carInfo/index?car=${JSON.stringify(car)}&from=createOrder`,
+      url: `/userPackage/carInfo/index?car=${JSON.stringify(car)}&from=createOrderManage`,
     })
   }
 

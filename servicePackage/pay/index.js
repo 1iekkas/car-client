@@ -245,7 +245,7 @@ Page({
   },
 
   onShowCoupon() {
-    if (data.payment.id == 1) return false
+    if (data.payment.id == 2) return false
     this.setData({
       showCoupon: !data.showCoupon
     })

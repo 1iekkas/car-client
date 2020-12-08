@@ -17,7 +17,7 @@
     </van-search>
     <block>
       <scroll-view enhanced scroll-y="true" style="height: calc(50vh - 54px - 44px - 10px);" bindscrolltoupper="upper"
-        bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+        bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{top}}">
         <view class="content" style="min-height: calc(50vh - 54px - 44px - 8px);">
           <!--地点列表-->
           <view class="address-group">

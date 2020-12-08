@@ -95,7 +95,8 @@ Page({
 
     if (!res.status) {
       this.setData({
-        location: res.result
+        location: res.result,
+        top: 0
       }, async() => {
         let result = await getSuggestion({
           keyword: data.location.formatted_addresses.recommend,

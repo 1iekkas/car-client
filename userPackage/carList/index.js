@@ -23,7 +23,8 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
-      IMG_HOST: IMG_HOST
+      IMG_HOST: IMG_HOST,
+      from: options.from || ''
     })
   },
 
@@ -123,15 +124,23 @@ Page({
 
   // 选中项
   async select(e) {
+    wx.showLoading({
+      druation: 0,
+      mask: true,
+      title: '加载中...',
+    })
     const item = e.currentTarget.dataset.item;
-    console.log(item)
+    // console.log(item)
     let factory = await this.getFactory(item.id) //厂家
-    let series = await this.getCarSeries(item.id) // 车系 废弃接口
+    let series = await this.getCarSeries(item.id) // 车系
     
     // 如果没有数据 终止逻辑
-    if(!factory) return false
+    if(!factory) {
+      wx.hideLoading()
+      return false
+    }
     
-    // 处理数据 废弃
+    // 处理数据
     factory.map((el, index) => {
       factory[index].list = []
       series.filter(e => {
@@ -147,6 +156,8 @@ Page({
       show: true,
       activeSeries: 0,
       seriesList: factory
+    },() => {
+      wx.hideLoading()
     })
   },
   
@@ -203,7 +214,6 @@ Page({
   onSelectSeries(e) {
     let series = e.currentTarget.dataset.series;
     series.brand_logo = this.data.activeBrand.img
-    
     this.setData({
       activeSeries: series
     })
@@ -212,7 +222,7 @@ Page({
   // 确认选择
   onConfirmSelect() {
     wx.navigateTo({
-      url: `/userPackage/carInfo/index?series=${JSON.stringify(this.data.activeSeries)}`
+      url: `/userPackage/carInfo/index?series=${JSON.stringify(this.data.activeSeries)}&from=${this.data.from}`
     })
   }
   

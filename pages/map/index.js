@@ -109,9 +109,9 @@ Page({
   },
 
   onShow() {
-    let location = wx.getStorageSync('location') || null
+    // let location = wx.getStorageSync('location') || null
     this.setData({
-      location: location ? location : app.globalData.location,
+      location: app.globalData.location, // location ? location : app.globalData.location,
       isLogin: app.globalData.isLogin,
       userInfo: app.globalData.userInfo,
       map: this.data.map ? this.data.map : wx.createMapContext('map', this),
@@ -160,14 +160,12 @@ Page({
     let res = await reverseGeocoder({
       location: location
     }) 
-    // console.log(location)
     if (!res.status) {
       // 重置全局变量？
       this.setData({
         location: res.result
-      },() => {
-        this.update = false
-        
+      }, () => {
+        // 搜索附近店铺
         this.searchStore({
           latitude: data.location.location.lat,
           longitude: data.location.location.lng
@@ -261,9 +259,11 @@ Page({
   // 创建订单
   toCreate(e) {
     const type = e.currentTarget.dataset.type
+    console.log(type)
     if(type === 'custom') {
-      wx.setStorageSync('location', this.location)
+      wx.setStorageSync('location', data.location)
     }
+
     wx.navigateTo({
       url: '/servicePackage/create/index',
     })

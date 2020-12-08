@@ -14,7 +14,8 @@
         "login/index",
         "mapSearch/index",
         "citySearch/index",
-        "wallet/index"
+        "wallet/index",
+        "coupon/index"
       ]
     },
     {
@@ -82,7 +83,10 @@
     "van-tree-select": "@vant/weapp/tree-select/index",
     "van-action-sheet": "@vant/weapp/action-sheet/index",
     "van-rate": "@vant/weapp/rate/index",
-    "van-uploader": "@vant/weapp/uploader/index"
+    "van-uploader": "@vant/weapp/uploader/index",
+    "van-goods-action": "@vant/weapp/goods-action/index",
+    "van-goods-action-icon": "@vant/weapp/goods-action-icon/index",
+    "van-goods-action-button": "@vant/weapp/goods-action-button/index"
   },
   "sitemapLocation": "sitemap.json"
 }

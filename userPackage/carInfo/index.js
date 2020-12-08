@@ -1,8 +1,14 @@
 // userPackage/carInfo/index.js
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
-import { validateCarNumber } from '../../utils/validator'
-import { editCar } from '../../api/user'
-import { IMG_HOST } from '../../constances/server'
+import {
+  validateCarNumber
+} from '../../utils/validator'
+import {
+  editCar
+} from '../../api/user'
+import {
+  IMG_HOST
+} from '../../constances/server'
 const app = getApp()
 const api = app.$api
 let data
@@ -34,13 +40,14 @@ Page({
     data = this.data
     const series = options.series ? JSON.parse(options.series) : null
     const car = options.car ? JSON.parse(options.car) : null
-    
+
     this.setData({
+      car: car,
       series: series,
       from: options.from || '',
       carId: car ? car.id : '',
       activeYearItem: car ? car.year : '',
-      activeCarItem: car ?car.name : '',
+      activeCarItem: car ? car.name : '',
       carNum: car ? car.car_num : '',
       focus: car && car.focus == 1 ? true : false,
       miles: car ? car.miles : '',
@@ -49,7 +56,7 @@ Page({
       IMG_HOST: IMG_HOST
     }, () => {
       // console.log(data)
-      if(!data.from) this.getCarYear()
+      if (data.from !== 'edit' && data.from !== 'createOrderManage') this.getCarYear()
     })
   },
 
@@ -64,7 +71,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+
   },
 
   /**
@@ -101,7 +108,7 @@ Page({
   /* onShareAppMessage: function () {
 
   }, */
-  
+
   // 获取车型年份
   async getCarYear() {
     let res = await api.get('https://tool.bitefu.net/car/', {
@@ -111,14 +118,14 @@ Page({
       pagesize: 50
     }, false)
     console.log(res)
-    if(res.statusCode == 200) {  
+    if (res.statusCode == 200) {
       this.setData({
         carYearList: res.data.info
       })
     }
-    
+
   },
-  
+
   // 获取车型
   async getCarList() {
     let res = await api.get('https://tool.bitefu.net/car/', {
@@ -129,17 +136,17 @@ Page({
       pagesize: 300
     }, false)
     console.log(res)
-    if(res.statusCode == 200) {
+    if (res.statusCode == 200) {
       this.setData({
         carList: res.data.info
       })
     }
   },
-  
+
   // 车型年份
   bindPickerYear(e) {
     const value = e.detail.value,
-    activeYearItem = this.data.carYearList[value];
+      activeYearItem = this.data.carYearList[value];
     //
     this.setData({
       activeYear: value,
@@ -147,11 +154,11 @@ Page({
     })
     this.getCarList()
   },
-  
+
   // 选择车型
   bindPickerCar(e) {
     const value = e.detail.value,
-    activeCarItem = this.data.carList[value];
+      activeCarItem = this.data.carList[value];
     //
     this.setData({
       activeCar: value,
@@ -176,10 +183,10 @@ Page({
 
   // 提交添加
   async onSubmit() {
-  validateCarNumber(data.carNum)
+    validateCarNumber(data.carNum)
 
     /**验证 */
-    if(!data.activeCarItem) {
+    if (!data.activeCarItem) {
       Toast.fail('请选择车型')
       return false
     }
@@ -196,22 +203,41 @@ Page({
       car_num: data.carNum,
     })
 
-    
 
-    if(res.code) {
+
+    if (res.code) {
       wx.showModal({
         content: res.error
       })
 
-    }else {
+    } else {
       Toast({
         type: 'success',
         message: '添加成功',
         onClose: () => {
-          let url = data.from == 'create' ? '/servicePackage/create/index' : '/pages/user/index'
-          wx.redirectTo({
-            url: url,
-          })
+          let url = ''
+          // let url = data.from == 'create' ? '/servicePackage/create/index' : '/pages/user/index'
+          const from = data.from
+          switch (from) {
+            case 'createOrder':
+              url = '/servicePackage/create/index'
+              wx.redirectTo({
+                url: url,
+              })
+              break;
+            case 'createOrderManage':
+              wx.navigateBack({
+                delta: 2
+              })
+              break;  
+            default:
+              url = '/userPackage/userCar/index'
+              wx.redirectTo({
+                url: url,
+              })
+              break;
+          }
+          
         },
       });
     }
@@ -238,17 +264,18 @@ Page({
   // 编辑保存
   async onSave() {
     let res = editCar({
-      id: data.carId, 
+      id: data.carId,
       miles: data.miles,
       year_check: data.date,
       focus: data.focus ? 1 : 0,
-      car_num: data.carNum})
-    
-      if(!res.code) {
-        Toast.success('保存成功')
-        wx.navigateBack({
-          delta: 1,
-        })
-      }
+      car_num: data.carNum
+    })
+
+    if (!res.code) {
+      Toast.success('保存成功')
+      wx.navigateBack({
+        delta: 1,
+      })
+    }
   }
 })

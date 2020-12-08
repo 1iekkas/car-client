@@ -7,6 +7,6 @@
     {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}} </view>
   </block>
   <block wx:else>
-    <view>请选择预约时间（选填）</view>
+    <view style="color: #c8c9cc">请选择预约时间（选填）</view>
   </block>
 </picker>

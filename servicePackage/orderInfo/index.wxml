@@ -3,13 +3,13 @@
 <template is="skeleton" wx-if="{{loading}}" />
 
 <view class="container {{!loading ? '': 'hidden'}}">
-  <view class="info van-hairline--bottom"  style="{{info.status == 6 ? 'padding-bottom: 60rpx': ''}}">
+  <view class="info van-hairline--bottom" style="{{info.status == 6 ? 'padding-bottom: 60rpx': ''}}">
     <block wx:if="{{info.status == 0}}">
       <view class="info-tips">
         <view class="icon">
-          <van-icon name="passed" color="#07c160" size="52rpx" />订单报价中
+          订单报价中
         </view>
-        <view class="text">请耐心等待商家报价</view>
+        <view class="text">已成功发布需求单，请耐心等待商家报价</view>
         <view class="time">剩余时间
           <van-count-down class="count-down" time="{{ time }}" />
         </view>
@@ -19,9 +19,9 @@
     <block wx:if="{{info.status == 1 || info.status == 2}}">
       <view class="info-tips">
         <view class="icon">
-          <van-icon name="setting" color="#ec8c05" size="52rpx" />待维修
+          待维修
         </view>
-        <view class="text">等待门店维修中</view>
+        <view class="text">等待门店维修作业中</view>
         <!-- <view class="time">剩余时间
           <van-count-down class="count-down" time="{{ time }}" />
         </view> -->
@@ -31,9 +31,9 @@
     <block wx:if="{{info.status == 3}}">
       <view class="info-tips">
         <view class="icon">
-          <van-icon name="underway-o" color="#ec8c05" size="52rpx" /><text>待交付</text>
+          待交付
         </view>
-        <view class="text">服务已完成，请确认商家已交付车辆</view>
+        <view class="text">需求服务已完成，请确认商家已交付车辆</view>
         <!-- <view class="time">剩余时间
           <van-count-down class="count-down" time="{{ time }}" />
         </view> -->
@@ -43,9 +43,9 @@
     <block wx:if="{{info.status == 5}}">
       <view class="info-tips">
         <view class="icon">
-          <van-icon name="success" color="#ec8c05" size="52rpx" /><text>已取消</text>
+          订单已取消
         </view>
-        <view class="text">订单已取消</view>
+        <view class="text">感谢使用科思汽车小程序，期待你的再临</view>
         <!-- <view class="time">剩余时间
           <van-count-down class="count-down" time="{{ time }}" />
         </view> -->
@@ -54,9 +54,9 @@
     <block wx:if="{{info.status == 4}}">
       <view class="info-tips">
         <view class="icon">
-          <van-icon name="success" color="#07c160" size="52rpx" /><text>已完成</text>
+          服务已完成
         </view>
-        <view class="text">订单已完成</view>
+        <view class="text">本次服务已完成，感谢您的使用</view>
         <!-- <view class="time">剩余时间
           <van-count-down class="count-down" time="{{ time }}" />
         </view> -->
@@ -68,26 +68,35 @@
         <view class="icon">
           <van-icon name="gold-coin-o" color="#ec8c05" size="52rpx" /><text>退款中</text>
         </view>
-        <view class="text">等待商家确认退款</view>
-        <view class="step">
-          <view class="step-item">
-            <view class="phoneColor" bindtap="onPhone">
-              <view>联系商家</view>
-              <view class="phone"><van-icon name="phone-o" />18055881011</view>
-            </view>
-          </view>
-          <van-icon name="arrow" />
-          <view class="step-item">协商退款金额</view>
-          <van-icon name="arrow" />
-          <view class="step-item">完成退款</view>
-        </view>
+        <view class="text">退款申请已提交，等待商家确认退款</view>
       </view>
     </block>
   </view>
+
+  <block wx:if="{{info.status == 6}}">
+    <view class="refund">
+      <view class="refund-title">退款流程</view>
+      <view class="step">
+        <view class="step-item">
+          <view class="phoneColor" bindtap="onPhone">
+            <view>联系商家</view>
+            <view class="phone">
+              <van-icon name="phone-o" />18055881011</view>
+          </view>
+        </view>
+        <van-icon name="arrow" />
+        <view class="step-item">协商退款金额</view>
+        <van-icon name="arrow" />
+        <view class="step-item">完成退款</view>
+      </view>
+    </view>
+  </block>
+
   <view class="line"></view>
   <!---->
   <view class="form">
-    <van-cell-group>
+    <view class="title van-hairline--bottom">需求详情</view>
+    <van-cell-group border="{{ false }}">
       <van-cell title-width="150rpx" title="需求描述" value="{{info.content}}" />
       <van-cell title="预算费用">
         <view class="price">
@@ -149,7 +158,8 @@
 
               </view>
             </view>
-            <view class="store-address van-hairline--top" catchtap="openMap" data-lat="{{item.lat}}" data-lng="{{item.lnt}}">
+            <view class="store-address van-hairline--top" catchtap="openMap" data-lat="{{item.lat}}"
+              data-lng="{{item.lnt}}">
               <view class="location">{{item.detail}}</view>
               <view class="range" wx:if="{{item.distance}}">{{item.distance}}km</view>
             </view>
@@ -176,7 +186,8 @@
                 <view class="price">价格:￥{{item.fee}}</view>
               </view>
             </view>
-            <view class="store-address van-hairline--top" catchtap="openMap" data-lat="{{item.lat}}" data-lng="{{item.lnt}}">
+            <view class="store-address van-hairline--top" catchtap="openMap" data-lat="{{item.lat}}"
+              data-lng="{{item.lnt}}">
               <view class="location">{{item.detail}}</view>
               <view class="range" wx:if="{{item.distance}}">{{item.distance}}km</view>
             </view>
@@ -272,9 +283,10 @@
       <van-radio-group value="{{ cancelType }}">
         <van-cell-group border="{{false}}">
           <block wx:for="{{cancelList}}" wx:key="index">
-            <van-cell border="{{false}}" title="{{item.title}}" clickable data-name="{{item.id}}" bind:click="onChangeCancel">
-            <van-radio slot="right-icon" name="{{item.id}}" />
-          </van-cell>
+            <van-cell border="{{false}}" title="{{item.title}}" clickable data-name="{{item.id}}"
+              bind:click="onChangeCancel">
+              <van-radio slot="right-icon" name="{{item.id}}" />
+            </van-cell>
           </block>
         </van-cell-group>
       </van-radio-group>

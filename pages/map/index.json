@@ -2,5 +2,6 @@
   "usingComponents": {
     "campaign": "../../components/index-campaign/index"
   },
-  "navigationStyle": "custom"
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "科思汽车"
 }

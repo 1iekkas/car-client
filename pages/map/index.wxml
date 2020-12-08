@@ -26,7 +26,6 @@
   <block wx:if="{{location}}">
     <map id="map" longitude="{{location.location.lng}}" setting="{{mapSetting}}" control="{{false}}"
       markers="{{markers}}" latitude="{{location.location.lat}}"
-      
       style="width: 100vw;height: calc(100vh - {{navBarHeight}}px - 170rpx);margin-top: {{navBarHeight}}px;"
       bindregionchange="regionchange">
       <image class="location-marker" src="../../static/img/marker.png" mode="widthFix"></image>
@@ -45,7 +44,7 @@
             <van-cell is-link bindtap="linkToOrder">
               <view slot="title" class="">
                 您有
-                <text class="number">1</text>
+                <text class="number">{{orderCount}}</text>
                 笔订单进行中
               </view>
             </van-cell>
@@ -80,15 +79,11 @@
         <!---->
         <view class="banner">
           <van-image fit="cover" width="calc((100vw - 60rpx))" height="calc((100vw - 60rpx) / 4)"
-            src="http://i1.fuimg.com/605992/5dbd9bbe8e675c91.png" />
+            src="https://car.coasewash.com/storage/1.png" />
         </view>
-
       </view>
     </movable-view>
   </movable-area>
-
-
-
 </view>
 
 <campaign />

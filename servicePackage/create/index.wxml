@@ -35,22 +35,22 @@
         placeholder="详细的需求描述有助于获得更精准的报价" autosize="{{ autosize }}" border="{{ false }}" />
     </van-cell-group>
     <!--上传组件-->
-    <view class="form-title">（选填）上传图片</view>
+    <view class="form-title">上传图片（选填）</view>
     <view class="upload">
       <van-uploader bind:delete="onDelImage" file-list="{{ fileList }}" max-count="6" bind:after-read="afterRead"
         multiple />
     </view>
     <!---->
     <van-cell-group>
-      <van-field custom-class="padding" required label="联系电话" type="number" data-type="phone" value="{{ phone }}"
+      <van-field custom-class="padding" custom-style="padding: 26rpx 16rpx 26rpx 26rpx" required label="联系电话" type="number" data-type="phone" value="{{ phone }}"
         input-align="right" placeholder="请填写联系电话,仅已预约门店可见" bind:change="onChange" />
-      <van-field custom-style="color: #000" type="number" custom-class="padding" require label="预算费用"
+      <van-field custom-style="padding: 26rpx 16rpx 26rpx 26rpx" type="number" custom-class="padding" require label="预算费用"
         data-type="evaluate_fee" bind:change="onChange" value="{{ evaluate_fee }}" placeholder="请输入预算费用（选填）"
         input-align="right" />
-      <van-cell custom-class="padding" require title="预约时间" input-align="right" placeholder="（选填）">
+      <van-cell custom-class="padding field-cell" require title="预约时间" title-width="80px" input-align="right" placeholder="（选填）">
         <picker-date bindset="set"></picker-date>
       </van-cell>
-      <van-cell title="需上门服务" custom-class="padding" class="loc-cell">
+      <van-cell title="需上门服务" custom-class="padding field-cell" class="loc-cell">
         <view class="slot-title" align="right">
           <van-checkbox class="checkboxes-{{ index }}" data-type="isLocation" name="{{ item }}" value="{{ isLocation }}"
             bind:change="onChange"></van-checkbox>

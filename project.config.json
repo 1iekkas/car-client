@@ -138,7 +138,7 @@
         {
           "name": "订单信息",
           "pathName": "servicePackage/orderInfo/index",
-          "query": "id=101",
+          "query": "id=109",
           "scene": null
         },
         {
@@ -192,6 +192,7 @@
         {
           "name": "钱包",
           "pathName": "userPackage/wallet/index",
+          "query": "",
           "scene": null
         }
       ]

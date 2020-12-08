@@ -4,7 +4,7 @@ page {
 }
 
 .content {
-  padding: 30rpx 0 100rpx 0;
+  padding: 30rpx 0 130rpx 0;
 }
 
 .car-item {

@@ -1,7 +1,7 @@
 <!--components/index-campaign/index.wxml-->
 <van-overlay z-index="1000" show="{{ show }}" bind:click="onClickHide">
   <view class="wrapper">
-   <image src="http://i1.fuimg.com/605992/bed17768bb2fbb97.png" mode="widthFix" style="width: 60vw"></image>
+   <image src="https://car.coasewash.com/storage/2.png" mode="widthFix" style="width: 60vw"></image>
    <view class="close" bindtap="onClickHide">
     <van-icon name="close" size="48rpx" />
    </view>

@@ -11,7 +11,7 @@
       <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{5000}}" duration="{{800}}">
         <block wx:for="{{1}}" wx:key="*this">
           <swiper-item>
-            <image src="../../static/img/store.jpg" mode="widthFix" style="width: 100vw;height: 100%"></image>
+            <image src="../../static/img/store.jpg" mode="widthFix" style="width: 100vw;height: 80vw"></image>
           </swiper-item>
         </block>
       </swiper>
@@ -96,3 +96,13 @@
     </view>
   </view>
 </view>
+
+<van-goods-action>
+  <van-goods-action-icon icon="share-o" text="分享" bind:click="onClickIcon" />
+  <van-goods-action-icon icon="star-o" text="收藏" bind:click="onClickIcon" />
+  <van-goods-action-icon icon="phone-o" text="联系店铺" bind:click="onClickIcon" />
+  <van-goods-action-button text="立即询价" bind:click="onClickIcon" />
+</van-goods-action>
+
+
+

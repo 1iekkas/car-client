@@ -3,6 +3,10 @@ page {
   background-color: #f7f7f7;
 }
 
+.container {
+  padding-bottom: 60px;
+}
+
 navigation {
   position: relative;
   z-index: 10;
@@ -117,7 +121,7 @@ swiper {
   top: 0;
   bottom: 0;
   left: 0;
-  background: -webkit-linear-gradient(top, #f89c1a, #f3c078);
+  background: -webkit-linear-gradient(top, #f89c1a, #fabc66);
 }
 
 .store-address .address-info {

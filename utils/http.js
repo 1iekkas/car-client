@@ -265,7 +265,7 @@ const api = {
 const refreshToken = (url, data, isSignature = true, callback) => {
   let refresh_token = wx.getStorageSync('refresh_token')
   // console.log(refresh_token)
-  api.get(`/u/user/token/${refresh_token}`).then(async res => {
+  api.get(`/auth/wechat/token/${refresh_token}`).then(async res => {
     wx.setStorageSync('token', res.data)
     console.log(url)
     let result = await api.get(url, data, isSignature = true)
