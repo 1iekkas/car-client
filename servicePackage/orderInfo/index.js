@@ -131,6 +131,7 @@ Page({
       // 保存
       this.setData({
         info: res.data,
+        time: res.data.remain * 1000,
         loading: false
       }, () => {
         this.getOfferList()
@@ -148,7 +149,7 @@ Page({
       if (res.data.length) {
         // 设置同步map
         Promise.all(res.data.map(async e => {
-          let d = await setCalculateDistance({
+          /* let d = await setCalculateDistance({
             form: {
               latitude: data.info.lat || 0,
               longitude: data.info.lnt || 0
@@ -163,9 +164,9 @@ Page({
             e.distance = (d.result.elements[0].distance / 1000).toFixed(0)
           } else {
             e.distance = '未定位'
-          }
-
-          return e
+          } */
+          e.distance = (e.distance / 1000).toFixed(0)
+          return e 
         })).then(result => {
 
 

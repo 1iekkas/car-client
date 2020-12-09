@@ -144,6 +144,7 @@ Page({
     let res = await getStoreList({
       keywords: data.keywords,
       type: 2,
+      page: data.page,
       page_size: 10
     })
     if(!res.code) {
@@ -156,6 +157,7 @@ Page({
         list: data.list,
         triggered: false,
         loading: false,
+        page: data.page + 1,
         total: res.data.last_page
       })
     }
@@ -163,7 +165,7 @@ Page({
 
   // 分页加载
   lower() {
-    if(this.loading || data.page >= data.total) return false
+    if(this.loading || data.page > data.total) return false
     this.loading = true
     this.setData({
       loading: true
@@ -179,9 +181,10 @@ Page({
     })
   },
 
-  linkToStore() {
+  linkToStore(e) {
+    const { id } = e.currentTarget.dataset
     wx.navigateTo({
-      url: '/storePackage/store/index',
+      url: `/storePackage/store/index?id=${id}`,
     })
   }
 })

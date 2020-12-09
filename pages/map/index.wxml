@@ -12,7 +12,7 @@
         </block>
       </view>
       <view class="location" bindtap="mapSearch">
-        {{location.address_component.city}}
+        {{location.address_component.city || '未定位'}}
         <van-icon class="icon-down" name="arrow-down" />
       </view>
     </view>

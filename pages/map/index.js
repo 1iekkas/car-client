@@ -80,7 +80,7 @@ Page({
     }
     // 用户信息回调
     app.userInfoReadyCallback = res => {
-      // console.log(res)
+      console.log(res)
       this.setData({
         userInfo: res.userInfo,
         hasUserInfo: true

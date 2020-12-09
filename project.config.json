@@ -114,8 +114,8 @@
         {
           "name": "店铺详情",
           "pathName": "storePackage/store/index",
-          "query": "",
-          "scene": null
+          "query": "id=26",
+          "scene": 1007
         },
         {
           "name": "地点搜索",

@@ -11,7 +11,7 @@
       <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{5000}}" duration="{{800}}">
         <block wx:for="{{1}}" wx:key="*this">
           <swiper-item>
-            <image src="../../static/img/store.jpg" mode="widthFix" style="width: 100vw;height: 80vw"></image>
+            <image src="{{store.facade_images[0]}}" mode="widthFix" style="width: 100vw;height: 80vw"></image>
           </swiper-item>
         </block>
       </swiper>
@@ -19,15 +19,15 @@
     <!---->
     <view class="store-info">
       <view class="info">
-        <view class="name">曼狄卡豪车升级改装中心（广州）</view>
+        <view class="name">{{store.name}}</view>
         <!-- <view class="range">
           800m
         </view> -->
       </view>
       <view class="service">
-        <van-tag color="#ec8c05" plain>企业</van-tag>
+        <van-tag color="#ec8c05" plain>{{store.type == 2 ? '企业': '个人'}}</van-tag>
         <view class="block">
-          总订单 <text>396</text>
+          总订单 <text>{{store.order_count}}</text>
         </view>
         <view class="block">
           评分 <text>4.3</text>
@@ -44,8 +44,8 @@
         <van-icon name="arrow" size="26rpx" color="#999" />
       </view>
       <view class="address-info">
-        <text>广东省广州市番禺区东环街蔡二工业区二街1号</text>
-        <text>0.8km</text>
+        <text>{{store.detail}}</text>
+        <text>{{store.distance}}km</text>
       </view>
     </view>
 
@@ -90,7 +90,7 @@
         <van-icon name="arrow" size="26rpx" color="#999" />
       </view>
       <view class="address-info">
-        <text>广东省广州市番禺区东环街蔡二工业区二街1号</text>
+        <text>{{store.detail}}</text>
         <text>0.8km</text>
       </view>
     </view>

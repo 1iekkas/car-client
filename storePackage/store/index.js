@@ -1,8 +1,12 @@
 // servicePackage/store/index.js
 import {
+  getStoreInfo
+} from '../../api/store'
+import {
   openMap
 } from '../../api/wxServer'
 const app = getApp()
+let data 
 Page({
 
   /**
@@ -18,14 +22,51 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
+    let pages = getCurrentPages();
+    this.prevPage = pages[pages.length - 2];  
+    console.log(`id:${JSON.stringify(options)}`)
+    data = this.data
+    this.storeId = options.id
+    
+    if(!this.prevPage) {
+      console.log('执行1')
+      // console.log(app.globalData.location)
+      if(app.globalData.location) {
+        this.getStoreInfo({
+          id: options.id,
+          lat: app.globalData.location.location.lat,
+          lnt: app.globalData.location.location.lng
+        })
 
+        return false
+      }
+      // 定位回调
+      app.locationReadyCallback = res => {
+        // console.log('定位回调')
+        this.getStoreInfo({
+          id: options.id,
+          lat: res.location.lat,
+          lnt: res.location.lng
+        })
+      }
+    }else {
+      console.log('执行2')
+      this.getStoreInfo({
+        id: options.id,
+        lat: app.globalData.location.location.lat,
+        lnt: app.globalData.location.location.lng
+      })
+    }
+
+    
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
 
   /**
@@ -68,9 +109,9 @@ Page({
    */
   onShareAppMessage: function () {
     return {
-      title: '曼狄卡豪车升级改装中心（广州）',
-      path: '/storePackage/store/index',
-      imageUrl: '../../static/img/store.jpg'
+      title: data.store.name,
+      path: `/storePackage/store/index?id=${data.store.id}`,
+      imageUrl: data.store.facade_images[0]
     }
   },
 
@@ -88,10 +129,25 @@ Page({
     // Do something when page scroll
   },
 
+  async getStoreInfo(params) {
+    let res = await getStoreInfo({
+      ...params
+    })
+
+    if (!res.code) {
+      console.log(`店铺信息：${JSON.stringify(res.data)}`)
+      res.data.distance = (res.data.distance / 1000).toFixed(0)
+      this.setData({
+        store: res.data
+      })
+    }
+  },
+
   openMap() {
     openMap({
-      latitude: 23.00944, // 纬度，范围为-90~90，负数表示南纬
-      longitude: 113.12249
+      latitude: data.store.lat, // 纬度，范围为-90~90，负数表示南纬
+      longitude: data.store.lnt,
+      name: data.store.name
     })
   },
 
@@ -113,18 +169,16 @@ Page({
   },
 
   back() {
-    let pages = getCurrentPages();
-    let prevPage = pages[pages.length - 2];
-    console.log(pages)
-    if(prevPage) {
+    
+    if (this.prevPage) {
       wx.navigateBack({
         delta: 1
       })
-    }else {
+    } else {
       wx.redirectTo({
         url: '/pages/map/index',
       })
     }
-    
+
   }
 })

@@ -24,7 +24,7 @@
       <!--存在数据-->
       <block wx:else>
         <view class="group">
-          <view class="store-item" wx:for="{{list}}" wx:key="index" bindtap="linkToStore">
+          <view class="store-item" wx:for="{{list}}" wx:key="index" bindtap="linkToStore" data-id="{{item.id}}">
             <view class="store-body">
               <van-image width="100" height="100" src="{{item.facade_images[0]}}"></van-image>
               <view class="store-content">
