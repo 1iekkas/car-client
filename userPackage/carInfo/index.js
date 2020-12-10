@@ -28,8 +28,9 @@ Page({
     miles: '',
     date: '',
     carNum: '',
-    focus: false,
-    isLoading: false
+    focus: true,
+    isLoading: false,
+    carNumberType: 0
   },
 
   /**
@@ -255,6 +256,23 @@ Page({
   },
 
   // 车牌
+  onChangeCarNumberType(e) {
+    this.setData({
+      carNumberType: e.currentTarget.dataset.value == 1 ? 0 : 1
+    })
+  },
+
+  setCarNumber(e) {
+    console.log(e)
+    this.setData({
+      carNum: e.detail
+    })
+  },
+
+  onKeyboard() {
+    this.selectComponent("#keyboard").onClose()
+  },
+
   onChangeCarNum(e) {
     this.setData({
       carNum: e.detail

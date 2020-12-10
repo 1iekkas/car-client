@@ -76,7 +76,8 @@ Page({
   onShow: function () {
     this.setData({
       list: [],
-      page: 1
+      page: 1,
+      loading: true
     })
     this.getList()
   },
@@ -171,8 +172,6 @@ Page({
       url: `/servicePackage/orderInfo/index?id=${id}`,
     })
   },
-
-
 
   // 分页加载
   lower() {

@@ -48,8 +48,15 @@
     <!---->
 
 
-    <van-field label="车牌号" value="{{ carNum }}" input-align="right" placeholder="请输入车牌号码"
-      bind:change="onChangeCarNum" />
+    <van-field required label="车牌号" readonly value="{{ carNum }}" input-align="right" placeholder="请输入车牌号码"
+      bindtap="onKeyboard" custom-style="color: #323232">
+      <!-- <block wx:if="{{carNumberType == 1}}">
+        <van-tag slot="button" size="medium" plain type="success" catchtap="onChangeCarNumberType" data-value="1">新能源</van-tag>
+      </block>
+      <block wx:else>
+        <van-tag slot="button" size="medium" plain type="primary" catchtap="onChangeCarNumberType" data-value="0">普通牌</van-tag>
+      </block> -->
+    </van-field>
 
     <van-cell title="是否设为默认">
       <van-checkbox value="{{ focus }}" bind:change="onChangeDefault"></van-checkbox>
@@ -80,5 +87,7 @@
     </block>
   </view>
 </view>
-
+<!--键盘-->
+<keyboard id="keyboard" bind:set="setCarNumber" bind:close="closeKeyboard"></keyboard>
 <van-toast id="van-toast" />
+
