@@ -35,11 +35,16 @@
         placeholder="详细的需求描述有助于获得更精准的报价" autosize="{{ autosize }}" border="{{ false }}" />
     </van-cell-group>
     <!--上传组件-->
-    <view class="form-title">上传图片（选填）</view>
-    <view class="upload">
-      <van-uploader bind:delete="onDelImage" file-list="{{ fileList }}" max-count="6" bind:after-read="afterRead"
-        multiple />
+    <view class="form-title switch-upload">
+      <text>上传图片（选填）</text>
+      <van-checkbox value="{{ isImg }}" bind:change="onChangeUpload"></van-checkbox>
     </view>
+    <block wx:if="{{isImg}}">
+      <view class="upload">
+        <van-uploader bind:delete="onDelImage" file-list="{{ fileList }}" max-count="6" bind:after-read="afterRead"
+          multiple />
+      </view>
+    </block>
     <!---->
     <van-cell-group>
       <van-field custom-class="padding" custom-style="padding: 26rpx 16rpx 26rpx 26rpx" required label="联系电话" type="number" data-type="phone" value="{{ phone }}"

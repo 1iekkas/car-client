@@ -224,6 +224,15 @@ page {
   padding-right: 20rpx;
 }
 
+.store-address .location .range {
+  display: flex;
+  align-items: center;
+}
+
+.store-address .location .range .van-icon {
+  margin-top: 2rpx;
+}
+
 van-goods-action-button {
   text-align: right;
 }

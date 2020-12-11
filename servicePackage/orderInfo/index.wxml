@@ -22,9 +22,9 @@
           待维修
         </view>
         <view class="text">等待门店维修作业中</view>
-        <!-- <view class="time">剩余时间
-          <van-count-down class="count-down" time="{{ time }}" />
-        </view> -->
+        <view>
+          <van-button type="default" size="small" hairline>申请退款</van-button>
+        </view>
       </view>
     </block>
     <!---->
@@ -46,9 +46,6 @@
           订单已取消
         </view>
         <view class="text">感谢使用科思汽车小程序，期待你的再临</view>
-        <!-- <view class="time">剩余时间
-          <van-count-down class="count-down" time="{{ time }}" />
-        </view> -->
       </view>
     </block>
     <block wx:if="{{info.status == 4}}">
@@ -57,9 +54,9 @@
           服务已完成
         </view>
         <view class="text">本次服务已完成，感谢您的使用</view>
-        <!-- <view class="time">剩余时间
-          <van-count-down class="count-down" time="{{ time }}" />
-        </view> -->
+        <view>
+          <van-button type="default" size="small" hairline>评价</van-button>
+        </view>
       </view>
     </block>
     <!--6: 待商家确认取消-->
@@ -138,14 +135,14 @@
       </van-sticky>
       <view class="store-group">
         <block wx:if="{{offerList.length}}">
-          <view class="store-item" wx:for="{{offerList}}" wx:key="index">
+          <view class="store-item" wx:for="{{offerList}}" wx:key="index" bindtap="storeDetails" data-id="{{item.id}}">
             <view class="store-body">
               <van-image width="100" height="100" src="{{item.facade_images[0]}}"></van-image>
               <view class="store-content">
                 <view class="name">{{item.name}}</view>
                 <block wx:if="{{ !item.vague }}">
-                  <view class="price">价格:￥{{item.fee}}</view>
-                  <view class="pay" bindtap="onSelectShop" data-item="{{item}}">
+                  <view class="price">报价:￥{{item.fee}}</view>
+                  <view class="pay" catchtap="onSelectShop" data-item="{{item}}">
                     <view>预约支付</view>
                     <van-icon name="arrow" size="26rpx" style="margin-top: 4rpx"></van-icon>
                   </view>
@@ -161,7 +158,7 @@
             <view class="store-address van-hairline--top" catchtap="openMap" data-lat="{{item.lat}}"
               data-lng="{{item.lnt}}">
               <view class="location">{{item.detail}}</view>
-              <view class="range" wx:if="{{item.distance}}">{{item.distance}}km</view>
+              <view class="range" wx:if="{{item.distance}}">{{item.distance}}km <van-icon name="location"></van-icon></view>
             </view>
           </view>
         </block>
@@ -178,12 +175,12 @@
       <view class="title van-hairline--bottom">服务门店</view>
       <view class="store-group">
         <block wx:if="{{offerList.length}}">
-          <view class="store-item" wx:for="{{offerList}}" wx:key="index">
+          <view class="store-item" wx:for="{{offerList}}" wx:key="index" bindtap="storeDetails" data-id="{{item.id}}">
             <view class="store-body">
               <van-image width="100" height="100" src="{{item.facade_images[0]}}"></van-image>
               <view class="store-content">
                 <view class="name">{{item.name}}</view>
-                <view class="price">价格:￥{{item.fee}}</view>
+                <view class="price">报价:￥{{item.fee}}</view>
               </view>
             </view>
             <view class="store-address van-hairline--top" catchtap="openMap" data-lat="{{item.lat}}"
@@ -208,6 +205,18 @@
         <van-icon name="service" /><text>联系客服</text></navigator>
     </view>
   </block>
+
+  
+  <!--订单信息-->
+  <view class="line"></view>
+  <view class="form">
+    <view class="title van-hairline--bottom">订单信息</view>
+    <van-cell-group border="{{false}}">
+      <van-cell title="订单编号" value="{{ info.order_no }}"></van-cell>
+      <van-cell title="创建时间" value="{{info.create_time}}"></van-cell>
+    </van-cell-group>
+  </view>
+
   <!--付款明细-->
   <block wx:if="{{ info.status != 0}}">
     <view class="line"></view>

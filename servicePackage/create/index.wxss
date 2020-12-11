@@ -70,9 +70,9 @@ page {
 }
 
 .form-title {
-  color: #646566;
+  color: #323232;
   font-size: 28rpx;
-  padding: 20rpx 30rpx;
+  padding: 20rpx 26rpx 20rpx 26rpx;
 }
 
 .upload {
@@ -170,4 +170,11 @@ van-field .van-field__label {
   top: 30rpx;
   right: 30rpx;
 }
+
+.switch-upload {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 

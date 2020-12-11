@@ -50,7 +50,7 @@ Page({
       activeYearItem: car ? car.year : '',
       activeCarItem: car ? car.name : '',
       carNum: car ? car.car_num : '',
-      focus: car && car.focus == 1 ? true : false,
+      focus: true,
       miles: car ? car.miles : '',
       date: car ? car.year_check : '',
       logo: car ? `${IMG_HOST}${car.img}` : '',
@@ -72,7 +72,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    console.log(getCurrentPages())
   },
 
   /**
@@ -216,17 +216,31 @@ Page({
         type: 'success',
         message: '添加成功',
         onClose: () => {
-          let url = ''
+          let url, pre
           // let url = data.from == 'create' ? '/servicePackage/create/index' : '/pages/user/index'
           const from = data.from
           switch (from) {
             case 'createOrder':
               url = '/servicePackage/create/index'
-              wx.redirectTo({
+              pre = getCurrentPages()[getCurrentPages().length - 3]
+              pre.setData({
+                showCar: false,
+                catchMove: false
+              })
+              // wx.setStorageSync('refresh', true)
+              /* wx.reLaunch({
                 url: url,
+              }) */
+              wx.navigateBack({
+                delta: 2
               })
               break;
             case 'createOrderManage':
+              pre = getCurrentPages()[getCurrentPages().length - 2]
+              pre.setData({
+                showCar: false,
+                catchMove: false
+              })
               wx.navigateBack({
                 delta: 2
               })

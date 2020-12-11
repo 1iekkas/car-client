@@ -326,4 +326,11 @@ Page({
     })
   },
 
+  storeDetails(e) {
+    const { id } = e.currentTarget.dataset;
+    wx.navigateTo({
+      url: `/storePackage/store/index?id=${id}`,
+    })
+  }
+
 })

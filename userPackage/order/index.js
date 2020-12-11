@@ -79,6 +79,7 @@ Page({
       page: 1,
       loading: true
     })
+    
     this.getList()
   },
 
@@ -175,7 +176,7 @@ Page({
 
   // 分页加载
   lower() {
-    if(this.loading || data.page > data.total) return false
+    if(data.loading || this.loading || data.page > data.total) return false
     this.loading = true
     this.setData({
       loading: true

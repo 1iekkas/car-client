@@ -25,6 +25,7 @@ Page({
     fileList: [],
     doorType: '1',
     location: null,
+    isImg: false,
     showCar: false,
     catchMove: false
   },
@@ -50,6 +51,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: async function() {
+    this.setData({
+      showCar: false,
+      catchMove: false
+    })
+
     let location = wx.getStorageSync('location') || null
     if(location) {
       this.setData({
@@ -57,7 +63,7 @@ Page({
       })
     }
 
-    console.log(location)
+    // console.log(location)
     let res = await getCarList(),
       car = [];
     if(!res.code) car = res.data.length ? res.data.filter(e => e.focus == 1)[0] : []
@@ -73,7 +79,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    // wx.setStorageSync('refresh', null)
   },
 
   /**
@@ -102,6 +108,13 @@ Page({
    */
   onShareAppMessage: function() {
 
+  },
+
+  onChangeUpload(e) {
+    this.setData({
+      isImg: e.detail,
+      fileList: []
+    })
   },
 
   //
