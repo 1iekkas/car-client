@@ -1,12 +1,7 @@
 {
   "usingComponents": {
-    "van-search": "@vant/weapp/search/index",
-    "navigation": "/components/nav-bar/index",
-    "van-icon": "@vant/weapp/icon/index",
-    "van-button": "@vant/weapp/button/index",
-    "van-cell": "@vant/weapp/cell/index",
-    "van-cell-group": "@vant/weapp/cell-group/index",
-    "van-image": "@vant/weapp/image/index"
+    "campaign": "../../components/index-campaign/index"
   },
-  "navigationStyle": "custom"
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "科思汽车"
 }

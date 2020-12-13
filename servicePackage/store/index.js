@@ -7,7 +7,8 @@ Page({
    */
   data: {
     navBarHeight: app.globalData.navBarHeight, //导航栏高度
-    menuHeight: app.globalData.menuHeight
+    menuHeight: app.globalData.menuHeight,
+    IMG_HOST: app.globalData.IMG_HOST
   },
 
   /**

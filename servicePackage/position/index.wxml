@@ -1,0 +1,45 @@
+<!--servicePackage/position/index.wxml-->
+<view class="container">
+  <van-sticky offset-top="0">
+    <block wx:if="{{location}}">
+      <map id="map" longitude="{{location.location.lng}}" setting="{{mapSetting}}" control="{{false}}"
+        markers="{{markers}}" latitude="{{location.location.lat}}" style="width: 100vw;height: 50vh;"
+        bindregionchange="regionchange">
+        <image class="location-marker" src="../../static/img/marker.png"></image>
+      </map>
+    </block>
+
+  </van-sticky>
+  <!---->
+  <view class="content">
+    <van-search catchtouchmove="{{true}}" value="{{ location.formatted_addresses.recommend }}" placeholder="请输入地点" use-left-icon-slot
+      use-action-slot bind:change="onChange" bind:search="onSearch">
+    </van-search>
+    <block>
+      <scroll-view enhanced scroll-y="true" style="height: calc(50vh - 54px - 44px - 10px);" bindscrolltoupper="upper"
+        bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{top}}">
+        <view class="content" style="min-height: calc(50vh - 54px - 44px - 8px);">
+          <!--地点列表-->
+          <view class="address-group">
+            <view wx:for="{{addressList}}"  wx:key="index" class="address-list van-hairline--bottom" bindtap="onClickAddress" data-item="{{item}}">
+              <van-icon name="location-o" size="26rpx" />
+              <view class="info">
+                <view class="title">{{ item.title }}</view>
+                <view class="address">{{ item.address }}</view>
+              </view>
+              <block wx:if="{{ location.id == item.id }}">
+                <van-icon class="active-icon" name="success" />
+              </block>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </block>
+
+    <view class="button">
+      <van-button type="primary" block bind:click="back">确定</van-button>
+    </view>
+
+  </view>
+
+</view>

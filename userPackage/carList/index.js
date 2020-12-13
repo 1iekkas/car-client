@@ -1,4 +1,6 @@
 // userPackage/carList/index.js
+import { getCarBrand } from '../../api/car'
+import { IMG_HOST } from '../../constances/server'
 const app = getApp()
 const api = app.$api
 Page({
@@ -20,7 +22,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.setData({
+      IMG_HOST: IMG_HOST,
+      from: options.from || ''
+    })
   },
 
   /**
@@ -75,14 +80,14 @@ Page({
   // 获取品牌列表
   async getCarBrand() {
     const data = this.data
-    let res = await api.get('https://tool.bitefu.net/car/', {
+    let res = await getCarBrand({
       type: 'brand',
       from: 0,
       pagesize: 300
-    })
+    }, false)
     if (res.statusCode == 200) {
       // 处理数据
-      let keys = res.data.info.map(e => e.firstletter)
+      let keys = res.data.map(e => e.firstletter)
       /* for(let i = 0 ; i < 26; i++) {
         keys.push(String.fromCharCode((65 + i)))
       } */
@@ -92,7 +97,7 @@ Page({
       }))
 
       brand.map((el, index) => {
-        res.data.info.filter(e => {
+        res.data.filter(e => {
           if (e.firstletter == el.key) {
             brand[index].list.push(e)
           }
@@ -119,13 +124,21 @@ Page({
 
   // 选中项
   async select(e) {
+    wx.showLoading({
+      druation: 0,
+      mask: true,
+      title: '加载中...',
+    })
     const item = e.currentTarget.dataset.item;
-    
+    // console.log(item)
     let factory = await this.getFactory(item.id) //厂家
     let series = await this.getCarSeries(item.id) // 车系
     
     // 如果没有数据 终止逻辑
-    if(!factory) return false
+    if(!factory) {
+      wx.hideLoading()
+      return false
+    }
     
     // 处理数据
     factory.map((el, index) => {
@@ -137,13 +150,32 @@ Page({
       })
     })
     
-    //console.log(factory)
+    // console.log(factory)
     this.setData({
       activeBrand: item,
       show: true,
       activeSeries: 0,
       seriesList: factory
+    },() => {
+      wx.hideLoading()
     })
+  },
+  
+  // 获取厂家
+  async getFactory(id) {
+    let res = await getCarFactory({
+      id: id,
+    }, false)
+    console.log(res)
+    if(res.statusCode == 200) {
+      return res.data
+    }else {
+      wx.showModal({
+        content: res.data.info
+      })
+      
+      return false
+    }
   },
   
   // 获取厂家
@@ -153,7 +185,7 @@ Page({
       from: 0,
       brand_id: id,
       pagesize: 50
-    })
+    }, false)
     if(res.statusCode == 200 && res.data.status == 1) {
       return res.data.info
     }else {
@@ -172,26 +204,29 @@ Page({
       from: 0,
       brand_id: id,
       pagesize: 50
-    })
+    }, false)
     if(res.statusCode == 200) {
       return res.data.info 
     }
   },
-  
+
   // 选择车系
   onSelectSeries(e) {
     let series = e.currentTarget.dataset.series;
     series.brand_logo = this.data.activeBrand.img
-    
     this.setData({
       activeSeries: series
+    },() => {
+      wx.navigateTo({
+        url: `/userPackage/carInfo/index?series=${JSON.stringify(this.data.activeSeries)}&from=${this.data.from}`
+      })
     })
   },
   
   // 确认选择
   onConfirmSelect() {
     wx.navigateTo({
-      url: `/userPackage/carInfoList/index?series=${JSON.stringify(this.data.activeSeries)}`
+      url: `/userPackage/carInfo/index?series=${JSON.stringify(this.data.activeSeries)}&from=${this.data.from}`
     })
   }
   

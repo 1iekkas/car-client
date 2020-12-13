@@ -1,0 +1,8 @@
+<!--userPackage/wallet/index.wxml-->
+<view class="container">
+  <view class="card">
+    <view>
+      <van-image src="{{userInfo.avatarUrl}}" round width="90rpx" height="90rpx"></van-image>
+    </view>
+  </view>
+</view>

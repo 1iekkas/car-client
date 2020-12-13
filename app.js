@@ -1,4 +1,5 @@
 //app.js
+// appId wxa487cd75e5f05745
 import {
   checkToken,
   getLocation
@@ -6,7 +7,7 @@ import {
 import {
   $api
 } from 'utils/http.js'
-
+import { IMG_HOST } from 'constances/server'
 App({
   onLaunch: function() {
     this.setNavBarInfo()
@@ -22,8 +23,15 @@ App({
 
     // 检查token是否存在
     checkToken().then(result => {
-      //console.log(result)
+      console.log(`token检测：${result}`)
       if (result) {
+        // 刷新token
+       /*  let refresh_token = wx.getStorageSync('refresh_token')
+        // console.log(refresh_token)
+        $api.get(`/u/user/token/${refresh_token}`).then(res => {
+          wx.setStorageSync('token', res.data)
+        }) */
+
         this.globalData.isLogin = true
         // 获取用户信息
         wx.getSetting({
@@ -33,6 +41,7 @@ App({
               // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
               wx.getUserInfo({
                 success: res => {
+                  console.log('succ')
                   // 可以将 res 发送给后台解码出 unionId
                   this.globalData.userInfo = res.userInfo
 
@@ -46,10 +55,14 @@ App({
             }
           }
         })
+      }else {
+       
       }
       if (this.userTokenReadyCallback) {
+        console.log('userTokenReadyCallback')
         this.userTokenReadyCallback(result)
       }
+     
     })
   },
 
@@ -78,6 +91,7 @@ App({
     menuBotton: 0, // 胶囊距底部间距（保持底部间距一致）
     menuRight: 0, // 胶囊距右方间距（方保持左、右间距一致）
     menuHeight: 0, // 胶囊高度（自定义内容可与胶囊高度保证一致）
+    IMG_HOST: IMG_HOST
   },
 
   $api

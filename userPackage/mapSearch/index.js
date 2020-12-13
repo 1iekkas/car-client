@@ -1,7 +1,7 @@
 // userPackage/mapSearch/index.js
 import { getSuggestion } from '../../api/wxServer'
 const app = getApp()
-
+let data 
 Page({
 
   /**
@@ -16,6 +16,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
     // 定位回调
     app.locationReadyCallback = res => {
       let markers = this.data.markers
@@ -26,14 +27,15 @@ Page({
         //console.log(this.data.markers)
         this.data.map.getCenterLocation({
           success: res => {
-            console.log(res)
+            // console.log(res)
           }
         })
       })
 
     }
 
-    
+    data = this.data
+
   },
 
   /**
@@ -52,8 +54,6 @@ Page({
       location: location
     })
     //console.log(this.data.location)
-    
-    
   },
 
   /**
@@ -97,13 +97,11 @@ Page({
   async onChange(e) {
     const keywords = e.detail,
       data = this.data;
-    console.log(e)
     let res = await getSuggestion({
       keyword: keywords,
       region: data.location.address_component.city
     })
 
-    console.log(res)
     if(res.status == 0) {
       this.setData({
         addressList: res.data
@@ -112,17 +110,24 @@ Page({
   },
 
   onClickAddress(e) {
-    const address = e.currentTarget.dataset.item;
-    console.log(address)
-    app.globalData.location.location = {
-      lng: address.location.lng,
-      lat: address.location.lat
-    }
-    /* wx.navigateTo({
-      url: '/pages/map/index',
-    }) */
+    let address = e.currentTarget.dataset.item;
+    // 深复制
+    let result = JSON.parse(JSON.stringify(data.location))
+    result.formatted_addresses.recommend = address.title
+    result.id = address.id
+    Object.keys(address).map(e => {
+      result[e] = address[e]
+    })
+    wx.setStorageSync('location', result)
     wx.navigateBack({
       delta: 1
     })
   },
+
+  // 跳转切换城市
+  linkToCitySearch() {
+    wx.navigateTo({
+      url: '/userPackage/citySearch/index?from=map',
+    })
+  }
 })

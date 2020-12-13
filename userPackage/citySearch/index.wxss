@@ -1,1 +1,4 @@
 /* userPackage/citySearch/index.wxss */
+van-index-bar .van-index-anchor{
+  background-color: #f7f8fa !important;
+}

@@ -2,23 +2,24 @@
 <view class="container">
   <view class="form-section">
     <view class="logo">
-      <van-image width="80" height="80" round lazy-load src="https://resource.jinduo.com/Image/returnMultimedia?path=/upload/adminback/image/20201104/eeee0e18e2856c02aedeab3b481d2afd.png" />
+      <van-image width="80" height="80" round lazy-load src="https://car.coasewash.com/static/images/logo.png" />
     </view>
     <view class="login-form">
       <van-cell-group border="{{ false }}">
         <van-field title-width="80rpx" value="{{ value }}" placeholder="输入手机号" bind:change="onChange">
           <view slot="label" class="prefix van-hairline--right">+86</view>
+          <van-button class="custom-btn" open-type="getPhoneNumber" bind:getphonenumber="getphonenumber" slot="button" plain size="small" type="primary">获取手机号</van-button>
         </van-field>
 
         <van-field value="{{ value }}" placeholder="输入验证码" bind:change="onChange">
-          <van-button class="custom-btn" slot="button" plain size="small" type="primary">发送验证码</van-button>
+          <van-button class="custom-btn" slot="button" plain size="small" bind:click="getSms" type="primary">发送验证码</van-button>
         </van-field>
       </van-cell-group>
 
 
       <!--按钮-->
       <view class="form-btn">
-        <van-button block round type="primary" color="#ec8c05">登 录</van-button>
+        <van-button block round type="primary" color="#ec8c05" bindtap="onToast">登 录</van-button>
       </view>
     </view>
   </view>
@@ -29,7 +30,8 @@
     <view class="action-group">
       <view class="action-item">
        <!-- <van-button block open-type="getPhoneNumber" bindgetphonenumber="getphonenumber"><van-image width="80rpx" height="80rpx" round lazy-load src="../../../../static/img/wechat.png" /></van-button> -->
-        <van-button block open-type="getUserInfo" bindgetuserinfo="getUserInfo"><van-image width="80rpx" height="80rpx" round lazy-load src="../../../../static/img/wechat.png" /></van-button>
+        <van-button block open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+          <van-image width="74rpx" height="74rpx" round lazy-load src="../../../../static/img/wechat.png" /></van-button>
         <text>微信登录</text>
       </view>
       <!-- <view class="action-item">

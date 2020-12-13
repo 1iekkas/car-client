@@ -1,5 +1,5 @@
 <!--components/nav-bar/index.wxml-->
-<view class="nav" style="height:{{navBarHeight}}px;">
+<view class="nav ^none-boxShadow custom-class" style="height:{{navBarHeight}}px;">
  <view class="nav-main">
  <!-- 胶囊区域 -->
  <view 

@@ -4,6 +4,10 @@
   top: 0;
   left: 0;
   width: 100vw;
+  box-shadow:0 -2rpx 10rpx 2rpx rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  transition: all .3s linear;
+  /* background: linear-gradient(to right , #FF8E14, #ff3d00);  */
 }
 
 .nav-main {
