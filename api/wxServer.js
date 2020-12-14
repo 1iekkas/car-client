@@ -75,7 +75,7 @@ module.exports = {
               resolve(d)
             },
             fail: r => {
-              console.log(r)
+              // console.log(r)
               wx.showModal({
                 content: '地址解析失败，请手动选择位置'
               })
@@ -83,9 +83,39 @@ module.exports = {
           })
         },
         fail: err => {
-          wx.showModal({
-            content: '获取当前位置失败，请重试'
+          // wx.openSetting
+          wx.getSetting({
+            success: s => {
+              if(s.authSetting['scope.userLocation']) {
+                wx.showModal({
+                  content: '获取当前位置失败，请重试',
+                  showCancel: false,
+                })
+              } else {
+                wx.showModal({
+                  content: '请先授权位置获取',
+                  showCancel: false,
+                })
+              }
+
+              map.reverseGeocoder({
+                location: {
+                  latitude: 40.22077,
+                  longitude: 116.23128
+                },
+                success: d => {
+                  resolve(d)
+                },
+                fail: r => {
+                  // console.log(r)
+                  wx.showModal({
+                    content: '地址解析失败，请手动选择位置'
+                  })
+                }
+              })
+            }
           })
+          
         }
       })
     })

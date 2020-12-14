@@ -1,13 +1,16 @@
 // pages/user/index.js
 const app = getApp()
 import { login } from '../../api/wxServer'
+import { getOrderCount } from '../../api/order'
 import { getCarList } from '../../api/user'
+let data
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    navBarHeight: app.globalData.navBarHeight, //导航栏高度
     isLogin: false,
     userInfo: null,
     hasUserInfo: false,
@@ -64,17 +67,28 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    data = this.data
     if(app.globalData.isLogin && !this.data.userInfo) {
       this.setData({
         isLogin: true,
         userInfo: app.globalData.userInfo
       })
 
+      // 车辆统计
       getCarList().then(res => {
         this.setData({
           carCount: res.data.length
         })
       })
+
+      // 订单统计
+      getOrderCount().then(res => {
+        data.tabs.map(tab => {
+          tab.count = (res.data.filter(e => tab.id.includes(e.status)))[0]
+        })
+        console.log(data.tabs)
+      })
+
     }
   },
 

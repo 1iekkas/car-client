@@ -127,6 +127,7 @@ Page({
     })
 
     if(!res.status) {
+      console.log(res.result)
       app.globalData.location = res.result
 
       wx.navigateBack({

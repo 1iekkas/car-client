@@ -18,7 +18,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.oid = options.id || null
   },
 
   /**
@@ -115,9 +115,15 @@ Page({
     app.globalData.userInfo = userInfo.userInfo
     app.globalData.isLogin = true
     wx.hideLoading()
-    wx.navigateBack({
-      delta: 1
-    })
+    if(this.oid) {
+      wx.redirectTo({
+        url: `/servicePackage/orderInfo/index?id=${this.oid}`,
+      })
+    }else {
+      wx.navigateBack({
+        delta: 1
+      })
+    }
   },
 
   // 获取手机号

@@ -15,7 +15,8 @@ Page({
   data: {
     navBarHeight: app.globalData.navBarHeight, //导航栏高度
     menuHeight: app.globalData.menuHeight,
-    showNav: false
+    showNav: false,
+    IMG_HOST: app.globalData.IMG_HOST
   },
 
   /**

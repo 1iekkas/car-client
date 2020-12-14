@@ -46,8 +46,8 @@
       </view>
     </scroll-view>
     <view class="popup-action">
-      <van-button type="primary" size="small" round block bind:click="onClosePopup">取消</van-button>
-      <van-button type="primary" size="small" round block disabled="{{!activeSeries}}" bind:click="onConfirmSelect">选好了</van-button> 
+      <van-button type="primary" color="#FF8E14" size="small" round block bind:click="onClosePopup">取消</van-button>
+      <!-- <van-button type="primary" size="small" round block disabled="{{!activeSeries}}" bind:click="onConfirmSelect">选好了</van-button>  -->
     </view>
   </view>
 </van-popup>

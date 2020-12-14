@@ -26,6 +26,10 @@ module.exports = {
     return $api.put(`/u/order/${data.id}/check`, data)
   },
 
+  getOrderCount(params) {
+    return $api.get(`/u/order/count`)
+  },
+
   // 获取支付配置
   getPayParams(data) {
     return $api.post(`/u/order/pay`, data)

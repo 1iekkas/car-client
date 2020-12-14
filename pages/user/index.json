@@ -4,5 +4,7 @@
     "van-cell": "@vant/weapp/cell/index",
     "van-cell-group": "@vant/weapp/cell-group/index"
   },
+  "navigationBarBackgroundColor": "#2D4059",
+  "navigationBarTextStyle": "white",
   "navigationBarTitleText": "个人中心"
 }

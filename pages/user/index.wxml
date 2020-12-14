@@ -1,7 +1,7 @@
 <!--pages/user/index.wxml-->
-<scroll-view class="van-hairline--top" scroll-y="true" style="height: 100vh">
+<scroll-view scroll-y="true" style="height: 100vh">
   <view class="content" style="min-height: calc(100vh + 4rpx);">
-    <view class="user-info-section">
+    <view class="user-info-section" >
       <view class="avatar">
         <block wx:if="{{!isLogin}}">
           <!-- <button class="auth-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
@@ -70,13 +70,40 @@
     <view class="cell-section">
       <block wx:if="{{isLogin}}">
         <van-cell-group border="{{ false }}">
-          <van-cell custom-class="padding" title="车辆管理" value="" is-link url="/userPackage/userCar/index?from=user" />
-          <van-cell custom-class="padding" title="钱包" value="" is-link />
-          <van-cell custom-class="padding" title="优惠券" value="" is-link />
-          <van-cell custom-class="padding" title="资料设置" value="" is-link />
-          <van-cell custom-class="padding" url="/servicePackage/service/index" title="联系客服" value="" is-link />
-          <van-cell custom-class="padding" title="投诉建议" value="" is-link />
-          <van-cell custom-class="padding" title="更多服务" value="" is-link border="{{ false }}" />
+          <van-cell custom-class="padding" title="车辆管理" value="" is-link url="/userPackage/userCar/index?from=user">
+            <view slot="icon" class="icon">
+              <image src="../../static/img/car.png" mode="widthFix" alt="" srcset="" />
+            </view>
+          </van-cell>
+          <van-cell custom-class="padding" title="钱包" value="" is-link>
+            <view slot="icon" class="icon">
+              <image src="../../static/img/wallet.png" mode="widthFix" alt="" srcset="" />
+            </view>
+          </van-cell>
+          <van-cell custom-class="padding" title="优惠券" value="" is-link >
+            <view slot="icon" class="icon">
+              <image src="../../static/img/coupons.png" mode="widthFix" alt="" srcset="" />
+            </view>
+          </van-cell>
+          <van-cell custom-class="padding" title="资料设置" value="" is-link >
+            <view slot="icon" class="icon">
+              <image src="../../static/img/set.png" mode="widthFix" alt="" srcset="" />
+            </view>
+          </van-cell>
+          <van-cell custom-class="padding" url="/servicePackage/service/index" title="联系客服" value="" is-link >
+            <view slot="icon" class="icon">
+              <image src="../../static/img/service.png" mode="widthFix" alt="" srcset="" />
+            </view></van-cell>
+          <van-cell custom-class="padding" title="投诉建议" value="" is-link >
+            <view slot="icon" class="icon">
+              <image src="../../static/img/comments.png" mode="widthFix" alt="" srcset="" />
+            </view>
+          </van-cell>
+          <van-cell custom-class="padding" title="更多服务" value="" is-link border="{{ false }}" >
+            <view slot="icon" class="icon">
+              <image src="../../static/img/more.png" mode="widthFix" alt="" srcset="" />
+            </view>
+          </van-cell>
         </van-cell-group>
       </block>
       <block wx:else>

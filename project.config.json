@@ -13,19 +13,15 @@
     "es6": true,
     "enhance": true,
     "postcss": true,
-    "preloadBackgroundData": false,
     "minified": true,
     "newFeature": false,
     "coverView": true,
     "nodeModules": true,
     "autoAudits": false,
-    "showShadowRootInWxmlPanel": true,
-    "scopeDataCheck": false,
     "uglifyFileName": false,
     "checkInvalidKey": true,
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
-    "compileHotReLoad": false,
     "useMultiFrameRuntime": false,
     "useApiHook": true,
     "babelSetting": {
@@ -40,7 +36,8 @@
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true
+    "minifyWXSS": true,
+    "scopeDataCheck": false
   },
   "compileType": "miniprogram",
   "libVersion": "2.14.0",
@@ -138,7 +135,7 @@
         {
           "name": "订单信息",
           "pathName": "servicePackage/orderInfo/index",
-          "query": "id=109",
+          "query": "id=95",
           "scene": null
         },
         {

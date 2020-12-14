@@ -65,8 +65,8 @@ Page({
 
     // console.log(location)
     let res = await getCarList(),
-      car = [];
-    if(!res.code) car = res.data.length ? res.data.filter(e => e.focus == 1)[0] : []
+      car = null;
+    if(!res.code) car = res.data.length ? res.data.filter(e => e.focus == 1)[0] : null
     this.setData({
       car: car,
       carList: res.data.length ? res.data : [],
@@ -230,9 +230,9 @@ Page({
       lng: data.location.location.lng || '',
       lat: data.location.location.lat || '',
       address: data.location.formatted_addresses.recommend || '',
-      images: data.fileList ? data.fileList.map(e => e.url).join('|') : [],
+      images: data.fileList ? data.fileList.map(e => (e.url).replace(/https:\/\/[^\/]*/, '')).join('|') : [],
     }
-
+    
     let res = await app.$api.post('/u/order/add', body)
 
     if(!res.code) {

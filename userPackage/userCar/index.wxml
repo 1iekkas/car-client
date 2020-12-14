@@ -15,7 +15,7 @@
             </view>
           </view>
           <view class="car-item-action van-hairline--top">
-            <van-button type="primary" block size="mini" wx:if="{{item.focus == 0}}" catchtap="setCar"
+            <van-button color="#FF8E14" type="primary" block size="mini" wx:if="{{item.focus == 0}}" catchtap="setCar"
               data-id="{{item.id}}">设为默认</van-button>
               <!-- <van-button type="primary" hairline block size="mini" plain catchtap="delCar" data-id="{{item.id}}">编辑</van-button>   -->
             <van-button type="danger" hairline block size="mini" plain catchtap="delCar" data-id="{{item.id}}">删除</van-button>
@@ -23,7 +23,7 @@
         </view>
       </block>
       <view class="add">
-        <van-button type="primary" block bind:click="addCar">添加车辆</van-button>
+        <van-button color="#2D4059" type="primary" block bind:click="addCar">添加车辆</van-button>
       </view>
     </view>
   </scroll-view>

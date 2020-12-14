@@ -22,9 +22,6 @@
           待维修
         </view>
         <view class="text">等待门店维修作业中</view>
-        <view>
-          <van-button type="default" size="small" hairline>申请退款</van-button>
-        </view>
       </view>
     </block>
     <!---->
@@ -40,7 +37,7 @@
       </view>
     </block>
     <!---->
-    <block wx:if="{{info.status == 5}}">
+    <block wx:if="{{info.status == 5 || info.status == -1}}">
       <view class="info-tips">
         <view class="icon">
           订单已取消
@@ -54,9 +51,6 @@
           服务已完成
         </view>
         <view class="text">本次服务已完成，感谢您的使用</view>
-        <view>
-          <van-button type="default" size="small" hairline>评价</van-button>
-        </view>
       </view>
     </block>
     <!--6: 待商家确认取消-->
@@ -93,7 +87,18 @@
   <!---->
   <view class="form">
     <view class="title van-hairline--bottom">需求详情</view>
-    <van-cell-group border="{{ false }}">
+    <view class="car-item">
+        <view class="car-item-body">
+          <van-image src="{{IMG_HOST + info.car.img}}" mode="widthFix" width="100rpx"></van-image>
+          <view class="car-info">
+            <view class="car-params">
+              <view class="car-number">{{info.car.car_num}}</view>
+              <view>{{info.car.full_name}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    <van-cell-group>
       <van-cell title-width="150rpx" title="需求描述" value="{{info.content}}" />
       <van-cell title="预算费用">
         <view class="price">
@@ -113,7 +118,7 @@
       <van-cell wx:if="{{info.images.length}}">
         <view class="images-group">
           <van-image width="22vw" height="22vw" wx:for="{{info.images}}" bindtap="onPreview" data-url="{{item}}"
-            wx:key="index" src="{{item}}"></van-image>
+            wx:key="index" src="{{IMG_HOST}}{{item}}"></van-image>
         </view>
       </van-cell>
     </van-cell-group>
@@ -137,7 +142,7 @@
         <block wx:if="{{offerList.length}}">
           <view class="store-item" wx:for="{{offerList}}" wx:key="index" bindtap="storeDetails" data-id="{{item.id}}">
             <view class="store-body">
-              <van-image width="100" height="100" src="{{item.facade_images[0]}}"></van-image>
+              <van-image width="100" height="100" src="{{IMG_HOST}}{{item.facade_images[0]}}"></van-image>
               <view class="store-content">
                 <view class="name">{{item.name}}</view>
                 <block wx:if="{{ !item.vague }}">
@@ -177,7 +182,7 @@
         <block wx:if="{{offerList.length}}">
           <view class="store-item" wx:for="{{offerList}}" wx:key="index" bindtap="storeDetails" data-id="{{item.id}}">
             <view class="store-body">
-              <van-image width="100" height="100" src="{{item.facade_images[0]}}"></van-image>
+              <van-image width="100" height="100" src="{{IMG_HOST}}{{ item.facade_images[0]}}"></van-image>
               <view class="store-content">
                 <view class="name">{{item.name}}</view>
                 <view class="price">报价:￥{{item.fee}}</view>
@@ -209,12 +214,24 @@
   
   <!--订单信息-->
   <view class="line"></view>
-  <view class="form">
+  <view class="form order-info">
     <view class="title van-hairline--bottom">订单信息</view>
     <van-cell-group border="{{false}}">
       <van-cell title="订单编号" value="{{ info.order_no }}"></van-cell>
-      <van-cell title="创建时间" value="{{info.create_time}}"></van-cell>
+      <!-- <van-cell title="创建时间" value="{{info.create_time}}"></van-cell> -->
     </van-cell-group>
+    <van-steps
+      steps="{{ orderSteps }}"
+      active="{{ active }}"
+      direction="vertical"
+      active-color="#ee0a24"
+      inactive-color="#ffffff"
+    />
+    <block wx:if="{{info.status == 0 || info.status == 1 || info.status == 2}}">
+      <view class="cancel-order">
+        <view class="van-hairline--left" bindtap="onCancelOrder">取消订单</view>
+      </view>
+    </block>
   </view>
 
   <!--付款明细-->
@@ -261,13 +278,13 @@
   <!--action 栏-->
 
   <!--等待报价 0-->
-  <block wx:if="{{info.status == 0}}">
+  <!-- <block wx:if="{{info.status == 0}}">
     <van-submit-bar button-type="default" button-text="取消订单" bind:submit="onCancelOrder" />
-  </block>
+  </block> -->
   <!--等待维修 1 & 2-->
-  <block wx:if="{{info.status == 1 || info.status == 2}}">
+  <!-- <block wx:if="{{info.status == 1 || info.status == 2}}">
     <van-submit-bar button-type="default" button-text="取消订单" bind:submit="onCancelOrder" />
-  </block>
+  </block> -->
   <!--等待维修 3-->
   <block wx:if="{{info.status == 3}}">
     <van-submit-bar button-text="确认交付" bind:submit="onConfirmCheck" />

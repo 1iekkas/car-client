@@ -59,7 +59,7 @@
     </van-field>
 
     <van-cell title="是否设为默认">
-      <van-checkbox value="{{ focus }}" bind:change="onChangeDefault"></van-checkbox>
+      <van-checkbox checked-color="#2D4059" value="{{ focus }}" bind:change="onChangeDefault"></van-checkbox>
     </van-cell>
 
   </van-cell-group>
@@ -80,10 +80,10 @@
 
   <view class="btn-section">
     <block wx:if="{{from == 'edit' || from == 'createOrderManage'}}">
-      <van-button type="primary" loading="{{ isLoading }}" block bind:click="onSave">保存</van-button>
+      <van-button type="primary" color="#2D4059" loading="{{ isLoading }}" block bind:click="onSave">保存</van-button>
     </block>
     <block wx:else>
-      <van-button type="primary" loading="{{ isLoading }}" block bind:click="onSubmit">添加车辆</van-button>
+      <van-button type="primary" color="#2D4059" loading="{{ isLoading }}" block bind:click="onSubmit">添加车辆</van-button>
     </block>
   </view>
 </view>

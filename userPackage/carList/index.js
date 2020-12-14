@@ -216,6 +216,10 @@ Page({
     series.brand_logo = this.data.activeBrand.img
     this.setData({
       activeSeries: series
+    },() => {
+      wx.navigateTo({
+        url: `/userPackage/carInfo/index?series=${JSON.stringify(this.data.activeSeries)}&from=${this.data.from}`
+      })
     })
   },
   

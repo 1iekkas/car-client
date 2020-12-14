@@ -32,7 +32,7 @@
     <view class="form-title">请输入你的需求</view>
     <van-cell-group>
       <van-field value="{{ content }}" type="textarea" data-type="content" bind:change="onChange"
-        placeholder="详细的需求描述有助于获得更精准的报价" autosize="{{ autosize }}" border="{{ false }}" />
+        placeholder="你可以发布有关汽车维修、保养、美容、改装、精品等需求，详细的描述有助于获得更精准的报价" autosize="{{ autosize }}" border="{{ false }}" />
     </van-cell-group>
     <!--上传组件-->
     <view class="form-title switch-upload">
@@ -82,7 +82,7 @@
   </view>
   <!---->
   <view class="submit-button">
-    <van-button type="primary" block round bindtap="onSubmit">提 交</van-button>
+    <van-button type="primary" color="#2D4059" block round bindtap="onSubmit">提 交</van-button>
   </view>
   <navigator class="servies" hover-class="none" url="/servicePackage/service/index">
     联系客服

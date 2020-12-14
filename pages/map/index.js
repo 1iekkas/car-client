@@ -5,7 +5,8 @@ import { reverseGeocoder, searchStore } from '../../api/wxServer'
 import {
   getLocation
 } from "../../api/wxServer.js"
-import { getOrderList } from '../../api/order'
+import { getOrderCount } from '../../api/order'
+import { getStoreList } from '../../api/store'
 import { getSwipeList } from '../../api/poster'
 let data 
 Page({
@@ -14,41 +15,13 @@ Page({
     isLogin: false,
     location: null,
     navBarHeight: app.globalData.navBarHeight, //导航栏高度
-    storeList: ['同时呼叫', '洗美店', '维修店', '快修员', '维修厂'], // 商家类型
-    rangeList: [{
-      id: '0',
-      name: '全部',
-      value: '0',
-      scale: 16
-    }, {
-      id: '1',
-      name: '500米',
-      value: 500,
-      scale: 15
-    }, {
-      id: '2',
-      name: '3公里内',
-      value: 3000,
-      scale: 13
-    }, {
-      id: '3',
-      name: '5公里',
-      value: 5000,
-      scale: 12
-    }, {
-      id: '4',
-      name: '10公里',
-      value: 10000,
-      scale: 11
-    }],
     orderCount: 0,
+    storeList: [],
     activeRange: 0,
     contentHeight: 0,
     // map配置
     mapSetting: {
       subkey: "553BZ-MI4CW-LMXR5-OXN7Z-OMBVK-RPFMX",
-      minScale: 16,
-      maxScale: 16,	
       layerStyle: '1',
       scale: 16,
       circles: [],
@@ -71,9 +44,9 @@ Page({
       })
 
       if(res) {
-        getOrderList({status: 0}).then(res => {
+        getOrderCount({status: 0}).then(res => {
           this.setData({
-            orderCount: res.data.data.length || 0
+            orderCount: res.data.filter(e => e.status == 0)[0].count
           })
         })
       }
@@ -109,9 +82,9 @@ Page({
   },
 
   onShow() {
-    // let location = wx.getStorageSync('location') || null
+    let location = wx.getStorageSync('location') || null
     this.setData({
-      location: app.globalData.location, // location ? location : app.globalData.location,
+      location: location ? location : app.globalData.location,
       isLogin: app.globalData.isLogin,
       userInfo: app.globalData.userInfo,
       map: this.data.map ? this.data.map : wx.createMapContext('map', this),
@@ -122,16 +95,20 @@ Page({
         latitude: data.location.location.lat,
         longitude: data.location.location.lng
       })
+      // 清除缓存位置信息
+      wx.setStorageSync('location', null)
     })
     // wx.setStorageSync('location', null)
     if(data.isLogin) {
-      getOrderList({status: 0}).then(res => {
-        console.log(res.data)
+      getOrderCount().then(res => {
         this.setData({
-          orderCount: res.data.data.length || 0
+          orderCount: res.data.filter(e => e.status == 0)[0].count
         })
       })
     }
+
+    
+
   },
 
   onReady() {
@@ -292,15 +269,21 @@ Page({
 
   // 地图移到当前定位点
   async onFocus() {
+    // 清除缓存位置信息
+    wx.setStorageSync('location', null)
     let obj = await getLocation()
     let myLocation = obj.result
+    console.log(obj.result)
     // 简略比较相等
     // if(JSON.stringify(myLocation) === JSON.stringify(app.globalData.location)) return false
     app.globalData.location = myLocation
     this.setData({
       location: myLocation
     },() => {
-      data.map.moveToLocation()
+      data.map.moveToLocation({
+        latitude: data.location.location.lat,
+        longitude: data.location.location.lng
+      })
       this.searchStore({
         latitude: data.location.location.lat,
         longitude: data.location.location.lng
@@ -343,24 +326,28 @@ Page({
   // 搜索门店
   async searchStore(location) {
     let storeList = []
-    let res = await searchStore({
+    /* let res = await searchStore({
       keyword: '酒店',
       location: `${location.latitude},${location.longitude}`
-    })
+    }) */
 
-    if(!res.status) {
+    // 店铺列表
+    let res = await getStoreList({page_size: 100})
+
+    if(!res.code) {
       //storeList = res.data
-      storeList = res.data.map(e => ({
+      // console.log(res.data.data)
+      storeList = res.data.data.map(e => ({
         id: e.id,
-        title: e.title,
-        latitude: e.location.lat,
-        longitude: e.location.lng,
+        title: e.name,
+        latitude: e.lat,
+        longitude: e.lnt,
         height: 30,
         width: 22,
         zIndex: 2,
         iconPath: '../../static/img/store.png'
       }))
-
+      // console.log(storeList)
       this.setData({
         markers: storeList
       })

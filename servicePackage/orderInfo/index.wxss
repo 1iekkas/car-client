@@ -15,15 +15,17 @@ page {
   width: 96vw;
   min-height: 80px;
   margin: 0 auto;
-  color: #646566;
+  color: white /* #646566 */;
   font-size: 32rpx;
   padding: 40rpx 30rpx;
-  background: white; /* linear-gradient( to bottom right,#FE6146 , #FF8773 90%); */
+  background: var(--defaultBg); /* linear-gradient( to bottom right,#FE6146 , #FF8773 90%); */
   text-align: center;
+  border-radius: 12rpx;
+
 }
 
 .info .icon {
-  color: #232323;
+  /* color: #232323; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,7 +37,7 @@ page {
 }
 
 .info .text {
-  color: #9e9e9e;
+  /* color: #9e9e9e; */
   font-size: 28rpx;
   font-family: Arial, Helvetica, sans-serif;
   margin: 20rpx 0;
@@ -54,7 +56,76 @@ page {
 }
 
 .info .count-down .van-count-down {
-  color: #f40;
+  /* color: #f40; */
+  color: white;
+}
+
+.refund {
+  width: 96vw;
+  margin: 0 auto;
+  background-color: white;
+  padding: 30rpx 20rpx 66rpx 20rpx;
+
+}
+
+.refund .refund-title {
+  padding-bottom: 30rpx;
+  position: relative;
+}
+
+.refund .refund-title::after, .refund .refund-title::before {
+  content: '';
+  width: 34rpx;
+  height: 34rpx;
+  background-color: #f7f7f7;
+  border-radius: 50%;
+  position: absolute;
+  top: -47rpx;
+  z-index: 10;
+}
+
+.refund .refund-title::before {
+  left: -40rpx;
+}
+
+.refund .refund-title::after {
+  right: -40rpx;
+}
+
+.step {
+  width: 96vw;
+  margin: 0 auto;
+  display: flex;
+  font-size: 24rpx;
+  align-items: center;
+}
+
+.step-item {
+  flex: 1;
+  text-align: center;
+}
+
+.phoneColor {
+  color: var(--phoneColor);
+  position: relative;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+
+.phoneColor .phone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 36rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.form {
+  width: 96vw;
+  margin: 0 auto;
 }
 
 .refund {
@@ -177,7 +248,11 @@ page {
 .store-item {
   padding: 20rpx;
   background-color: white;
-  
+  margin-bottom: 10rpx;
+}
+
+.store-item:last-child {
+  margin-bottom: 0;
 }
 
 .store-body {
@@ -319,5 +394,107 @@ van-goods-action-button button {
   padding: 40rpx 0;
   background-color: white;
   text-align: center;
+}
+
+.cancel-order {
+  padding: 30rpx 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: white;
+  font-size: 28rpx;
+}
+
+.cancel-order view {
+  color: var(--red);
+  flex: 0 0 50%;
+  text-align: right;
+}
+
+/** */
+.car-item {
+  width: 100%;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 8rpx;
+  padding: 30rpx;
+  position: relative;
+}
+
+.car-item::after, .car-item::before {
+  content: '';
+  position: absolute;
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+  background-color: #f7f7f7;
+  bottom: -15rpx;
+  z-index: 1;
+}
+
+.car-item::after {
+  left: -15rpx;
+  box-shadow: 6rpx 0 0 0 white;
+}
+
+.car-item::before {
+  right: -15rpx;
+  box-shadow: -6rpx 0 0 0 white;
+}
+
+.car-item-body {
+  display: flex;
+}
+
+.car-item-body.add {
+  padding: 20rpx 0;
+  align-items: center;
+  justify-content: center;
+  color: #646566;
+}
+
+.car-item-body.add van-icon {
+  margin-right: 10rpx;
+}
+
+.car-info {
+  padding-left: 10rpx;
+  padding-bottom: 30rpx;
+}
+
+.car-brand {
+  margin-bottom: 12rpx;
+}
+
+.car-params {
+  color: #bbb;
+  font-size: 24rpx;
+}
+
+.car-params .car-number {
+  color: #232323;
+  font-size: 32rpx;
+  margin-bottom: 6rpx;
+}
+
+.car-item-action {
+  color: #777;
+  font-size: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.car-item-action van-icon {
+  padding-left: 12rpx;
+}
+
+.order-info .van-step {
+  font-size: 28rpx;
+  color: #969799 !important;
+}
+
+.order-info .van-step__wrapper {
+  padding: 0 30rpx 0 20px !important;
 }
 

@@ -54,11 +54,11 @@
           </block>
         </view>
         <block wx:if="{{isLogin}}">
-          <van-button custom-class="link-button" round type="primary" block bind:click="toCreate">发布需求</van-button>
+          <van-button custom-class="link-button" color="#2D4059" round type="primary" block bind:click="toCreate">获取汽车服务报价</van-button>
         </block>
         <block wx:else>
-          <van-button block custom-class="link-button" round type="primary" bind:click="toLogin">
-            发布需求
+          <van-button block  color="#2D4059" custom-class="link-button" round type="primary" bind:click="toLogin">
+            获取汽车服务报价
           </van-button>
         </block>
         <!-- <view class="order-swipe">

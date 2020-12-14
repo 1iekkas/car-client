@@ -45,6 +45,7 @@ Page({
       page: 1,
       max: 3
     }],
+    IMG_HOST: app.globalData.IMG_HOST,
     active: 'all',
     list: [],
     page: 1,
@@ -137,6 +138,7 @@ Page({
     })
     this.setData({
       active: e.detail.name,
+      page: 1,
       list: [],
       loading: true
     },() => {
@@ -148,6 +150,7 @@ Page({
   async getList() {
     let res = await getOrderList({
       status: data.active === 'all' ? '' : data.active,
+      page: data.page,
     })
     if(!res.data.code) {
       if(data.triggered) {

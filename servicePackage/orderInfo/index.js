@@ -23,6 +23,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLogin: app.globalData.isLogin,
     time: 30 * 60 * 60 * 1000,
     filterList: [{
       name: '综合排序'
@@ -38,6 +39,7 @@ Page({
     showCancel: false, // 取消订单弹出
     cancelList: [],
     cancelType: '1', // 取消类型
+    IMG_HOST: IMG_HOST,
     steps: [
       {
         text: '联系商家',
@@ -51,16 +53,47 @@ Page({
       }
     ],
     activeStep: 3,
+
+    orderSteps: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    console.log(options)
+  onLoad: async function (options) {
+    // console.log(options)
     data = this.data
     this.oid = options.id
-    this.getCancelReason()
+    data.isLogin = app.globalData.isLogin
+    // 清除缓存位置信息
+    wx.setStorageSync('location', null)
+
+    // 用户token回调
+    app.userTokenReadyCallback = res => {
+      console.log(res)
+      this.setData({
+        hasToken: res,
+        isLogin: res
+      })
+
+      if(!res) {
+        wx.redirectTo({
+          url: `/userPackage/login/index?id=${this.oid}`,
+        })
+      }else {
+        this.getData(this.oid)
+        this.getCancelReason()
+      }
+    }
+
+    // 用户信息回调
+    app.userInfoReadyCallback = res => {
+      console.log(res)
+      this.setData({
+        userInfo: res.userInfo,
+        hasUserInfo: true
+      })
+    }
   },
 
   /**
@@ -74,8 +107,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    /* console.log(data)
-    if(data.info && data.info.id) this.onLoad() */
+    if(!this.data.isLogin) return false
     this.getData(this.oid)
   },
 
@@ -128,11 +160,64 @@ Page({
       })
 
       res.data.address = address.result ? address.result.address : '解析位置失败'
+
+      /**处理订单流程 */
+      data.orderSteps.push({
+        text: '创建订单',
+        desc: res.data.create_time
+      })
+
+      // 以下均为非空成立
+      if(res.data.pick_car_time) {
+        data.orderSteps.push({
+          text: '店铺已接车',
+          desc: res.data.pick_car_time
+        })
+      }
+
+      if(res.data.repair_time) {
+        data.orderSteps.push({
+          text: '开始维修',
+          desc: res.data.repair_time
+        })
+      }
+
+      if(res.data.repair_complete_time) {
+        data.orderSteps.push({
+          text: '维修完成',
+          desc: res.data.repair_complete_time
+        })
+      }
+
+      if(res.data.cancel_time) {
+        data.orderSteps.push({
+          text: '已取消',
+          desc: res.data.cancel_time
+        })
+      }
+
+      if(res.data.refund_success_time) {
+        data.orderSteps.push({
+          text: '已退款',
+          desc: res.data.refund_success_time
+        })
+      }
+
+      if(res.data.complete_time) {
+        data.orderSteps.push({
+          text: '订单已完成',
+          desc: res.data.complete_time
+        })
+      }
+
+
       // 保存
       this.setData({
         info: res.data,
         time: res.data.remain * 1000,
-        loading: false
+        loading: false,
+        orderSteps: data.orderSteps,
+        active: data.orderSteps.length - 1
       }, () => {
         this.getOfferList()
       })
@@ -149,22 +234,6 @@ Page({
       if (res.data.length) {
         // 设置同步map
         Promise.all(res.data.map(async e => {
-          /* let d = await setCalculateDistance({
-            form: {
-              latitude: data.info.lat || 0,
-              longitude: data.info.lnt || 0
-            },
-            to: [{
-              latitude: e.lat,
-              longitude: e.lnt
-            }]
-          })
-
-          if (d.status == 0) {
-            e.distance = (d.result.elements[0].distance / 1000).toFixed(0)
-          } else {
-            e.distance = '未定位'
-          } */
           e.distance = (e.distance / 1000).toFixed(0)
           return e 
         })).then(result => {
@@ -193,9 +262,11 @@ Page({
   // 图片预览
   onPreview(e) {
     const url = e.currentTarget.dataset.url;
+    let imgs = data.info.images.map(e =>  `${data.IMG_HOST}${e}`)
+
     wx.previewImage({
-      current: url,
-      urls: data.info.images,
+      current: data.IMG_HOST + url,
+      urls: imgs,
     })
   },
 

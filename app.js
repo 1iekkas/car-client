@@ -7,7 +7,7 @@ import {
 import {
   $api
 } from 'utils/http.js'
-
+import { IMG_HOST } from 'constances/server'
 App({
   onLaunch: function() {
     this.setNavBarInfo()
@@ -55,10 +55,14 @@ App({
             }
           }
         })
+      }else {
+       
       }
       if (this.userTokenReadyCallback) {
+        console.log('userTokenReadyCallback')
         this.userTokenReadyCallback(result)
       }
+     
     })
   },
 
@@ -87,6 +91,7 @@ App({
     menuBotton: 0, // 胶囊距底部间距（保持底部间距一致）
     menuRight: 0, // 胶囊距右方间距（方保持左、右间距一致）
     menuHeight: 0, // 胶囊高度（自定义内容可与胶囊高度保证一致）
+    IMG_HOST: IMG_HOST
   },
 
   $api

@@ -6,7 +6,18 @@ const md5 = require('../utils/md5.js')
  * @baseUrl 服务器地址
  * 
  * */
-const baseUrl = 'https://car.coasewash.com'
+const env = ''
+let baseUrl = 'https://car.coasewash.com'
+switch (env) {
+  case 'test':
+    baseUrl = 'https://cartest.coasewash.com'
+    break;
+  default:
+    baseUrl = 'https://car.coasewash.com'
+    break;
+}
+
+
 let url = ''
 
 const getStr = (data = null) => {
