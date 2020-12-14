@@ -57,3 +57,9 @@ page {
   padding-top: 30rpx;
   text-align: left;
 }
+
+.rate-tips {
+  color: #646566;
+  font-size: 24rpx;
+  padding-bottom: 20rpx;
+}

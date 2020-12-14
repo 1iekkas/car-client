@@ -3,7 +3,7 @@
   <navigation custom-class="{{showNav ? 'nav-bg' : ''}}" catchtouchmove="{{false}}">
     <view class="nav-content" style="height: {{menuHeight}}px">
       <van-icon class="arrow" name="arrow-left" size="40rpx" bindtap="back" />
-      <view class="nav-title" wx:if="{{showNav}}">店铺详情</view>
+      <view class="nav-title" wx:if="{{showNav}}">{{store.name}}</view>
     </view>
   </navigation>
   <view class="store-body">

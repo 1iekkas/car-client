@@ -87,17 +87,17 @@
   <!---->
   <view class="form">
     <view class="title van-hairline--bottom">需求详情</view>
-    <view class="car-item">
-        <view class="car-item-body">
-          <van-image src="{{IMG_HOST + info.car.img}}" mode="widthFix" width="100rpx"></van-image>
-          <view class="car-info">
-            <view class="car-params">
-              <view class="car-number">{{info.car.car_num}}</view>
-              <view>{{info.car.full_name}}</view>
-            </view>
+    <view class="car-item" wx:if="{{info && info.car}}">
+      <view class="car-item-body">
+        <van-image src="{{IMG_HOST}}{{info.car.img}}" mode="widthFix" width="100rpx" height="100rpx"></van-image>
+        <view class="car-info">
+          <view class="car-params">
+            <view class="car-number">{{info.car.car_num}}</view>
+            <view>{{info.car.full_name}}</view>
           </view>
         </view>
       </view>
+    </view>
     <van-cell-group>
       <van-cell title-width="150rpx" title="需求描述" value="{{info.content}}" />
       <van-cell title="预算费用">
@@ -163,7 +163,8 @@
             <view class="store-address van-hairline--top" catchtap="openMap" data-lat="{{item.lat}}"
               data-lng="{{item.lnt}}">
               <view class="location">{{item.detail}}</view>
-              <view class="range" wx:if="{{item.distance}}">{{item.distance}}km <van-icon name="location"></van-icon></view>
+              <view class="range" wx:if="{{item.distance}}">{{item.distance}}km <van-icon name="location"></van-icon>
+              </view>
             </view>
           </view>
         </block>
@@ -211,7 +212,7 @@
     </view>
   </block>
 
-  
+
   <!--订单信息-->
   <view class="line"></view>
   <view class="form order-info">
@@ -220,13 +221,8 @@
       <van-cell title="订单编号" value="{{ info.order_no }}"></van-cell>
       <!-- <van-cell title="创建时间" value="{{info.create_time}}"></van-cell> -->
     </van-cell-group>
-    <van-steps
-      steps="{{ orderSteps }}"
-      active="{{ active }}"
-      direction="vertical"
-      active-color="#ee0a24"
-      inactive-color="#ffffff"
-    />
+    <van-steps steps="{{ orderSteps }}" active="{{ active }}" direction="vertical" active-color="#ee0a24"
+      inactive-color="#ffffff" />
     <block wx:if="{{info.status == 0 || info.status == 1 || info.status == 2}}">
       <view class="cancel-order">
         <view class="van-hairline--left" bindtap="onCancelOrder">取消订单</view>

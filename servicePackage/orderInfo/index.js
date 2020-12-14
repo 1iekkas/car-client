@@ -160,7 +160,7 @@ Page({
       })
 
       res.data.address = address.result ? address.result.address : '解析位置失败'
-
+      data.orderSteps = []
       /**处理订单流程 */
       data.orderSteps.push({
         text: '创建订单',
@@ -387,7 +387,7 @@ Page({
   // 跳转评价
   onLinkRate() {
     wx.navigateTo({
-      url: `/storePackage/rate/index`,
+      url: `/storePackage/rate/index?id=${data.info.id}`,
     })
   },
 

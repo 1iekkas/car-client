@@ -43,5 +43,10 @@ module.exports = {
   // 取消原因
   cancelReason(data={}) {
     return $api.get(`/u/order/reason`, data)
+  },
+
+  // 订单评价
+  comment(data) {
+    return $api.post(`/u/order/${data.id}/comment`, data)
   }
 }

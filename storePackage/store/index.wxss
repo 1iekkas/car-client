@@ -121,7 +121,7 @@ swiper {
   top: 0;
   bottom: 0;
   left: 0;
-  background: -webkit-linear-gradient(top, #f89c1a, #fabc66);
+  background: -webkit-linear-gradient(top,#ec8c05, #f89c1a);
 }
 
 .store-address .address-info {

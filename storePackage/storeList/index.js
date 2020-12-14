@@ -22,6 +22,7 @@ Page({
     total: 1,
     triggered: false,
     loading: true,
+    IMG_HOST: app.globalData.IMG_HOST
   },
 
   /**

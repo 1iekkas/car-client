@@ -247,8 +247,8 @@ Page({
               break;  
             default:
               url = '/userPackage/userCar/index'
-              wx.redirectTo({
-                url: url,
+              wx.navigateBack({
+                delta: 2
               })
               break;
           }

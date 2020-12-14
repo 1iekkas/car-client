@@ -68,7 +68,7 @@ Page({
    */
   onShow: function () {
     data = this.data
-    if(app.globalData.isLogin && !this.data.userInfo) {
+    if(app.globalData.isLogin /* && !this.data.userInfo */) {
       this.setData({
         isLogin: true,
         userInfo: app.globalData.userInfo
