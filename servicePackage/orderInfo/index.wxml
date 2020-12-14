@@ -286,8 +286,11 @@
     <van-submit-bar button-text="确认交付" bind:submit="onConfirmCheck" />
   </block>
 
-  <block wx:if="{{info.status == 4}}">
+  <block wx:if="{{info.status == 4 && !info.shop_comment}}">
     <van-submit-bar button-text="服务评价" bind:submit="onLinkRate" />
+  </block>
+  <block wx:if="{{info.status == 4 && info.shop_comment}}">
+    <van-submit-bar button-text="已评价" />
   </block>
 </view>
 

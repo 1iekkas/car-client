@@ -6,10 +6,16 @@ const md5 = require('../utils/md5.js')
  * @baseUrl 服务器地址
  * 
  * */
-const env = ''
-let baseUrl = 'https://car.coasewash.com'
+
+const env = wx.getAccountInfoSync().miniProgram.envVersion
+
+
+let baseUrl = ''
 switch (env) {
-  case 'test':
+  case 'develop':
+    baseUrl = 'https://cartest.coasewash.com'
+    break;
+  case 'trial':
     baseUrl = 'https://cartest.coasewash.com'
     break;
   default:
