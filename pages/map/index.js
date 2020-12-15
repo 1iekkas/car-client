@@ -46,7 +46,7 @@ Page({
       if(res) {
         getOrderCount({status: 0}).then(res => {
           this.setData({
-            orderCount: res.data.filter(e => e.status == 0)[0].count
+            orderCount: res.data.wait_offer
           })
         })
       }
@@ -102,7 +102,7 @@ Page({
     if(data.isLogin) {
       getOrderCount().then(res => {
         this.setData({
-          orderCount: res.data.filter(e => e.status == 0)[0].count
+          orderCount: res.data.wait_offer
         })
       })
     }

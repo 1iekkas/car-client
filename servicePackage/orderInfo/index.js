@@ -109,6 +109,7 @@ Page({
   onShow: function () {
     if(!this.data.isLogin) return false
     this.getData(this.oid)
+    this.getCancelReason()
   },
 
   /**

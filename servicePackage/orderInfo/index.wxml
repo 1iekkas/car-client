@@ -7,7 +7,7 @@
     <block wx:if="{{info.status == 0}}">
       <view class="info-tips">
         <view class="icon">
-          订单报价中
+          {{info.status_text}}
         </view>
         <view class="text">已成功发布需求单，请耐心等待商家报价</view>
         <view class="time">剩余时间
@@ -19,7 +19,7 @@
     <block wx:if="{{info.status == 1 || info.status == 2}}">
       <view class="info-tips">
         <view class="icon">
-          待维修
+          {{info.status_text}}
         </view>
         <view class="text">等待门店维修作业中</view>
       </view>
@@ -28,7 +28,7 @@
     <block wx:if="{{info.status == 3}}">
       <view class="info-tips">
         <view class="icon">
-          待交付
+          {{info.status_text}}
         </view>
         <view class="text">需求服务已完成，请确认商家已交付车辆</view>
         <!-- <view class="time">剩余时间
@@ -40,7 +40,7 @@
     <block wx:if="{{info.status == 5 || info.status == -1}}">
       <view class="info-tips">
         <view class="icon">
-          订单已取消
+          {{info.status_text}}
         </view>
         <view class="text">感谢使用科思汽车小程序，期待你的再临</view>
       </view>
@@ -48,7 +48,7 @@
     <block wx:if="{{info.status == 4}}">
       <view class="info-tips">
         <view class="icon">
-          服务已完成
+          {{info.status_text}}
         </view>
         <view class="text">本次服务已完成，感谢您的使用</view>
       </view>
@@ -109,7 +109,7 @@
       <van-cell title="预计到店时间" value="{{info.evaluate_time}}"></van-cell>
       <van-cell title="是否需要上门服务" value="{{ info.on_door ? '是' : '否' }}"></van-cell>
       <block wx:if="{{info.on_door !== 0}}">
-        <van-cell title="上门类型" value="{{ info.on_door == 2 ? '上门取车' : '上门服务' }}"></van-cell>
+        <van-cell title="上门类型" value="{{ info.on_door == 2 ? '接车送车' : '上门救援' }}"></van-cell>
         <van-cell title="上门位置" title-width="120rpx" value="{{ info.address }}"></van-cell>
       </block>
       <block wx:else>

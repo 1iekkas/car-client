@@ -144,7 +144,7 @@ Page({
   async getStoreList() {
     let res = await getStoreList({
       keywords: data.keywords,
-      type: 2,
+      type: '',
       page: data.page,
       page_size: 10
     })

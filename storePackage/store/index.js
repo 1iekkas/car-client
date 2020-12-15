@@ -112,7 +112,7 @@ Page({
     return {
       title: data.store.name,
       path: `/storePackage/store/index?id=${data.store.id}`,
-      imageUrl: data.store.facade_images[0]
+      imageUrl: data.store.type == 2 ? data.store.facade_images[0] : data.store.shop_image
     }
   },
 

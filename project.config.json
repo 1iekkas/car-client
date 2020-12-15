@@ -136,12 +136,6 @@
           "scene": null
         },
         {
-          "name": "订单详情",
-          "pathName": "servicePackage/orderDetails/index",
-          "query": "id=101",
-          "scene": null
-        },
-        {
           "name": "位置搜索",
           "pathName": "servicePackage/position/index",
           "query": "",

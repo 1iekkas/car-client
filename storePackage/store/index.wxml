@@ -8,13 +8,22 @@
   </navigation>
   <view class="store-body">
     <view class="store-swiper">
-      <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{5000}}" duration="{{800}}">
-        <block wx:for="{{store.facade_images}}" wx:key="*this">
+      <block wx:if="{{store.type == 2}}">
+        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{5000}}" duration="{{800}}">
+          <block wx:for="{{store.facade_images}}" wx:key="*this">
+            <swiper-item>
+              <van-image src="{{IMG_HOST}}{{item}}" mode="widthFix" width="100vw" height="80vw"></van-image>
+            </swiper-item>
+          </block>
+        </swiper>
+      </block>
+      <block wx:else>
+        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{5000}}" duration="{{800}}">
           <swiper-item>
-            <van-image src="{{IMG_HOST}}{{item}}" mode="widthFix" width="100vw" height="80vw"></van-image>
+            <van-image src="{{IMG_HOST}}{{store.shop_image}}" mode="widthFix" width="100vw" height="80vw"></van-image>
           </swiper-item>
-        </block>
-      </swiper>
+        </swiper>
+      </block>
     </view>
     <!---->
     <view class="store-info">
@@ -30,7 +39,8 @@
           总订单 <text>{{store.order_count}}</text>
         </view>
         <view class="block">
-          评分 <text>4.3</text>
+          <block wx:if="{{ store.rank }}"> 评分 <text>{{ store.rank }}</text></block>
+          <block wx:else><text>暂无评分</text></block>
         </view>
       </view>
       <view class="time">
@@ -54,7 +64,8 @@
       <view class="comment-title">
         <view>
           <text>评价</text>
-          <text class="comment-count">43条</text>
+          <text class="comment-count" wx:if="{{store_comment}}">{{store_comment}}条</text>
+          <text class="comment-count">暂无评论</text>
         </view>
         <!-- <van-icon name="arrow" size="26rpx" color="#999" /> -->
       </view>
@@ -62,7 +73,8 @@
       <view class="comment-group">
         <view class="comment-item van-hairline--bottom" wx:for="{{3}}" wx:key="index">
           <view class="comment-item__title">
-            <van-image src="https://gss0.bdstatic.com/7051cy89Q1gCncy6lo7D0j9wexYrbOWh7c50/yt/bdsp/icon/anonymous.png" round width="56rpx" height="56rpx"></van-image>
+            <van-image src="https://gss0.bdstatic.com/7051cy89Q1gCncy6lo7D0j9wexYrbOWh7c50/yt/bdsp/icon/anonymous.png"
+              round width="56rpx" height="56rpx"></van-image>
             <text class="user-name">18********01</text>
             <text class="time">2020-10-31</text>
           </view>
@@ -72,9 +84,12 @@
             </view>
             <block wx:if="{{index % 2}}">
               <view class="comment-image">
-                <van-image src="https://img.wanchezhijia.com/A/2020/11/3/11/11/0fc9dd85-a4cf-486e-8f7e-ee70e49e272f.jpg" bindtap="onPreview" width="20vw" height="20vw"></van-image>
-                <van-image src="https://img.wanchezhijia.com/A/2020/11/3/11/11/0fc9dd85-a4cf-486e-8f7e-ee70e49e272f.jpg" width="20vw" height="20vw"></van-image>
-                <van-image src="https://img.wanchezhijia.com/A/2020/11/3/11/11/0fc9dd85-a4cf-486e-8f7e-ee70e49e272f.jpg" width="20vw" height="20vw"></van-image>
+                <van-image src="https://img.wanchezhijia.com/A/2020/11/3/11/11/0fc9dd85-a4cf-486e-8f7e-ee70e49e272f.jpg"
+                  bindtap="onPreview" width="20vw" height="20vw"></van-image>
+                <van-image src="https://img.wanchezhijia.com/A/2020/11/3/11/11/0fc9dd85-a4cf-486e-8f7e-ee70e49e272f.jpg"
+                  width="20vw" height="20vw"></van-image>
+                <van-image src="https://img.wanchezhijia.com/A/2020/11/3/11/11/0fc9dd85-a4cf-486e-8f7e-ee70e49e272f.jpg"
+                  width="20vw" height="20vw"></van-image>
               </view>
             </block>
           </view>
@@ -103,6 +118,3 @@
   <van-goods-action-icon icon="phone-o" text="联系店铺" bind:click="onClickIcon" />
   <van-goods-action-button text="立即询价" bind:click="onClickIcon" />
 </van-goods-action>
-
-
-

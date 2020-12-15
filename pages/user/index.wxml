@@ -37,18 +37,15 @@
         </view>
         <view class="tabs-list">
           <view class="tabs-item" wx:for="{{tabs}}" bindtap="orderLink" data-id="{{item.id}}" wx:key="index">
+            <block wx:if="{{ item.count }}">
+              <text class="info">{{ item.count }}</text>
+            </block>
             <view class="tabs-img">
               <image src="../../static/img/order.png" mode="widthFix" style="width: 46rpx;height: auto;"></image>
             </view>
             <text>{{item.name}}</text>
           </view>
         </view>
-       <!--  <view class="tabs-all van-hairline--left" bindtap="orderLink" data-id="all">
-          <view class="tabs-img">
-            <image src="../../static/img/order.png" mode="widthFix" style="width: 46rpx;height: auto;"></image>
-          </view>
-          <text>全部</text>
-        </view> -->
       </view>
     </block>
 
