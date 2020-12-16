@@ -35,8 +35,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60rpx;
-  height: 60rpx;
+  width: 52rpx;
+  height: auto;
 }
 
 #map .location-button {
@@ -57,87 +57,6 @@
   align-items: center;
   max-width: 32vw;
 }
-
-/* .tabs-section {
-  color: rgb(90, 90, 90);
-  height: 90rpx;
-  position: relative;
-  z-index: 2;
-}
-
-.tabs-section--black {
-  height: 120rpx;
-  background-color: rgb(28, 31, 48);
-  color: white;
-}
-
-.tabs-section--black .content {
-  height: 120rpx;
-}
-
-.tabs-section .content {
-  display: flex;
-  align-items: center;
-}
-
-.tabs-section .content .tabs-item {
-  font-size: 26rpx;
-  flex: 0 0 18vw;
-  text-align: center;
-  line-height: 90rpx;
-  position: relative;
-}
-
-.tabs-section .content .tabs-item.type-item {
-  font-size: 24rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.tabs-section .content .tabs-item.type-item image {
-  margin-bottom: 10rpx;
-}
-
-.tabs-section .content .type-item.active::before {
-  content:"";
-  position: absolute;
-  bottom: 0rpx;
-  left: 50%;
-  transform: translateX(-50%);
-  border-bottom: 12rpx solid white;
-  border-left: 16rpx solid transparent;
-  border-right: 16rpx solid transparent;
-  z-index: 100;
-}
-
-.tabs-section--black .content .tabs-item {
-  height: 120rpx;
-  line-height: inherit;
-}
-
-.tabs-section--flex {
-  display: flex;
-  align-items: center;
-}
-
-.tabs-section--flex .tabs-item:last-child {
-  padding-right: 20rpx;
-}
-
-.tabs-section--flex .tabs-item.active {
-  color: var(--fontColor);
-}
-
-.tabs-section--flex .search {
-  flex: 0 0 12vw;
-  height: 60rpx;
-  padding: 6rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-} */
 
 .search-section {
   position: fixed;
@@ -210,6 +129,7 @@
   top: 0;
   left: 0;
   width: 56rpx;
+  height: 56rpx;
   border: 2rpx solid white;
   border-radius: 50%;
   box-shadow:0 2rpx 4rpx 2rpx rgba(0, 0, 0, 0.2);/*for Android*/
@@ -224,7 +144,7 @@
 
 /** */
 swiper {
-  margin: 40rpx auto 40rpx auto;
+  margin: 40rpx auto 0 auto;
   height: 170rpx;
   width: 80vw;
 }
@@ -250,7 +170,7 @@ swiper {
 }
 
 .banner {
-  
+  margin-top: 40rpx;
 }
 
 .focus-icon {

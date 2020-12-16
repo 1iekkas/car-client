@@ -1,0 +1,11 @@
+/* userPackage/wallet/index.wxss */
+.container {
+  padding: 30rpx;
+}
+
+.card {
+  height: 320rpx;
+  background-image: url(http://i2.tiimg.com/605992/bb668fc236117d81.png);
+  background-size: 100% 100%;
+  border-radius: 12rpx;
+}

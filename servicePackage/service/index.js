@@ -1,5 +1,4 @@
-// pages/index/index.js
-const app = getApp()
+// servicePackage/service/index.js
 Page({
 
   /**
@@ -13,12 +12,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    /* app.userTokenReadyCallback = res => {
-      this.setData({
-        hasToken: res,
-        isLogin: true
-      })
-    } */
+
   },
 
   /**
@@ -68,5 +62,11 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  onPhone() {
+    wx.makePhoneCall({
+      phoneNumber: '0757-86251003',
+    })
   }
 })

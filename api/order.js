@@ -26,6 +26,10 @@ module.exports = {
     return $api.put(`/u/order/${data.id}/check`, data)
   },
 
+  getOrderCount(params) {
+    return $api.get(`/u/order/count`)
+  },
+
   // 获取支付配置
   getPayParams(data) {
     return $api.post(`/u/order/pay`, data)
@@ -34,5 +38,15 @@ module.exports = {
   // 取消订单
   cancelOrder(data) {
     return $api.put(`/u/order/${data.id}/cancel`, data)
-  }
+  },
+
+  // 取消原因
+  cancelReason(data={}) {
+    return $api.get(`/u/order/reason`, data)
+  },
+
+  // 订单评价
+  comment(data) {
+    return $api.post(`/u/order/${data.id}/comment`, data)
+  },
 }

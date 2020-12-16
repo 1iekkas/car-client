@@ -1,18 +1,36 @@
 // pages/user/index.js
 const app = getApp()
 import { login } from '../../api/wxServer'
+import { getOrderCount } from '../../api/order'
 import { getCarList } from '../../api/user'
+let data
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    navBarHeight: app.globalData.navBarHeight, //导航栏高度
     isLogin: false,
     userInfo: null,
     hasUserInfo: false,
     carCount: 0,
-    tabs: ['已发布', '待维修', '待验收', '已完成', '已取消']
+    tabs: [{
+      id: '0',
+      name: '报价中'
+    }, {
+      id: '1,2',
+      name: '待维修'
+    }, {
+      id: '3',
+      name: '待交付'
+    }, {
+      id: '4',
+      name: '已完成'
+    }, {
+      id: '5,6,7,8',
+      name: '已取消'
+    }]
   },
 
   /**
@@ -49,22 +67,34 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if(app.globalData.isLogin && !this.data.userInfo) {
+    data = this.data
+    if(app.globalData.isLogin /* && !this.data.userInfo */) {
       this.setData({
         isLogin: true,
         userInfo: app.globalData.userInfo
       })
 
+      // 车辆统计
       getCarList().then(res => {
         this.setData({
           carCount: res.data.length
         })
       })
 
+      // 订单统计
+      getOrderCount().then(res => {
+        if(!res.code) {
+          data.tabs[0].count = res.data.wait_offer
+          data.tabs[1].count = res.data.wait_repair
+          data.tabs[2].count = res.data.wait_check
+          this.setData({
+            tabs: data.tabs
+          })
+          console.log(data.tabs)
+        }
+      })
+
     }
-
-    
-
   },
 
   /**
@@ -103,8 +133,7 @@ Page({
   }, */
   
   // 获取用户信息
-  getUserInfo: async function(e) {
-    
+  getUserInfo: async function(e) {  
     if(e.detail.errMsg === 'getUserInfo:ok') {
       app.globalData.userInfo = e.detail.userInfo
       let res = await login()
@@ -119,7 +148,23 @@ Page({
   orderLink(e) {
     const id = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url:`/userPackage/order/index?id=${id}`
+      url:`/userPackage/order/index?status=${id}`
     })
   },
+
+  linkLogin() {
+    wx.navigateTo({
+      url: '/userPackage/login/index',
+    })
+  },
+
+  // 未开放提示
+  showToast() {
+    wx.showToast({
+      icon: 'none',
+      mask: true,
+      duration: 2000,
+      title: '活动暂未开放，敬请期待',
+    })
+  }
 })

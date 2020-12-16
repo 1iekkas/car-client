@@ -1,6 +1,18 @@
 /* userPackage/carList/index.wxss */
 @import "index.skeleton.wxss";
 
+.search {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.van-index-bar {
+  padding-top: 54px
+}
+
 .brand-icon{
   margin-right: 26rpx;
 }

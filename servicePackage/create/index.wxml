@@ -5,16 +5,15 @@
     <block wx:if="{{car}}">
       <view class="car-item">
         <view class="car-item-body">
-          <image src="{{'http:' + car.img}}" mode="widthFix" style="width: 100rpx;"></image>
+          <image src="{{IMG_HOST + car.img}}" mode="widthFix" style="width: 100rpx;"></image>
           <view class="car-info">
-            <view class="car-brand">{{car.brand}}</view>
             <view class="car-params">
               <view class="car-number">{{car.car_num}}</view>
               <view>{{car.full_name}}</view>
             </view>
           </view>
         </view>
-        <view class="car-item-action">
+        <view class="car-item-action" bindtap="onShowCar">
           切换
           <van-icon name="replay" size="28rpx" />
         </view>
@@ -32,25 +31,31 @@
   <view class="form">
     <view class="form-title">请输入你的需求</view>
     <van-cell-group>
-      <van-field value="{{ content }}" type="textarea" data-type="content" bind:change="onChange" placeholder="详细的需求描述有助于报价"
-        autosize="{{ autosize }}" border="{{ false }}" />
+      <van-field value="{{ content }}" type="textarea" data-type="content" bind:change="onChange"
+        placeholder="你可以发布有关汽车维修、保养、美容、改装、精品等需求，详细的描述有助于获得更精准的报价" autosize="{{ autosize }}" border="{{ false }}" />
     </van-cell-group>
     <!--上传组件-->
-    <view class="form-title">上传图片</view>
-    <view class="upload">
-      <van-uploader bind:delete="onDelImage" file-list="{{ fileList }}" max-count="6" bind:after-read="afterRead"
-        multiple />
+    <view class="form-title switch-upload">
+      <text>上传图片（选填）</text>
+      <van-checkbox value="{{ isImg }}" bind:change="onChangeUpload"></van-checkbox>
     </view>
+    <block wx:if="{{isImg}}">
+      <view class="upload">
+        <van-uploader bind:delete="onDelImage" accept="image" use-before-read bind:before-read="beforeRead" file-list="{{ fileList }}" max-count="6" bind:after-read="afterRead"
+          multiple />
+      </view>
+    </block>
     <!---->
     <van-cell-group>
-      <van-field custom-class="padding" required label="联系电话" type="number" data-type="phone" value="{{ phone }}" input-align="right"
-        placeholder="请填写联系电话" bind:change="onChange" />
-      <van-field custom-style="color: #000" custom-class="padding" require label="预计费用" data-type="evaluate_fee"
-        bind:change="onChange" value="{{ evaluate_fee }}" input-align="right" placeholder="" />
-      <van-cell custom-class="padding" require title="预约时间" input-align="right" placeholder="">
+      <van-field custom-class="padding" custom-style="padding: 26rpx 16rpx 26rpx 26rpx" required label="联系电话" type="number" data-type="phone" value="{{ phone }}"
+        input-align="right" placeholder="请填写联系电话,仅已预约门店可见" bind:change="onChange" />
+      <van-field custom-style="padding: 26rpx 16rpx 26rpx 26rpx" type="number" custom-class="padding" require label="预算费用"
+        data-type="evaluate_fee" bind:change="onChange" value="{{ evaluate_fee }}" placeholder="请输入预算费用（选填）"
+        input-align="right" />
+      <van-cell custom-class="padding field-cell" require title="预约时间" title-width="80px" input-align="right" placeholder="（选填）">
         <picker-date bindset="set"></picker-date>
       </van-cell>
-      <van-cell title="需上门服务" custom-class="padding" class="loc-cell">
+      <van-cell title="需上门服务" custom-class="padding field-cell" class="loc-cell">
         <view class="slot-title" align="right">
           <van-checkbox class="checkboxes-{{ index }}" data-type="isLocation" name="{{ item }}" value="{{ isLocation }}"
             bind:change="onChange"></van-checkbox>
@@ -77,12 +82,49 @@
   </view>
   <!---->
   <view class="submit-button">
-    <van-button type="primary" block round bindtap="onSubmit">提 交</van-button>
+    <van-button type="primary" color="#2D4059" block round bindtap="onSubmit">提 交</van-button>
   </view>
-  <view class="servies">
-    在线客服
-  </view>
+  <navigator class="servies" hover-class="none" url="/servicePackage/service/index">
+    联系客服
+  </navigator>
 </view>
 
-<!---->
+<!--Toast-->
 <van-toast id="van-toast" />
+
+<!--用户车辆列表-->
+<van-popup show="{{ showCar }}" catchtouchmove="{{ catchMove }}" round custom-style="height: 80vh" position="bottom"
+  bind:close="onClose">
+  <view class="popup-head" catchtouchmove="{{true}}">
+    <view class="cancel" bindtap="onShowCar">取消</view>
+    我的车辆
+  </view>
+  <scroll-view bindscrolltoupper="upper" bindscrolltolower="lower" scroll-y bindscroll="onPopupScroll"
+    class="popup-body">
+    <view class="popup-group">
+      <view class="car-item" wx:for="{{carList}}" wx:key="index" bindtap="onSelectCar" data-car="{{item}}">
+        <view class="car-item-body">
+          <image src="{{IMG_HOST + item.img}}" mode="widthFix" style="width: 100rpx;"></image>
+          <view class="car-info">
+            <view class="car-params">
+              <view class="car-number">{{item.car_num}}</view>
+              <view>{{item.full_name}}</view>
+            </view>
+          </view>
+        </view>
+        <block wx:if="{{car.id == item.id}}">
+          <van-icon name="success" color="#ec8c05" class="checked-icon" />
+        </block>
+        <view class="car-item-action" catchtap="onEidtCar" data-car="{{item}}">
+          编辑
+          <van-icon name="edit" size="28rpx" />
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <view class="popup-action" catchtouchmove="{{ true }}">
+    <navigator class="add-car" url="/userPackage/carList/index?from=createOrder">
+      <van-icon name="add-o" style="margin-right: 10px"></van-icon>添加车辆
+    </navigator>
+  </view>
+</van-popup>

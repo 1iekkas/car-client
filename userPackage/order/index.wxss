@@ -18,6 +18,7 @@ page {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 16rpx;
 }
 
 .order-title .no {
@@ -33,6 +34,13 @@ page {
   color: #959595;
   font-size: 28rpx;
   padding: 30rpx 0;
+  display: flex;
+  align-items: center;
+}
+
+.order-body .desc {
+  flex: 1;
+  padding-left: 30rpx;
 }
 
 .order-body .cell {
@@ -53,7 +61,7 @@ page {
 }
 
 .order-body .cell .text {
-  width: 90vw;
+  width: 70vw;
 }
 
 .order-action {

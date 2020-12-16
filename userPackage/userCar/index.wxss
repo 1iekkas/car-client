@@ -4,7 +4,7 @@ page {
 }
 
 .content {
-  padding: 30rpx 0 100rpx 0;
+  padding: 30rpx 0 130rpx 0;
 }
 
 .car-item {
@@ -35,6 +35,12 @@ page {
 .car-params {
   color: #bbb;
   font-size: 24rpx;
+}
+
+.car-params .car-number {
+  color: #232323;
+  font-size: 32rpx;
+  margin-bottom: 6rpx;
 }
 
 .car-item-action {

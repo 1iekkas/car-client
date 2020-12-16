@@ -4,26 +4,37 @@ page {
 }
 
 .user-info-section {
-  padding: 40rpx 30rpx 60rpx 30rpx;
+  padding: 40rpx 30rpx 120rpx 30rpx;
   display: flex;
   align-items: center;
-  background-color: white;
+  background: #2D4059 
 }
 
 .avatar {
   width: 118rpx;
   height: 118rpx;
+  position: relative;
   border-radius: 50%;
   border: 4rpx solid #fff;
-  overflow: hidden;
   background-color: white;
   margin-right: 40rpx;
   box-shadow: 0rpx 4rpx 6rpx 2rpx #68686899;/*for Android*/
   -webkit-box-shadow: 0px 2px 3px 1px #68686899;/*for IOS*/
 }
 
+.avatar .user-head {
+  border-radius: 50%;
+}
+
+.user-mark {
+  position: absolute;
+  bottom: -18rpx;
+  left: 2rpx;
+  z-index: 1;
+}
+
 .info {
-  color: #a1a1a1;
+  color: white;
   font-size: 24rpx;
   display: flex;
   flex-direction: column;
@@ -32,7 +43,7 @@ page {
 }
 
 .info .name {
-  color: #232323;
+  color: white;
   font-size: 32rpx;
   padding-bottom: 12rpx;
 }
@@ -60,10 +71,27 @@ page {
   font-size: 26rpx;
   width: 95vw;
   margin: 0 auto;
-  display: flex;
+  margin-top: -90rpx;
+  /* display: flex; */
   background-color: white;
-  padding: 30rpx;
-  border-radius: 8rpx;
+  padding: 26rpx 30rpx;
+  border-radius: 12rpx;
+  box-shadow:0 0rpx 10rpx 2rpx rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1;
+}
+
+.order-tabs-title {
+  font-size: 24rpx;
+  padding-bottom: 30rpx;
+  display: flex;
+  align-items: center;
+}
+
+.order-tabs-title text{
+  color: #232323;
+  font-size: 28rpx;
+  flex: 1;
 }
 
 .tabs-list {
@@ -78,10 +106,25 @@ page {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .tabs-list .tabs-item {
+  font-size: 26rpx;
   width: 46rpx;
+}
+
+.tabs-list .tabs-item .info {
+  min-width: 28rpx;
+  line-height: 28rpx;
+  background: #ee0a24;
+  border-radius: 50%;
+  text-align: center;
+  display: block;
+  font-size: 20rpx;
+  position: absolute;
+  right: 32rpx;
+  top: -12rpx;
 }
 
 .tabs-list .tabs-item image, .tabs-all image {
@@ -101,5 +144,32 @@ page {
 .cell-section {
   width: 95vw;
   margin: 0 auto;
+  border-radius: 12rpx;
+  overflow: hidden;
+  
+}
+
+.cell-section .padding {
+  padding: 30rpx 20rpx !important;
+}
+
+.padding .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10rpx;
+}
+
+.padding .icon image {
+  width: 46rpx;
+  height: auto;
+}
+
+/** */
+.activity image{
+  width: 95vw;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 24rpx;
 }
 

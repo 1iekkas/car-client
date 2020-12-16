@@ -13,7 +13,16 @@ module.exports = {
     return $api.put(`/u/car/${data.id}/focus`, data)
   },
 
+  editCar(data) {
+    return $api.put(`/u/car/${data.id}/edit`, data)
+  },
+
   getPhone(data) {
     return $api.put(`/u/user/phone`, data)
+  },
+
+  // 提交投诉建议
+  sendFeedback(data) {
+    return $api.post(`/feedback/add`, data)
   }
 }

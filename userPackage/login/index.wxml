@@ -19,7 +19,7 @@
 
       <!--按钮-->
       <view class="form-btn">
-        <van-button block round type="primary" color="#ec8c05">登 录</van-button>
+        <van-button block round type="primary" color="#ec8c05" bindtap="onToast">登 录</van-button>
       </view>
     </view>
   </view>

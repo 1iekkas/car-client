@@ -12,7 +12,7 @@
         </block>
       </view>
       <view class="location" bindtap="mapSearch">
-        {{location.address_component.city}}
+        {{location.address_component.city || '未定位'}}
         <van-icon class="icon-down" name="arrow-down" />
       </view>
     </view>
@@ -20,16 +20,15 @@
 
   <view class="search-section" style="top: calc({{navBarHeight}}px + 30rpx)">
     <van-search bindtap="toSearchOrder" shape="round" disabled placeholder="搜索同类车型历史订单"></van-search>
-    <view class="store-title">店铺列表</view>
+    <view class="store-title" bindtap="linkToStore">店铺列表</view>
   </view>
 
   <block wx:if="{{location}}">
     <map id="map" longitude="{{location.location.lng}}" setting="{{mapSetting}}" control="{{false}}"
       markers="{{markers}}" latitude="{{location.location.lat}}"
-      
       style="width: 100vw;height: calc(100vh - {{navBarHeight}}px - 170rpx);margin-top: {{navBarHeight}}px;"
       bindregionchange="regionchange">
-      <image class="location-marker" src="../../static/img/marker.png"></image>
+      <image class="location-marker" src="../../static/img/marker.png" mode="widthFix"></image>
       <view class="location-button" catchtap="toCreate" data-type="custom">{{location.formatted_addresses.recommend}}</view>
     </map>
   </block>
@@ -41,11 +40,11 @@
       </view>
       <view class="content">
         <view class="order-tips" bindtap="linkToOrder">
-          <block wx:if="{{tips}}">
-            <van-cell is-link>
+          <block wx:if="{{orderCount}}">
+            <van-cell is-link bindtap="linkToOrder">
               <view slot="title" class="">
                 您有
-                <text class="number">1</text>
+                <text class="number">{{orderCount}}</text>
                 笔订单进行中
               </view>
             </van-cell>
@@ -55,14 +54,14 @@
           </block>
         </view>
         <block wx:if="{{isLogin}}">
-          <van-button custom-class="link-button" round type="primary" block bind:click="toCreate">发布需求</van-button>
+          <van-button custom-class="link-button" color="#2D4059" round type="primary" block bind:click="toCreate">获取汽车服务报价</van-button>
         </block>
         <block wx:else>
-          <van-button block custom-class="link-button" round type="primary" bind:click="toLogin">
-            发布需求
+          <van-button block  color="#2D4059" custom-class="link-button" round type="primary" bind:click="toLogin">
+            获取汽车服务报价
           </van-button>
         </block>
-        <view class="order-swipe">
+        <!-- <view class="order-swipe">
           <swiper indicator-dots="{{indicatorDots}}" vertical="{{true}}" autoplay="{{false}}" circular="{{true}}"
             interval="{{5000}}" duration="{{800}}">
             <block wx:for="{{5}}" wx:key="*this">
@@ -76,19 +75,15 @@
               </swiper-item>
             </block>
           </swiper>
-        </view>
+        </view> -->
         <!---->
         <view class="banner">
           <van-image fit="cover" width="calc((100vw - 60rpx))" height="calc((100vw - 60rpx) / 4)"
-            src="http://i1.fuimg.com/605992/5dbd9bbe8e675c91.png" />
+            src="https://car.coasewash.com/storage/1.png" />
         </view>
-
       </view>
     </movable-view>
   </movable-area>
-
-
-
 </view>
 
 <campaign />

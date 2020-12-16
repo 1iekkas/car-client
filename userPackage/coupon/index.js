@@ -1,19 +1,11 @@
-// servicePackage/orderDetails/index.js
+// userPackage/coupon/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    time: 30 * 60 * 60 * 1000,
-    filterList: [{
-      name: '综合排序'
-    },{
-      name: '距离'
-    },{
-      name: '价格'
-    }],
-    active: 0
+
   },
 
   /**

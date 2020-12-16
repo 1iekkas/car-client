@@ -25,3 +25,7 @@ page {
 .van-checkbox {
   justify-content: flex-end;
 }
+
+.van-field__label {
+  color: #323232 !important;
+}

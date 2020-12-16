@@ -1,0 +1,31 @@
+<!--components/keyboard/index.wxml-->
+<view class="keyboard-overlay" wx:if="{{show}}" catchtouchmove="{{true}}"></view>
+<view class="keyboard" wx:if="{{show}}">
+  <view class="keyboard-action van-hairline--bottom">
+    <!-- <view class="cancel-btn" catchtap="onClose">取消</view> -->
+    <view class="confirm-btn" catchtap="onClose">确认</view>
+  </view>
+  <!--省份-->
+  <block wx:if="{{ isProvince }}">
+    <view class="province-group">
+      <view class="province-row" wx:for="{{province}}" wx:key="index">
+        <view class="province-item" wx:for="{{item}}" wx:for-item="name" wx:key="idx" wx:for-index="idx" catchtap="onChange" data-type="0" data-value="{{name}}">
+          {{name}}
+        </view>
+      </view>
+    </view>
+  </block>
+  <!--数字-->
+  <block wx:else>
+    <view class="desc-group">
+      <view class="desc-row" wx:for="{{number}}" wx:key="index">
+        <view class="desc-item {{ name === 'del' ? 'del' : '' }}" wx:for="{{item}}" wx:for-item="name" wx:key="idx" wx:for-index="idx" catchtap="onChange" data-type="1" data-value="{{name}}">
+          <block wx:if="{{name !== 'del'}}">{{name}}</block>
+          <block wx:else>
+            <van-icon name="cross" />
+          </block>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

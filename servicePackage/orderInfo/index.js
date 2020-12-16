@@ -2,15 +2,14 @@
 import {
   getWaitOrderInfo,
   getOffer,
-  pickOffer,
-  getPayParams,
   checkOrder,
-  cancelOrder
+  cancelOrder,
+  cancelReason
 } from '../../api/order'
 import {
   reverseGeocoder,
   setCalculateDistance,
-  requestPayment
+  openMap
 } from '../../api/wxServer'
 import {
   IMG_HOST
@@ -24,6 +23,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLogin: app.globalData.isLogin,
     time: 30 * 60 * 60 * 1000,
     filterList: [{
       name: '综合排序'
@@ -37,7 +37,9 @@ Page({
     offerList: [],
     loading: true,
     showCancel: false, // 取消订单弹出
+    cancelList: [],
     cancelType: '1', // 取消类型
+    IMG_HOST: IMG_HOST,
     steps: [
       {
         text: '联系商家',
@@ -50,15 +52,48 @@ Page({
         text: '退款成功',
       }
     ],
-    activeStep: 3
+    activeStep: 3,
+
+    orderSteps: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: async function (options) {
+    // console.log(options)
     data = this.data
-    this.getData(options.id)
+    this.oid = options.id
+    data.isLogin = app.globalData.isLogin
+    // 清除缓存位置信息
+    wx.setStorageSync('location', null)
+
+    // 用户token回调
+    app.userTokenReadyCallback = res => {
+      console.log(res)
+      this.setData({
+        hasToken: res,
+        isLogin: res
+      })
+
+      if(!res) {
+        wx.redirectTo({
+          url: `/userPackage/login/index?id=${this.oid}`,
+        })
+      }else {
+        this.getData(this.oid)
+        this.getCancelReason()
+      }
+    }
+
+    // 用户信息回调
+    app.userInfoReadyCallback = res => {
+      console.log(res)
+      this.setData({
+        userInfo: res.userInfo,
+        hasUserInfo: true
+      })
+    }
   },
 
   /**
@@ -72,7 +107,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if(!this.data.isLogin) return false
+    this.getData(this.oid)
+    this.getCancelReason()
   },
 
   /**
@@ -114,10 +151,6 @@ Page({
     let res = await getWaitOrderInfo({
       id: id
     })
-<<<<<<< HEAD
-=======
-    console.log(res)
->>>>>>> 1a6ce2175172fbd4a87a52866f98e6f149425296
     if (!res.status) {
       // 解析地址
       let address = await reverseGeocoder({
@@ -128,10 +161,64 @@ Page({
       })
 
       res.data.address = address.result ? address.result.address : '解析位置失败'
+      data.orderSteps = []
+      /**处理订单流程 */
+      data.orderSteps.push({
+        text: '创建订单',
+        desc: res.data.create_time
+      })
+
+      // 以下均为非空成立
+      if(res.data.pick_car_time) {
+        data.orderSteps.push({
+          text: '店铺已接车',
+          desc: res.data.pick_car_time
+        })
+      }
+
+      if(res.data.repair_time) {
+        data.orderSteps.push({
+          text: '开始维修',
+          desc: res.data.repair_time
+        })
+      }
+
+      if(res.data.repair_complete_time) {
+        data.orderSteps.push({
+          text: '维修完成',
+          desc: res.data.repair_complete_time
+        })
+      }
+
+      if(res.data.cancel_time) {
+        data.orderSteps.push({
+          text: '已取消',
+          desc: res.data.cancel_time
+        })
+      }
+
+      if(res.data.refund_success_time) {
+        data.orderSteps.push({
+          text: '已退款',
+          desc: res.data.refund_success_time
+        })
+      }
+
+      if(res.data.complete_time) {
+        data.orderSteps.push({
+          text: '订单已完成',
+          desc: res.data.complete_time
+        })
+      }
+
+
       // 保存
       this.setData({
         info: res.data,
-        loading: false
+        time: res.data.remain * 1000,
+        loading: false,
+        orderSteps: data.orderSteps,
+        active: data.orderSteps.length - 1
       }, () => {
         this.getOfferList()
       })
@@ -148,24 +235,8 @@ Page({
       if (res.data.length) {
         // 设置同步map
         Promise.all(res.data.map(async e => {
-          let d = await setCalculateDistance({
-            form: {
-              latitude: data.info.lat || 0,
-              longitude: data.info.lnt || 0
-            },
-            to: [{
-              latitude: e.lat,
-              longitude: e.lnt
-            }]
-          })
-
-          if (d.status == 0) {
-            e.distance = (d.result.elements[0].distance / 1000).toFixed(0)
-          } else {
-            e.distance = '未定位'
-          }
-
-          return e
+          e.distance = (e.distance / 1000).toFixed(0)
+          return e 
         })).then(result => {
 
 
@@ -192,15 +263,17 @@ Page({
   // 图片预览
   onPreview(e) {
     const url = e.currentTarget.dataset.url;
+    let imgs = data.info.images.map(e =>  `${data.IMG_HOST}${e}`)
+
     wx.previewImage({
-      current: url,
-      urls: data.info.images,
+      current: data.IMG_HOST + url,
+      urls: imgs,
     })
   },
 
   // 选择预约门店
   onSelectShop(e) {
-    const id = e.currentTarget.dataset.id;
+    const { item } = e.currentTarget.dataset;
     Dialog.confirm({
         title: '确认预约',
         message: '是否确认预约该门店',
@@ -208,17 +281,9 @@ Page({
       })
       .then(async () => {
         // on confirm
-        let res = await pickOffer({
-          offer_id: id,
-          order_id: data.info.id
+        wx.navigateTo({
+          url: `/servicePackage/pay/index?id=${data.info.id}&offer=${JSON.stringify(item)}`,
         })
-
-        if (!res.code) {
-          /* wx.showToast({
-            title: 'title',
-          }) */
-          this.getData(data.info.id)
-        }
 
       })
       .catch(() => {
@@ -234,91 +299,110 @@ Page({
     })
   },
 
-  // 付款
-  async onSubmitPay() {
-    // 获取支付配置
-    let res = await getPayParams({
-      order_id: data.info.id,
-      offer_id: data.info.offer_id
-    })
-
-    if (!res.code) {
-      let result = await requestPayment(res.data)
-      if (!result.code) {
-        wx.showToast({
-          title: '支付成功',
-        })
-        this.getData(data.info.id)
-      }
-    }
-  },
-
   // 取消订单
   onCancelOrder() {
+    let message = ''
+    const status = data.info.status
+
+    switch (status) {
+      case 0:
+        message = '当前等待报价中，是否确认取消订单?'
+        break;
+      default :
+        message = '当前等待维修中,是否确认取消订单?'
+        break;    
+    }
+
     Dialog.confirm({
       title: '取消订单',
-      message: '当前等待维修中,是否确认取消订单',
+      message: message,
       confirmButtonText: '确定取消',
       cancelButtonText: '不，点错了'
     })
     .then(() => {
-<<<<<<< HEAD
       this.setData({
         showCancel: true
       })
       // on confirm
-      /* wx.navigateTo({
-        url: `/servicePackage/cancel/index`,
-      }) */
-      
     }).catch(() => {
 
     }) 
   },
 
+  // 
+  async getCancelReason() {
+    let res = await cancelReason()
+    if(!res.code) {
+      this.setData({
+        cancelList: res.data,
+        cancelType: res.data[0].id
+      })
+    }
+  },
+
   onChangeCancel(e) {
     const { name } = e.currentTarget.dataset;
     this.setData({
-      cancelType:name
+      cancelType: name
     })
   },
 
   async confirmPopup() {
     let res = await cancelOrder({id: data.info.id, cancel_reason_id: data.cancelType})
     if(!res.code) {
+      wx.showToast({
+        title: '已提交取消申请',
+      })
       this.setData({
         showCancel: false
+      }, () => {
+        this.getData(data.info.id)
       })
     }
-    
   },
 
   cancelPopup() {
     this.setData({
       showCancel: false
-=======
-      // on confirm
-      wx.navigateTo({
-        url: `/servicePackage/cancel/index`,
-      })
->>>>>>> 1a6ce2175172fbd4a87a52866f98e6f149425296
     })
   },
 
   // 验收
   async onConfirmCheck(e) {
     let res = await checkOrder({id: data.info.id})
-<<<<<<< HEAD
     // console.log(res)
-=======
-    console.log(res)
->>>>>>> 1a6ce2175172fbd4a87a52866f98e6f149425296
     if(!res.code) {
       wx.showToast({
         title: '已验收',
       })
       this.getData(data.info.id)
     }
+  },
+
+  async openMap(e) {
+    const { lat, lng } = e.currentTarget.dataset;
+    // console.log(lat, lng)
+    let res = await openMap({latitude: lat, longitude: lng})
+  },
+
+  // 跳转评价
+  onLinkRate() {
+    wx.navigateTo({
+      url: `/storePackage/rate/index?id=${data.info.id}`,
+    })
+  },
+
+  onPhone() {
+    wx.makePhoneCall({
+      phoneNumber: data.offerList[0].phone,
+    })
+  },
+
+  storeDetails(e) {
+    const { id } = e.currentTarget.dataset;
+    wx.navigateTo({
+      url: `/storePackage/store/index?id=${id}`,
+    })
   }
 
 })

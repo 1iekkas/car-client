@@ -1,7 +1,12 @@
 <!--components/date/index.wxml-->
 <picker mode="multiSelector" value="{{dateTime}}" bindcolumnchange="changeDateTimeColumn" bindchange="changeDateTime"
   range="{{dateTimeArray}}">
-  <view class="picker" style="{{pickUpTime ? '' : 'color: #8a8a8a'}}">
+  <block wx:if="{{isDate}}">
+    <view class="picker" style="{{pickUpTime ? '' : 'color: #8a8a8a'}}">
     {{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}}
     {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}} </view>
+  </block>
+  <block wx:else>
+    <view style="color: #c8c9cc">请选择预约时间（选填）</view>
+  </block>
 </picker>

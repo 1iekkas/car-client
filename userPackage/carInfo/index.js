@@ -1,6 +1,14 @@
 // userPackage/carInfo/index.js
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
-import { validateCarNumber } from '../../utils/validator'
+import {
+  validateCarNumber
+} from '../../utils/validator'
+import {
+  editCar
+} from '../../api/user'
+import {
+  IMG_HOST
+} from '../../constances/server'
 const app = getApp()
 const api = app.$api
 let data
@@ -17,25 +25,39 @@ Page({
     carList: [], // 车型列表
     activeCar: 0,
     activeCarItem: null,
-    checked: true,
     miles: '',
     date: '',
     carNum: '',
-    focus: false,
-    isLoading: false
+    focus: true,
+    isLoading: false,
+    carNumberType: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: async function (options) {
+    // console.log(options.car)
     data = this.data
     const series = options.series ? JSON.parse(options.series) : null
+    const car = options.car ? JSON.parse(options.car) : null
+
     this.setData({
+      car: car,
       series: series,
-      from: options.from
+      from: options.from || '',
+      carId: car ? car.id : '',
+      activeYearItem: car ? car.year : '',
+      activeCarItem: car ? car.name : '',
+      carNum: car ? car.car_num : '',
+      focus: true,
+      miles: car ? car.miles : '',
+      date: car ? car.year_check : '',
+      logo: car ? `${IMG_HOST}${car.img}` : '',
+      IMG_HOST: IMG_HOST
     }, () => {
-      this.getCarYear()
+      // console.log(data)
+      if (data.from !== 'edit' && data.from !== 'createOrderManage') this.getCarYear()
     })
   },
 
@@ -50,7 +72,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    console.log(getCurrentPages())
   },
 
   /**
@@ -87,7 +109,7 @@ Page({
   /* onShareAppMessage: function () {
 
   }, */
-  
+
   // 获取车型年份
   async getCarYear() {
     let res = await api.get('https://tool.bitefu.net/car/', {
@@ -97,14 +119,14 @@ Page({
       pagesize: 50
     }, false)
     console.log(res)
-    if(res.statusCode == 200) {  
+    if (res.statusCode == 200) {
       this.setData({
         carYearList: res.data.info
       })
     }
-    
+
   },
-  
+
   // 获取车型
   async getCarList() {
     let res = await api.get('https://tool.bitefu.net/car/', {
@@ -115,17 +137,17 @@ Page({
       pagesize: 300
     }, false)
     console.log(res)
-    if(res.statusCode == 200) {
+    if (res.statusCode == 200) {
       this.setData({
         carList: res.data.info
       })
     }
   },
-  
+
   // 车型年份
   bindPickerYear(e) {
     const value = e.detail.value,
-    activeYearItem = this.data.carYearList[value];
+      activeYearItem = this.data.carYearList[value];
     //
     this.setData({
       activeYear: value,
@@ -133,11 +155,11 @@ Page({
     })
     this.getCarList()
   },
-  
+
   // 选择车型
   bindPickerCar(e) {
     const value = e.detail.value,
-    activeCarItem = this.data.carList[value];
+      activeCarItem = this.data.carList[value];
     //
     this.setData({
       activeCar: value,
@@ -162,10 +184,10 @@ Page({
 
   // 提交添加
   async onSubmit() {
-  validateCarNumber(data.carNum)
+    validateCarNumber(data.carNum)
 
     /**验证 */
-    if(!data.activeCarItem) {
+    if (!data.activeCarItem) {
       Toast.fail('请选择车型')
       return false
     }
@@ -176,28 +198,61 @@ Page({
 
     let res = await app.$api.post(`/u/car/add`, {
       car_info_id: data.activeCarItem.id,
-      miles: 100,
+      miles: data.miles,
       year_check: data.date,
-      focus: data.checked ? 1 : 0,
+      focus: data.focus ? 1 : 0,
       car_num: data.carNum,
     })
 
-    
 
-    if(res.code) {
+
+    if (res.code) {
       wx.showModal({
         content: res.error
       })
 
-    }else {
+    } else {
       Toast({
         type: 'success',
         message: '添加成功',
         onClose: () => {
-          let url = data.from == 'create' ? '/servicePackage/create/index' : '/pages/user/index'
-          wx.redirectTo({
-            url: url,
-          })
+          let url, pre
+          // let url = data.from == 'create' ? '/servicePackage/create/index' : '/pages/user/index'
+          const from = data.from
+          switch (from) {
+            case 'createOrder':
+              url = '/servicePackage/create/index'
+              pre = getCurrentPages()[getCurrentPages().length - 3]
+              pre.setData({
+                showCar: false,
+                catchMove: false
+              })
+              // wx.setStorageSync('refresh', true)
+              /* wx.reLaunch({
+                url: url,
+              }) */
+              wx.navigateBack({
+                delta: 2
+              })
+              break;
+            case 'createOrderManage':
+              pre = getCurrentPages()[getCurrentPages().length - 2]
+              pre.setData({
+                showCar: false,
+                catchMove: false
+              })
+              wx.navigateBack({
+                delta: 2
+              })
+              break;  
+            default:
+              url = '/userPackage/userCar/index'
+              wx.navigateBack({
+                delta: 2
+              })
+              break;
+          }
+          
         },
       });
     }
@@ -215,9 +270,44 @@ Page({
   },
 
   // 车牌
+  onChangeCarNumberType(e) {
+    this.setData({
+      carNumberType: e.currentTarget.dataset.value == 1 ? 0 : 1
+    })
+  },
+
+  setCarNumber(e) {
+    console.log(e)
+    this.setData({
+      carNum: e.detail
+    })
+  },
+
+  onKeyboard() {
+    this.selectComponent("#keyboard").onClose()
+  },
+
   onChangeCarNum(e) {
     this.setData({
       carNum: e.detail
     })
+  },
+
+  // 编辑保存
+  async onSave() {
+    let res = editCar({
+      id: data.carId,
+      miles: data.miles,
+      year_check: data.date,
+      focus: data.focus ? 1 : 0,
+      car_num: data.carNum
+    })
+
+    if (!res.code) {
+      Toast.success('保存成功')
+      wx.navigateBack({
+        delta: 1,
+      })
+    }
   }
 })

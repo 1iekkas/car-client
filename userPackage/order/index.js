@@ -16,25 +16,19 @@ Page({
       max: 3
     },{
       id: '0',
-      name: '已发布',
+      name: '报价中',
       list: [],
       page: 1,
       max: 3
     },{
-      id: '1',
-      name: '待付款',
-      list: [],
-      page: 1,
-      max: 3
-    },{
-      id: '2',
+      id: '1,2',
       name: '待维修',
       list: [],
       page: 1,
       max: 3
     },{
       id: '3',
-      name: '待验收',
+      name: '待交付',
       list: [],
       page: 1,
       max: 3
@@ -45,18 +39,13 @@ Page({
       page: 1,
       max: 3
     },{
-      id: '5',
+      id: '5,6,7,8',
       name: '已取消',
       list: [],
       page: 1,
       max: 3
-    },{
-      id: '6,7',
-      name: '退款中',
-      list: [],
-      page: 1,
-      max: 3
     }],
+    IMG_HOST: app.globalData.IMG_HOST,
     active: 'all',
     list: [],
     page: 1,
@@ -70,6 +59,9 @@ Page({
    */
   onLoad: function (options) {
     data = this.data
+    this.setData({
+      active: options.status || 'all'
+    })
   },
 
   /**
@@ -85,8 +77,10 @@ Page({
   onShow: function () {
     this.setData({
       list: [],
-      page: 1
+      page: 1,
+      loading: true
     })
+    
     this.getList()
   },
 
@@ -139,8 +133,12 @@ Page({
 
   // 切换列表
   changeTabs(e) {
+    wx.pageScrollTo({
+      scrollTop: 0
+    })
     this.setData({
       active: e.detail.name,
+      page: 1,
       list: [],
       loading: true
     },() => {
@@ -152,6 +150,7 @@ Page({
   async getList() {
     let res = await getOrderList({
       status: data.active === 'all' ? '' : data.active,
+      page: data.page,
     })
     if(!res.data.code) {
       if(data.triggered) {
@@ -164,6 +163,7 @@ Page({
         list: data.list,
         triggered: false,
         loading: false,
+        page: data.page + 1,
         total: res.data.last_page
       })
     }
@@ -177,17 +177,14 @@ Page({
     })
   },
 
-
-
   // 分页加载
   lower() {
-    if(this.loading || data.page > data.total) return false
+    if(data.loading || this.loading || data.page > data.total) return false
     this.loading = true
     this.setData({
       loading: true
     },() => {
       this.getList()
     })
-    
   },
 })
