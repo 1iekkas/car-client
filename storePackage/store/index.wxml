@@ -1,105 +1,111 @@
 <!--servicePackage/store/index.wxml-->
 <!--wxs-->
+<import src="index.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{!store}}" />
 <wxs src="../../utils/wxs/computed.wxs" module="tools"></wxs>
-<view class="container">
-  <navigation custom-class="{{showNav ? 'nav-bg' : ''}}" catchtouchmove="{{false}}">
-    <view class="nav-content" style="height: {{menuHeight}}px">
-      <van-icon class="arrow" name="arrow-left" size="40rpx" bindtap="back" />
-      <view class="nav-title" wx:if="{{showNav}}">{{store.name}}</view>
-    </view>
-  </navigation>
-  <view class="store-body">
-    <view class="store-swiper">
-      <block wx:if="{{store.type == 2}}">
-        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{5000}}" duration="{{800}}">
-          <block wx:for="{{store.facade_images}}" wx:key="*this">
+<block wx:if="{{store}}">
+  <view class="container">
+    <navigation custom-class="{{showNav ? 'nav-bg' : ''}}" catchtouchmove="{{false}}">
+      <view class="nav-content" style="height: {{menuHeight}}px">
+        <van-icon class="arrow" name="arrow-left" size="40rpx" bindtap="back" />
+        <view class="nav-title" wx:if="{{showNav}}">{{store.name}}</view>
+      </view>
+    </navigation>
+    <view class="store-body">
+      <view class="store-swiper">
+        <block wx:if="{{store.type == 2}}">
+          <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{5000}}" duration="{{800}}">
+            <block wx:for="{{store.facade_images}}" wx:key="*this">
+              <swiper-item>
+                <van-image src="{{ tools.fix_img(IMG_HOST, item) }}" mode="widthFix" width="100vw" height="80vw">
+                </van-image>
+              </swiper-item>
+            </block>
+          </swiper>
+        </block>
+        <block wx:else>
+          <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{5000}}" duration="{{800}}">
             <swiper-item>
-              <van-image src="{{ tools.fix_img(IMG_HOST, item) }}" mode="widthFix" width="100vw" height="80vw"></van-image>
+              <van-image src="{{ tools.fix_img(IMG_HOST, store.shop_image) }}" mode="widthFix" width="100vw"
+                height="80vw"></van-image>
             </swiper-item>
-          </block>
-        </swiper>
-      </block>
-      <block wx:else>
-        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{5000}}" duration="{{800}}">
-          <swiper-item>
-            <van-image src="{{ tools.fix_img(IMG_HOST, store.shop_image) }}" mode="widthFix" width="100vw" height="80vw"></van-image>
-          </swiper-item>
-        </swiper>
-      </block>
-    </view>
-    <!---->
-    <view class="store-info">
-      <view class="info">
-        <view class="name">{{store.name}}</view>
-        <!-- <view class="range">
-          800m
-        </view> -->
-      </view>
-      <view class="service">
-        <van-tag color="#ec8c05" plain>{{store.type == 2 ? '企业': '个人'}}</van-tag>
-        <view class="block">
-          总订单 <text>{{store.order_count}}</text>
-        </view>
-        <view class="block">
-          <block wx:if="{{ store.rank }}"> 评分 <text>{{ store.rank }}</text></block>
-          <block wx:else><text>暂无评分</text></block>
-        </view>
-      </view>
-      <view class="time">
-        营业时间: 09:00 ~ 21:00
-      </view>
-    </view>
-
-    <view class="store-address" bindtap="openMap">
-      <view class="address-title">
-        <text>门店地址</text>
-        <van-icon name="arrow" size="26rpx" color="#999" />
-      </view>
-      <view class="address-info">
-        <text>{{store.detail}}</text>
-        <text>{{store.distance}}km</text>
-      </view>
-    </view>
-
-    <!---->
-    <view class="store-comment">
-      <view class="comment-title">
-        <view>
-          <text>评价</text>
-          <text class="comment-count" wx:if="{{store.comment_count}}">{{store.comment_count}}条</text>
-          <text class="comment-count" wx:else>暂无评论</text>
-        </view>
+          </swiper>
+        </block>
       </view>
       <!---->
-      <view class="comment-group">
-        <view class="comment-item van-hairline--bottom" wx:for="{{commentList}}" wx:key="index">
-          <view class="comment-item__title">
-            <van-image src="{{item.head}}"
-              round width="56rpx" height="56rpx"></van-image>
-            <text class="user-name">{{item.nicename}}</text>
-            <text class="time">{{tools.fix_date(item.create_time)}}</text>
+      <view class="store-info">
+        <view class="info">
+          <view class="name">{{store.name}}</view>
+          <!-- <view class="range">
+          800m
+        </view> -->
+        </view>
+        <view class="service">
+          <van-tag color="#ec8c05" plain>{{store.type == 2 ? '企业': '个人'}}</van-tag>
+          <view class="block">
+            总订单 <text>{{store.order_count}}</text>
           </view>
-          <view class="comment-item__body">
-            <view class="comment-rate">
-              <van-rate value="{{ item.service_rank }}" readonly size="{{ 14 }}" allow-half color="#ee0a24" void-color="#eee" void-icon="star" />
-            </view>
-            <view class="comment-value">
-              {{item.content}}
-            </view>
-            <block wx:if="{{item.rank_images && item.rank_images.length}}">
-              <view class="comment-image">
-                <van-image wx:for="{{item.rank_images}}" wx:for-item="img" wx:for-index="i" wx:key="i" src="{{ tools.fix_img(IMG_HOST, img) }}"
-                  bindtap="onPreview" width="21vw" height="21vw" data-index="{{ index }}" data-url="{{ tools.fix_img(IMG_HOST, img) }}"></van-image>
-              </view>
-            </block>
+          <view class="block">
+            <block wx:if="{{ store.rank }}"> 评分 <text>{{ store.rank }}</text></block>
+            <block wx:else><text>暂无评分</text></block>
           </view>
         </view>
-        <view wx:if="{{commentList.length}}" class="showMore">查看全部</view>
+        <view class="time">
+          营业时间: 09:00 ~ 21:00
+        </view>
       </view>
-    </view>
 
-    <!---->
-    <!-- <view class="store-address" bindtap="openMap">
+      <view class="store-address" bindtap="openMap">
+        <view class="address-title">
+          <text>门店地址</text>
+          <van-icon name="arrow" size="26rpx" color="#999" />
+        </view>
+        <view class="address-info">
+          <text>{{store.detail}}</text>
+          <text>{{store.distance}}km</text>
+        </view>
+      </view>
+
+      <!---->
+      <view class="store-comment">
+        <view class="comment-title">
+          <view>
+            <text>评价</text>
+            <text class="comment-count" wx:if="{{store.comment_count}}">{{store.comment_count}}条</text>
+            <text class="comment-count" wx:else>暂无评论</text>
+          </view>
+        </view>
+        <!---->
+        <view class="comment-group">
+          <view class="comment-item van-hairline--bottom" wx:for="{{commentList}}" wx:key="index">
+            <view class="comment-item__title">
+              <van-image src="{{item.head}}" round width="56rpx" height="56rpx"></van-image>
+              <text class="user-name">{{item.nicename}}</text>
+              <text class="time">{{tools.fix_date(item.create_time)}}</text>
+            </view>
+            <view class="comment-item__body">
+              <view class="comment-rate">
+                <van-rate value="{{ item.service_rank }}" readonly size="{{ 14 }}" allow-half color="#ee0a24"
+                  void-color="#eee" void-icon="star" />
+              </view>
+              <view class="comment-value">
+                {{item.content}}
+              </view>
+              <block wx:if="{{item.rank_images && item.rank_images.length}}">
+                <view class="comment-image">
+                  <van-image wx:for="{{item.rank_images}}" wx:for-item="img" wx:for-index="i" wx:key="i"
+                    src="{{ tools.fix_img(IMG_HOST, img) }}" bindtap="onPreview" width="21vw" height="21vw"
+                    data-index="{{ index }}" data-url="{{ tools.fix_img(IMG_HOST, img) }}"></van-image>
+                </view>
+              </block>
+            </view>
+          </view>
+          <view wx:if="{{commentList.length}}" class="showMore">查看全部</view>
+        </view>
+      </view>
+
+      <!---->
+      <!-- <view class="store-address" bindtap="openMap">
       <view class="address-title">
         <text>门店地址</text>
         <van-icon name="arrow" size="26rpx" color="#999" />
@@ -109,12 +115,13 @@
         <text>0.8km</text>
       </view>
     </view> -->
+    </view>
   </view>
-</view>
 
-<van-goods-action>
-  <van-goods-action-icon icon="share-o" text="分享" bind:click="onClickIcon" />
-  <van-goods-action-icon icon="star-o" text="收藏" bind:click="onClickIcon" />
-  <van-goods-action-icon icon="phone-o" text="联系店铺" bind:click="onClickIcon" />
-  <van-goods-action-button text="立即询价" bind:click="onClickIcon" />
-</van-goods-action>
+  <van-goods-action>
+    <van-goods-action-icon icon="share-o" text="分享" bind:click="onClickIcon" />
+    <van-goods-action-icon icon="star-o" text="收藏" bind:click="onClickIcon" />
+    <van-goods-action-icon icon="phone-o" text="联系店铺" bind:click="onPhone" />
+    <van-goods-action-button text="立即询价" bind:click="onClickIcon" />
+  </van-goods-action>
+</block>

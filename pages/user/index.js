@@ -30,7 +30,8 @@ Page({
     }, {
       id: '5,6,7,8',
       name: '已取消'
-    }]
+    }],
+    loading: true
   },
 
   /**
@@ -88,12 +89,17 @@ Page({
           data.tabs[1].count = res.data.wait_repair
           data.tabs[2].count = res.data.wait_check
           this.setData({
-            tabs: data.tabs
+            tabs: data.tabs,
+            loading: false
           })
-          console.log(data.tabs)
+          // console.log(data.tabs)
         }
       })
 
+    }else {
+      this.setData({
+        loading: false
+      })
     }
   },
 

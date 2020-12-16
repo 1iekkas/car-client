@@ -1,4 +1,5 @@
 /* servicePackage/store/index.wxss */
+@import "./index.skeleton.wxss";
 page {
   background-color: #f7f7f7;
 }

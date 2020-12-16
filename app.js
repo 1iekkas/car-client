@@ -55,11 +55,9 @@ App({
             }
           }
         })
-      }else {
-       
       }
       if (this.userTokenReadyCallback) {
-        console.log('userTokenReadyCallback')
+        // console.log('userTokenReadyCallback')
         this.userTokenReadyCallback(result)
       }
      

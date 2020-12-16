@@ -140,7 +140,7 @@
       </van-sticky>
       <view class="store-group">
         <block wx:if="{{offerList.length}}">
-          <view class="store-item" wx:for="{{offerList}}" wx:key="index" bindtap="storeDetails" data-id="{{item.id}}">
+          <view class="store-item" wx:for="{{offerList}}" wx:key="index" bindtap="storeDetails" data-id="{{item.shop_id}}">
             <view class="store-body">
               <van-image width="100" height="100" src="{{IMG_HOST}}{{item.facade_images[0]}}"></van-image>
               <view class="store-content">
@@ -159,7 +159,7 @@
                 </block>
               </view>
             </view>
-            <view class="store-address van-hairline--top" catchtap="openMap" data-lat="{{item.lat}}"
+            <view class="store-address van-hairline--top" catchtap="openMap"  data-name="{{item.name}}" data-lat="{{item.lat}}"
               data-lng="{{item.lnt}}">
               <view class="location">{{item.detail}}</view>
               <view class="range" wx:if="{{item.distance}}">{{item.distance}}km <van-icon name="location"></van-icon>
@@ -180,7 +180,7 @@
       <view class="title van-hairline--bottom">服务门店</view>
       <view class="store-group">
         <block wx:if="{{offerList.length}}">
-          <view class="store-item" wx:for="{{offerList}}" wx:key="index" bindtap="storeDetails" data-id="{{item.id}}">
+          <view class="store-item" wx:for="{{offerList}}" wx:key="index" bindtap="storeDetails" data-id="{{item.shop_id}}">
             <view class="store-body">
               <van-image width="100" height="100" src="{{IMG_HOST}}{{ item.facade_images[0]}}"></van-image>
               <view class="store-content">
@@ -188,7 +188,7 @@
                 <view class="price">报价:￥{{item.fee}}</view>
               </view>
             </view>
-            <view class="store-address van-hairline--top" catchtap="openMap" data-lat="{{item.lat}}"
+            <view class="store-address van-hairline--top" catchtap="openMap" data-name="{{item.name}}" data-lat="{{item.lat}}"
               data-lng="{{item.lnt}}">
               <view class="location">{{item.detail}}</view>
               <view class="range" wx:if="{{item.distance}}">{{item.distance}}km</view>

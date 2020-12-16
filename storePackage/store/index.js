@@ -203,5 +203,11 @@ Page({
       })
     }
 
-  }
+  },
+
+  onPhone() {
+    wx.makePhoneCall({
+      phoneNumber: data.store.phone,
+    })
+  },
 })
