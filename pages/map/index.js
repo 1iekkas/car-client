@@ -335,8 +335,6 @@ Page({
     let res = await getStoreList({page_size: 100})
 
     if(!res.code) {
-      //storeList = res.data
-      // console.log(res.data.data)
       storeList = res.data.data.map(e => ({
         id: e.id,
         title: e.name,

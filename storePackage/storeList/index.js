@@ -161,6 +161,7 @@ Page({
         page: data.page + 1,
         total: res.data.last_page
       })
+      this.loading = false
     }
   },
 

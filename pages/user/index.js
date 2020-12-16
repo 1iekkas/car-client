@@ -156,5 +156,15 @@ Page({
     wx.navigateTo({
       url: '/userPackage/login/index',
     })
+  },
+
+  // 未开放提示
+  showToast() {
+    wx.showToast({
+      icon: 'none',
+      mask: true,
+      duration: 2000,
+      title: '活动暂未开放，敬请期待',
+    })
   }
 })

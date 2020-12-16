@@ -34,6 +34,15 @@ Component({
       this.setData({
         show: false
       })
+    },
+
+    showToast() {
+      wx.showToast({
+        icon: 'none',
+        mask: true,
+        duration: 2000,
+        title: '活动暂未开放，敬请期待',
+      })
     }
   }
 })

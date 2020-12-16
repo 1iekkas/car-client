@@ -15,7 +15,8 @@
         "mapSearch/index",
         "citySearch/index",
         "wallet/index",
-        "coupon/index"
+        "coupon/index",
+        "suggestions/index"
       ]
     },
     {

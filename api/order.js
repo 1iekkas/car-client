@@ -48,5 +48,5 @@ module.exports = {
   // 订单评价
   comment(data) {
     return $api.post(`/u/order/${data.id}/comment`, data)
-  }
+  },
 }

@@ -1,0 +1,20 @@
+
+var fix_img = function(http, url=null) {
+  if(!url) return false
+
+  if(url && url.indexOf('http') > -1) {
+    return url.replace('/^https?:\/\/(.*?)\//', http + '/') 
+  } else {
+    // console.log(http + url)
+    return http + '/' + url
+  }
+}
+
+var fix_date = function (date) {
+  return date.split(' ')[0]
+}
+
+module.exports = {
+  fix_img: fix_img,
+  fix_date: fix_date
+}

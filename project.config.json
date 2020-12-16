@@ -13,22 +13,34 @@
     "es6": true,
     "enhance": false,
     "postcss": true,
+    "preloadBackgroundData": false,
     "minified": true,
     "newFeature": false,
     "coverView": true,
     "nodeModules": true,
     "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
     "uglifyFileName": false,
     "checkInvalidKey": true,
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
-    "useMultiFrameRuntime": false,
-    "useApiHook": true
+    "bundle": false,
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "userConfirmedBundleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.14.0",
@@ -102,7 +114,7 @@
         {
           "name": "店铺详情",
           "pathName": "storePackage/store/index",
-          "query": "id=26",
+          "query": "id=27",
           "scene": 1007
         },
         {
@@ -126,7 +138,7 @@
         {
           "name": "订单信息",
           "pathName": "servicePackage/orderInfo/index",
-          "query": "id=95",
+          "query": "id=151",
           "scene": null
         },
         {
@@ -174,6 +186,12 @@
         {
           "name": "钱包",
           "pathName": "userPackage/wallet/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "投诉建议",
+          "pathName": "userPackage/suggestions/index",
           "query": "",
           "scene": null
         }

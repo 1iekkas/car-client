@@ -148,8 +148,8 @@
                 <block wx:if="{{ !item.vague }}">
                   <view class="price">报价:￥{{item.fee}}</view>
                   <view class="pay" catchtap="onSelectShop" data-item="{{item}}">
-                    <view>预约支付</view>
-                    <van-icon name="arrow" size="26rpx" style="margin-top: 4rpx"></van-icon>
+                    <van-button type="danger" size="mini">去预约</van-button>
+                    <!-- <van-icon name="arrow" size="26rpx" style="margin-top: 4rpx"></van-icon> -->
                   </view>
                 </block>
                 <block wx:else>
@@ -157,7 +157,6 @@
                     您描述的需求不清晰，本店无法提供报价，可致电或到店咨询
                   </view>
                 </block>
-
               </view>
             </view>
             <view class="store-address van-hairline--top" catchtap="openMap" data-lat="{{item.lat}}"
@@ -211,7 +210,6 @@
         <van-icon name="service" /><text>联系客服</text></navigator>
     </view>
   </block>
-
 
   <!--订单信息-->
   <view class="line"></view>

@@ -182,6 +182,10 @@ swiper {
 
 }
 
+.comment-rate {
+  margin-top: 12rpx;
+}
+
 .comment-value {
   margin-top: 20rpx;
   color: #232323;
@@ -190,7 +194,7 @@ swiper {
 }
 
 .comment-image {
-  margin-top: 20rpx;
+  margin-top: 28rpx;
   display: flex;
   align-items: center;
   flex-wrap: wrap;

@@ -17,7 +17,7 @@
     <van-field value="{{ message }}" label="" bind:change="changeMessage" type="textarea" placeholder="请输入您的评价" autosize="{{autosize}}" border="{{ false }}" />
 
     <view class="upload van-hairline--top">
-      <van-uploader bind:delete="onDelImage" file-list="{{ fileList }}" max-count="6" bind:after-read="afterRead"
+      <van-uploader accept="image" use-before-read bind:before-read="beforeRead" bind:delete="onDelImage" file-list="{{ fileList }}" max-count="6" bind:after-read="afterRead"
         multiple />
     </view>
 

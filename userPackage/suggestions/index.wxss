@@ -1,0 +1,20 @@
+/* userPackage/suggestions/index.wxss */
+.container {
+  padding: 30rpx;
+}
+
+.title {
+  font-size: 28rpx;
+  line-height: 48rpx;
+  text-indent: 2em;
+  padding-bottom: 30rpx;
+}
+
+.message {
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.message .van-cell {
+  background-color: #f7f7f7;
+}

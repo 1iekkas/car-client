@@ -71,7 +71,9 @@
           </view>
           <view class="order-body">
             <view class="image">
-              <van-image src="{{IMG_HOST}}{{item.car.img}}" width="12vw" height="12vw"></van-image>
+              <van-image use-error-slot src="{{IMG_HOST}}{{item.car.img}}" width="12vw" height="12vw">
+                <van-icon slot="error" color="#dcdee0" size="20px" name="photo-fail" />
+              </van-image>
             </view>
             <view class="desc">
               <view class="cell">

@@ -19,5 +19,10 @@ module.exports = {
 
   getPhone(data) {
     return $api.put(`/u/user/phone`, data)
+  },
+
+  // 提交投诉建议
+  sendFeedback(data) {
+    return $api.post(`/feedback/add`, data)
   }
 }

@@ -1,4 +1,5 @@
-// pages/index/index.js
+// userPackage/suggestions/index.js
+import { sendFeedback } from '../../api/user'
 const app = getApp()
 Page({
 
@@ -6,19 +7,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    message: '',
+    autosize: {
+      minHeight: 150
+    },
+    loading: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    /* app.userTokenReadyCallback = res => {
-      this.setData({
-        hasToken: res,
-        isLogin: true
-      })
-    } */
+
   },
 
   /**
@@ -68,5 +68,37 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  onChange(e) {
+    this.setData({
+      message: e.detail.value
+    })
+  },
+
+  async onSubmit() {
+    this.setData({
+      loading: true
+    })
+    let res = await sendFeedback({
+      content: this.data.message
+    }) 
+
+    if(!res.code) {
+      wx.showToast({
+        mask: true,
+        duration: 2000,
+        title: '提交成功',
+        success: () => {
+          wx.navigateBack({
+            delta: 1
+          })
+        }
+      })
+    }
+
+    this.setData({
+      loading: false
+    })
   }
 })

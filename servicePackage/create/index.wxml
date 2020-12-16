@@ -41,7 +41,7 @@
     </view>
     <block wx:if="{{isImg}}">
       <view class="upload">
-        <van-uploader bind:delete="onDelImage" file-list="{{ fileList }}" max-count="6" bind:after-read="afterRead"
+        <van-uploader bind:delete="onDelImage" accept="image" use-before-read bind:before-read="beforeRead" file-list="{{ fileList }}" max-count="6" bind:after-read="afterRead"
           multiple />
       </view>
     </block>

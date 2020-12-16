@@ -1,6 +1,7 @@
 // servicePackage/store/index.js
 import {
-  getStoreInfo
+  getStoreInfo,
+  getCommentList
 } from '../../api/store'
 import {
   openMap
@@ -26,12 +27,12 @@ Page({
     
     let pages = getCurrentPages();
     this.prevPage = pages[pages.length - 2];  
-    console.log(`id:${JSON.stringify(options)}`)
+    // console.log(`id:${JSON.stringify(options)}`)
     data = this.data
     this.storeId = options.id
     
     if(!this.prevPage) {
-      console.log('执行1')
+      // console.log('执行1')
       // console.log(app.globalData.location)
       if(app.globalData.location) {
         this.getStoreInfo({
@@ -52,7 +53,7 @@ Page({
         })
       }
     }else {
-      console.log('执行2')
+      // console.log('执行2')
       this.getStoreInfo({
         id: options.id,
         lat: app.globalData.location.location.lat,
@@ -109,10 +110,12 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    /* console.log(`${data.IMG_HOST}/${data.store.facade_images[0]}`)
+    console.log(`${data.IMG_HOST}/${data.store.shop_image}`) */
     return {
       title: data.store.name,
       path: `/storePackage/store/index?id=${data.store.id}`,
-      imageUrl: data.store.type == 2 ? data.store.facade_images[0] : data.store.shop_image
+      imageUrl: data.store.type == 2 ? `${data.IMG_HOST}/${data.store.facade_images[0]}` : `${data.IMG_HOST}/${data.store.shop_image}`
     }
   },
 
@@ -136,12 +139,29 @@ Page({
     })
 
     if (!res.code) {
-      console.log(`店铺信息：${JSON.stringify(res.data)}`)
+      // console.log(`店铺信息：${JSON.stringify(res.data)}`)
       res.data.distance = (res.data.distance / 1000).toFixed(0)
       this.setData({
         store: res.data
       })
+      this.fetchCommentList()
     }
+  },
+
+  // 评论列表
+  async fetchCommentList() {
+    let res = await getCommentList({
+      id: data.store.id,
+      page_size: 4
+    })
+
+    if(!res.code) {
+      let list = res.data.data
+      this.setData({
+        commentList: list
+      }) 
+    }
+
   },
 
   openMap() {
@@ -154,13 +174,15 @@ Page({
 
   // 图片预览
   onPreview(e) {
-    const url = e.currentTarget.dataset.url;
+    const {index , url} = e.currentTarget.dataset;
+    // console.log(index)
     wx.previewImage({
-      current: 'https://img.yzcdn.cn/vant/cat.jpeg',
-      urls: ['https://img.yzcdn.cn/vant/cat.jpeg'],
+      current: url,
+      urls: data.commentList[index].rank_images,
     })
   },
 
+  // event
   onClickIcon() {
     wx.showToast({
       icon: 'none',
@@ -169,8 +191,8 @@ Page({
     })
   },
 
+  // 返回
   back() {
-    
     if (this.prevPage) {
       wx.navigateBack({
         delta: 1

@@ -72,7 +72,7 @@
       </view>
     </block>
     <view class="line"></view>
-    <view class="activity">
+    <view class="activity" bindtap="showToast">
       <image src="../../static/img/in.png" mode="widthFix"></image>
     </view>
     <!---->
@@ -105,7 +105,7 @@
               <image src="../../static/img/service.png" mode="widthFix" alt="" srcset="" />
             </view>
           </van-cell>
-          <van-cell custom-class="padding" title="投诉建议" value="" is-link>
+          <van-cell custom-class="padding" title="投诉建议" url="/userPackage/suggestions/index" value="" is-link>
             <view slot="icon" class="icon">
               <image src="../../static/img/comments.png" mode="widthFix" alt="" srcset="" />
             </view>

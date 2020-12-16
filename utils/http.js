@@ -1,4 +1,5 @@
 /**http请求封装 */
+import Toast from '../miniprogram_npm/@vant/weapp/toast/toast';
 const md5 = require('../utils/md5.js')
 // console.log(md5)
 
@@ -8,7 +9,6 @@ const md5 = require('../utils/md5.js')
  * */
 
 const env = wx.getAccountInfoSync().miniProgram.envVersion
-
 
 let baseUrl = ''
 switch (env) {
@@ -273,6 +273,38 @@ const api = {
         }
       })
     })
+    return res
+  },
+
+  // 上传图片
+  async uploadImage(file) {
+    const signature = getStr(),
+      url = `${baseUrl}/u/upload?timestamp=${signature.timestamp}&nonce=${signature.nonce}&signature=${signature.signature}`
+    Toast.loading({
+      duration: 0, // 持续展示 toast
+      forbidClick: true,
+      message: '上传中',
+    });
+    // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
+    let res = await new Promise((resolve, reject) => {
+      wx.uploadFile({
+        url: url, // 仅为示例，非真实的接口地址
+        filePath: file.url,
+        name: 'file',
+        formData: signature,
+        success: res => {
+          res = JSON.parse(res.data).map(e => {
+            return `${baseUrl}/${e}`
+          })
+          // 上传完成需要更新 fileList
+          resolve(res)
+        },
+        complete: c => {
+          Toast.clear()
+        }
+      });
+    })
+
     return res
   }
 
