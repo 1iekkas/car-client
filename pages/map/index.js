@@ -113,15 +113,25 @@ Page({
 
   onReady() {
     setTimeout(() => {
+      console.log(123)
       let query = wx.createSelectorQuery();
       query.select('.content').boundingClientRect(rect => {
         let height = rect.height;
-        //console.log(height);
+        console.log(height);
         this.setData({
           contentHeight: height - 30
         })
       }).exec();
-    }, 0)
+    }, 8000)
+  },
+
+  showToast() {
+    wx.showToast({
+      icon: 'none',
+      mask: true,
+      duration: 2000,
+      title: '活动暂未开放，敬请期待',
+    })
   },
 
   // 获取banner
@@ -350,5 +360,11 @@ Page({
         markers: storeList
       })
     }
+  },
+
+  navToStoreService() {
+    wx.navigateToMiniProgram({
+      appId: 'wxd53968a559c6fa77'
+    })
   }
 })

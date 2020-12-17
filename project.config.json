@@ -87,7 +87,6 @@
           "scene": null
         },
         {
-          "id": -1,
           "name": "地图",
           "pathName": "pages/map/index",
           "query": "",

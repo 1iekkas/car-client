@@ -44,9 +44,9 @@ module.exports = {
 
       // do something  
       //wx.setStorageSync('token', 'token')
-     
+
       return res
-      
+
     } catch (err) {
       wx.showModal({
         content: '登陆失败，请重新登录'
@@ -86,7 +86,7 @@ module.exports = {
           // wx.openSetting
           wx.getSetting({
             success: s => {
-              if(s.authSetting['scope.userLocation']) {
+              if (s.authSetting['scope.userLocation']) {
                 wx.showModal({
                   content: '获取当前位置失败，请重试',
                   showCancel: false,
@@ -115,7 +115,7 @@ module.exports = {
               })
             }
           })
-          
+
         }
       })
     })
@@ -130,7 +130,7 @@ module.exports = {
    *  region_fix: 是否自动扩大范围到全国 0=是 1=否,
    * }  
    */
-  async getSuggestion(params={}) {
+  async getSuggestion(params = {}) {
     let object = {
       ...params,
       region_fix: 1,
@@ -148,7 +148,7 @@ module.exports = {
       })
 
       return res
-    }catch(error){
+    } catch (error) {
       wx.showModal({
         content: error
       })
@@ -156,7 +156,7 @@ module.exports = {
   },
 
   // 坐标解析地址 @params { lat, lng }
-  async reverseGeocoder(params={}) {
+  async reverseGeocoder(params = {}) {
     let object = {
       ...params
     }
@@ -171,7 +171,7 @@ module.exports = {
       })
 
       return res
-    }catch(error){
+    } catch (error) {
       wx.showModal({
         content: error
       })
@@ -194,7 +194,7 @@ module.exports = {
       })
 
       return res
-    }catch(error){
+    } catch (error) {
       wx.showModal({
         content: error
       })
@@ -217,7 +217,7 @@ module.exports = {
       })
 
       return res
-    }catch(error){
+    } catch (error) {
       wx.showModal({
         content: error
       })
@@ -232,7 +232,7 @@ module.exports = {
    * } 
    * create by liekkas 2020-11-07
    */
-  searchLocation(params={}) {
+  searchLocation(params = {}) {
     map.search()
   },
 
@@ -244,10 +244,16 @@ module.exports = {
       wx.requestPayment({
         ...data,
         complete: res => {
-          if(res.errMsg == 'requestPayment:fail cancel') {
-            resolve({code: 1, message: 'requestPayment:fail cancel' })
-          }else {
-            resolve({code: 0, message: '支付成功'})
+          if (res.errMsg == 'requestPayment:fail cancel') {
+            resolve({
+              code: 1,
+              message: 'requestPayment:fail cancel'
+            })
+          } else {
+            resolve({
+              code: 0,
+              message: '支付成功'
+            })
           }
         }
       })
@@ -280,7 +286,7 @@ module.exports = {
       })
 
       return res
-    }catch(error){
+    } catch (error) {
       wx.showModal({
         content: error
       })
@@ -289,18 +295,46 @@ module.exports = {
 
   // 订阅消息 废弃
   requestSubscribeMessage(tmplIds = []) {
-   return new Promise(resolve => {
-    wx.requestSubscribeMessage({
-      tmplIds: tmplIds,
-      complete: res => {
-        if(res.errMsg == "requestSubscribeMessage:ok") {
-          resolve({code: 0, message: '订阅成功' })
-        }else {
-          resolve({code: 1, message: '订阅失败'})
+    return new Promise(resolve => {
+      wx.requestSubscribeMessage({
+        tmplIds: tmplIds,
+        complete: res => {
+          if (res.errMsg == "requestSubscribeMessage:ok") {
+            resolve({
+              code: 0,
+              message: '订阅成功'
+            })
+          } else {
+            resolve({
+              code: 1,
+              message: '订阅失败'
+            })
+          }
         }
-      }
+      })
     })
-   })
+  },
+
+  updateListener() {
+    const updateManager = wx.getUpdateManager()
+    console.log(updateManager)
+    updateManager.onCheckForUpdate(function (res) {
+      // 请求完新版本信息的回调
+      console.log(res.hasUpdate)
+    })
+
+    updateManager.onUpdateReady(function () {
+      wx.showModal({
+        title: '更新提示',
+        content: '新版本已经准备好，是否重启应用？',
+        success: function (res) {
+          if (res.confirm) {
+            // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+            updateManager.applyUpdate()
+          }
+        }
+      })
+    })
   }
- 
+
 }
