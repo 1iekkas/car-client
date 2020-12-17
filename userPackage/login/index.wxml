@@ -8,11 +8,11 @@
       <van-cell-group border="{{ false }}">
         <van-field title-width="80rpx" value="{{ value }}" placeholder="输入手机号" bind:change="onChange">
           <view slot="label" class="prefix van-hairline--right">+86</view>
-          <van-button class="custom-btn" open-type="getPhoneNumber" bind:getphonenumber="getphonenumber" slot="button" plain size="small" type="primary">获取手机号</van-button>
+          <van-button class="custom-btn" bindtap="onToast" slot="button" plain size="small" type="primary">获取手机号</van-button>
         </van-field>
 
         <van-field value="{{ value }}" placeholder="输入验证码" bind:change="onChange">
-          <van-button class="custom-btn" slot="button" plain size="small" bind:click="getSms" type="primary">发送验证码</van-button>
+          <van-button class="custom-btn" slot="button" plain size="small"  bindtap="onToast" type="primary">发送验证码</van-button>
         </van-field>
       </van-cell-group>
 

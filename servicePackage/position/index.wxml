@@ -5,7 +5,7 @@
       <map id="map" longitude="{{location.location.lng}}" setting="{{mapSetting}}" control="{{false}}"
         markers="{{markers}}" latitude="{{location.location.lat}}" style="width: 100vw;height: 50vh;"
         bindregionchange="regionchange">
-        <image class="location-marker" src="../../static/img/marker.png"></image>
+        <image class="location-marker" src="../../static/img/marker.png" mode="widthFix"></image>
       </map>
     </block>
 
