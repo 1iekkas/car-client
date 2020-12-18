@@ -1,165 +1,173 @@
 <!--pages/user/index.wxml-->
-<scroll-view scroll-y="true" style="height: 100vh">
-  <view class="content" style="min-height: calc(100vh + 4rpx);">
-    <view class="user-info-section">
-      <view class="avatar">
-        <block wx:if="{{!isLogin}}">
-          <!-- <button class="auth-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+<import src="index.skeleton.wxml" />
+<template is="skeleton" wx-if="{{loading}}" />
+<view class="container {{!loading ? '': 'hidden'}}">
+  <scroll-view scroll-y="true" style="height: 100vh">
+    <view class="content" style="min-height: calc(100vh + 4rpx);">
+      <view class="user-info-section">
+        <view class="avatar">
+          <block wx:if="{{!isLogin}}">
+            <!-- <button class="auth-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
               <image src="../../static/img/avatar.png" mode="widthFix" style="width: 100%"></image>
             </button> -->
-          <navigator class="auth-btn" hover-class="none" url="../../userPackage/login/index">
-            <image src="../../static/img/avatar.png" mode="widthFix" style="width: 100%"></image>
-          </navigator>
-        </block>
-        <block wx:else>
-          <image class="user-head" src="{{userInfo.avatarUrl}}" mode="widthFix" style="width: 100%"></image>
-          <image class="user-mark" src="../../static/img/vip1.png" mode="widthFix" style="width: 100%" />
-        </block>
-      </view>
-      <view class="info">
-        <block wx:if="{{isLogin}}">
-          <text class="name">{{userInfo.nickName}}</text>
-          <text wx:if="{{carCount}}">已绑定车辆：{{ carCount }}</text>
-          <text wx:else>未绑定车辆</text>
-        </block>
-        <block wx:else>
-          <text>请点击头像登录</text>
-        </block>
-      </view>
-    </view>
-    <!---->
-    <view class="line"></view>
-    <block wx:if="{{isLogin}}">
-      <view class="tabs order-tabs">
-        <view class="order-tabs-title" bindtap="orderLink" data-id="all">
-          <text>我的订单</text>
-          全部订单 <van-icon name="arrow"></van-icon>
+            <navigator class="auth-btn" hover-class="none" url="../../userPackage/login/index">
+              <image src="../../static/img/avatar.png" mode="widthFix" style="width: 100%"></image>
+            </navigator>
+          </block>
+          <block wx:else>
+            <image class="user-head" src="{{userInfo.avatarUrl}}" mode="widthFix" style="width: 100%"></image>
+            <image class="user-mark" src="../../static/img/vip1.png" mode="widthFix" style="width: 100%" />
+          </block>
         </view>
-        <view class="tabs-list">
-          <view class="tabs-item" wx:for="{{tabs}}" bindtap="orderLink" data-id="{{item.id}}" wx:key="index">
-            <block wx:if="{{ item.count }}">
-              <text class="info">{{ item.count }}</text>
-            </block>
-            <view class="tabs-img">
-              <image src="../../static/img/order.png" mode="widthFix" style="width: 46rpx;height: auto;"></image>
+        <view class="info">
+          <block wx:if="{{isLogin}}">
+            <text class="name">{{userInfo.nickName}}</text>
+            <text wx:if="{{carCount}}">已绑定车辆：{{ carCount }}</text>
+            <text wx:else>未绑定车辆</text>
+          </block>
+          <block wx:else>
+            <text>请点击头像登录</text>
+          </block>
+        </view>
+      </view>
+      <!--订单-->
+      <view class="line"></view>
+      <block wx:if="{{isLogin}}">
+        <view class="tabs order-tabs">
+          <view class="order-tabs-title" bindtap="orderLink" data-id="all">
+            <text>我的订单</text>
+            全部订单 <van-icon name="arrow"></van-icon>
+          </view>
+          <view class="tabs-list">
+            <view class="tabs-item" wx:for="{{tabs}}" bindtap="orderLink" data-id="{{item.id}}" wx:key="index">
+              <block wx:if="{{ item.count }}">
+                <text class="info">{{ item.count }}</text>
+              </block>
+              <view class="tabs-img">
+                <image src="../../static/img/order.png" mode="widthFix" style="width: 46rpx;height: auto;"></image>
+              </view>
+              <text>{{item.name}}</text>
             </view>
-            <text>{{item.name}}</text>
           </view>
         </view>
-      </view>
-    </block>
+      </block>
 
-    <block wx:else>
-      <view class="tabs order-tabs">
-        <view class="order-tabs-title" bindtap="linkLogin">
-          <text>我的订单</text>
-          全部订单 <van-icon name="arrow"></van-icon>
-        </view>
-        <view class="tabs-list">
-          <view class="tabs-item" wx:for="{{tabs}}" bindtap="linkLogin" wx:key="index">
-            <view class="tabs-img">
-              <image src="../../static/img/order.png" mode="widthFix" style="width: 46rpx;height: auto;"></image>
-            </view>
-            <text>{{item.name}}</text>
+      <block wx:else>
+        <view class="tabs order-tabs">
+          <view class="order-tabs-title" bindtap="linkLogin">
+            <text>我的订单</text>
+            全部订单 <van-icon name="arrow"></van-icon>
           </view>
-        </view>
-        <!-- <view class="tabs-all van-hairline--left" bindtap="linkLogin">
+          <view class="tabs-list">
+            <view class="tabs-item" wx:for="{{tabs}}" bindtap="linkLogin" wx:key="index">
+              <view class="tabs-img">
+                <image src="../../static/img/order.png" mode="widthFix" style="width: 46rpx;height: auto;"></image>
+              </view>
+              <text>{{item.name}}</text>
+            </view>
+          </view>
+          <!-- <view class="tabs-all van-hairline--left" bindtap="linkLogin">
           <view class="tabs-img">
             <image src="../../static/img/order.png" mode="widthFix" style="width: 46rpx;height: auto;"></image>
           </view>
           <text>全部</text>
         </view> -->
-      </view>
-    </block>
-    <view class="line"></view>
-    <view class="activity" bindtap="showToast">
-      <image src="../../static/img/in.png" mode="widthFix"></image>
-    </view>
-    <!---->
-    <view class="line"></view>
-    <view class="cell-section">
-      <block wx:if="{{isLogin}}">
-        <van-cell-group border="{{ false }}">
-          <van-cell custom-class="padding" title="车辆管理" value="" is-link url="/userPackage/userCar/index?from=user">
-            <view slot="icon" class="icon">
-              <image src="../../static/img/car.png" mode="widthFix" alt="" srcset="" />
-            </view>
-          </van-cell>
-          <van-cell custom-class="padding" title="钱包" value="" is-link>
-            <view slot="icon" class="icon">
-              <image src="../../static/img/wallet.png" mode="widthFix" alt="" srcset="" />
-            </view>
-          </van-cell>
-          <van-cell custom-class="padding" title="优惠券" value="" is-link>
-            <view slot="icon" class="icon">
-              <image src="../../static/img/coupons.png" mode="widthFix" alt="" srcset="" />
-            </view>
-          </van-cell>
-          <van-cell custom-class="padding" title="资料设置" value="" is-link>
-            <view slot="icon" class="icon">
-              <image src="../../static/img/set.png" mode="widthFix" alt="" srcset="" />
-            </view>
-          </van-cell>
-          <van-cell custom-class="padding" url="/servicePackage/service/index" title="联系客服" value="" is-link>
-            <view slot="icon" class="icon">
-              <image src="../../static/img/service.png" mode="widthFix" alt="" srcset="" />
-            </view>
-          </van-cell>
-          <van-cell custom-class="padding" title="投诉建议" url="/userPackage/suggestions/index" value="" is-link>
-            <view slot="icon" class="icon">
-              <image src="../../static/img/comments.png" mode="widthFix" alt="" srcset="" />
-            </view>
-          </van-cell>
-          <van-cell custom-class="padding" title="更多服务" value="" is-link border="{{ false }}">
-            <view slot="icon" class="icon">
-              <image src="../../static/img/more.png" mode="widthFix" alt="" srcset="" />
-            </view>
-          </van-cell>
-        </van-cell-group>
+        </view>
       </block>
-      <block wx:else>
-        <van-cell-group border="{{ false }}">
-          <van-cell custom-class="padding" title="车辆管理" value="" is-link url="/userPackage/login/index">
-            <view slot="icon" class="icon">
-              <image src="../../static/img/car.png" mode="widthFix" alt="" srcset="" />
-            </view>
-          </van-cell>
-          <van-cell custom-class="padding" title="钱包" value="" is-link url="/userPackage/login/index">
-            <view slot="icon" class="icon">
-              <image src="../../static/img/wallet.png" mode="widthFix" alt="" srcset="" />
-            </view>
-          </van-cell>
-          <van-cell custom-class="padding" title="优惠券" value="" is-link url="/userPackage/login/index">
-            <view slot="icon" class="icon">
-              <image src="../../static/img/coupons.png" mode="widthFix" alt="" srcset="" />
-            </view>
-          </van-cell>
-          <van-cell custom-class="padding" title="资料设置" value="" is-link url="/userPackage/login/index">
-            <view slot="icon" class="icon">
-              <image src="../../static/img/set.png" mode="widthFix" alt="" srcset="" />
-            </view>
-          </van-cell>
-          <van-cell custom-class="padding" url="/servicePackage/service/index" title="联系客服" value="" is-link
-            url="/userPackage/login/index">
-            <view slot="icon" class="icon">
-              <image src="../../static/img/service.png" mode="widthFix" alt="" srcset="" />
-            </view>
-          </van-cell>
-          <van-cell custom-class="padding" title="投诉建议" value="" is-link url="/userPackage/login/index">
-            <view slot="icon" class="icon">
-              <image src="../../static/img/comments.png" mode="widthFix" alt="" srcset="" />
-            </view>
-          </van-cell>
-          <van-cell custom-class="padding" title="更多服务" value="" is-link border="{{ false }}"
-            url="/userPackage/login/index">
-            <view slot="icon" class="icon">
-              <image src="../../static/img/more.png" mode="widthFix" alt="" srcset="" />
-            </view>
-          </van-cell>
-        </van-cell-group>
-      </block>
+      <!--活动-->
       <view class="line"></view>
-    </view>
+      <view class="activity" bindtap="showToast">
+        <image src="../../static/img/in.png" mode="widthFix"></image>
+      </view>
+      <!--列表-->
+      <view class="line"></view>
+      <view class="cell-section">
+        <block wx:if="{{isLogin}}">
+          <van-cell-group border="{{ false }}">
+            <van-cell custom-class="padding" title="车辆管理" value="" is-link url="/userPackage/userCar/index?from=user">
+              <view slot="icon" class="icon">
+                <image src="../../static/img/car.png" mode="widthFix" alt="" srcset="" />
+              </view>
+            </van-cell>
+            <van-cell custom-class="padding" title="钱包" bindtap="showToast" value="" is-link>
+              <view slot="icon" class="icon">
+                <image src="../../static/img/wallet.png" mode="widthFix" alt="" srcset="" />
+              </view>
+            </van-cell>
+            <van-cell custom-class="padding" title="优惠券" bindtap="showToast" value="" is-link>
+              <view slot="icon" class="icon">
+                <image src="../../static/img/coupons.png" mode="widthFix" alt="" srcset="" />
+              </view>
+            </van-cell>
+            <!-- <van-cell custom-class="padding" title="资料设置" value="" is-link>
+              <view slot="icon" class="icon">
+                <image src="../../static/img/set.png" mode="widthFix" alt="" srcset="" />
+              </view>
+            </van-cell> -->
+            <van-cell custom-class="padding" url="/servicePackage/service/index" title="联系客服" value="" is-link>
+              <view slot="icon" class="icon">
+                <image src="../../static/img/service.png" mode="widthFix" alt="" srcset="" />
+              </view>
+            </van-cell>
+            <van-cell custom-class="padding" title="投诉建议" url="/userPackage/suggestions/index" value="" is-link>
+              <view slot="icon" class="icon">
+                <image src="../../static/img/comments.png" mode="widthFix" alt="" srcset="" />
+              </view>
+            </van-cell>
+            <van-cell custom-class="padding" title="更多服务" url="/servicePackage/more/index" value="" is-link border="{{ false }}">
+              <view slot="icon" class="icon">
+                <image src="../../static/img/more.png" mode="widthFix" alt="" srcset="" />
+              </view>
+            </van-cell>
+          </van-cell-group>
+        </block>
+        <block wx:else>
+          <van-cell-group border="{{ false }}">
+            <van-cell custom-class="padding" title="车辆管理" value="" is-link url="/userPackage/login/index">
+              <view slot="icon" class="icon">
+                <image src="../../static/img/car.png" mode="widthFix" alt="" srcset="" />
+              </view>
+            </van-cell>
+            <van-cell custom-class="padding" title="钱包" value="" is-link url="/userPackage/login/index">
+              <view slot="icon" class="icon">
+                <image src="../../static/img/wallet.png" mode="widthFix" alt="" srcset="" />
+              </view>
+            </van-cell>
+            <van-cell custom-class="padding" title="优惠券" value="" is-link url="/userPackage/login/index">
+              <view slot="icon" class="icon">
+                <image src="../../static/img/coupons.png" mode="widthFix" alt="" srcset="" />
+              </view>
+            </van-cell>
+            <!-- <van-cell custom-class="padding" title="资料设置" value="" is-link url="/userPackage/login/index">
+              <view slot="icon" class="icon">
+                <image src="../../static/img/set.png" mode="widthFix" alt="" srcset="" />
+              </view>
+            </van-cell> -->
+            <van-cell custom-class="padding" url="/servicePackage/service/index" title="联系客服" value="" is-link
+              url="/userPackage/login/index">
+              <view slot="icon" class="icon">
+                <image src="../../static/img/service.png" mode="widthFix" alt="" srcset="" />
+              </view>
+            </van-cell>
+            <van-cell custom-class="padding" title="投诉建议" value="" is-link url="/userPackage/login/index">
+              <view slot="icon" class="icon">
+                <image src="../../static/img/comments.png" mode="widthFix" alt="" srcset="" />
+              </view>
+            </van-cell>
+            <van-cell custom-class="padding" title="更多服务" value="" is-link border="{{ false }}"
+              url="/userPackage/login/index">
+              <view slot="icon" class="icon">
+                <image src="../../static/img/more.png" mode="widthFix" alt="" srcset="" />
+              </view>
+            </van-cell>
+          </van-cell-group>
+        </block>
+        <view class="line"></view>
+      </view>
 
-  </view>
-</scroll-view>
+      <view wx:if="{{isLogin}}" class="logout">
+        <view bindtap="logout">退出登录</view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

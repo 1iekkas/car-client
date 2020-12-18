@@ -1,0 +1,7 @@
+<!--servicePackage/more/index.wxml-->
+<view class="container">
+  <van-cell-group>
+    <van-cell title="用户服务协议" is-link url="/servicePackage/agreement/index" />
+    <van-cell title="隐私政策" value="" border="{{ false }}" is-link url="/servicePackage/policy/index"></van-cell>
+  </van-cell-group>
+</view>

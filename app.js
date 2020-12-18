@@ -2,7 +2,8 @@
 // appId wxa487cd75e5f05745
 import {
   checkToken,
-  getLocation
+  getLocation,
+  updateListener
 } from "api/wxServer.js"
 import {
   $api
@@ -10,6 +11,8 @@ import {
 import { IMG_HOST } from 'constances/server'
 App({
   onLaunch: function() {
+    // 监视版本更新
+    updateListener()
     this.setNavBarInfo()
     // 获取定位
     getLocation().then(res => {
@@ -55,11 +58,9 @@ App({
             }
           }
         })
-      }else {
-       
       }
       if (this.userTokenReadyCallback) {
-        console.log('userTokenReadyCallback')
+        // console.log('userTokenReadyCallback')
         this.userTokenReadyCallback(result)
       }
      
@@ -81,6 +82,8 @@ App({
     this.globalData.menuRight = systemInfo.screenWidth - menuButtonInfo.right;
     this.globalData.menuHeight = menuButtonInfo.height;
   },
+
+  
 
   globalData: {
     isLogin: false,

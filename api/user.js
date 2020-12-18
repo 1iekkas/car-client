@@ -18,7 +18,7 @@ module.exports = {
   },
 
   getPhone(data) {
-    return $api.put(`/u/user/phone`, data)
+    return $api.put(`/auth/wechat/phone`, data)
   },
 
   // 提交投诉建议

@@ -3,11 +3,13 @@
   <van-sticky offset-top="0" catchtouchmove="{{true}}">
     <van-search value="{{ value }}" placeholder="请输入相关车型" />
   </van-sticky>
-  <scroll-view scroll-y="true" style="height: calc(100vh - 108rpx)" bindscrolltoupper="upper" bindscrolltolower="lower"
-    bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+  <scroll-view scroll-y="true" style="height: calc(100vh - 108rpx)"  scroll-y refresher-enabled refresher-triggered="{{triggered}}" bindrefresherpulling="onPulling"
+    bindrefresherrefresh="onRefresh" bindrefresherrestore="onRestore" bindrefresherabort="onAbort">
     <view class="content" style="min-height: calc(100vh - 100rpx)">
       <!--空数据-->
-      <block></block>
+      <block wx:if="{{!list.length && !loading && !triggered}}">
+        <van-empty image="search" description="未找到相关订单" />
+      </block>
       <!---->
       <block>
         <view class="item" wx:for="{{10}}" wx:key="index">
@@ -15,7 +17,11 @@
         </view>
       </block>
       <!---->
-      <block></block>
+      <block wx:if="{{loading}}">
+        <view class="list-loading">
+          <van-loading />
+        </view>
+      </block>
     </view>
   </scroll-view>
 </view>

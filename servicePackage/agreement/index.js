@@ -1,14 +1,11 @@
-// servicePackage/store/index.js
-const app = getApp()
+// servicePackage/agreement/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    navBarHeight: app.globalData.navBarHeight, //导航栏高度
-    menuHeight: app.globalData.menuHeight,
-    IMG_HOST: app.globalData.IMG_HOST
+
   },
 
   /**

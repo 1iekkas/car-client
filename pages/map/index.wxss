@@ -35,14 +35,16 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 52rpx;
-  height: auto;
+  width: 8rpx;
+  height: 70rpx;
+  background-color: var(--defaultBg);
+  border-radius: 4rpx;
 }
 
 #map .location-button {
   color: white;
   font-size: 20rpx;
-  padding: 8rpx 16rpx;
+  padding: 12rpx 16rpx;
   min-height: 48rpx;
   /* line-height: 48rpx; */
   text-align: center;
@@ -51,7 +53,7 @@
   left: 50%;
   transform: translate(-51%, -145%);
   z-index: 100;
-  background-color: #232323;
+  background-color: var(--defaultBg);
   border-radius: 36rpx;
   display: flex;
   align-items: center;
@@ -108,7 +110,7 @@
   background-color: white;
   padding: 40rpx 30rpx 30rpx 30rpx;
   box-shadow:0 -2rpx 10rpx 2rpx rgba(0, 0, 0, 0.2);/*for Android*/
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .content .number {
@@ -116,7 +118,7 @@
 }
 
 .link-button {
-  margin-top: 40rpx;
+  /* margin-top: 40rpx; */
   width: 80vw !important;
 }
 
@@ -143,34 +145,34 @@
 }
 
 /** */
-swiper {
+/* swiper {
   margin: 40rpx auto 0 auto;
   height: 170rpx;
   width: 80vw;
-}
+} */
 
-.swiper-item {
+/* .swiper-item {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 6rpx 0;
-}
+} */
 
-.swiper-item .item {
+/* .swiper-item .item {
   color: #999;
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
+} */
 
-.swiper-item .item-avatar {
+/* .swiper-item .item-avatar {
   width: 40rpx;
   margin-right: 12rpx;
-}
+} */
 
 .banner {
-  margin-top: 40rpx;
+
 }
 
 .focus-icon {
@@ -178,4 +180,32 @@ swiper {
   top: -10vw;
   right: 4vw;
   z-index: 2;
+}
+
+.poster-title {
+  color: #323232;
+  font-size: 32rpx;
+  padding: 10rpx 0 20rpx 0;
+}
+
+.poster {
+  /* margin-top: 40rpx; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.poster-item {
+  flex: 0 0 calc((100vw - 60rpx - 20rpx) / 2);
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+swipe image{
+  
+}
+
+.swiper-image {
+  border-radius: 12rpx;
+  overflow: hidden;
 }

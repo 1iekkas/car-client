@@ -28,7 +28,8 @@
       markers="{{markers}}" latitude="{{location.location.lat}}"
       style="width: 100vw;height: calc(100vh - {{navBarHeight}}px - 170rpx);margin-top: {{navBarHeight}}px;"
       bindregionchange="regionchange">
-      <image class="location-marker" src="../../static/img/marker.png" mode="widthFix"></image>
+      <!-- <image class="location-marker" src="../../static/img/marker.png" mode="widthFix"></image> -->
+      <view class="location-marker"></view>
       <view class="location-button" catchtap="toCreate" data-type="custom">{{location.formatted_addresses.recommend}}</view>
     </map>
   </block>
@@ -53,14 +54,16 @@
             <van-cell title="暂无订单进行中" is-link></van-cell>
           </block>
         </view>
+        <view class="line"></view>
         <block wx:if="{{isLogin}}">
           <van-button custom-class="link-button" color="#2D4059" round type="primary" block bind:click="toCreate">获取汽车服务报价</van-button>
         </block>
         <block wx:else>
-          <van-button block  color="#2D4059" custom-class="link-button" round type="primary" bind:click="toLogin">
+          <van-button block color="#2D4059" custom-class="link-button" round type="primary" bind:click="toLogin">
             获取汽车服务报价
           </van-button>
         </block>
+        <!--历史订单-->
         <!-- <view class="order-swipe">
           <swiper indicator-dots="{{indicatorDots}}" vertical="{{true}}" autoplay="{{false}}" circular="{{true}}"
             interval="{{5000}}" duration="{{800}}">
@@ -77,10 +80,29 @@
           </swiper>
         </view> -->
         <!---->
-        <view class="banner">
-          <van-image fit="cover" width="calc((100vw - 60rpx))" height="calc((100vw - 60rpx) / 4)"
-            src="https://car.coasewash.com/storage/1.png" />
+        <view class="line"></view>
+        <view class="poster-title">上线福利</view>
+        <view class="poster">
+          <view class="poster-item" bindtap="navToStoreService">
+            <image src="../../static/img/store_poster.png" alt="" style="width: calc((100vw - 60rpx - 20rpx) / 2);height: calc(((100vw - 60rpx - 20rpx) / 2) / 3)" mode="widthFix" srcset="" />
+          </view>
+          <view class="poster-item" catchtap="showToast">
+            <image src="../../static/img/poster_coupon.png" alt="" style="width: calc((100vw - 60rpx - 20rpx) / 2);height: calc(((100vw - 60rpx - 20rpx) / 2) / 3)" mode="widthFix" srcset="" />
+          </view>
+          
         </view>
+        <!---->
+        <view class="line"></view>
+       <!--  <swiper indicator-dots="{{true}}"
+          autoplay="{{false}}" interval="{{500}}" duration="{{5000}}">
+          <block wx:for="{{1}}" wx:key="*this">
+            <swiper-item>
+              <image class="swiper-image" src="../../static/img/item.png" alt="" style="width: calc((100vw - 60rpx));height: 150px; display: inline-block;" mode="widthFix" srcset="" />
+            </swiper-item>
+          </block>
+        </swiper>    
+
+        <view class="line"></view> -->
       </view>
     </movable-view>
   </movable-area>

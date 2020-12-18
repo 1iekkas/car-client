@@ -1,0 +1,149 @@
+<!--
+此文件为开发者工具生成，生成时间: 2020/12/16 下午8:17:28 
+使用方法：
+在 H:\wechat\car-client\storePackage\store\index.wxml 引入模板
+
+```
+<import src="index.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{loading}}" />
+```
+
+在 H:\wechat\car-client\storePackage\store\index.wxss 中引入样式
+```
+@import "./index.skeleton.wxss";
+```
+
+更多详细信息可以参考文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html
+-->
+<template name="skeleton">
+  <view class="sk-container">
+    <view class="container">
+      <view is="components/nav-bar/index">
+        <view class="nav-bar-index--nav none-boxShadow " style="height:60px;">
+          <view class="nav-bar-index--nav-main">
+            <view class="nav-bar-index--capsule-box" style="height:32px; min-height:32px; line-height:32px; bottom:4px;left:10px;">
+              <view class="nav-content" style="height: 32px">
+                <view is="miniprogram_npm/@vant/weapp/icon/index" class="arrow">
+                  <view class="van-icon weapp-icon-index--van-icon van-icon-arrow-left weapp-icon-index--van-icon-arrow-left sk-pseudo sk-pseudo-circle" style="color: ;font-size: 20px;"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="store-body">
+        <view class="store-swiper">
+          <swiper duration="800" interval="5000" current="0" autoplay="false">
+            <swiper-item style="position: absolute; width: 100%; height: 100%; transform: translate(0%, 0px) translateZ(0px);">
+              <view is="miniprogram_npm/@vant/weapp/image/index">
+                <view class=" van-image image-index--van-image" style="width: 100vw;height: 80vw;">
+                  <image class="van-image__img image-index--van-image__img sk-image" mode="scaleToFill"></image>
+                </view>
+              </view>
+            </swiper-item>
+          </swiper>
+        </view>
+        <view class="store-info">
+          <view class="info">
+            <view class="name sk-transparent sk-text-18-0000-464 sk-text">晨曦汽车改装中心</view>
+          </view>
+          <view class="service">
+            <view is="miniprogram_npm/@vant/weapp/tag/index">
+              <view class="van-tag tag-index--van-tag van-tag--default tag-index--van-tag--default van-tag--plain tag-index--van-tag--plain sk-transparent sk-text-12-5000-38 sk-text sk-pseudo sk-pseudo-circle" style="color: #ec8c05">个人</view>
+            </view>
+            <view class="block sk-transparent">
+              总订单
+              <text class="sk-transparent sk-opacity">0</text>
+            </view>
+            <view class="block">
+              <text class="sk-transparent sk-text-24-0000-606 sk-text">暂无评分</text>
+            </view>
+          </view>
+          <view class="time sk-transparent sk-text-24-0000-629 sk-text">
+            营业时间: 09:00 ~ 21:00
+          </view>
+        </view>
+        <view class="store-address">
+          <view class="address-title sk-pseudo sk-pseudo-circle">
+            <text class="sk-transparent sk-text-14-2857-598 sk-text">门店地址</text>
+            <view is="miniprogram_npm/@vant/weapp/icon/index">
+              <view class="van-icon weapp-icon-index--van-icon van-icon-arrow weapp-icon-index--van-icon-arrow sk-pseudo sk-pseudo-circle" style="color: #999;font-size: 13px;"></view>
+            </view>
+          </view>
+          <view class="address-info">
+            <text class="sk-transparent sk-text-14-2857-501 sk-text">广东省佛山市高明区荷城街道办沿江路银海国际购物广场北侧</text>
+            <text class="sk-transparent sk-text-14-2857-909 sk-text" style="background-position-x: 100%;">42km</text>
+          </view>
+        </view>
+        <view class="store-comment">
+          <view class="comment-title sk-pseudo sk-pseudo-circle">
+            <view>
+              <text class="sk-transparent sk-text-14-2857-113 sk-text">评价</text>
+              <text class="comment-count sk-transparent sk-text-14-2857-708 sk-text">暂无评论</text>
+            </view>
+          </view>
+          <view class="comment-group"></view>
+        </view>
+      </view>
+    </view>
+    <view is="miniprogram_npm/@vant/weapp/goods-action/index">
+      <view class=" van-goods-action action-index--van-goods-action van-goods-action--safe action-index--van-goods-action--safe">
+        <view is="miniprogram_npm/@vant/weapp/goods-action-icon/index">
+          <view is="miniprogram_npm/@vant/weapp/button/index">
+            <button app-parameter="true" business-id="true" class="action-icon-index--van-goods-action-icon van-button weapp-button-index--van-button van-button--default weapp-button-index--van-button--default van-button--large weapp-button-index--van-button--large van-button--square weapp-button-index--van-button--square sk-button sk-pseudo sk-pseudo-circle"
+              data-detail="null" form-type="true" hover-class="van-button--active hover-class" lang="true" open-type="true" send-message-img="true" send-message-path="true" send-message-title="true" session-from="true" style=" ">
+              <view class="van-button__text weapp-button-index--van-button__text">
+                <view is="miniprogram_npm/@vant/weapp/icon/index" class="van-goods-action-icon__icon action-icon-index--van-goods-action-icon__icon">
+                  <view class="van-icon weapp-icon-index--van-icon van-icon-share-o weapp-icon-index--van-icon-share-o sk-pseudo sk-pseudo-circle" style="color: ;font-size: ;">
+                    <view is="miniprogram_npm/@vant/weapp/info/index"></view>
+                  </view>
+                </view>
+                <text class="sk-transparent sk-text-0-0000-885 sk-text" style="background-position-x: 50%;">分享</text>
+              </view>
+            </button>
+          </view>
+        </view>
+        <view is="miniprogram_npm/@vant/weapp/goods-action-icon/index">
+          <view is="miniprogram_npm/@vant/weapp/button/index">
+            <button app-parameter="true" business-id="true" class="action-icon-index--van-goods-action-icon van-button weapp-button-index--van-button van-button--default weapp-button-index--van-button--default van-button--large weapp-button-index--van-button--large van-button--square weapp-button-index--van-button--square sk-button sk-pseudo sk-pseudo-circle"
+              data-detail="null" form-type="true" hover-class="van-button--active hover-class" lang="true" open-type="true" send-message-img="true" send-message-path="true" send-message-title="true" session-from="true" style=" ">
+              <view class="van-button__text weapp-button-index--van-button__text">
+                <view is="miniprogram_npm/@vant/weapp/icon/index" class="van-goods-action-icon__icon action-icon-index--van-goods-action-icon__icon">
+                  <view class="van-icon weapp-icon-index--van-icon van-icon-star-o weapp-icon-index--van-icon-star-o sk-pseudo sk-pseudo-circle" style="color: ;font-size: ;">
+                    <view is="miniprogram_npm/@vant/weapp/info/index"></view>
+                  </view>
+                </view>
+                <text class="sk-transparent sk-text-0-0000-959 sk-text" style="background-position-x: 50%;">收藏</text>
+              </view>
+            </button>
+          </view>
+        </view>
+        <view is="miniprogram_npm/@vant/weapp/goods-action-icon/index">
+          <view is="miniprogram_npm/@vant/weapp/button/index">
+            <button app-parameter="true" business-id="true" class="action-icon-index--van-goods-action-icon van-button weapp-button-index--van-button van-button--default weapp-button-index--van-button--default van-button--large weapp-button-index--van-button--large van-button--square weapp-button-index--van-button--square sk-button sk-pseudo sk-pseudo-circle"
+              data-detail="null" form-type="true" hover-class="van-button--active hover-class" lang="true" open-type="true" send-message-img="true" send-message-path="true" send-message-title="true" session-from="true" style=" ">
+              <view class="van-button__text weapp-button-index--van-button__text">
+                <view is="miniprogram_npm/@vant/weapp/icon/index" class="van-goods-action-icon__icon action-icon-index--van-goods-action-icon__icon">
+                  <view class="van-icon weapp-icon-index--van-icon van-icon-phone-o weapp-icon-index--van-icon-phone-o sk-pseudo sk-pseudo-circle" style="color: ;font-size: ;">
+                    <view is="miniprogram_npm/@vant/weapp/info/index"></view>
+                  </view>
+                </view>
+                <text class="sk-transparent sk-text-0-0000-19 sk-text" style="background-position-x: 50%;">联系店铺</text>
+              </view>
+            </button>
+          </view>
+        </view>
+        <view is="miniprogram_npm/@vant/weapp/goods-action-button/index">
+          <view is="miniprogram_npm/@vant/weapp/button/index" class="van-goods-action-button action-button-index--van-goods-action-button van-goods-action-button--danger action-button-index--van-goods-action-button--danger van-goods-action-button--first action-button-index--van-goods-action-button--first van-goods-action-button--last action-button-index--van-goods-action-button--last">
+            <button app-parameter="true" business-id="true" class="action-button-index--van-goods-action-button__inner van-button weapp-button-index--van-button van-button--danger weapp-button-index--van-button--danger van-button--normal weapp-button-index--van-button--normal sk-pseudo sk-pseudo-circle sk-image"
+              data-detail="null" form-type="true" hover-class="van-button--active hover-class" lang="true" open-type="true" send-message-img="true" send-message-path="true" send-message-title="true" session-from="true" style="border: none;">
+              <view class="van-button__text weapp-button-index--van-button__text sk-transparent sk-text-15-0000-334 sk-text" style="background-position-x: 50%;">
+                立即询价
+              </view>
+            </button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

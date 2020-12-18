@@ -1,0 +1,147 @@
+<!--
+此文件为开发者工具生成，生成时间: 2020/12/16 下午8:12:42 
+使用方法：
+在 H:\wechat\car-client\pages\user\index.wxml 引入模板
+
+```
+<import src="index.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{loading}}" />
+```
+
+在 H:\wechat\car-client\pages\user\index.wxss 中引入样式
+```
+@import "./index.skeleton.wxss";
+```
+
+更多详细信息可以参考文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html
+-->
+<template name="skeleton">
+  <view class="sk-container">
+    <view class="container">
+      <scroll-view scroll-y="true" style="height: 100vh">
+        <view class="content" style="min-height: calc(100vh + 2px);">
+          <view class="user-info-section">
+            <view class="avatar" style="border: none;">
+              <image class="user-head sk-image" mode="widthFix" style="width: 100%; height: 55px;"></image>
+              <image class="user-mark sk-image" mode="widthFix" style="width: 100%; height: 17.4881px;"></image>
+            </view>
+            <view class="info">
+              <text class="name sk-transparent sk-text-14-2857-894 sk-text">违规昵称yzs2gk5jluq</text>
+              <text class="sk-transparent sk-text-14-2857-473 sk-text">已绑定车辆：3</text>
+            </view>
+          </view>
+          <view class="line"></view>
+          <view class="tabs order-tabs">
+            <view class="order-tabs-title sk-transparent" data-id="all">
+              <text class="sk-transparent sk-text-14-2857-179 sk-text">我的订单</text> 全部订单
+              <view is="miniprogram_npm/@vant/weapp/icon/index">
+                <view class="van-icon weapp-icon-index--van-icon van-icon-arrow weapp-icon-index--van-icon-arrow sk-pseudo sk-pseudo-circle" style="color: ;font-size: ;"></view>
+              </view>
+            </view>
+            <view class="tabs-list">
+              <view class="tabs-item" data-id="0">
+                <view class="tabs-img">
+                  <image mode="widthFix" style="width: 23px; height: 23px;" class="sk-image"></image>
+                </view>
+                <text class="sk-transparent sk-text-14-2857-817 sk-text">报价中</text>
+              </view>
+              <view class="tabs-item" data-id="1,2">
+                <view class="tabs-img">
+                  <image mode="widthFix" style="width: 23px; height: 23px;" class="sk-image"></image>
+                </view>
+                <text class="sk-transparent sk-text-14-2857-888 sk-text">待维修</text>
+              </view>
+              <view class="tabs-item" data-id="3">
+                <view class="tabs-img">
+                  <image mode="widthFix" style="width: 23px; height: 23px;" class="sk-image"></image>
+                </view>
+                <text class="sk-transparent sk-text-14-2857-659 sk-text">待交付</text>
+              </view>
+              <view class="tabs-item" data-id="4">
+                <view class="tabs-img">
+                  <image mode="widthFix" style="width: 23px; height: 23px;" class="sk-image"></image>
+                </view>
+                <text class="sk-transparent sk-text-14-2857-40 sk-text">已完成</text>
+              </view>
+              <view class="tabs-item" data-id="5,6,7,8">
+                <view class="tabs-img">
+                  <image mode="widthFix" style="width: 23px; height: 23px;" class="sk-image"></image>
+                </view>
+                <text class="sk-transparent sk-text-14-2857-846 sk-text">已取消</text>
+              </view>
+            </view>
+          </view>
+          <view class="line"></view>
+          <view class="activity">
+            <image mode="widthFix" style="height: 102.84px;" class="sk-image"></image>
+          </view>
+          <view class="line"></view>
+          <view class="cell-section">
+            <view is="miniprogram_npm/@vant/weapp/cell-group/index">
+              <view class=" van-cell-group cell-group-index--van-cell-group">
+                <view is="miniprogram_npm/@vant/weapp/cell/index">
+                  <view class="padding van-cell cell-index--van-cell van-cell--clickable cell-index--van-cell--clickable sk-pseudo sk-pseudo-circle" hover-class="van-cell--hover hover-class" hover-stay-time="70" style="true">
+                    <view class="icon">
+                      <image mode="widthFix" style="height: 23px;" class="sk-image"></image>
+                    </view>
+                    <view class="van-cell__title cell-index--van-cell__title sk-transparent sk-text-20-8333-795 sk-text" style="true">车辆管理</view>
+                    <view is="miniprogram_npm/@vant/weapp/icon/index" class="van-cell__right-icon-wrap cell-index--van-cell__right-icon-wrap ">
+                      <view class="cell-index--van-cell__right-icon van-icon weapp-icon-index--van-icon van-icon-arrow weapp-icon-index--van-icon-arrow sk-pseudo sk-pseudo-circle" style="color: ;font-size: ;"></view>
+                    </view>
+                  </view>
+                </view>
+                <view is="miniprogram_npm/@vant/weapp/cell/index">
+                  <view class="padding van-cell cell-index--van-cell van-cell--clickable cell-index--van-cell--clickable sk-pseudo sk-pseudo-circle" hover-class="van-cell--hover hover-class" hover-stay-time="70" style="true">
+                    <view class="icon">
+                      <image mode="widthFix" style="height: 23px;" class="sk-image"></image>
+                    </view>
+                    <view class="van-cell__title cell-index--van-cell__title sk-transparent sk-text-20-8333-452 sk-text" style="true">钱包</view>
+                    <view is="miniprogram_npm/@vant/weapp/icon/index" class="van-cell__right-icon-wrap cell-index--van-cell__right-icon-wrap ">
+                      <view class="cell-index--van-cell__right-icon van-icon weapp-icon-index--van-icon van-icon-arrow weapp-icon-index--van-icon-arrow sk-pseudo sk-pseudo-circle" style="color: ;font-size: ;"></view>
+                    </view>
+                  </view>
+                </view>
+                <view is="miniprogram_npm/@vant/weapp/cell/index">
+                  <view class="padding van-cell cell-index--van-cell van-cell--clickable cell-index--van-cell--clickable sk-pseudo sk-pseudo-circle" hover-class="van-cell--hover hover-class" hover-stay-time="70" style="true">
+                    <view class="icon">
+                      <image mode="widthFix" style="height: 23px;" class="sk-image"></image>
+                    </view>
+                    <view class="van-cell__title cell-index--van-cell__title sk-transparent sk-text-20-8333-191 sk-text" style="true">优惠券</view>
+                    <view is="miniprogram_npm/@vant/weapp/icon/index" class="van-cell__right-icon-wrap cell-index--van-cell__right-icon-wrap ">
+                      <view class="cell-index--van-cell__right-icon van-icon weapp-icon-index--van-icon van-icon-arrow weapp-icon-index--van-icon-arrow sk-pseudo sk-pseudo-circle" style="color: ;font-size: ;"></view>
+                    </view>
+                  </view>
+                </view>
+                <view is="miniprogram_npm/@vant/weapp/cell/index">
+                  <view class="padding van-cell cell-index--van-cell van-cell--clickable cell-index--van-cell--clickable sk-pseudo sk-pseudo-circle" hover-class="van-cell--hover hover-class" hover-stay-time="70" style="true">
+                    <view class="icon">
+                      <image mode="widthFix" style="height: 23px;" class="sk-image"></image>
+                    </view>
+                    <view class="van-cell__title cell-index--van-cell__title sk-transparent sk-text-20-8333-382 sk-text" style="true">资料设置</view>
+                    <view is="miniprogram_npm/@vant/weapp/icon/index" class="van-cell__right-icon-wrap cell-index--van-cell__right-icon-wrap ">
+                      <view class="cell-index--van-cell__right-icon van-icon weapp-icon-index--van-icon van-icon-arrow weapp-icon-index--van-icon-arrow sk-pseudo sk-pseudo-circle" style="color: ;font-size: ;"></view>
+                    </view>
+                  </view>
+                </view>
+                <view is="miniprogram_npm/@vant/weapp/cell/index">
+                  <view class="padding van-cell cell-index--van-cell van-cell--clickable cell-index--van-cell--clickable sk-pseudo sk-pseudo-circle" hover-class="van-cell--hover hover-class" hover-stay-time="70" style="true">
+                    <view class="icon">
+                      <image mode="widthFix" style="height: 23px;" class="sk-image"></image>
+                    </view>
+                    <view class="van-cell__title cell-index--van-cell__title sk-transparent sk-text-20-8333-330 sk-text" style="true">联系客服</view>
+                    <view is="miniprogram_npm/@vant/weapp/icon/index" class="van-cell__right-icon-wrap cell-index--van-cell__right-icon-wrap ">
+                      <view class="cell-index--van-cell__right-icon van-icon weapp-icon-index--van-icon van-icon-arrow weapp-icon-index--van-icon-arrow sk-pseudo sk-pseudo-circle" style="color: ;font-size: ;"></view>
+                    </view>
+                  </view>
+                </view>
+                <view is="miniprogram_npm/@vant/weapp/cell/index">
+                  <view class="padding van-cell cell-index--van-cell van-cell--clickable cell-index--van-cell--clickable sk-pseudo sk-pseudo-circle" hover-class="van-cell--hover hover-class" hover-stay-time="70" style="true"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</template>

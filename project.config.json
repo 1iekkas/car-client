@@ -13,19 +13,15 @@
     "es6": true,
     "enhance": false,
     "postcss": true,
-    "preloadBackgroundData": false,
     "minified": true,
     "newFeature": false,
     "coverView": true,
     "nodeModules": true,
     "autoAudits": false,
-    "showShadowRootInWxmlPanel": true,
-    "scopeDataCheck": false,
     "uglifyFileName": false,
     "checkInvalidKey": true,
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
-    "compileHotReLoad": false,
     "useMultiFrameRuntime": false,
     "useApiHook": true,
     "babelSetting": {
@@ -33,14 +29,13 @@
       "disablePlugins": [],
       "outputPath": ""
     },
-    "bundle": false,
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
-    "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true
+    "minifyWXSS": true,
+    "scopeDataCheck": false
   },
   "compileType": "miniprogram",
   "libVersion": "2.14.0",
@@ -99,7 +94,6 @@
           "scene": null
         },
         {
-          "id": -1,
           "name": "地图",
           "pathName": "pages/map/index",
           "query": "",
@@ -138,7 +132,7 @@
         {
           "name": "订单信息",
           "pathName": "servicePackage/orderInfo/index",
-          "query": "id=151",
+          "query": "id=161",
           "scene": null
         },
         {
@@ -192,6 +186,18 @@
         {
           "name": "投诉建议",
           "pathName": "userPackage/suggestions/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "用户协议",
+          "pathName": "servicePackage/agreement/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "隐私政策",
+          "pathName": "servicePackage/policy/index",
           "query": "",
           "scene": null
         }

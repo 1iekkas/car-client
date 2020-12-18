@@ -1,8 +1,14 @@
 // pages/user/index.js
 const app = getApp()
-import { login } from '../../api/wxServer'
-import { getOrderCount } from '../../api/order'
-import { getCarList } from '../../api/user'
+import {
+  login
+} from '../../api/wxServer'
+import {
+  getOrderCount
+} from '../../api/order'
+import {
+  getCarList
+} from '../../api/user'
 let data
 Page({
 
@@ -30,7 +36,8 @@ Page({
     }, {
       id: '5,6,7,8',
       name: '已取消'
-    }]
+    }],
+    loading: true
   },
 
   /**
@@ -45,7 +52,7 @@ Page({
         hasUserInfo: true
       })
     }
-    
+
     // 用户token回调
     app.userTokenReadyCallback = res => {
       this.setData({
@@ -53,7 +60,7 @@ Page({
         isLogin: true
       })
     }
-    
+
   },
 
   /**
@@ -68,32 +75,39 @@ Page({
    */
   onShow: function () {
     data = this.data
-    if(app.globalData.isLogin /* && !this.data.userInfo */) {
+    if (app.globalData.isLogin /* && !this.data.userInfo */ ) {
       this.setData({
         isLogin: true,
-        userInfo: app.globalData.userInfo
+        userInfo: app.globalData.userInfo,
+        loading: false
       })
 
       // 车辆统计
       getCarList().then(res => {
         this.setData({
-          carCount: res.data.length
+          carCount: res.data.length,
+          loading: false
         })
       })
 
       // 订单统计
       getOrderCount().then(res => {
-        if(!res.code) {
+        if (!res.code) {
           data.tabs[0].count = res.data.wait_offer
           data.tabs[1].count = res.data.wait_repair
           data.tabs[2].count = res.data.wait_check
           this.setData({
-            tabs: data.tabs
+            tabs: data.tabs,
+            loading: false
           })
-          console.log(data.tabs)
+          // console.log(data.tabs)
         }
       })
 
+    } else {
+      this.setData({
+        loading: false
+      })
     }
   },
 
@@ -131,24 +145,35 @@ Page({
   /* onShareAppMessage: function () {
 
   }, */
-  
+
+  /**退出登录 */
+  logout() {
+    app.globalData.isLogin = false
+    app.globalData.userInfo = null
+    wx.setStorageSync('token', null)
+    wx.setStorageSync('refresh_token', null)
+    this.setData({
+      isLogin: false
+    })
+  },
+
   // 获取用户信息
-  getUserInfo: async function(e) {  
-    if(e.detail.errMsg === 'getUserInfo:ok') {
+  getUserInfo: async function (e) {
+    if (e.detail.errMsg === 'getUserInfo:ok') {
       app.globalData.userInfo = e.detail.userInfo
       let res = await login()
       // do something
       wx.setStorageSync('token', 'token')
-    }else {
+    } else {
       return false
     }
   },
-  
+
   // 跳转订单
   orderLink(e) {
     const id = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url:`/userPackage/order/index?status=${id}`
+      url: `/userPackage/order/index?status=${id}`
     })
   },
 
@@ -164,7 +189,7 @@ Page({
       icon: 'none',
       mask: true,
       duration: 2000,
-      title: '活动暂未开放，敬请期待',
+      title: '功能暂未开放，敬请期待',
     })
   }
 })

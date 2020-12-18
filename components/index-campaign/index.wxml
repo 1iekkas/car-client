@@ -2,7 +2,8 @@
 <van-overlay z-index="1000" show="{{ show }}" bind:click="onClickHide">
   <view class="wrapper">
   <!--3:5-->
-   <van-image src="https://car.coasewash.com/storage/2.png" width="60vw" height="100vw" catchtap="showToast"></van-image>
+   <!-- <van-image src="https://car.coasewash.com/storage/2.jpg" fit="contain" width="60vw" height="100vw" catchtap="showToast"></van-image> -->
+   <image src="https://car.coasewash.com/storage/2.jpg" mode="widthFix" style="width: 80vw;height: auto"></image>
    <view class="close" bindtap="onClickHide">
     <van-icon name="close" size="48rpx" />
    </view>

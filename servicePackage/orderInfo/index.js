@@ -380,9 +380,9 @@ Page({
   },
 
   async openMap(e) {
-    const { lat, lng } = e.currentTarget.dataset;
+    const { lat, lng, name } = e.currentTarget.dataset;
     // console.log(lat, lng)
-    let res = await openMap({latitude: lat, longitude: lng})
+    let res = await openMap({latitude: lat, longitude: lng, name: name})
   },
 
   // 跳转评价
@@ -400,6 +400,7 @@ Page({
 
   storeDetails(e) {
     const { id } = e.currentTarget.dataset;
+
     wx.navigateTo({
       url: `/storePackage/store/index?id=${id}`,
     })
