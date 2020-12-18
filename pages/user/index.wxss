@@ -174,3 +174,18 @@ page {
   border-radius: 24rpx;
 }
 
+.logout {
+  width: 95vw;
+  margin: 0 auto;
+  padding: 40rpx 0 50rpx 0;
+}
+
+.logout view {
+  height: 46px;
+  line-height: 46px;
+  color: white;
+  text-align: center;
+  background: var(--red);
+  border-radius: 12rpx;
+}
+

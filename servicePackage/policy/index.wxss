@@ -1,0 +1,35 @@
+/* servicePackage/policy/index.wxss */
+.container {
+  padding: 30rpx;
+  font-size: 28rpx;
+}
+
+view {
+  line-height: 48rpx;
+}
+
+.text {
+  text-indent: 2em;
+}
+
+.module {
+  padding-bottom: 40rpx;
+}
+
+.module .title {
+  font-weight: bold;
+  font-size: 32rpx;
+  padding-bottom: 10rpx;
+}
+
+.module .desc {
+  text-indent: 2em;
+}
+
+.module view + view {
+  padding-bottom: 10rpx;
+}
+
+.first .li {
+  font-weight: bold;
+}

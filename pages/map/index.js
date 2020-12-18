@@ -112,7 +112,7 @@ Page({
   },
 
   onReady() {
-    setTimeout(() => {
+    /* setTimeout(() => {
       console.log(123)
       let query = wx.createSelectorQuery();
       query.select('.content').boundingClientRect(rect => {
@@ -122,7 +122,7 @@ Page({
           contentHeight: height - 30
         })
       }).exec();
-    }, 8000)
+    }, 8000) */
   },
 
   showToast() {
@@ -336,11 +336,6 @@ Page({
   // 搜索门店
   async searchStore(location) {
     let storeList = []
-    /* let res = await searchStore({
-      keyword: '酒店',
-      location: `${location.latitude},${location.longitude}`
-    }) */
-
     // 店铺列表
     let res = await getStoreList({page_size: 100})
 

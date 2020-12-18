@@ -28,7 +28,10 @@
         "position/index",
         "cancel/index",
         "pay/index",
-        "service/index"
+        "service/index",
+        "agreement/index",
+        "policy/index",
+        "more/index"
       ]
     },
     {
@@ -38,6 +41,10 @@
         "storeList/index",
         "rate/index"
       ]
+    },
+    {
+      "root": "activityPackage",
+      "pages": []
     }
   ],
   "window": {

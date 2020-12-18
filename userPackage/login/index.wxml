@@ -40,7 +40,9 @@
       </view> -->
     </view>
     <view class="tips">
-      登录即视为已阅读并同意<text style="color: #f00;">《同意用户注册协议》</text>
+      登录即视为已阅读并同意
+      <navigator style="color: #f00;" url="/servicePackage/agreement/index" hover-class="none">《用户服务协议》</navigator>
+      <navigator style="color: #f00;" url="/servicePackage/policy/index" hover-class="none">《隐私政策》</navigator>
     </view>
   </view>
 

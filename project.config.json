@@ -188,6 +188,18 @@
           "pathName": "userPackage/suggestions/index",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "用户协议",
+          "pathName": "servicePackage/agreement/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "隐私政策",
+          "pathName": "servicePackage/policy/index",
+          "query": "",
+          "scene": null
         }
       ]
     }

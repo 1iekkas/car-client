@@ -1,0 +1,37 @@
+/* servicePackage/agreement/index.wxss */
+.container {
+  padding: 30rpx;
+}
+
+view {
+  line-height: 48rpx;
+  font-size: 28rpx;
+}
+
+.desc {
+  text-indent: 2em;
+}
+
+.agreement-title {
+  text-align: center;
+  font-size: 32rpx;
+}
+
+.module {
+  padding-bottom: 40rpx;
+}
+
+.module .sub {
+  color: #232323;
+  font-size: 32rpx;
+  font-weight: bold;
+  padding-bottom: 10rpx;
+}
+
+.module view + view {
+  padding-top: 10rpx;
+}
+
+.module .li {
+  color: #424242;
+}
