@@ -51,7 +51,7 @@
           </view>
         </view>
         <view class="time">
-          营业时间: 09:00 ~ 21:00
+          营业时间: {{store.on_work}} ~ {{store.off_work}}
         </view>
       </view>
 

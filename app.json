@@ -41,10 +41,6 @@
         "storeList/index",
         "rate/index"
       ]
-    },
-    {
-      "root": "activityPackage",
-      "pages": []
     }
   ],
   "window": {

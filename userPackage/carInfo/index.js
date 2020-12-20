@@ -226,13 +226,10 @@ Page({
               pre.setData({
                 showCar: false,
                 catchMove: false
-              })
-              // wx.setStorageSync('refresh', true)
-              /* wx.reLaunch({
-                url: url,
-              }) */
-              wx.navigateBack({
-                delta: 2
+              },() => {
+                wx.navigateBack({
+                  delta: 2
+                })
               })
               break;
             case 'createOrderManage':
@@ -240,10 +237,12 @@ Page({
               pre.setData({
                 showCar: false,
                 catchMove: false
+              },() => {
+                wx.navigateBack({
+                  delta: 2
+                })
               })
-              wx.navigateBack({
-                delta: 2
-              })
+              
               break;  
             default:
               url = '/userPackage/userCar/index'
