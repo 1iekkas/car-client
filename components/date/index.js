@@ -3,7 +3,8 @@ const dateTimePicker = require('../../utils/dateTimePicker.js'); // components/p
 Component({
   /** * 组件的属性列表 */
   properties: {},
-  /** * 组件的初始数据 */ data: {
+  /** * 组件的初始数据 */ 
+  data: {
     isDate: false
   },
   lifetimes: {

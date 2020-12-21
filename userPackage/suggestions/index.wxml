@@ -1,8 +1,7 @@
 <!--userPackage/suggestions/index.wxml-->
 <view class="container">
   <view class="title">
-    如您在使⽤科思汽车小程序提供的服务过程中遇到问题，欢迎您提出宝贵的意⻅和建议，我们将充分分析您的
-    意见，作为我们持续改进的参考。
+    如您在使⽤科思汽车小程序提供的服务过程中遇到问题，欢迎您提出宝贵的意⻅和建议，我们将充分分析您的意见，作为我们持续改进的参考。
   </view>
   <van-cell-group class="message">
     <van-field value="{{ message }}" bind:change="onChange" type="textarea" placeholder="请输入投诉或建议" autosize="{{ autosize }}" border="{{ false }}" />

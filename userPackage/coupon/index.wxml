@@ -1,2 +1,112 @@
 <!--userPackage/coupon/index.wxml-->
-<text>userPackage/coupon/index.wxml</text>
+<view class="container">
+  <van-tabs color="#FF3D00" swipeable sticky active="{{active}}" offset-top="0" bind:click="changeTabs">
+    <van-tab wx:for="{{tabs}}" wx:key="index" name="{{item.id}}" title="{{item.name}}"></van-tab>
+  </van-tabs>
+
+  <scroll-view scroll-y refresher-enabled refresher-triggered="{{triggered}}" bindrefresherrefresh="onRefresh"
+    bindrefresherrestore="onRestore" bindrefresherabort="onAbort" style="height: calc(100vh - 88rpx)"
+    bindscrolltolower="lower">
+    <view class="content" style="min-height: calc(100vh - 80rpx)">
+      <block wx:if="{{!list.length && !loading && !triggered}}">
+        <van-empty image="search" description="你还没领取到优惠券哦" />
+      </block>
+
+      <block wx:else>
+        <view class="order-item" wx:for="{{list}}" wx:key="index" bindtap="linkToInfo" data-id="{{item.id}}">
+          <view class="order-title van-hairline--bottom">
+            <view class="no">No.{{item.order_no}}</view>
+            <!--状态-->
+            <block wx:if="{{item.status == -1}}">
+              <view class="status origin">
+                系统取消
+              </view>
+            </block>
+            <block wx:if="{{item.status == 0}}">
+              <view class="status origin">
+                报价中
+              </view>
+            </block>
+            <block wx:if="{{item.status == 1 || item.status == 2}}">
+              <view class="status origin">
+                待维修
+              </view>
+            </block>
+            <block wx:if="{{item.status == 3}}">
+              <view class="status origin">
+                待交付
+              </view>
+            </block>
+
+            <block wx:if="{{item.status == 4}}">
+              <view class="status green">
+                已完成
+              </view>
+            </block>
+
+            <block wx:if="{{item.status == 5}}">
+              <view class="status green">
+                已取消
+              </view>
+            </block>
+
+            <block wx:if="{{item.status == 6}}">
+              <view class="status green">
+                待商家确认取消
+              </view>
+            </block>
+
+            <block wx:if="{{item.status == 7}}">
+              <view class="status green">
+                退款中
+              </view>
+            </block>
+
+            <block wx:if="{{item.status == 8}}">
+              <view class="status green">
+                已退款
+              </view>
+            </block>
+
+          </view>
+          <view class="order-body">
+            <view class="image">
+              <van-image use-error-slot src="{{IMG_HOST}}{{item.car.img}}" width="12vw" height="12vw">
+                <van-icon slot="error" color="#dcdee0" size="20px" name="photo-fail" />
+              </van-image>
+            </view>
+            <view class="desc">
+              <view class="cell">
+                <van-icon name="label" size="24rpx" />  <text style="color:#232323;margin-left:5px">{{item.car.car_num}} {{item.car.series_name}} </text></view>
+              <view class="cell">
+                <van-icon class="color" name="orders-o" />
+                <view class="text van-ellipsis">{{item.content}}</view>
+              </view>
+              <view class="cell">
+                <van-icon class="color" name="gold-coin-o" /> 预算费用 {{item.evaluate_fee}}
+              </view>
+            </view>
+          </view>
+          <!--等待报价-->
+          <block wx:if="{{item.status == 0}}">
+            <view class="order-action van-hairline--top">
+              <block wx:if="{{item.offer_count}}">
+                <view class="type">已有<text style="color: #ec8c05;">{{item.offer_count}}</text>位商户报价</view>
+              </block>
+              <block wx:else>
+                <view class="type">等待商家报价中</view>
+              </block>
+              <van-icon name="arrow" />
+            </view>
+          </block>
+        </view>
+      </block>
+      <block wx:if="{{loading}}">
+        <view class="list-loading">
+          <van-loading />
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+
+</view>

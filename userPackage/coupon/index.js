@@ -5,7 +5,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    tabs: [{
+      name: '未使用',
+      id: 0
+    },{
+      name: '已使用',
+      id: 1
+    }],
+    list: [],
+    page: 1,
+    total: 1,
+    triggered: false,
+    loading: true
   },
 
   /**
@@ -26,7 +37,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    setTimeout(() => {
+      this.setData({
+        loading: false
+      })
+    }, 1000)
   },
 
   /**
@@ -62,5 +77,24 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+  async onRefresh() {
+    if (this._freshing || data.loading) return
+    this.setData({
+      page: 1,
+      triggered: true
+    })
+    this._freshing = true
+    await this.getList()
+    this._freshing = false
+  },
+
+  onRestore(e) {
+    console.log('onRestore:', e)
+  },
+
+  onAbort(e) {
+    console.log('onAbort', e)
+  },
 })

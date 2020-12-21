@@ -193,6 +193,11 @@
           "pathName": "servicePackage/policy/index",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "优惠券列表",
+          "pathName": "userPackage/coupon/index",
+          "scene": null
         }
       ]
     }

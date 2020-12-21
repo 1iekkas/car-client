@@ -28,7 +28,8 @@ Page({
       showLocation: true
     },
     markers: [],
-    circles: []
+    circles: [],
+    showCollectTips: false
   },
 
   onLoad: async function () {
@@ -107,22 +108,19 @@ Page({
       })
     }
 
-    
+    const isTips = wx.getStorageSync('tips') || false // 是否已提示过
+    if(!isTips) {
+      this.setData({
+        showCollectTips: !isTips
+      },() => {
+        wx.setStorageSync('tips', true)
+      })
+    }
 
   },
 
   onReady() {
-    /* setTimeout(() => {
-      console.log(123)
-      let query = wx.createSelectorQuery();
-      query.select('.content').boundingClientRect(rect => {
-        let height = rect.height;
-        console.log(height);
-        this.setData({
-          contentHeight: height - 30
-        })
-      }).exec();
-    }, 8000) */
+
   },
 
   showToast() {
@@ -137,6 +135,14 @@ Page({
   // 获取banner
   async getSwipeList(e) {
     let res = await getSwipeList() 
+  },
+
+  // 点击地图marker
+  markerTap(e) {
+    console.log(e)
+    wx.navigateTo({
+      url: `/storePackage/store/index?id=${e.detail.markerId}`,
+    })
   },
 
   // 视野变更

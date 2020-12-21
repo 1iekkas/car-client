@@ -27,6 +27,7 @@
     <map id="map" longitude="{{location.location.lng}}" setting="{{mapSetting}}" control="{{false}}"
       markers="{{markers}}" latitude="{{location.location.lat}}"
       style="width: 100vw;height: calc(100vh - {{navBarHeight}}px - 170rpx);margin-top: {{navBarHeight}}px;"
+      bindcallouttap="markerTap"
       bindregionchange="regionchange">
       <!-- <image class="location-marker" src="../../static/img/marker.png" mode="widthFix"></image> -->
       <view class="location-marker"></view>
@@ -109,3 +110,5 @@
 </view>
 
 <campaign />
+
+<collecty-tips show="{{showCollectTips}}" />

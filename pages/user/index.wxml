@@ -94,7 +94,7 @@
                 <image src="../../static/img/wallet.png" mode="widthFix" alt="" srcset="" />
               </view>
             </van-cell>
-            <van-cell custom-class="padding" title="优惠券" bindtap="showToast" value="" is-link>
+            <van-cell custom-class="padding" title="优惠券" url="/userPackage/coupon/index" value="" is-link>
               <view slot="icon" class="icon">
                 <image src="../../static/img/coupons.png" mode="widthFix" alt="" srcset="" />
               </view>

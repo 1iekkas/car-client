@@ -1,0 +1,7 @@
+<!--components/collect-tips/index.wxml-->
+<block wx:if="{{show}}">
+  <view class="collect-tips" style="top: {{top}}px" bindtap="close">
+    <view>收藏小程序</view>
+    <van-icon style="margin-left: 4rpx" name="cross" />
+  </view>
+</block>
