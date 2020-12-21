@@ -133,6 +133,10 @@ Page({
   },
 
   async onSearch() {
+    this.setData({
+      page: 1,
+      loading: true
+    })
     this.isSearch = true
     await this.getStoreList()
     this.isSearch = false

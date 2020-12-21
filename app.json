@@ -41,10 +41,6 @@
         "storeList/index",
         "rate/index"
       ]
-    },
-    {
-      "root": "activityPackage",
-      "pages": []
     }
   ],
   "window": {
@@ -94,7 +90,8 @@
     "van-uploader": "@vant/weapp/uploader/index",
     "van-goods-action": "@vant/weapp/goods-action/index",
     "van-goods-action-icon": "@vant/weapp/goods-action-icon/index",
-    "van-goods-action-button": "@vant/weapp/goods-action-button/index"
+    "van-goods-action-button": "@vant/weapp/goods-action-button/index",
+    "collecty-tips": "/components/collect-tips/index"
   },
   "sitemapLocation": "sitemap.json"
 }
