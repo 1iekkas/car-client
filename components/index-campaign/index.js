@@ -1,4 +1,5 @@
 // components/index-campaign/index.js
+import { getCoupon } from '../../api/user'
 Component({
   lifetimes: {
     attached: function() {
@@ -43,6 +44,12 @@ Component({
         duration: 2000,
         title: '活动暂未开放，敬请期待',
       })
+    },
+
+    async onClickCoupon() {
+      // console.log(getCoupon)
+      let res = await getCoupon({})
+      // console.log(res)
     }
   }
 })

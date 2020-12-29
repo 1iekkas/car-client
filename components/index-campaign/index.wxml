@@ -1,5 +1,5 @@
 <!--components/index-campaign/index.wxml-->
-<van-overlay z-index="1000" show="{{ show }}" bind:click="onClickHide">
+<van-overlay z-index="1000" show="{{ show }}" bind:click="onClickCoupon">
   <view class="wrapper">
   <!--3:5-->
    <!-- <van-image src="https://car.coasewash.com/storage/2.jpg" fit="contain" width="60vw" height="100vw" catchtap="showToast"></van-image> -->

@@ -101,7 +101,21 @@ Page({
   },
 
   async getCouponList() {
-    let res = await getCouponList()
-    console.log(res)
+    let res = await getCouponList({
+      status: 0
+    })
+    if(!res.code) {
+      if(res.data.length) {
+        res.data.map(e => {
+          e.value = parseInt(e.value)
+          e.rule_money = parseInt(e.rule_money)
+        })
+      }
+
+      this.setData({
+        list: res.data
+      })
+    }
+    // console.log(res)
   }
 })

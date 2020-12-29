@@ -102,6 +102,7 @@ const api = {
    * 2020-11-03 create by 1iekkas
    */
   async post(url, data, isSignature = true, el, stop = true) {
+    console.log(url)
     const cacheUrl = url
     const token = wx.getStorageSync('token') || ''
     if (isSignature) {
