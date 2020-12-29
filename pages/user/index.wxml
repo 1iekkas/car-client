@@ -99,6 +99,11 @@
                 <image src="../../static/img/coupons.png" mode="widthFix" alt="" srcset="" />
               </view>
             </van-cell>
+            <van-cell custom-class="padding" bindtap="showToast" title="我的收藏" value="" is-link>
+              <view slot="icon" class="icon">
+                <image src="../../static/img/collect.png" mode="widthFix" alt="" srcset="" />
+              </view>
+            </van-cell>
             <!-- <van-cell custom-class="padding" title="资料设置" value="" is-link>
               <view slot="icon" class="icon">
                 <image src="../../static/img/set.png" mode="widthFix" alt="" srcset="" />
@@ -136,6 +141,11 @@
             <van-cell custom-class="padding" title="优惠券" value="" is-link url="/userPackage/login/index">
               <view slot="icon" class="icon">
                 <image src="../../static/img/coupons.png" mode="widthFix" alt="" srcset="" />
+              </view>
+            </van-cell>
+            <van-cell custom-class="padding" url="/userPackage/login/index" title="我的收藏" value="" is-link>
+              <view slot="icon" class="icon">
+                <image src="../../static/img/collect.png" mode="widthFix" alt="" srcset="" />
               </view>
             </van-cell>
             <!-- <van-cell custom-class="padding" title="资料设置" value="" is-link url="/userPackage/login/index">

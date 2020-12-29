@@ -51,6 +51,9 @@
           </view>
         </view>
         <view class="time">
+          主营业务: {{store.service}}
+        </view>
+        <view class="time">
           营业时间: {{store.on_work}} ~ {{store.off_work}}
         </view>
       </view>
@@ -119,9 +122,17 @@
   </view>
 
   <van-goods-action>
-    <van-goods-action-icon icon="share-o" text="分享" bind:click="onClickIcon" />
+    <van-goods-action-icon icon="share-o" text="分享" bind:click="onClickShare" />
     <van-goods-action-icon icon="star-o" text="收藏" bind:click="onClickIcon" />
     <van-goods-action-icon icon="phone-o" text="联系店铺" bind:click="onPhone" />
     <van-goods-action-button text="立即询价" bind:click="onClickIcon" />
   </van-goods-action>
 </block>
+
+<van-share-sheet
+  show="{{ showShare }}"
+  title="立即分享给好友"
+  options="{{ options }}"
+  bind:select="onSelect"
+  bind:close="onClickShare"
+/>

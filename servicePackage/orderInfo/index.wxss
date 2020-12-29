@@ -273,6 +273,10 @@ page {
   padding-top: 20rpx;
 }
 
+.store-content .remark {
+  color: #999;
+}
+
 .store-content .pay {
   flex: 1;
   color: #646566;
@@ -496,5 +500,18 @@ van-goods-action-button button {
 
 .order-info .van-step__wrapper {
   padding: 0 30rpx 0 20px !important;
+}
+
+.img-group {
+  background-color: white;
+  padding: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.img-group .img {
+  margin: 0 20rpx 20rpx 0;
 }
 

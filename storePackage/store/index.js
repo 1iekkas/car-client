@@ -17,7 +17,12 @@ Page({
     navBarHeight: app.globalData.navBarHeight, //导航栏高度
     menuHeight: app.globalData.menuHeight,
     showNav: false,
-    IMG_HOST: app.globalData.IMG_HOST
+    IMG_HOST: app.globalData.IMG_HOST,
+    showShare: false,
+    options: [
+      { name: '微信好友', icon: 'wechat', openType: 'share' },
+      { name: '分享海报', icon: 'poster' }
+    ],
   },
 
   /**
@@ -110,8 +115,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    /* console.log(`${data.IMG_HOST}/${data.store.facade_images[0]}`)
-    console.log(`${data.IMG_HOST}/${data.store.shop_image}`) */
     return {
       title: data.store.name,
       path: `/storePackage/store/index?id=${data.store.id}`,
@@ -187,8 +190,24 @@ Page({
     wx.showToast({
       icon: 'none',
       mask: true,
-      title: '未开放'
+      title: '暂未开放，敬请期待'
     })
+  },
+
+  // 转发
+  onClickShare() {
+    this.setData({
+      showShare: !data.showShare
+    })
+  },
+
+  onSelect(e) {
+    console.log(e)
+    const { index } = e.detail
+    if(index == 1) {
+      this.onClickIcon()
+    }
+    this.onClickShare()
   },
 
   // 返回

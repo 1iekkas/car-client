@@ -1,8 +1,34 @@
 <!--userPackage/wallet/index.wxml-->
 <view class="container">
   <view class="card">
-    <view>
+    <view class="card-fixed">
+      明细 <van-icon name="arrow"></van-icon>
+    </view>
+    <view class="card-user">
       <van-image src="{{userInfo.avatarUrl}}" round width="90rpx" height="90rpx"></van-image>
+      <view class="name">{{userInfo.nickName}}</view>
+    </view>
+    <view class="card-box-group">
+      <view class="card-box">
+        <view class="card-box__title">余额</view>
+        <view class="card-box__value">
+          <text>0</text>
+          <text>.00</text>
+        </view>
+      </view>
+      <view class="card-box">
+        <view class="card-box__title">积分</view>
+        <view class="card-box__value">
+          0
+        </view>
+      </view>
+      <view class="card-box">
+        <view class="card-box__title">优惠券</view>
+        <view class="card-box__value">
+          <text>0</text>
+          <text style="margin-left: 3px;display: inline-block;vertical-align: middle;">张</text>
+        </view>
+      </view>
     </view>
   </view>
 </view>

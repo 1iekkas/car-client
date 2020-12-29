@@ -1,11 +1,59 @@
 /* userPackage/wallet/index.wxss */
 .container {
-  padding: 30rpx;
+  padding: 30rpx 20rpx;
 }
 
 .card {
   height: 320rpx;
-  background-image: url(http://i2.tiimg.com/605992/bb668fc236117d81.png);
-  background-size: 100% 100%;
+  padding: 30rpx;
+  background: linear-gradient(to bottom right,#40638d, #2D4059);
   border-radius: 12rpx;
+  position: relative;
+}
+
+.card-fixed {
+  position: absolute;
+  top: 30rpx;
+  right: 20rpx;
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: white;
+}
+
+.card-user {
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.card-user .name {
+  font-size: 28rpx;
+  margin-left: 20rpx;
+}
+
+.card-box-group {
+  margin-top: 30rpx;
+  padding-top: 30rpx;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.card-box + .card-box {
+  margin-left: 20vw;
+}
+
+.card-box__title {
+  font-size: 28rpx;
+  margin-bottom: 16rpx;
+}
+
+.card-box__value {
+  font-size: 42rpx;
+  text-align: center;
+}
+
+.card-box__value text:last-child {
+  font-size: 24rpx;
 }

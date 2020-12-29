@@ -271,6 +271,16 @@ Page({
     })
   },
 
+  onPreviewRepair(e) {
+    const url = e.currentTarget.dataset.img;
+    let imgs = data.info.repair_complete_images.map(e =>  `${data.IMG_HOST}${e}`)
+
+    wx.previewImage({
+      current: data.IMG_HOST + url,
+      urls: imgs,
+    })
+  },
+
   // 选择预约门店
   onSelectShop(e) {
     const { item } = e.currentTarget.dataset;

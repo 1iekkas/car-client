@@ -96,11 +96,28 @@ van-icon.slot {
   padding-right: 20rpx;
 }
 
-.store-item .rate {
-  font-size: 24rpx;
+.store-item .count {
+  color:#bdbdbd ;
+  display: flex;
+  align-items: center;
+}
+
+.store-item .count text:last-child {
   color: var(--fontColor);
+  margin-left: 6rpx;
+}
+
+.store-item .rate {
+  padding-top: 0;
+  font-size: 24rpx;
+  margin-right: 20rpx;
 }
 
 .store-item .tags {
+  font-size: 24rpx;
+}
+
+.store-item .service {
+  color: #858585;
   font-size: 24rpx;
 }

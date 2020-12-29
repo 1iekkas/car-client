@@ -11,24 +11,36 @@
   "setting": {
     "urlCheck": false,
     "es6": true,
-    "enhance": false,
+    "enhance": true,
     "postcss": true,
+    "preloadBackgroundData": false,
     "minified": true,
     "newFeature": false,
     "coverView": true,
     "nodeModules": true,
     "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
     "uglifyFileName": false,
     "checkInvalidKey": true,
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
-    "useMultiFrameRuntime": false,
-    "useApiHook": true
+    "bundle": false,
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "userConfirmedBundleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.14.0",
@@ -125,7 +137,7 @@
         {
           "name": "订单信息",
           "pathName": "servicePackage/orderInfo/index",
-          "query": "id=161",
+          "query": "id=95",
           "scene": null
         },
         {
@@ -197,6 +209,7 @@
         {
           "name": "优惠券列表",
           "pathName": "userPackage/coupon/index",
+          "query": "",
           "scene": null
         }
       ]

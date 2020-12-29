@@ -2,9 +2,9 @@
 <wxs src="../../utils/wxs/computed.wxs" module="tools"></wxs>
 <view class="container">
   <van-sticky offset-top="0" catchtouchmove="{{true}}">
-    <van-search catchtouchmove="{{true}}" value="{{ keywords }}" placeholder="请输入店铺名称" use-left-icon-slot use-action-slot
-      bind:change="onChange" bind:search="onSearch">
-     <!--  <view slot="label" class="slot" bindtap="linkToCitySearch">{{location.address_component.city}}</view>
+    <van-search catchtouchmove="{{true}}" value="{{ keywords }}" placeholder="请输入店铺名称" use-left-icon-slot
+      use-action-slot bind:change="onChange" bind:search="onSearch">
+      <!--  <view slot="label" class="slot" bindtap="linkToCitySearch">{{location.address_component.city}}</view>
       <van-icon slot="left-icon" class="slot" name="arrow-down" /> -->
     </van-search>
     <view class="store-filter van-hairline--bottom">
@@ -28,7 +28,8 @@
           <view class="store-item" wx:for="{{list}}" wx:key="index" bindtap="linkToStore" data-id="{{item.id}}">
             <view class="store-body">
               <block wx:if="{{item.type == 2}}">
-                <van-image use-error-slot width="100" height="100" src="{{ tools.fix_img(IMG_HOST, item.facade_images[0]) }}">
+                <van-image use-error-slot width="100" height="100"
+                  src="{{ tools.fix_img(IMG_HOST, item.facade_images[0]) }}">
                   <van-icon slot="error" color="#dcdee0" size="28px" name="photo-fail" />
                 </van-image>
               </block>
@@ -39,12 +40,23 @@
               </block>
               <view class="store-content">
                 <view class="name">{{item.name}}</view>
-                <view class="rate">
-                 <block wx:if="{{ item.rank }}">{{item.rank}}</block>
-                 <block wx:else>暂无评分</block>
+                <view class="count">
+                  <view class="rate">
+                    <block wx:if="{{ item.rank }}">
+                      <text>评分</text>
+                      <text class="origin">{{item.rank}}</text>
+                    </block>
+                    <block wx:else>暂无评分</block>
+                  </view>
+                  <view class="rate">
+                    <text>订单</text> <text class="origin">{{item.order_count || 0}}</text>
+                  </view>
                 </view>
                 <view class="tags">
                   <van-tag type="danger" plain>{{item.type_text}}</van-tag>
+                </view>
+                <view class="service">
+                  <!-- 主营业务:  -->{{item.service}}
                 </view>
               </view>
             </view>

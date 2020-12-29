@@ -146,6 +146,7 @@
               <view class="store-content">
                 <view class="name">{{item.name}}</view>
                 <block wx:if="{{ !item.vague }}">
+                  <view wx:if="{{ item.remark }}" class="">备注:{{item.remark}}</view>
                   <view class="price">报价:￥{{item.fee}}</view>
                   <view class="pay" catchtap="onSelectShop" data-item="{{item}}">
                     <van-button type="danger" size="mini">去预约</van-button>
@@ -179,12 +180,13 @@
     <view class="store-section">
       <view class="title van-hairline--bottom">服务门店</view>
       <view class="store-group">
-        <block wx:if="{{offerList.length}}">
+        <block wx:if="{{offerList.length && info.order_offer}}">
           <view class="store-item" wx:for="{{offerList}}" wx:key="index" bindtap="storeDetails" data-id="{{item.shop_id}}">
             <view class="store-body">
               <van-image width="100" height="100" src="{{IMG_HOST}}{{ item.facade_images[0]}}"></van-image>
               <view class="store-content">
                 <view class="name">{{item.name}}</view>
+                <view wx:if="{{ item.remark }}" class="remark">备注:{{item.remark}}</view>
                 <view class="price">报价:￥{{item.fee}}</view>
               </view>
             </view>
@@ -204,7 +206,7 @@
   <!--联系商家/客服-->
   <block wx:if="{{info.status != 0 && offerList.length}}">
     <view class="contact van-hairline--top">
-      <view class="contact-item van-hairline--right" bindtap="onPhone">
+      <view wx:if="{{ info.status != -1 || item.status == 5 || item.status == 3}}" class="contact-item van-hairline--right" bindtap="onPhone">
         <van-icon name="phone" /><text>联系商家</text></view>
       <navigator hover-class="none" class="contact-item" url="/servicePackage/service/index">
         <van-icon name="service" /><text>联系客服</text></navigator>
@@ -221,6 +223,15 @@
     </van-cell-group>
     <van-steps steps="{{ orderSteps }}" active="{{ active }}" direction="vertical" active-color="#ee0a24"
       inactive-color="#ffffff" />
+    <block wx:if="{{info.repair_complete_images.length}}">
+      <van-cell-group border="{{false}}">
+        <van-cell title="施工图片"></van-cell>
+        <!-- <van-cell title="创建时间" value="{{info.create_time}}"></van-cell> -->
+      </van-cell-group>
+      <view class="img-group">
+        <van-image bindtap="onPreviewRepair" data-img="{{IMG_HOST}}{{item}}" class="img" wx:for="{{info.repair_complete_images}}" wx:key="index" src="{{IMG_HOST}}{{item}}" width="20vw" height="20vw"></van-image>
+      </view>
+    </block>  
     <block wx:if="{{info.status == 0 || info.status == 1 || info.status == 2}}">
       <view class="cancel-order">
         <view class="van-hairline--left" bindtap="onCancelOrder">取消订单</view>

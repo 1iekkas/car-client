@@ -1,4 +1,5 @@
 // userPackage/coupon/index.js
+import { getCouponList } from '../../api/user'
 Page({
 
   /**
@@ -36,12 +37,13 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: async function () {
     setTimeout(() => {
       this.setData({
         loading: false
       })
     }, 1000)
+    this.getCouponList()
   },
 
   /**
@@ -97,4 +99,9 @@ Page({
   onAbort(e) {
     console.log('onAbort', e)
   },
+
+  async getCouponList() {
+    let res = await getCouponList()
+    console.log(res)
+  }
 })

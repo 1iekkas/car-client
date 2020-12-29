@@ -288,12 +288,20 @@ const api = {
     // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
     let res = await new Promise((resolve, reject) => {
       wx.uploadFile({
-        url: url, // 仅为示例，非真实的接口地址
+        url: url, 
         filePath: file.url,
         name: 'file',
         formData: signature,
-        success: res => {
-          res = JSON.parse(res.data).map(e => {
+        success: result => {
+          if(result.statusCode === 202) {
+            wx.showToast({
+              icon: 'none',
+              title: '图片不能大于2MB'
+            })
+            return false
+          }
+          
+          res = JSON.parse(result.data).map(e => {
             return `${baseUrl}/${e}`
           })
           // 上传完成需要更新 fileList

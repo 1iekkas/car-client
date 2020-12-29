@@ -85,6 +85,8 @@
   color: #656565;
   font-size: 24rpx;
   flex: 0 0 15vw;
+  height: 46px;
+  line-height: 46px;
 }
 
 .movable-area {

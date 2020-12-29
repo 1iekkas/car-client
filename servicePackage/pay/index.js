@@ -55,7 +55,8 @@ Page({
     },],
     showCoupon: false,
     couponList: [],
-    couponItem: ''
+    couponItem: '',
+    IMG_HOST: IMG_HOST
   },
 
   /**

@@ -123,6 +123,14 @@ Page({
 
   },
 
+  onShareAppMessage() {
+    return {
+      title: '科思汽车小程序',
+      path: `/storePackage/map/index`,
+      imageUrl: '../../static/img/logo.png'
+    }
+  },
+
   showToast() {
     wx.showToast({
       icon: 'none',
