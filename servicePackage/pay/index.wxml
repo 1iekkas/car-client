@@ -77,7 +77,7 @@
         <block wx:else>
           <block wx:if="{{couponItem !== ''}}">
             <view class="price">
-              -￥0.00
+              -￥{{couponItem.value}}
             </view>
           </block>
           <block wx:else>
@@ -109,20 +109,30 @@
   <view class="popup-head">优惠券</view>
   <view class="popup-body">
     <view class="popup-group">
-      <van-radio-group value="{{ couponItem }}">
+      <van-radio-group value="{{ selectedCoupon }}">
         <van-cell-group border="{{false}}">
-          <van-cell title-width="192rpx" wx:for="{{6}}" wx:key="index" custom-class="coupon" border="{{false}}"
+          <van-cell title-width="192rpx" wx:for="{{couponList}}" wx:key="index" custom-class="coupon" border="{{false}}"
             clickable data-name="{{index}}" bind:click="onSelectCoupon">
             <view slot="title" class="coupon-head">
-              <view class="coupon-amount">
-                20<text>元</text>
+                <view class="coupon-amount">
+                  {{item.value}}<text>元</text>
+                </view>
+                <view class="coupon-condition">
+                  <block wx:if="{{item.rule_money}}">满{{item.rule_money}}元可用</block>
+                  <block wx:else>无使用门槛</block>
+                </view>
               </view>
-              <view class="coupon-condition">无使用门槛</view>
-            </view>
-            <view class="coupon-info">
-              <view class="coupon-name">优惠券名称</view>
-              <view class="coupon-desc">描述信息</view>
-            </view>
+              <view class="coupon-info">
+                <view class="coupon-name">{{item.title}}</view>
+                <view class="coupon-desc">
+                  <block wx:if="{{item.rule_time}}">
+                    有效期: {{item.rule_time}}
+                  </block>
+                  <block wx:else>
+                    有效期: 永久
+                  </block>
+                </view>
+              </view>
             <van-radio slot="right-icon" name="{{index}}" />
           </van-cell>
 

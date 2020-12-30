@@ -26,7 +26,7 @@ module.exports = {
   },
 
   getCoupon(data) {
-    return $api.post(`/u/coupon/1/receive`, data)
+    return $api.post(`/u/coupon/receive_random`, data)
   },
 
   // 提交投诉建议

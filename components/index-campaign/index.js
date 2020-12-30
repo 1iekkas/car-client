@@ -1,4 +1,5 @@
 // components/index-campaign/index.js
+const app = getApp()
 import { getCoupon } from '../../api/user'
 Component({
   lifetimes: {
@@ -47,6 +48,12 @@ Component({
     },
 
     async onClickCoupon() {
+      if(!app.globalData.isLogin) {
+        wx.navigateTo({
+          url: `/userPackage/login/index`,
+        })
+        return false
+      }
       // console.log(getCoupon)
       let res = await getCoupon({})
       // console.log(res)

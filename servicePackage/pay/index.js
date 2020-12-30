@@ -5,6 +5,9 @@ import {
   getPayParams
 } from '../../api/order'
 import {
+  getCouponList
+} from '../../api/user'
+import {
   reverseGeocoder,
   requestPayment
 } from '../../api/wxServer'
@@ -56,18 +59,39 @@ Page({
     showCoupon: false,
     couponList: [],
     couponItem: '',
+    selectedCoupon: '',
     IMG_HOST: IMG_HOST
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: async function (options) {
     data = this.data
     this.getData(options.id)
+  
     this.setData({
       offer: JSON.parse(options.offer)
     })
+
+    let res = await getCouponList({
+      status: 0,
+      order_id: JSON.parse(options.offer).id,
+      offer_id: options.id
+    })
+
+    if(!res.code) {
+      if(res.data.length) {
+        res.data.map(e => {
+          e.value = parseInt(e.value)
+          e.rule_money = parseInt(e.rule_money)
+        })
+      }
+      this.setData({
+        couponList: res.data
+      })
+    }
+
   },
 
   /**
@@ -137,8 +161,6 @@ Page({
       this.setData({
         info: res.data,
         loading: false
-      }, () => {
-        //this.getOfferList()
       })
     }
   },
@@ -155,7 +177,6 @@ Page({
   onPostForm() {
     var pages = getCurrentPages();
     var beforePage = pages[pages.length - 2];
-    console.log(beforePage)
     if (data.payment.id == 2) {
       this.appointment()
     } else {
@@ -175,8 +196,6 @@ Page({
         title: '预约成功',
         duration: 1500,
         complete: c => {
-
-
           wx.navigateBack({
             delta: 1
           })
@@ -233,15 +252,20 @@ Page({
     })
   },
 
-  // 优惠券
+  // 选择优惠券
   onSelectCoupon(e) {
     const {
       name
     } = e.currentTarget.dataset;
+    data.offer.fee = data.offer.fee - data.couponList[name].value < 0 ? 0 : data.offer.fee - data.couponList[name].value
+
     this.setData({
-      couponItem: name,
+      couponItem: data.couponList[name],
       showCoupon: false,
-      selectedCoupon: null
+      selectedCoupon: name,
+      'offer.fee': data.offer.fee
+    },() => {
+      
     })
   },
 
