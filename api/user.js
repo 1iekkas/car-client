@@ -21,8 +21,12 @@ module.exports = {
     return $api.put(`/auth/wechat/phone`, data)
   },
 
-  getCouponList() {
-    return $api.get(`/u/coupon/self`)
+  getCouponList(params) {
+    return $api.get(`/u/coupon/self`, params)
+  },
+
+  getCoupon(data) {
+    return $api.post(`/u/coupon/1/receive`, data)
   },
 
   // 提交投诉建议
