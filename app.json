@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/map/index",
-    "pages/user/index"
+    "pages/user/index",
+    "activityPackage/coupon/index"
   ],
   "subPackages": [
     {

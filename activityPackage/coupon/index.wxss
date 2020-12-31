@@ -1,0 +1,4 @@
+/* activityPackage/coupon/index.wxss */
+.container {
+  height: auto;
+}
