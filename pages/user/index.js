@@ -16,6 +16,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    IMG_HOST: app.globalData.IMG_HOST,
     navBarHeight: app.globalData.navBarHeight, //导航栏高度
     isLogin: false,
     userInfo: null,

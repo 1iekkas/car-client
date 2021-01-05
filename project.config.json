@@ -199,6 +199,12 @@
           "pathName": "userPackage/coupon/index",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "活动页面",
+          "pathName": "activityPackage/coupon/index",
+          "query": "",
+          "scene": null
         }
       ]
     }

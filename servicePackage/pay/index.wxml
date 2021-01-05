@@ -81,7 +81,12 @@
             </view>
           </block>
           <block wx:else>
-            2张可用
+            <block wx:if="{{couponList.length}}">
+              {{couponList.length}}张可用
+            </block>
+            <block wx:else="{{couponList.length}}">
+              暂无可用优惠券
+            </block>
           </block>
         </block>
       </van-cell>

@@ -22,9 +22,7 @@
                   {{item.value}}<text>元</text>
                 </view>
                 <view class="coupon-condition">
-                  <block wx:if="{{item.rule_money}}">
-                    满{{item.rule_money}}元可用
-                  </block>
+                  <block wx:if="{{item.rule_money}}">满{{item.rule_money}}元可用</block>
                   <block wx:else>无使用门槛</block>
                 </view>
               </view>

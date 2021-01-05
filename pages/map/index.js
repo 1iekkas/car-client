@@ -224,6 +224,12 @@ Page({
     }
   },
 
+  navToActivity() {
+    wx.navigateTo({
+      url: '/activityPackage/coupon/index',
+    })
+  },
+
   // 获取用户信息 已废弃
   getUserInfo: async function (e) {
 

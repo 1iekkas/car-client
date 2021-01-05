@@ -1,4 +1,10 @@
 <!--activityPackage/coupon/index.wxml-->
 <view class="container">
-  
+  <image src="{{IMG_HOST}}/storage/coupon_bg.jpg" mode="widthFix" style="width:100vw"></image>
+  <block wx:if="{{!coupon}}">
+    <image bindtap="onClickCoupon" class="btn" src="{{IMG_HOST}}/storage/receive.png" mode="widthFix" style="width:80vw"></image>
+  </block>
+  <block wx:else>
+    <image bindtap="onUseCoupon" class="btn btn-coupon" src="{{IMG_HOST}}/storage/coupon_{{coupon.value}}.png" mode="widthFix" style="width:70vw"></image>
+  </block>
 </view>

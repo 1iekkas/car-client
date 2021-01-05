@@ -100,9 +100,20 @@ Page({
     console.log('onAbort', e)
   },
 
-  async getCouponList() {
+  async changeTabs(e) {
+    const { index } = e.detail
+    this.setData({
+      list: [],
+      page: 1,
+      loading: true
+    })
+
+    this.getCouponList(index)
+  },
+
+  async getCouponList(status=0) {
     let res = await getCouponList({
-      status: 0
+      status: status
     })
     if(!res.code) {
       if(res.data.length) {

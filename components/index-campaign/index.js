@@ -1,6 +1,5 @@
 // components/index-campaign/index.js
 const app = getApp()
-import { getCoupon } from '../../api/user'
 Component({
   lifetimes: {
     attached: function() {
@@ -33,6 +32,7 @@ Component({
    */
   methods: {
     onClickHide() {
+      // console.log(123)
       this.setData({
         show: false
       })
@@ -48,15 +48,9 @@ Component({
     },
 
     async onClickCoupon() {
-      if(!app.globalData.isLogin) {
-        wx.navigateTo({
-          url: `/userPackage/login/index`,
-        })
-        return false
-      }
-      // console.log(getCoupon)
-      let res = await getCoupon({})
-      // console.log(res)
+      wx.navigateTo({
+        url: `/activityPackage/coupon/index`,
+      })
     }
   }
 })

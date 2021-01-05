@@ -71,7 +71,8 @@ Page({
     this.getData(options.id)
   
     this.setData({
-      offer: JSON.parse(options.offer)
+      offer: JSON.parse(options.offer),
+      price: JSON.parse(options.offer).fee
     })
 
     let res = await getCouponList({
@@ -212,7 +213,8 @@ Page({
     // 获取支付配置
     let res = await getPayParams({
       order_id: data.info.id,
-      offer_id: data.offer.id
+      offer_id: data.offer.id,
+      coupon_id: data.couponItem ? data.couponItem.id : ''
     })
 
     if (!res.code) {
@@ -279,7 +281,8 @@ Page({
   onCancelCoupon() {
     this.setData({
       couponItem: '',
-      showCoupon: false
+      showCoupon: false,
+      'offer.fee': data.price
     })
   }
 })

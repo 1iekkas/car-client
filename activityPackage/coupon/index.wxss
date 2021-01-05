@@ -1,4 +1,18 @@
 /* activityPackage/coupon/index.wxss */
 .container {
   height: auto;
+  position: relative;
+}
+
+.btn {
+  width: 70vw;
+  position: absolute;
+  top: 137vw;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 15vw;
+}
+
+.btn-coupon {
+  top: 139vw;
 }

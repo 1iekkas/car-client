@@ -87,7 +87,7 @@
           <view class="poster-item" bindtap="navToStoreService">
             <image src="../../static/img/store_poster.png" alt="" style="width: calc((100vw - 60rpx - 20rpx) / 2);height: calc(((100vw - 60rpx - 20rpx) / 2) / 3)" mode="widthFix" srcset="" />
           </view>
-          <view class="poster-item" catchtap="showToast">
+          <view class="poster-item" catchtap="navToActivity">
             <image src="../../static/img/poster_coupon.png" alt="" style="width: calc((100vw - 60rpx - 20rpx) / 2);height: calc(((100vw - 60rpx - 20rpx) / 2) / 3)" mode="widthFix" srcset="" />
           </view>
           

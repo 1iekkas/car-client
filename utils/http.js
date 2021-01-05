@@ -136,6 +136,8 @@ const api = {
               title: '提示',
               content: (`${res.data.error}`).toString(),
             })
+
+            // resolve(res)
           } else {
             resolve(res)
           }

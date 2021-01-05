@@ -1,8 +1,7 @@
 {
   "pages": [
     "pages/map/index",
-    "pages/user/index",
-    "activityPackage/coupon/index"
+    "pages/user/index"
   ],
   "subPackages": [
     {
@@ -41,6 +40,12 @@
         "store/index",
         "storeList/index",
         "rate/index"
+      ]
+    },
+    {
+      "root": "activityPackage",
+      "pages": [
+        "coupon/index"
       ]
     }
   ],
