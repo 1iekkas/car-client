@@ -1,10 +1,23 @@
 <!--activityPackage/coupon/index.wxml-->
 <view class="container">
-  <image src="{{IMG_HOST}}/storage/coupon_bg.jpg" mode="widthFix" style="width:100vw"></image>
-  <block wx:if="{{!coupon}}">
-    <image bindtap="onClickCoupon" class="btn" src="{{IMG_HOST}}/storage/receive.png" mode="widthFix" style="width:80vw"></image>
+  <image src="{{IMG_HOST}}/upload/20210111/8a99a14b8687df20f6c4b25711459d2e.jpg" mode="widthFix" style="width:100vw">
+  </image>
+  <block wx:if="{{!coupon && code != 203}}">
+    <image bindtap="onClickCoupon" class="btn" src="{{IMG_HOST}}/upload/20210110/6620a0bc818cb553e7fc37b881421796.png"
+      mode="widthFix" style="width:80vw"></image>
   </block>
-  <block wx:else>
-    <image bindtap="onUseCoupon" class="btn btn-coupon" src="{{IMG_HOST}}/storage/coupon_{{coupon.value}}.png" mode="widthFix" style="width:70vw"></image>
+  <block wx:if="{{code == 203}}">
+    <image class="btn btn-coupon" src="{{IMG_HOST}}/upload/20210110/72a2f5a46599e562711f06475ffa4c1e.png"
+      mode="widthFix" style="width:70vw"></image>
+  </block>
+
+  <block wx:if="{{code == 202}}">
+    <image class="btn btn-coupon" src="{{IMG_HOST}}/upload/20210110/72a2f5a46599e562711f06475ffa4c1e.png"
+      mode="widthFix" style="width:70vw"></image>
+  </block>
+  
+  <block wx:if="{{coupon}}">
+    <image bindtap="onUseCoupon" class="btn" src="{{IMG_HOST}}/upload/20210111/6845b2d39a5de467d9f3405fdf08bd09.png"
+    mode="widthFix" style="width:80vw"></image>
   </block>
 </view>

@@ -137,7 +137,10 @@ const api = {
               content: (`${res.data.error}`).toString(),
             })
 
-            // resolve(res)
+            resolve({
+              code: res.statusCode || 203,
+              error: 'error'
+            })
           } else {
             resolve(res)
           }

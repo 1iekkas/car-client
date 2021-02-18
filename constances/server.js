@@ -4,10 +4,10 @@ const env = wx.getAccountInfoSync().miniProgram.envVersion
 let url = ''
 switch (env) {
   case 'develop':
-   url = 'https://cartest.coasewash.com'
+   url = 'https://car.coasewash.com'
     break;
   case 'trial':
-   url = 'https://cartest.coasewash.com'
+   url = 'https://car.coasewash.com'
     break;
   default:
     url = 'https://car.coasewash.com'

@@ -10,8 +10,8 @@
           {{info.status_text}}
         </view>
         <view class="text">已成功发布需求单，请耐心等待商家报价</view>
-        <view class="time">剩余时间
-          <van-count-down class="count-down" time="{{ time }}" />
+        <view class="time"><!-- 剩余时间
+          <van-count-down class="count-down" time="{{ time }}" /> -->
         </view>
       </view>
     </block>

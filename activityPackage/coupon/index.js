@@ -9,7 +9,8 @@ Page({
    */
   data: {
     IMG_HOST: app.globalData.IMG_HOST,
-    coupon: null
+    coupon: null,
+    code: 200
   },
 
   /**
@@ -88,9 +89,9 @@ Page({
       })
       return false
     }
-    // console.log(getCoupon)
+    console.log(getCoupon)
     let res = await getCoupon({})
-
+    console.log(res)
     if(!res.code) {
       wx.showModal({
         content: '领取成功'
@@ -100,6 +101,11 @@ Page({
 
       this.setData({
         coupon: res.data
+      })
+    }else {
+      console.log(res.code)
+      this.setData({
+        code: res.code
       })
     }
   },

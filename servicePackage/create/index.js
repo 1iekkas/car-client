@@ -36,7 +36,8 @@ Page({
     location: null,
     isImg: false,
     showCar: false,
-    catchMove: false
+    catchMove: false,
+    loading: false
   },
 
   /**
@@ -189,15 +190,24 @@ Page({
 
   // 提交
   async onSubmit() {
+    this.setData({
+      loading: true
+    })
     validatePhone(data.phone)
     //validateContent(data.content)
     if (data.content == '') {
       Toast.fail('请填写您的需求')
+      this.setData({
+        loading: false
+      })
       return false
     }
 
     if (!data.car) {
       Toast.fail('请先添加车辆')
+      this.setData({
+        loading: false
+      })
       return false
     }
 
@@ -222,11 +232,21 @@ Page({
         type: 'success',
         message: '提交成功',
         onClose: async () => {
+          
         },
       })
-      wx.redirectTo({
-        url: '/userPackage/order/index',
-      })
+
+      let d = await requestSubscribeMessage([
+        'dAd4A5XhCl1egKH5SkudOEo5ZjBlhuEgLw6JLn-BKmk',
+        'huXLWTyuXvjNjvbJ8qktf00-DSH6TdAufUI1oYNK_ug',
+        'H-1pxFY9LFOTF55qIFYIzc_4cElqKm9rw1WDDqiyPts'
+      ])
+      console.log(d)  
+      if(!d.code) {
+        wx.redirectTo({
+          url: '/userPackage/order/index',
+        })
+      }
     }
 
   },

@@ -82,7 +82,7 @@
   </view>
   <!---->
   <view class="submit-button">
-    <van-button type="primary" color="#2D4059" block round bindtap="onSubmit">提 交</van-button>
+    <van-button type="primary" color="#2D4059" block loading="{{loading}}" round bindtap="onSubmit">提 交</van-button>
   </view>
   <navigator class="servies" hover-class="none" url="/servicePackage/service/index">
     联系客服

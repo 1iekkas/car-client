@@ -295,10 +295,12 @@ module.exports = {
 
   // 订阅消息 废弃
   requestSubscribeMessage(tmplIds = []) {
+    console.log(tmplIds)
     return new Promise(resolve => {
       wx.requestSubscribeMessage({
         tmplIds: tmplIds,
         complete: res => {
+          console.log(res)
           if (res.errMsg == "requestSubscribeMessage:ok") {
             resolve({
               code: 0,

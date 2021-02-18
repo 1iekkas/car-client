@@ -1,11 +1,17 @@
 // components/index-campaign/index.js
+import { getSwipeList } from '../../api/poster.js'
 const app = getApp()
 Component({
   lifetimes: {
-    attached: function() {
+    attached: async function() {
+      let res = await getSwipeList({
+        type: 2
+      })
+      console.log(res)
+
       // 在组件实例进入页面节点树时执行
      this.setData({
-       show: true
+       show: false
      })
     },
     detached: function() {
